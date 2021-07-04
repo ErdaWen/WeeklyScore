@@ -47,6 +47,9 @@
 		C8BCDFF626918075006E7D7E = {
 			isa = PBXGroup;
 			children = (
+				C8BCE020269181C2006E7D7E /* Server */,
+				C8BCE01F269181B4006E7D7E /* ViewModel */,
+				C8BCE01E269181A6006E7D7E /* Model */,
 				C8BCDFFB26918075006E7D7E /* Shared */,
 				C8BCE00526918079006E7D7E /* iOS */,
 				C8BCE00C26918079006E7D7E /* macOS */,
@@ -57,8 +60,8 @@
 		C8BCDFFB26918075006E7D7E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
+				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -88,6 +91,27 @@
 				C8BCE00E26918079006E7D7E /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		C8BCE01E269181A6006E7D7E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8BCE01F269181B4006E7D7E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C8BCE020269181C2006E7D7E /* Server */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
