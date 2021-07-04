@@ -9,26 +9,27 @@ import Foundation
 
 // time slot structure for Duration based habits
 
-struct TimeSlot {
+class TimeSlot {
     var beginTime = Date()
     var endTime = Date ()
 }
 
 class Entry: Decodable {
-    private var habitTitle = ""
-    private var location = ""
-    private var notes = ""
-    private var journal = ""
-    private var score = 0
-    private var scoreGained = 0
-    private var checked = false
+    var habitTitle = ""
+    var location:String?
+    var notes:String?
+    var journal:String?
+    var score = 0
+    var scoreGained = 0
+    var checked = false
+    var hidden = false
 }
 
 class Entry_Db: Entry {
-    private var timeSlot = TimeSlot()
-    private var hoursGained = 0.0
+    var timeSlot = TimeSlot()
+    var hoursGained = 0.0
 }
 
 class Entry_Hb: Entry{
-    private var timePoint = Date()
+    var timePoint = Date()
 }

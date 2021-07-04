@@ -12,18 +12,18 @@ import SwiftUI
 struct ContentView: View {
     
     
-    @State var tabIndex = 0
+    @State var tabIndex = 1
     var body: some View {
         
         TabView(selection: $tabIndex){
             Text("Calendar View")
-                .padding()
+                .padding(.leading, 14.0)
                 .tabItem {
                     VStack{
                         Image (systemName: "calendar")
                         Text ("Schedule")
                     }
-                }.tag(0)
+                }.tag(1)
             
             Text("Habbit View")
                 .padding()
@@ -32,9 +32,9 @@ struct ContentView: View {
                         Image (systemName: "star")
                         Text ("Habits")
                     }
-                }.tag(1)
+                }.tag(2)
         }
-        
+
     }
 }
 

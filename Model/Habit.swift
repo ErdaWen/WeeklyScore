@@ -9,30 +9,22 @@ import Foundation
 
 // Parent habit class
 class Habit:Decodable{
-    private var titleIcon = ""
-    private var title = "New Habit"
-    private var initialDate = Date()
-    private var entryNumTotal = 0
-    private var scoreTotal = 0
-    private var defaultScore = 5
+    var titleIcon = ""
+    var title = "New Habit"
+    var initialDate = Date()
+    var entryNumTotal = 0
+    var scoreTotal = 0
+    var defaultScore = 5
+    var hidden = false
     
-    func changeTitleIcon(inputIcon:String) -> Bool {
-        self.titleIcon = inputIcon
-        return true
-    }
-    
-    func changeTitle(inputTitle:String) -> Bool {
-        self.title = inputTitle
-        return true
-    }
 }
 
 // Duration-based habit
 class Habit_Db:Habit{
-    private var hoursTotal = 0.0
+    var hoursTotal = 0.0
 }
 
 // Hit-based habit
 class Habit_Hb:Habit{
-    private var hitTotal = 0
+    var hitTotal = 0
 }
