@@ -17,6 +17,10 @@
 		C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCE02126918B4D006E7D7E /* Habit.swift */; };
 		C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCE02426921FFF006E7D7E /* Entry.swift */; };
 		C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCE02426921FFF006E7D7E /* Entry.swift */; };
+		C8BCE02926926A25006E7D7E /* habits_DbList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE02826926A25006E7D7E /* habits_DbList.json */; };
+		C8BCE02A26926A25006E7D7E /* habits_DbList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE02826926A25006E7D7E /* habits_DbList.json */; };
+		C8BCE03226927060006E7D7E /* entries_DbList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entries_DbList.json */; };
+		C8BCE03326927060006E7D7E /* entries_DbList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entries_DbList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,8 @@
 		C8BCE00E26918079006E7D7E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		C8BCE02126918B4D006E7D7E /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		C8BCE02426921FFF006E7D7E /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		C8BCE02826926A25006E7D7E /* habits_DbList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habits_DbList.json; sourceTree = "<group>"; };
+		C8BCE03126927060006E7D7E /* entries_DbList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = entries_DbList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +59,10 @@
 		C8BCDFF626918075006E7D7E = {
 			isa = PBXGroup;
 			children = (
-				C8BCE020269181C2006E7D7E /* Server */,
-				C8BCE01F269181B4006E7D7E /* ViewModel */,
-				C8BCE01E269181A6006E7D7E /* Model */,
+				C8BCE027269269BF006E7D7E /* Data */,
+				C8BCE020269181C2006E7D7E /* Services */,
+				C8BCE01F269181B4006E7D7E /* ViewModels */,
+				C8BCE01E269181A6006E7D7E /* Models */,
 				C8BCDFFB26918075006E7D7E /* Shared */,
 				C8BCE00526918079006E7D7E /* iOS */,
 				C8BCE00C26918079006E7D7E /* macOS */,
@@ -99,27 +106,36 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		C8BCE01E269181A6006E7D7E /* Model */ = {
+		C8BCE01E269181A6006E7D7E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C8BCE02126918B4D006E7D7E /* Habit.swift */,
 				C8BCE02426921FFF006E7D7E /* Entry.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		C8BCE01F269181B4006E7D7E /* ViewModel */ = {
+		C8BCE01F269181B4006E7D7E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		C8BCE020269181C2006E7D7E /* Server */ = {
+		C8BCE020269181C2006E7D7E /* Services */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Server;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C8BCE027269269BF006E7D7E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCE02826926A25006E7D7E /* habits_DbList.json */,
+				C8BCE03126927060006E7D7E /* entries_DbList.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +216,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BCE02926926A25006E7D7E /* habits_DbList.json in Resources */,
+				C8BCE03226927060006E7D7E /* entries_DbList.json in Resources */,
 				C8BCE01326918079006E7D7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BCE02A26926A25006E7D7E /* habits_DbList.json in Resources */,
+				C8BCE03326927060006E7D7E /* entries_DbList.json in Resources */,
 				C8BCE01426918079006E7D7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

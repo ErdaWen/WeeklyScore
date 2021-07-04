@@ -16,7 +16,7 @@ class Habit:Decodable{
     var scoreTotal = 0
     var defaultScore = 5
     var hidden = false
-    
+    var colorTag = 0
 }
 
 // Duration-based habit

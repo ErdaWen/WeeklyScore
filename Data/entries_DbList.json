@@ -1,0 +1,12 @@
+[
+    {
+        "habitTitle" : "Study!",
+        "score": 20,
+        "scoreGained": 20,
+        "checked": true,
+        "hidden": false,
+        "beginTime": 0,
+        "endTime": 3600,
+        "hoursGained": 1
+    }
+]
