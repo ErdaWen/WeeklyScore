@@ -7,8 +7,8 @@
 
 import Foundation
 
-class EntryModel{
-    var entries = [Entry]()
+class EntryModel: ObservableObject{
+    @Published var entries = [Entry]()
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")

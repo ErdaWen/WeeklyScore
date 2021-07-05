@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
+		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
+		C88EC1392692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
+		C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
 		C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01126918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
@@ -28,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		C88EC1382692B378005A4DAB /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 		C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyScoreApp.swift; sourceTree = "<group>"; };
 		C8BCDFFD26918075006E7D7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8BCDFFE26918079006E7D7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +87,8 @@
 			children = (
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
+				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
+				C88EC1382692B378005A4DAB /* HabitView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -250,7 +258,9 @@
 				C8F94BFA26927F9900DD3703 /* EntryModel.swift in Sources */,
 				C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
+				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				C8BCE02226918B4D006E7D7E /* Habit.swift in Sources */,
+				C88EC1392692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
@@ -263,7 +273,9 @@
 				C8F94BFB26927F9900DD3703 /* EntryModel.swift in Sources */,
 				C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
+				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */,
+				C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);

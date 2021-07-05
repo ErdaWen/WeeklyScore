@@ -7,8 +7,8 @@
 
 import Foundation
 
-class HabitModel{
-    var habits = [Habit]()
+class HabitModel: ObservableObject{
+    @Published var habits = [Habit]()
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")

@@ -11,36 +11,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var habitModel = HabitModel()
-    var entryModel = EntryModel()
+    @ObservedObject var habitModel = HabitModel()
+    @ObservedObject var entryModel = EntryModel()
     @State var tabIndex = 1
     
     var body: some View {
         
         TabView(selection: $tabIndex){
-            List(entryModel.entries){ r in
-                VStack{
-                    Text(r.habitTitle)
-                    Text(entryModel.printTime(inputTime: r.beginTime))
-                    Text(entryModel.printTime(inputTime: r.endTime))
-                }
-            }
-                .padding(.leading, 14.0)
+            ScheduleView()
                 .tabItem {
                     VStack{
                         Image (systemName: "calendar")
                         Text ("Schedule")
                     }
                 }.tag(1)
-            
-            List(habitModel.habits){ r in
-                HStack{
-                    Text(r.title)
-                    Text(String(r.hoursTotal))
-                }
-                
-            }
-                .padding()
+            HabitView()
                 .tabItem {
                     VStack{
                         Image (systemName: "star")
@@ -48,7 +33,9 @@ struct ContentView: View {
                     }
                 }.tag(2)
         }
-
+        .environmentObject(HabitModel())
+        .environmentObject(EntryModel())
+        
     }
 }
 
