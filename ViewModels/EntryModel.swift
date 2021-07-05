@@ -8,7 +8,7 @@
 import Foundation
 
 class EntryModel{
-    var entries = [Entry_Db]()
+    var entries_Db = [Entry_Db]()
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "entries_DbList", ofType: "json")
@@ -19,9 +19,7 @@ class EntryModel{
             do{
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                decoder.dateDecodingStrategy = .iso8601
                 // Parse json
                 do{
                     let entryData = try decoder.decode([Entry_Db].self, from: data)
@@ -29,7 +27,7 @@ class EntryModel{
                         r.id = UUID()
                     }
                     // MARK: Assigned data
-                    entries = entryData
+                    entries_Db = entryData
                 } catch {
                     print(error)
                 }
@@ -38,5 +36,11 @@ class EntryModel{
             }
             
         }
+    }
+    
+    func printTime(inputTime:Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm E, d MMM y"
+        return (formatter.string(from: inputTime))
     }
 }

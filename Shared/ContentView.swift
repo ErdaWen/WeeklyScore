@@ -18,12 +18,11 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $tabIndex){
-            List(entryModel.entries){ r in
+            List(entryModel.entries_Db){ r in
                 VStack{
-                    let dateFormatter = DateFormatter()
                     Text(r.habitTitle)
-                    //Text(dateFormatter.string(from: r.beginTime))
-                    //Text(dateFormatter.string(from: r.endTime))
+                    Text(entryModel.printTime(inputTime: r.beginTime))
+                    Text(entryModel.printTime(inputTime: r.endTime))
                 }
             }
                 .padding(.leading, 14.0)
@@ -34,7 +33,7 @@ struct ContentView: View {
                     }
                 }.tag(1)
             
-            List(habitModel.habits){ r in
+            List(habitModel.habits_Db){ r in
                 HStack{
                     Text(r.title)
                     Text(String(r.hoursTotal))

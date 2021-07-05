@@ -8,7 +8,7 @@
 import Foundation
 
 class HabitModel{
-    var habits = [Habit_Db]()
+    var habits_Db = [Habit_Db]()
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "habits_DbList", ofType: "json")
@@ -26,7 +26,7 @@ class HabitModel{
                         r.id = UUID()
                     }
                     // MARK: Assigned data
-                    habits = habitData
+                    habits_Db = habitData
                 } catch {
                     print(error)
                 }
