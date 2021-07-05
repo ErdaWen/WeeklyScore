@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @ObservedObject var habitModel = HabitModel()
-    @ObservedObject var entryModel = EntryModel()
+
     @State var tabIndex = 1
     
     var body: some View {

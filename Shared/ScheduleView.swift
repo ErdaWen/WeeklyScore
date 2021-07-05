@@ -11,16 +11,21 @@ struct ScheduleView: View {
     
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
+    @State var addViewPresented = false
     
     var body: some View {
-        List(entryModel.entries){ r in
-            VStack{
-                Text(r.habitTitle)
-                Text(entryModel.printTime(inputTime: r.beginTime))
-                Text(entryModel.printTime(inputTime: r.endTime))
+        VStack(){
+            List(entryModel.entries){ r in
+                VStack{
+                    Text(r.habitTitle)
+                    Text(entryModel.printTime(inputTime: r.beginTime))
+                    Text(entryModel.printTime(inputTime: r.endTime))
+                }
             }
+            Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
+                AddHabitView(addHabitViewPresented: $addViewPresented)
+            })
         }
-        .padding(.leading, 14.0)
     }
 }
 

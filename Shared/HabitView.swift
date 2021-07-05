@@ -10,13 +10,22 @@ import SwiftUI
 struct HabitView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
+    
+    @State var addViewPresented = false
+    
     var body: some View {
-        List(habitModel.habits){ r in
-            HStack{
-                Text(r.title)
-                Text(String(r.hoursTotal))
-            }            
+        VStack{
+            List(habitModel.habits){ r in
+                HStack{
+                    Text(r.title)
+                    Text(String(r.hoursTotal))
+                }
+            }
+            Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
+                AddHabitView(addHabitViewPresented: $addViewPresented)
+            })
         }
+
         .padding()
     }
 }
