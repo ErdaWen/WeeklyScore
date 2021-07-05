@@ -11,6 +11,8 @@
 		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1392692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
 		C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
+		C88EC13C2692BB27005A4DAB /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddHabitView.swift */; };
+		C88EC13D2692BB27005A4DAB /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddHabitView.swift */; };
 		C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01126918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
@@ -34,6 +36,7 @@
 /* Begin PBXFileReference section */
 		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1382692B378005A4DAB /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
+		C88EC13B2692BB27005A4DAB /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 		C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyScoreApp.swift; sourceTree = "<group>"; };
 		C8BCDFFD26918075006E7D7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8BCDFFE26918079006E7D7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
 				C88EC1382692B378005A4DAB /* HabitView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
+				C88EC13B2692BB27005A4DAB /* AddHabitView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				C8BCE02226918B4D006E7D7E /* Habit.swift in Sources */,
+				C88EC13C2692BB27005A4DAB /* AddHabitView.swift in Sources */,
 				C88EC1392692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
@@ -275,6 +280,7 @@
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */,
+				C88EC13D2692BB27005A4DAB /* AddHabitView.swift in Sources */,
 				C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,

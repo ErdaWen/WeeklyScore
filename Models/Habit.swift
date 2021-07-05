@@ -10,18 +10,35 @@ import Foundation
 class Habit:Decodable,Identifiable{
     // Contents
     var id:UUID?
-    var durationBased = true
-    var titleIcon = ""
-    var title = "New Habit"
-    var defaultScore = 5
-    var colorTag = 0
-    var hidden = false
+    var durationBased:Bool
+    var titleIcon:String
+    var title:String
+    var defaultScore:Int
+    var colorTag:Int
+    var hidden:Bool
     
     //Statics
-    var entryNum = 0
-    var checkedEntryNum = 0
-    var scoreTotal = 0
+    var entryNum:Int
+    var checkedEntryNum:Int
+    var scoreTotal:Int
     
     // Duration-based
     var hoursTotal:Double
+    
+    init(){
+        durationBased = true
+        titleIcon = ""
+        title = "New Habit"
+        defaultScore = 5
+        colorTag = 0
+        hidden = false
+        
+        //Statics
+        entryNum = 0
+        checkedEntryNum = 0
+        scoreTotal = 0
+        
+        // Duration-based
+        hoursTotal = 0.0
+    }
 }

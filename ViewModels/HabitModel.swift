@@ -9,6 +9,7 @@ import Foundation
 
 class HabitModel: ObservableObject{
     @Published var habits = [Habit]()
+    
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")
@@ -33,7 +34,19 @@ class HabitModel: ObservableObject{
             } catch {
                 print (error)
             }
-            
         }
+    }
+    
+    
+    func addHabit (inDurationbased:Bool, inTitleIcon:String, inTitle:String, inDefaultScore:Int, inColorTag:Int, inHidden:Bool){
+        let newHabit = Habit()
+        newHabit.id = UUID()
+        newHabit.durationBased = inDurationbased
+        newHabit.titleIcon = inTitleIcon
+        newHabit.title = inTitle
+        newHabit.defaultScore = inDefaultScore
+        newHabit.colorTag = inColorTag
+        newHabit.hidden = inHidden
+        habits.append(newHabit)
     }
 }

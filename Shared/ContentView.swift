@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $tabIndex){
+            // MARK: Schedule View
             ScheduleView()
                 .tabItem {
                     VStack{
@@ -23,6 +24,7 @@ struct ContentView: View {
                         Text ("Schedule")
                     }
                 }.tag(1)
+            // MARK: Habit View
             HabitView()
                 .tabItem {
                     VStack{
