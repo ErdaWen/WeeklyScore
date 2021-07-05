@@ -37,7 +37,6 @@ class HabitModel: ObservableObject{
         }
     }
     
-    
     func addHabit (inDurationbased:Bool, inTitleIcon:String, inTitle:String, inDefaultScore:Int, inColorTag:Int, inHidden:Bool){
         let newHabit = Habit()
         newHabit.id = UUID()
