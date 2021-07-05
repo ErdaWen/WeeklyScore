@@ -9,7 +9,8 @@ import Foundation
 
 // time slot structure for Duration based habits
 
-class Entry: Decodable {
+class Entry: Decodable,Identifiable {
+    var id:UUID?
     var habitTitle = ""
     var location:String?
     var notes:String?
@@ -21,8 +22,8 @@ class Entry: Decodable {
 }
 
 class Entry_Db: Entry {
-    var beginTime = Date()
-    var endTime = Date()
+    var beginTime:Date?
+    var endTime:Date?
     var hoursGained = 0.0
 }
 

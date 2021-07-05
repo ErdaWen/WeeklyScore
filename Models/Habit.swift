@@ -8,10 +8,10 @@
 import Foundation
 
 // Parent habit class
-class Habit:Decodable{
+class Habit:Decodable,Identifiable{
+    var id:UUID?
     var titleIcon = ""
     var title = "New Habit"
-    var initialDate = Date()
     var entryNumTotal = 0
     var scoreTotal = 0
     var defaultScore = 5

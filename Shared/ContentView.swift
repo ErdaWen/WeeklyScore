@@ -11,12 +11,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
+    var habitModel = HabitModel()
+    var entryModel = EntryModel()
     @State var tabIndex = 1
+    
     var body: some View {
         
         TabView(selection: $tabIndex){
-            Text("Calendar View")
+            List(entryModel.entries){ r in
+                VStack{
+                    let dateFormatter = DateFormatter()
+                    Text(r.habitTitle)
+                    //Text(dateFormatter.string(from: r.beginTime))
+                    //Text(dateFormatter.string(from: r.endTime))
+                }
+            }
                 .padding(.leading, 14.0)
                 .tabItem {
                     VStack{
@@ -25,7 +34,13 @@ struct ContentView: View {
                     }
                 }.tag(1)
             
-            Text("Habbit View")
+            List(habitModel.habits){ r in
+                HStack{
+                    Text(r.title)
+                    Text(String(r.hoursTotal))
+                }
+                
+            }
                 .padding()
                 .tabItem {
                     VStack{

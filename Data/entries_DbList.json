@@ -5,8 +5,8 @@
         "scoreGained": 20,
         "checked": true,
         "hidden": false,
-        "beginTime": 0,
-        "endTime": 3600,
-        "hoursGained": 1
+        "beginTime": "2009-05-06T18:56:38",
+        "endTime": "2009-05-06T18:56:38",
+        "hoursGained": 1.0
     }
 ]
