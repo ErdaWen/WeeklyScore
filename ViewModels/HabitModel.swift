@@ -8,10 +8,10 @@
 import Foundation
 
 class HabitModel{
-    var habits_Db = [Habit_Db]()
+    var habits = [Habit]()
     init(){
         // String path
-        let pathString = Bundle.main.path(forResource: "habits_DbList", ofType: "json")
+        let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")
         if let path = pathString{
             // URL
             let url=URL(fileURLWithPath: path)
@@ -21,12 +21,12 @@ class HabitModel{
                 let decoder = JSONDecoder()
                 // Parse json
                 do{
-                    let habitData = try decoder.decode([Habit_Db].self, from: data)
+                    let habitData = try decoder.decode([Habit].self, from: data)
                     for r in habitData{
                         r.id = UUID()
                     }
                     // MARK: Assigned data
-                    habits_Db = habitData
+                    habits = habitData
                 } catch {
                     print(error)
                 }

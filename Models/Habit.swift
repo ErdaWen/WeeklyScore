@@ -7,29 +7,21 @@
 
 import Foundation
 
-// Parent habit class
-class Habit_Db:Decodable,Identifiable{
+class Habit:Decodable,Identifiable{
+    // Contents
     var id:UUID?
+    var durationBased = true
     var titleIcon = ""
     var title = "New Habit"
-    var entryNumTotal = 0
-    var scoreTotal = 0
     var defaultScore = 5
-    var hidden = false
     var colorTag = 0
+    var hidden = false
     
-    var hoursTotal = 0.0
-}
-
-
-class Habit_Hb:Decodable,Identifiable{
-    var titleIcon = ""
-    var title = "New Habit"
-    var entryNumTotal = 0
+    //Statics
+    var entryNum = 0
+    var checkedEntryNum = 0
     var scoreTotal = 0
-    var defaultScore = 5
-    var hidden = false
-    var colorTag = 0
     
-    var hitTotal = 0
+    // Duration-based
+    var hoursTotal:Double
 }

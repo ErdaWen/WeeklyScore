@@ -1,0 +1,38 @@
+[
+    {
+        "durationBased": true,
+        "titleIcon": "📚",
+        "title": "Study!",
+        "defaultScore": 20,
+        "colorTag": 0,
+        "hidden": false,
+        "entryNum": 1,
+        "checkedEntryNum": 1,
+        "scoreTotal": 20,
+        "hoursTotal": 1.0
+    },
+    {
+        "durationBased": true,
+        "titleIcon": "💪",
+        "title": "Workout!",
+        "defaultScore": 10,
+        "colorTag": 1,
+        "hidden": false,
+        "entryNum": 0,
+        "checkedEntryNum": 1,
+        "scoreTotal": 0,
+        "hoursTotal": 0.0
+    },
+    {
+        "durationBased": false,
+        "titleIcon": "🐈",
+        "title": "Clean Litter!",
+        "defaultScore": 5,
+        "colorTag": 3,
+        "hidden": false,
+        "entryNum": 0,
+        "checkedEntryNum": 1,
+        "scoreTotal": 0,
+        "hoursTotal": 0.0
+    }
+]

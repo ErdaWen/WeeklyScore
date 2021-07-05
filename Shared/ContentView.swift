@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $tabIndex){
-            List(entryModel.entries_Db){ r in
+            List(entryModel.entries){ r in
                 VStack{
                     Text(r.habitTitle)
                     Text(entryModel.printTime(inputTime: r.beginTime))
@@ -33,7 +33,7 @@ struct ContentView: View {
                     }
                 }.tag(1)
             
-            List(habitModel.habits_Db){ r in
+            List(habitModel.habits){ r in
                 HStack{
                     Text(r.title)
                     Text(String(r.hoursTotal))

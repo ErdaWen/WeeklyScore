@@ -2,11 +2,11 @@
     {
         "habitTitle" : "Study!",
         "score": 20,
+        "hidden": false,
+        "beginTime": "2021-07-4T12:30:00Z",
+        "endTime": "2021-07-4T17:30:00Z",
         "scoreGained": 20,
         "checked": true,
-        "hidden": false,
-        "beginTime": "2013-07-21T19:32:00Z",
-        "endTime": "2013-07-21T19:32:00Z",
         "hoursGained": 1.0
     }
 ]

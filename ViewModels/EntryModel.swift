@@ -8,10 +8,10 @@
 import Foundation
 
 class EntryModel{
-    var entries_Db = [Entry_Db]()
+    var entries = [Entry]()
     init(){
         // String path
-        let pathString = Bundle.main.path(forResource: "entries_DbList", ofType: "json")
+        let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")
         if let path = pathString{
             // URL
             let url=URL(fileURLWithPath: path)
@@ -22,12 +22,12 @@ class EntryModel{
                 decoder.dateDecodingStrategy = .iso8601
                 // Parse json
                 do{
-                    let entryData = try decoder.decode([Entry_Db].self, from: data)
+                    let entryData = try decoder.decode([Entry].self, from: data)
                     for r in entryData{
                         r.id = UUID()
                     }
                     // MARK: Assigned data
-                    entries_Db = entryData
+                    entries = entryData
                 } catch {
                     print(error)
                 }
