@@ -2,7 +2,7 @@
 //  HabitView.swift
 //  WeeklyScore
 //
-//  Created by Xiaozhen Yang on 7/4/21.
+//  Created by Erda Wen on 7/4/21.
 //
 
 import SwiftUI

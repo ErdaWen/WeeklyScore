@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     
     @ObservedObject var habitModel = HabitModel()
