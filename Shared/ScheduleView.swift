@@ -16,10 +16,18 @@ struct ScheduleView: View {
     var body: some View {
         VStack(){
             List(entryModel.entries){ r in
-                VStack{
-                    Text(r.habitTitle)
-                    Text(entryModel.printTime(inputTime: r.beginTime))
-                    Text(entryModel.printTime(inputTime: r.endTime))
+                HStack(){
+                    VStack{
+                        Text(r.habitTitle)
+                        Text(entryModel.printTime(inputTime: r.beginTime))
+                        Text(entryModel.printTime(inputTime: r.endTime))
+                        Text(String(r.scoreGained))
+                    }
+                    
+                    Button("Complete") {
+                        r.complete()
+                        print("setting complete")
+                    }
                 }
             }
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
@@ -31,6 +39,6 @@ struct ScheduleView: View {
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView()
+        ScheduleView().environmentObject(HabitModel()).environmentObject(EntryModel())
     }
 }

@@ -26,4 +26,7 @@ class Entry: Decodable,Identifiable {
     var endTime:Date
     var hoursGained:Double
     
+    func complete(){
+        scoreGained = score
+    }
 }

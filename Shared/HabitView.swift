@@ -25,13 +25,12 @@ struct HabitView: View {
                 AddHabitView(addHabitViewPresented: $addViewPresented)
             })
         }
-
         .padding()
     }
 }
 
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitView()
+        HabitView().environmentObject(HabitModel()).environmentObject(EntryModel())
     }
 }
