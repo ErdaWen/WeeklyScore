@@ -12,21 +12,35 @@ import Foundation
 class Entry: Decodable,Identifiable {
     var id:UUID?
     var habitTitle = ""
-    var score = 0
-    var hidden = false
-    var beginTime = Date()
+    var score:Int
+    var hidden:Bool
+    var beginTime:Date
     var location:String?
     var notes:String?
     var journal:String?
     
     //Statistics
-    var scoreGained = 0
-    var checked = false
+    var scoreGained:Int
+    var checked:Bool
     //Duration-based
     var endTime:Date
     var hoursGained:Double
     
+    init(){
+        habitTitle = "UnkownHabit"
+        score = 0
+        hidden = false
+        beginTime = Date()
+
+        //Statistics
+        scoreGained = 0
+        checked = false
+        //Duration-based
+        endTime = Date()
+        hoursGained = 0.0
+    }
+    
     func complete(){
-        scoreGained = score
+        self.scoreGained = score
     }
 }

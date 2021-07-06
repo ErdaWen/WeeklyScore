@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ScheduleView: View {
     
@@ -15,18 +16,37 @@ struct ScheduleView: View {
     
     var body: some View {
         VStack(){
-            List(entryModel.entries){ r in
+//            List(entryModel.entries){ r in
+//                HStack(){
+//                    VStack{
+//                        Text(r.habitTitle)
+//                        Text(entryModel.printTime(inputTime: r.beginTime))
+//                        Text(entryModel.printTime(inputTime: r.endTime))
+//                        Text(String(r.scoreGained))
+//                    }
+//
+//                    Button("Complete") {
+//                        r.complete()
+//                        print("setting complete")
+//                    }
+//                }
+//            }
+            
+            ForEach(0...entryModel.entries.count-1, id:\.self){ r in
                 HStack(){
                     VStack{
-                        Text(r.habitTitle)
-                        Text(entryModel.printTime(inputTime: r.beginTime))
-                        Text(entryModel.printTime(inputTime: r.endTime))
-                        Text(String(r.scoreGained))
+                        Text(entryModel.entries[r].habitTitle)
+                        Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
+                        Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))
+                        Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")
                     }
                     
                     Button("Complete") {
-                        r.complete()
+                        entryModel.entries[r].complete()
                         print("setting complete")
+                        let newEntry=Entry()
+                        entryModel.entries.append(newEntry)
+                        entryModel.entries.removeLast()
                     }
                 }
             }
