@@ -9,6 +9,9 @@ import Foundation
 
 class HabitModel: ObservableObject{
     @Published var habits = [Habit]()
+    @Published var refresh = true
+    var idmax = 0
+    var idIndexing = [Int?]()
     
     init(){
         // String path
@@ -23,9 +26,6 @@ class HabitModel: ObservableObject{
                 // Parse json
                 do{
                     let habitData = try decoder.decode([Habit].self, from: data)
-                    for r in habitData{
-                        r.id = UUID()
-                    }
                     // MARK: Assigned data
                     habits = habitData
                 } catch {
@@ -35,11 +35,20 @@ class HabitModel: ObservableObject{
                 print (error)
             }
         }
+        if habits.count != 0{
+            for r in 0...habits.count-1{
+                if habits[r].id > idmax {
+                    idmax = habits[r].id
+                }
+            }
+        }
+        updateIdIndexing()
     }
     
     func addHabit (inDurationbased:Bool, inTitleIcon:String, inTitle:String, inDefaultScore:Int, inColorTag:Int, inHidden:Bool){
+        idmax += 1
         let newHabit = Habit()
-        newHabit.id = UUID()
+        newHabit.id = idmax
         newHabit.durationBased = inDurationbased
         newHabit.titleIcon = inTitleIcon
         newHabit.title = inTitle
@@ -47,5 +56,15 @@ class HabitModel: ObservableObject{
         newHabit.colorTag = inColorTag
         newHabit.hidden = inHidden
         habits.append(newHabit)
+        updateIdIndexing()
+    }
+    
+    func updateIdIndexing (){
+        idIndexing = Array(repeating:nil, count:idmax+1)
+        if habits.count != 0 {
+            for r in 0...habits.count-1{
+                idIndexing[habits[r].id] = r
+            }
+        }
     }
 }

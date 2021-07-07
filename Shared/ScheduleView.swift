@@ -35,7 +35,9 @@ struct ScheduleView: View {
             ForEach(0...entryModel.entries.count-1, id:\.self){ r in
                 HStack(){
                     VStack{
-                        Text(entryModel.entries[r].habitTitle)
+                        if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
+                            Text(habitModel.habits[posInd].title)
+                        }
                         Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
                         Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))
                         Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")

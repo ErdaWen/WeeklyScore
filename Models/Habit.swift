@@ -9,7 +9,7 @@ import Foundation
 
 class Habit:Decodable,Identifiable{
     // Contents
-    var id:UUID?
+    var id:Int
     var durationBased:Bool
     var titleIcon:String
     var title:String
@@ -26,6 +26,7 @@ class Habit:Decodable,Identifiable{
     var hoursTotal:Double
     
     init(){
+        id = 0
         durationBased = true
         titleIcon = ""
         title = "New Habit"

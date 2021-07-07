@@ -10,8 +10,8 @@ import Foundation
 // time slot structure for Duration based habits
 
 class Entry: Decodable,Identifiable {
-    var id:UUID?
-    var habitTitle = ""
+    var id:Int
+    var habitid:Int
     var score:Int
     var hidden:Bool
     var beginTime:Date
@@ -27,7 +27,8 @@ class Entry: Decodable,Identifiable {
     var hoursGained:Double
     
     init(){
-        habitTitle = "UnkownHabit"
+        id=0
+        habitid = 0
         score = 0
         hidden = false
         beginTime = Date()

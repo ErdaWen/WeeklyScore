@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "durationBased": true,
         "titleIcon": "📚",
         "title": "Study!",
@@ -12,6 +13,7 @@
         "hoursTotal": 1.0
     },
     {
+        "id": 2,
         "durationBased": true,
         "titleIcon": "💪",
         "title": "Workout!",
@@ -24,6 +26,7 @@
         "hoursTotal": 0.0
     },
     {
+        "id": 3,
         "durationBased": false,
         "titleIcon": "🐈",
         "title": "Clean Litter!",

@@ -10,6 +10,8 @@ import Foundation
 class EntryModel: ObservableObject{
     @Published var entries = [Entry]()
     @Published var refresh = true
+    var idmax = 0
+    
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")
@@ -24,9 +26,6 @@ class EntryModel: ObservableObject{
                 // Parse json
                 do{
                     let entryData = try decoder.decode([Entry].self, from: data)
-                    for r in entryData{
-                        r.id = UUID()
-                    }
                     // MARK: Assigned data
                     entries = entryData
                 } catch {
@@ -35,7 +34,13 @@ class EntryModel: ObservableObject{
             } catch {
                 print (error)
             }
-            
+            if entries.count != 0{
+                for r in 0...entries.count-1{
+                    if entries[r].id > idmax {
+                        idmax = entries[r].id
+                    }
+                }
+            }
         }
     }
     
