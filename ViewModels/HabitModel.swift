@@ -12,6 +12,7 @@ class HabitModel: ObservableObject{
     @Published var refresh = true
     var idmax = 0
     var idIndexing = [Int?]()
+    var activeId:Int
     
     init(){
         // String path
@@ -35,12 +36,14 @@ class HabitModel: ObservableObject{
                 print (error)
             }
         }
+        activeId = 0
         if habits.count != 0{
             for r in 0...habits.count-1{
                 if habits[r].id > idmax {
                     idmax = habits[r].id
                 }
             }
+            activeId = idmax
         }
         updateIdIndexing()
     }
@@ -67,4 +70,5 @@ class HabitModel: ObservableObject{
             }
         }
     }
+
 }

@@ -44,6 +44,18 @@ class EntryModel: ObservableObject{
         }
     }
     
+    func addEntry (inHabitid:Int,inScore:Int,inBeginTime:Date,inEndTime:Date,inHidden:Bool){
+        idmax += 1
+        let newEntry = Entry()
+        newEntry.id = idmax
+        newEntry.habitid = inHabitid
+        newEntry.score = inScore
+        newEntry.beginTime = inBeginTime
+        newEntry.endTime = inEndTime
+        newEntry.hidden = inHidden
+        entries.append(newEntry)
+    }
+    
     func printTime(inputTime:Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm E, d MMM y"
