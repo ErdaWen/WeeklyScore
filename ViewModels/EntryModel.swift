@@ -9,6 +9,7 @@ import Foundation
 
 class EntryModel: ObservableObject{
     @Published var entries = [Entry]()
+    @Published var refresh = true
     init(){
         // String path
         let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")

@@ -44,9 +44,7 @@ struct ScheduleView: View {
                     Button("Complete") {
                         entryModel.entries[r].complete()
                         print("setting complete")
-                        let newEntry=Entry()
-                        entryModel.entries.append(newEntry)
-                        entryModel.entries.removeLast()
+                        entryModel.refresh.toggle()
                     }
                 }
             }
