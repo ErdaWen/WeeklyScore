@@ -27,7 +27,7 @@ class Entry: Decodable,Identifiable {
     var hoursGained:Double
     
     init(){
-        id=0
+        id = 0
         habitid = 0
         score = 0
         hidden = false

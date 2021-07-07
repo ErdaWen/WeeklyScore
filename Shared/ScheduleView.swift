@@ -16,21 +16,6 @@ struct ScheduleView: View {
     
     var body: some View {
         VStack(){
-//            List(entryModel.entries){ r in
-//                HStack(){
-//                    VStack{
-//                        Text(r.habitTitle)
-//                        Text(entryModel.printTime(inputTime: r.beginTime))
-//                        Text(entryModel.printTime(inputTime: r.endTime))
-//                        Text(String(r.scoreGained))
-//                    }
-//
-//                    Button("Complete") {
-//                        r.complete()
-//                        print("setting complete")
-//                    }
-//                }
-//            }
             
             ForEach(0...entryModel.entries.count-1, id:\.self){ r in
                 HStack(){
