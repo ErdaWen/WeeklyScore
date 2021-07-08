@@ -10,8 +10,11 @@ import Foundation
 class HabitModel: ObservableObject{
     @Published var habits = [Habit]()
     @Published var refresh = true
+    // keep the maximum id so added habits can take the next Int
     var idmax = 0
+    // idIndexing[x] returns the index in the array of the habit with id=x
     var idIndexing = [Int?]()
+    // activeIdpos records the active habit in add schedule view
     var activeIdpos:Int
     
     init(){
@@ -37,6 +40,7 @@ class HabitModel: ObservableObject{
             }
         }
         activeIdpos = 0
+        // update idmax
         if habits.count != 0{
             for r in 0...habits.count-1{
                 if habits[r].id > idmax {
@@ -59,20 +63,29 @@ class HabitModel: ObservableObject{
         newHabit.hidden = inHidden
         habits.append(newHabit)
         updateIdIndexing()
+        // Write to json
     }
     
     func updateIdIndexing (){
+        // refresh the idIndexing when initializing, adding or deleting habits.
         idIndexing = Array(repeating:nil, count:idmax+1)
         if habits.count != 0 {
             for r in 0...habits.count-1{
                 idIndexing[habits[r].id] = r
             }
         }
+        // Triggering this function also means a change of habit number,
+        // so the activeIdpos should also be refreshed
         activeIdpos = habits.count-1
+        // idmax needs no change since it's taken care inside intitalizer, addHabit or deletHabit
+        // Can be distributed to each function. When addHabit or deleteHabit, only one element
+        // needs to be changed.
     }
     
     func deletehabit(){
-        // update index
+        // depends whether it's idmax
+        // update indexing
+        // Write to json
     }
 
 }
