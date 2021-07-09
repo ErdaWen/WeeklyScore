@@ -13,6 +13,7 @@ struct ScheduleView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     @State var addViewPresented = false
+    @State var completionViewPresented = false
     
     var body: some View {
         VStack(){
@@ -29,10 +30,13 @@ struct ScheduleView: View {
                     }
                     
                     Button("Complete") {
-                        entryModel.entries[r].complete()
-                        print("setting complete")
-                        entryModel.refresh.toggle()
-                    }
+//                        entryModel.entries[r].complete()
+//                        print("setting complete")
+//                        entryModel.refresh.toggle()
+                        completionViewPresented.toggle()
+                    }.sheet(isPresented: $completionViewPresented, content: {
+                        ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,entryIndex:r)
+                    })
                 }
             }
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {

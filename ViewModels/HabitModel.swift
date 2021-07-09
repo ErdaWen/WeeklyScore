@@ -83,9 +83,10 @@ class HabitModel: ObservableObject{
     }
     
     func deletehabit(){
-        // depends whether it's idmax
+        // depends on whether it's idmax
         // update indexing
         // Write to json
+        // followed by deleted all entries
     }
 
 }

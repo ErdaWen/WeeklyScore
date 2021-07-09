@@ -23,6 +23,7 @@ struct AddHabitView: View {
     var body: some View {
         NavigationView(){
             Form{
+                // MARK:Title and color (HStack)
                 HStack(){
                     TextField("🏁",text:$inputTitleIcon).frame(width:35)
                     Divider()
@@ -33,11 +34,14 @@ struct AddHabitView: View {
                         Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
                     }.frame(width: 50)
                 }
+                // MARK:Habit Type: Duration/time-based (Segmented picker)
                 Picker("", selection:$inputDurationBased){
                     Text("Duration").tag(true)
                     Text("Time-based").tag(false)
                 }.pickerStyle(SegmentedPickerStyle()).frame(width: 250)
-                Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 1...100)
+                // MARK:Score (Stepper)
+                Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
+                // MARK: View title and button
             }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ addHabitViewPresented = false}, label: {
                 Text("Cancel")
             }), trailing: Button(action:{

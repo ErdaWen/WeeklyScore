@@ -9,8 +9,8 @@
         "hidden": false,
         "entryNum": 1,
         "checkedEntryNum": 1,
-        "scoreTotal": 20,
-        "hoursTotal": 1.0
+        "scoreTotal": 10,
+        "hoursTotal": 2.0
     },
     {
         "id": 2,
@@ -21,7 +21,7 @@
         "colorTag": 1,
         "hidden": false,
         "entryNum": 0,
-        "checkedEntryNum": 1,
+        "checkedEntryNum": 0,
         "scoreTotal": 0,
         "hoursTotal": 0.0
     },
@@ -34,7 +34,7 @@
         "colorTag": 3,
         "hidden": false,
         "entryNum": 0,
-        "checkedEntryNum": 1,
+        "checkedEntryNum": 0,
         "scoreTotal": 0,
         "hoursTotal": 0.0
     }

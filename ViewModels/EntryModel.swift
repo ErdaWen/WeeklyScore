@@ -10,6 +10,7 @@ import Foundation
 class EntryModel: ObservableObject{
     @Published var entries = [Entry]()
     @Published var refresh = true
+    // Keep the max id for adding new schedule
     var idmax = 0
     
     init(){
@@ -34,6 +35,7 @@ class EntryModel: ObservableObject{
             } catch {
                 print (error)
             }
+            // Update idmax
             if entries.count != 0{
                 for r in 0...entries.count-1{
                     if entries[r].id > idmax {
@@ -56,6 +58,7 @@ class EntryModel: ObservableObject{
         entries.append(newEntry)
     }
     
+    // Print time in certain format
     func printTime(inputTime:Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm E, d MMM y"

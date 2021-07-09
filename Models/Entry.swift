@@ -41,6 +41,14 @@ class Entry: Decodable,Identifiable {
         hoursGained = 0.0
     }
     
+    func changeCompletion (inscoreGained:Int, inhoursGained:Double, inChecked:Bool){
+        // Change entry itself
+        scoreGained = inscoreGained
+        hoursGained = inhoursGained
+        checked = inChecked
+        // habit.changeHours should always be called after this function
+    }
+    
     func complete(){
         self.scoreGained = score
     }

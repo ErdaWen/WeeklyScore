@@ -42,4 +42,10 @@ class Habit:Decodable,Identifiable{
         // Duration-based
         hoursTotal = 0.0
     }
+    func changeHours (inScoreAdded:Int,inHoursAdded:Double ,inCheckedAdded:Int){
+        // This function goes after each entry.changeCompletion
+        scoreTotal += inScoreAdded
+        hoursTotal += inHoursAdded
+        checkedEntryNum += inCheckedAdded
+    }
 }

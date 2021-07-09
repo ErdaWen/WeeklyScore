@@ -6,9 +6,9 @@
         "hidden": false,
         "beginTime": "2021-07-4T12:30:00Z",
         "endTime": "2021-07-4T17:30:00Z",
-        "scoreGained": 0,
+        "scoreGained": 10,
         "checked": true,
-        "hoursGained": 0.0
+        "hoursGained": 2.0
     },
     {
         "id": 2,
@@ -18,7 +18,7 @@
         "beginTime": "2021-07-5T12:30:00Z",
         "endTime": "2021-07-5T17:30:00Z",
         "scoreGained": 0,
-        "checked": true,
+        "checked": false,
         "hoursGained": 0.0
     }
 ]
