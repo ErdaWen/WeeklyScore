@@ -19,12 +19,13 @@ struct ChangeCompletionView: View {
     @State var orgChecked = false
     @State var inputScoreGained = 0
     @State var inputHoursGained = 0.0
+    @State var inputHoursGainedString = "0"
     @State var inputChecked = false
     
     @State var habitHours = 0.0
     // For duration-based habit, the status goes 3 ways
     // This var should be adjusted with the inputchecked at the same time
-    // 0: messed up, 1: partial credit/manual, 2: complete
+    // 0: messed up, 1: partial credit, 2: complete, 3: extra
     @State var completeState = 0
     
     
@@ -37,6 +38,7 @@ struct ChangeCompletionView: View {
                         Text("Messed up").tag(0)
                         Text("Manual").tag(1)
                         Text("Compelete").tag(2)
+                        Text("Plus").tag(3)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .onChange(of: completeState, perform: { value in
@@ -46,16 +48,29 @@ struct ChangeCompletionView: View {
                             inputHoursGained = 0.0
                         } else if (completeState == 1){
                             inputChecked = true
+                        } else if (completeState == 3){
+                            inputChecked = true
+                            inputScoreGained = entryModel.entries[entryIndex].score
+                            inputHoursGained = habitHours
                         } else {
                             inputChecked = true
                             inputScoreGained = entryModel.entries[entryIndex].score
                             inputHoursGained = habitHours
+                            inputHoursGainedString = String(inputHoursGained)
                         }
                     })
                     if completeState == 2 {
                         Text ("Full credit, score = \(inputScoreGained), hoursgained = \(inputHoursGained)")
-                    } else if (completeState == 1){
-                        
+                    } else if (completeState == 3){
+                        HStack{
+                            Text ("Full credit, score = \(inputScoreGained)")
+                            TextField("Hours", text: $inputHoursGainedString)
+                                .onChange(of: inputHoursGainedString, perform: { value in
+                                    if let inputnumber = Double(inputHoursGainedString) {
+                                        inputHoursGained = inputnumber
+                                    }
+                                })
+                        }
                     }
                     
                 } else {
@@ -79,6 +94,8 @@ struct ChangeCompletionView: View {
             if inputChecked {
                 if (inputHoursGained == habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
                     completeState = 2
+                } else if (inputHoursGained == habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
+                    completeState = 3
                 } else {
                     completeState = 1
                 }
