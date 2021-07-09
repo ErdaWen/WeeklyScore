@@ -19,6 +19,8 @@ struct HabitView: View {
                 HStack{
                     Text(r.title)
                     Text(String(r.hoursTotal))
+                    Text(String(r.checkedEntryNum))
+                    Text(String(r.scoreTotal))
                 }
             }
             Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {

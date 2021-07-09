@@ -29,10 +29,7 @@ struct ScheduleView: View {
                         Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")
                     }
                     
-                    Button("Complete") {
-//                        entryModel.entries[r].complete()
-//                        print("setting complete")
-//                        entryModel.refresh.toggle()
+                    Button("Record") {
                         completionViewPresented.toggle()
                     }.sheet(isPresented: $completionViewPresented, content: {
                         ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,entryIndex:r)

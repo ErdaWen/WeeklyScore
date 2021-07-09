@@ -17,10 +17,12 @@ struct ChangeCompletionView: View {
     @State var orgScoreGained = 0
     @State var orgHoursGained = 0.0
     @State var orgChecked = false
+    @State var checkChanged = 0
     @State var inputScoreGained = 0
     @State var inputHoursGained = 0.0
     @State var inputHoursGainedString = "0"
     @State var inputChecked = false
+    
     
     @State var habitHours = 0.0
     // For duration-based habit, the status goes 3 ways
@@ -43,15 +45,18 @@ struct ChangeCompletionView: View {
                         Text("Plus").tag(3)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    //update check status with given picker
+                    //update check status and scores with given picker
                     .onChange(of: completeState, perform: { value in
-                        if completeState == 0 {
+                        if completeState == 0
+                        {
                             // No score, 0 score, 0 hour
                             inputChecked = false
                             inputScoreGained = 0
                             inputHoursGained = 0.0
                             inputHoursGainedString = String(inputHoursGained)
-                        } else if (completeState == 1){
+                        }
+                        else if (completeState == 1)
+                        {
                             // Partial score, leave the values to be entered in the textfields.
                             inputChecked = true
                             if activeStateChange{
@@ -65,7 +70,9 @@ struct ChangeCompletionView: View {
                                 activeStateChange = true
                             }
                             
-                        } else if (completeState == 3){
+                        }
+                        else if (completeState == 3)
+                        {
                             // Extra, full socre, hours to be entered, default at full hours
                             inputChecked = true
                             if activeStateChange{
@@ -78,7 +85,9 @@ struct ChangeCompletionView: View {
                                 // Reset activeStateChange
                                 activeStateChange = true
                             }
-                        } else {
+                        }
+                        else
+                        {
                             inputChecked = true
                             inputScoreGained = entryModel.entries[entryIndex].score
                             inputHoursGained = habitHours
@@ -96,12 +105,15 @@ struct ChangeCompletionView: View {
                                 if let inputnumber = Double(inputHoursGainedString) {
                                     inputHoursGained = inputnumber
                                 }
-                                if (inputHoursGained > habitHours)&&(completeState == 1) {
+                                if (inputHoursGained > habitHours)&&(completeState == 1)
+                                {
                                     // If input hours is large than full hours in partial state, trigger passive state chagne
                                     activeStateChange = false
                                     //
                                     completeState = 3
-                                } else if (inputHoursGained < habitHours)&&(completeState == 3){
+                                }
+                                else if (inputHoursGained < habitHours)&&(completeState == 3)
+                                {
                                     // If input hours is less than full hours in partial state, trigger passive state chagne
                                     activeStateChange = false
                                     //
@@ -110,87 +122,84 @@ struct ChangeCompletionView: View {
                             })
                     }
                     
-                    // Texts or Fields depending on the status
-                    //                    if completeState == 2 {
-                    //                        Text ("Full credit, score = \(inputScoreGained), hoursgained = \(inputHoursGained)")
-                    //                    } else if (completeState == 3){
-                    //                        HStack{
-                    //                            Text ("Full credit, score = \(inputScoreGained)")
-                    //                            TextField("Hours", text: $inputHoursGainedString)
-                    //                                .keyboardType(.numberPad)
-                    //                                .onChange(of: inputHoursGainedString, perform: { value in
-                    //                                    if let inputnumber = Double(inputHoursGainedString) {
-                    //                                        inputHoursGained = inputnumber
-                    //                                    }
-                    //                                    if inputHoursGained < habitHours {
-                    //                                        // If input hours is less than full hours, trigger passive state chagne
-                    //                                        activeStateChange = false
-                    //                                        //
-                    //                                        completeState = 1
-                    //                                    }
-                    //                                })
-                    //                        }
-                    //                    } else if (completeState == 1){
-                    //                        HStack{
-                    //                            Stepper("Score: \(inputScoreGained)", value: $inputScoreGained, in: 0...entryModel.entries[entryIndex].score)
-                    //                            TextField("Hours", text: $inputHoursGainedString)
-                    //                                .keyboardType(.numberPad)
-                    //                                .onChange(of: inputHoursGainedString, perform: { value in
-                    //                                    if let inputnumber = Double(inputHoursGainedString) {
-                    //                                        inputHoursGained = inputnumber
-                    //                                    }
-                    //                                    if inputHoursGained > habitHours {
-                    //                                        // If input hours is less than full hours, trigger passive state chagne
-                    //                                        activeStateChange = false
-                    //                                        //
-                    //                                        completeState = 3
-                    //                                    }
-                    //                                })
-                    //
-                    //                        }
-                    //                    } else {
-                    //                        // completeState == 0, nothing shown
-                    //                    }
-                    //
                 } else {
                     // MARK: Hit-based case
+                    Picker("", selection:$inputChecked){
+                        Text("Messed up").tag(false)
+                        Text("Compelete").tag(true)
+                    }.onChange(of: inputChecked, perform: { value in
+                        if inputChecked{
+                            inputScoreGained = entryModel.entries[entryIndex].scoreGained
+                        } else {
+                            inputScoreGained = 0
+                        }
+                    })
                 }
                 
             }
-        }.onAppear(){
-            // Get habit index
-            if let indexing = habitModel.idIndexing[entryModel.entries[entryIndex].habitid]{
-                habitIndex = indexing
-            }
-            inputScoreGained = entryModel.entries[entryIndex].scoreGained
-            inputHoursGained = entryModel.entries[entryIndex].hoursGained
-            inputHoursGainedString = String(inputHoursGained)
-            inputChecked = entryModel.entries[entryIndex].checked
-            orgScoreGained = inputScoreGained
-            orgHoursGained = inputHoursGained
-            
-            habitHours=(entryModel.entries[entryIndex].endTime.timeIntervalSinceReferenceDate - entryModel.entries[entryIndex].beginTime.timeIntervalSinceReferenceDate)/3600
-            // Calculate the complete states
-            if inputChecked {
-                if (inputHoursGained == habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
-                    completeState = 2
-                } else if (inputHoursGained == habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
-                    completeState = 3
+            .onAppear(){
+                // Get habit index
+                if let indexing = habitModel.idIndexing[entryModel.entries[entryIndex].habitid]{
+                    habitIndex = indexing
+                }
+                inputScoreGained = entryModel.entries[entryIndex].scoreGained
+                inputHoursGained = entryModel.entries[entryIndex].hoursGained
+                inputHoursGainedString = String(inputHoursGained)
+                inputChecked = entryModel.entries[entryIndex].checked
+                orgScoreGained = inputScoreGained
+                orgHoursGained = inputHoursGained
+                orgChecked = inputChecked
+                
+                habitHours=(entryModel.entries[entryIndex].endTime.timeIntervalSinceReferenceDate - entryModel.entries[entryIndex].beginTime.timeIntervalSinceReferenceDate)/3600
+                // Calculate the complete states
+                if inputChecked {
+                    if (inputHoursGained == habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
+                        completeState = 2
+                    } else if (inputHoursGained > habitHours) && (inputScoreGained == entryModel.entries[entryIndex].score) {
+                        completeState = 3
+                    } else {
+                        completeState = 1
+                    }
+                    
                 } else {
-                    completeState = 1
+                    completeState = 0
                 }
                 
-            } else {
-                completeState = 0
             }
-            
+            .navigationBarTitle("Record Scores",displayMode: .inline)
+            .navigationBarItems(
+                leading: Button(action:{
+                    changeCompletionViewPresented = false
+                    entryModel.refresh.toggle()
+                }, label: {
+                    Text("Cancel")
+                })
+                ,trailing: Button(action:{
+                    // Execute change to entry
+                    entryModel.entries[entryIndex].changeCompletion(inscoreGained: inputScoreGained, inhoursGained: inputHoursGained, inChecked: inputChecked)
+                    // Calculate check changed
+                    if orgChecked != inputChecked{
+                        if inputChecked {
+                            checkChanged = 1
+                        } else{
+                            checkChanged = -1
+                        }
+                    }
+                    // Execute change to habit for records
+                    habitModel.habits[habitIndex].changeHours(inScoreAdded: inputScoreGained-orgScoreGained, inHoursAdded: inputHoursGained-orgHoursGained, inCheckedAdded: checkChanged)
+                    changeCompletionViewPresented = false
+                    entryModel.refresh.toggle()
+                }, label: {
+                    Text("Save")
+                }))
         }
+
     }
 }
 
 struct ChangeCompletionView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        ChangeCompletionView(changeCompletionViewPresented: $dummyBool,entryIndex: 0)
+        ChangeCompletionView(changeCompletionViewPresented: $dummyBool,entryIndex: 1)
     }
 }
