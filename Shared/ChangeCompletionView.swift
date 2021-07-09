@@ -127,13 +127,16 @@ struct ChangeCompletionView: View {
                     Picker("", selection:$inputChecked){
                         Text("Messed up").tag(false)
                         Text("Compelete").tag(true)
-                    }.onChange(of: inputChecked, perform: { value in
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .onChange(of: inputChecked, perform: { value in
                         if inputChecked{
-                            inputScoreGained = entryModel.entries[entryIndex].scoreGained
+                            inputScoreGained = entryModel.entries[entryIndex].score
                         } else {
                             inputScoreGained = 0
                         }
                     })
+                    Text(" \(inputScoreGained) score Gained")
                 }
                 
             }

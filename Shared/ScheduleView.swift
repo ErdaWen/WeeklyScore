@@ -14,6 +14,7 @@ struct ScheduleView: View {
     @EnvironmentObject var habitModel:HabitModel
     @State var addViewPresented = false
     @State var completionViewPresented = false
+    @State var changeViewPresented = false
     
     var body: some View {
         VStack(){
@@ -22,7 +23,11 @@ struct ScheduleView: View {
                 HStack(){
                     VStack{
                         if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
-                            Text(habitModel.habits[posInd].title)
+                            Button(habitModel.habits[posInd].title){
+                                changeViewPresented.toggle()
+                            }.sheet(isPresented: $changeViewPresented, content: {
+                                ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, entryIndex: r)
+                            })
                         }
                         Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
                         Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))

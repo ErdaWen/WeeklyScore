@@ -46,6 +46,7 @@ class EntryModel: ObservableObject{
         }
     }
     
+    // Add a new entry
     func addEntry (inHabitid:Int,inScore:Int,inBeginTime:Date,inEndTime:Date,inHidden:Bool){
         idmax += 1
         let newEntry = Entry()
@@ -56,6 +57,10 @@ class EntryModel: ObservableObject{
         newEntry.endTime = inEndTime
         newEntry.hidden = inHidden
         entries.append(newEntry)
+    }
+    
+    func deleteEntry (indexing: Int){
+        //
     }
     
     // Print time in certain format

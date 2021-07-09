@@ -49,6 +49,14 @@ class Entry: Decodable,Identifiable {
         // habit.changeHours should always be called after this function
     }
     
+    func changeProp (inHabitid:Int, inScore:Int, inBeginTime:Date, inEndTime:Date)
+    {
+        habitid = inHabitid
+        score = inScore
+        beginTime = inBeginTime
+        endTime = inEndTime
+    }
+    
     func complete(){
         self.scoreGained = score
     }
