@@ -36,6 +36,7 @@ struct ChangeCompletionView: View {
     var body: some View {
         NavigationView{
             Form{
+                Text("Entry Index = \(entryIndex)")
                 if habitModel.habits[habitIndex].durationBased{
                     // MARK:Duration-based case
                     Picker("", selection:$completeState){

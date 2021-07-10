@@ -17,30 +17,34 @@ struct ScheduleView: View {
     @State var changeViewPresented = false
     
     var body: some View {
-        VStack(){
-            
-            ForEach(0...entryModel.entries.count-1, id:\.self){ r in
-                HStack(){
-                    VStack{
-                        if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
-                            Button(habitModel.habits[posInd].title){
-                                changeViewPresented.toggle()
-                            }.sheet(isPresented: $changeViewPresented, content: {
-                                ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, entryIndex: r)
-                            })
+        VStack{
+            TabView{
+                // , id:\.self
+                ForEach(0...entryModel.entries.count-1,id:\.self){ r in
+                    HStack(){
+                        VStack{
+                            if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
+                                Button(habitModel.habits[posInd].title){
+                                    changeViewPresented.toggle()
+                                }.sheet(isPresented: $changeViewPresented, content: {
+                                    ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, entryIndex: r)
+                                })
+                            }
+                            Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
+                            Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))
+                            Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")
                         }
-                        Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
-                        Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))
-                        Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")
+                        
+                        Button("Record\(r)") {
+                            completionViewPresented.toggle()
+                        }.sheet(isPresented: $completionViewPresented, content: {
+                            ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,entryIndex:r)
+                        })
                     }
-                    
-                    Button("Record") {
-                        completionViewPresented.toggle()
-                    }.sheet(isPresented: $completionViewPresented, content: {
-                        ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,entryIndex:r)
-                    })
                 }
             }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
                 AddEntryView(addEntryViewPresented: $addViewPresented)
             })

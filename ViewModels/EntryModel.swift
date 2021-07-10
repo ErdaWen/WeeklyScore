@@ -14,6 +14,18 @@ class EntryModel: ObservableObject{
     var idmax = 0
     
     init(){
+        parseJason()
+        // Update idmax
+        if entries.count != 0{
+            for r in 0...entries.count-1{
+                if entries[r].id > idmax {
+                    idmax = entries[r].id
+                }
+            }
+        }
+    }
+    
+    func parseJason(){
         // String path
         let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")
         if let path = pathString{
@@ -34,14 +46,6 @@ class EntryModel: ObservableObject{
                 }
             } catch {
                 print (error)
-            }
-            // Update idmax
-            if entries.count != 0{
-                for r in 0...entries.count-1{
-                    if entries[r].id > idmax {
-                        idmax = entries[r].id
-                    }
-                }
             }
         }
     }

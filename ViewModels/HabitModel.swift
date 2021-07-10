@@ -15,9 +15,23 @@ class HabitModel: ObservableObject{
     // idIndexing[x] returns the index in the array of the habit with id=x
     var idIndexing = [Int?]()
     // activeIdpos records the active habit in add schedule view
-    var activeIdpos:Int
+    var activeIdpos = 0
     
     init(){
+        parseJason()
+        // Update idmax
+        if habits.count != 0{
+            for r in 0...habits.count-1{
+                if habits[r].id > idmax {
+                    idmax = habits[r].id
+                }
+            }
+        }
+        // Update indexing
+        updateIdIndexing()
+    }
+    
+    func parseJason(){
         // String path
         let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")
         if let path = pathString{
@@ -39,16 +53,6 @@ class HabitModel: ObservableObject{
                 print (error)
             }
         }
-        activeIdpos = 0
-        // update idmax
-        if habits.count != 0{
-            for r in 0...habits.count-1{
-                if habits[r].id > idmax {
-                    idmax = habits[r].id
-                }
-            }
-        }
-        updateIdIndexing()
     }
     
     func addHabit (inDurationbased:Bool, inTitleIcon:String, inTitle:String, inDefaultScore:Int, inColorTag:Int, inHidden:Bool){
@@ -88,5 +92,5 @@ class HabitModel: ObservableObject{
         // Write to json
         // followed by deleted all entries
     }
-
+    
 }
