@@ -64,7 +64,11 @@ class EntryModel: ObservableObject{
     }
     
     func deleteEntry (indexing: Int){
-        //
+        // Alway after changing the completion of the corresponding habit
+        if entries[indexing].id == idmax {
+            idmax = idmax - 1
+        }
+        entries.remove(at: indexing)
     }
     
     // Print time in certain format
