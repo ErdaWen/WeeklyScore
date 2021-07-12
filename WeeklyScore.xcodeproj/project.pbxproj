@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
+		003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
 		00C72FA626963CC00028EF5C /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddEntryView.swift */; };
 		00C72FA726963CC00028EF5C /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddEntryView.swift */; };
 		00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
@@ -40,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		003A248A269BFD7800BDB239 /* ChangeHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHabitView.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
+				003A248A269BFD7800BDB239 /* ChangeHabitView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -275,6 +279,7 @@
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00C72FA626963CC00028EF5C /* AddEntryView.swift in Sources */,
 				C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */,
+				003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
@@ -294,6 +299,7 @@
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00C72FA726963CC00028EF5C /* AddEntryView.swift in Sources */,
 				C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */,
+				003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,

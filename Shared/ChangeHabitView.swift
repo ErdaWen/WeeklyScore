@@ -1,0 +1,82 @@
+//
+//  ChangeHabitView.swift
+//  WeeklyScore
+//
+//  Created by Erda Wen on 7/11/21.
+//
+
+import SwiftUI
+
+struct ChangeHabitView: View {
+    @EnvironmentObject var entryModel:EntryModel
+    @EnvironmentObject var habitModel:HabitModel
+    @Binding var changeHabitViewPresented:Bool
+    
+    var habitIndex: Int
+    
+    @State var inputTitleIcon = ""
+    @State var inputTitle = ""
+    @State var inputDefaultScore = 10
+    @State var inputColorTag = 0
+    
+    
+    var body: some View {
+        NavigationView(){
+            Form{
+                // MARK:Title and color (HStack)
+                HStack(){
+                    TextField("🏁",text:$inputTitleIcon).frame(width:35)
+                    Divider()
+                    TextField("Title",text:$inputTitle)
+                    Divider()
+                    Picker("",selection:$inputColorTag){
+                        Rectangle().frame(width: 40, height: 40).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).cornerRadius(8.0).tag(0)
+                        Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
+                    }.frame(width: 50)
+                }
+                // MARK:Score (Stepper)
+                Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
+                // MARK: Change duration-based
+                if habitModel.habits[habitIndex].durationBased {
+                    Button("Change to time-based") {
+                        habitModel.habits[habitIndex].changeDurationBased()
+                    }
+                } else {
+                    Button("Change to duration-based") {
+                        habitModel.habits[habitIndex].changeDurationBased()
+                        habitModel.refresh.toggle()
+                        changeHabitViewPresented = false
+                    }
+                }
+                
+                Button("Delete Habits") {
+                    changeHabitViewPresented = false
+                    entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
+                    habitModel.deleteHabit(indexing:habitIndex)
+                }
+                
+                // MARK: View title and button
+            }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ changeHabitViewPresented = false}, label: {
+                Text("Cancel")
+            }), trailing: Button(action:{
+                habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
+                habitModel.refresh.toggle()
+                changeHabitViewPresented = false
+            }, label: {
+                Text("Save")
+            }))
+        }.onAppear(){
+            inputTitleIcon = habitModel.habits[habitIndex].titleIcon
+            inputTitle = habitModel.habits[habitIndex].title
+            inputDefaultScore = habitModel.habits[habitIndex].defaultScore
+            inputColorTag = habitModel.habits[habitIndex].colorTag
+        }
+    }
+}
+
+struct ChangeHabitView_Previews: PreviewProvider {
+    @State static var dummyBool = true
+    static var previews: some View {
+        ChangeHabitView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
+    }
+}

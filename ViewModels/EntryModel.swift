@@ -71,6 +71,14 @@ class EntryModel: ObservableObject{
         entries.remove(at: indexing)
     }
     
+    func deleteAllEntryRelated (deletedHabitId:Int){
+        for entryIndex in (0...entries.count-1).reversed() {
+            if entries[entryIndex].habitid == deletedHabitId {
+                deleteEntry(indexing: entryIndex)
+            }
+        }
+    }
+    
     // Print time in certain format
     func printTime(inputTime:Date) -> String {
         let formatter = DateFormatter()

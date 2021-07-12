@@ -12,17 +12,30 @@ struct HabitView: View {
     @EnvironmentObject var habitModel:HabitModel
     
     @State var addViewPresented = false
+    @State var changeViewPresented = false
     
     var body: some View {
         VStack{
-            List(habitModel.habits){ r in
-                HStack{
-                    Text(r.title)
-                    Text(String(r.hoursTotal))
-                    Text(String(r.checkedEntryNum))
-                    Text(String(r.scoreTotal))
+            TabView{
+                ForEach(0...habitModel.habits.count-1, id: \.self) { r in
+                    HStack{
+                        Button(habitModel.habits[r].title) {
+                            changeViewPresented = true
+                        }.sheet(isPresented: $changeViewPresented, content: {
+                            ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
+                        })
+                        if habitModel.habits[r].durationBased {
+                            Text("Total \(habitModel.habits[r].hoursTotal) hours")
+                        } else {
+                            Text("\(habitModel.habits[r].checkedEntryNum) times hited")
+                        }
+                        Text(String(habitModel.habits[r].scoreTotal))
+                    }
                 }
             }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            
+            
             Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
                 AddHabitView(addHabitViewPresented: $addViewPresented)
             })

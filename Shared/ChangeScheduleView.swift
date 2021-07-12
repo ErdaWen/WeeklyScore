@@ -70,9 +70,9 @@ struct ChangeScheduleView: View {
                     // MARK: Delete schedule
                     Button(action:
                             {
+                                changeScheduleViewPresented = false
                                 habitModel.habits[inputHabitidpos].changeHours(inScoreAdded: -entryModel.entries[entryIndex].scoreGained, inHoursAdded: -entryModel.entries[entryIndex].hoursGained, inCheckedAdded: entryModel.entries[entryIndex].checked ? -1 : 0)
                                 entryModel.deleteEntry(indexing: entryIndex)
-                                changeScheduleViewPresented = false
                             }, label: {
                         Text("Delete this event")
                     })
