@@ -22,49 +22,53 @@ struct ChangeHabitView: View {
     
     var body: some View {
         NavigationView(){
-            Form{
-                // MARK:Title and color (HStack)
-                HStack(){
-                    TextField("🏁",text:$inputTitleIcon).frame(width:35)
-                    Divider()
-                    TextField("Title",text:$inputTitle)
-                    Divider()
-                    Picker("",selection:$inputColorTag){
-                        Rectangle().frame(width: 40, height: 40).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).cornerRadius(8.0).tag(0)
-                        Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
-                    }.frame(width: 50)
-                }
-                // MARK:Score (Stepper)
-                Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
-                // MARK: Change duration-based
-                if habitModel.habits[habitIndex].durationBased {
-                    Button("Change to time-based") {
-                        habitModel.habits[habitIndex].changeDurationBased()
+            // habitIndex may overflow when deleting the last element, need to check
+            if habitIndex < habitModel.habits.count {
+                Form{
+                    // MARK:Title and color (HStack)
+                    HStack(){
+                        TextField("🏁",text:$inputTitleIcon).frame(width:35)
+                        Divider()
+                        TextField("Title",text:$inputTitle)
+                        Divider()
+                        Picker("",selection:$inputColorTag){
+                            Rectangle().frame(width: 40, height: 40).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).cornerRadius(8.0).tag(0)
+                            Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
+                        }.frame(width: 50)
                     }
-                } else {
-                    Button("Change to duration-based") {
-                        habitModel.habits[habitIndex].changeDurationBased()
-                        habitModel.refresh.toggle()
+                    // MARK:Score (Stepper)
+                    Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
+                    // MARK: Change duration-based
+                    if habitModel.habits[habitIndex].durationBased {
+                        Button("Change to time-based") {
+                            habitModel.habits[habitIndex].changeDurationBased()
+                        }
+                    } else {
+                        Button("Change to duration-based") {
+                            habitModel.habits[habitIndex].changeDurationBased()
+                            habitModel.refresh.toggle()
+                            changeHabitViewPresented = false
+                        }
+                    }
+                    
+                    Button("Delete Habits") {
                         changeHabitViewPresented = false
+                        entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
+                        entryModel.refresh.toggle()
+                        habitModel.deleteHabit(indexing:habitIndex)
                     }
-                }
-                
-                Button("Delete Habits") {
+                    
+                    // MARK: View title and button
+                }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ changeHabitViewPresented = false}, label: {
+                    Text("Cancel")
+                }), trailing: Button(action:{
                     changeHabitViewPresented = false
-                    entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
-                    habitModel.deleteHabit(indexing:habitIndex)
-                }
-                
-                // MARK: View title and button
-            }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ changeHabitViewPresented = false}, label: {
-                Text("Cancel")
-            }), trailing: Button(action:{
-                habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
-                habitModel.refresh.toggle()
-                changeHabitViewPresented = false
-            }, label: {
-                Text("Save")
-            }))
+                    habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
+                    habitModel.refresh.toggle()
+                }, label: {
+                    Text("Save")
+                }))
+            }
         }.onAppear(){
             inputTitleIcon = habitModel.habits[habitIndex].titleIcon
             inputTitle = habitModel.habits[habitIndex].title

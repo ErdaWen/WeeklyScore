@@ -1,41 +1,41 @@
 [
-    {
-        "id": 1,
-        "durationBased": true,
-        "titleIcon": "📚",
-        "title": "Study!",
-        "defaultScore": 20,
-        "colorTag": 0,
-        "hidden": false,
-        "entryNum": 1,
-        "checkedEntryNum": 1,
-        "scoreTotal": 10,
-        "hoursTotal": 2.0
-    },
-    {
-        "id": 2,
-        "durationBased": true,
-        "titleIcon": "💪",
-        "title": "Workout!",
-        "defaultScore": 10,
-        "colorTag": 1,
-        "hidden": false,
-        "entryNum": 0,
-        "checkedEntryNum": 0,
-        "scoreTotal": 0,
-        "hoursTotal": 0.0
-    },
-    {
-        "id": 3,
-        "durationBased": false,
-        "titleIcon": "🐈",
-        "title": "Clean Litter!",
-        "defaultScore": 5,
-        "colorTag": 3,
-        "hidden": false,
-        "entryNum": 0,
-        "checkedEntryNum": 0,
-        "scoreTotal": 0,
-        "hoursTotal": 0.0
-    }
+  {
+    "id" : 1,
+    "durationBased" : true,
+    "titleIcon" : "📚",
+    "title" : "Study!",
+    "defaultScore" : 20,
+    "colorTag" : 0,
+    "hidden" : false,
+    "entryNum" : 1,
+    "checkedEntryNum" : 1,
+    "scoreTotal" : 10,
+    "hoursTotal" : 2
+  },
+  {
+    "id" : 2,
+    "durationBased" : true,
+    "titleIcon" : "💪",
+    "title" : "Workout!",
+    "defaultScore" : 10,
+    "colorTag" : 1,
+    "hidden" : false,
+    "entryNum" : 0,
+    "checkedEntryNum" : 0,
+    "scoreTotal" : 0,
+    "hoursTotal" : 0
+  },
+  {
+    "id" : 3,
+    "durationBased" : false,
+    "titleIcon" : "🐈",
+    "title" : "Clean Litter!",
+    "defaultScore" : 5,
+    "colorTag" : 3,
+    "hidden" : false,
+    "entryNum" : 0,
+    "checkedEntryNum" : 0,
+    "scoreTotal" : 0,
+    "hoursTotal" : 0
+  }
 ]
