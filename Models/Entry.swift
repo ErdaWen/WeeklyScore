@@ -60,4 +60,5 @@ class Entry: Decodable,Identifiable {
     func complete(){
         self.scoreGained = score
     }
+    
 }

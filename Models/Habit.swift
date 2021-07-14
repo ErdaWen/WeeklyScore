@@ -62,4 +62,7 @@ class Habit:Decodable,Identifiable{
         durationBased.toggle()
     }
     
+    func archive(){
+        hidden.toggle()
+    }
 }

@@ -21,7 +21,7 @@ struct ScheduleView: View {
             if entryModel.entries.count > 0 {
                 TabView{
                     // , id:\.self
-                    ForEach(0...entryModel.entries.count-1,id:\.self){ r in
+                    ForEach(0..<entryModel.entries.count){ r in
                         HStack(){
                             VStack{
                                 if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
@@ -45,6 +45,8 @@ struct ScheduleView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            } else {
+                Text("No Schedule")
             }
             
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {

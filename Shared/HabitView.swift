@@ -18,19 +18,21 @@ struct HabitView: View {
         VStack{
             if habitModel.habits.count > 0{
                 TabView{
-                    ForEach(0...habitModel.habits.count-1, id: \.self) { r in
-                        HStack{
-                            Button(habitModel.habits[r].title) {
-                                changeViewPresented = true
-                            }.sheet(isPresented: $changeViewPresented, content: {
-                                ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
-                            })
-                            if habitModel.habits[r].durationBased {
-                                Text("Total \(habitModel.habits[r].hoursTotal) hours")
-                            } else {
-                                Text("\(habitModel.habits[r].checkedEntryNum) times hited")
+                    ForEach(0..<habitModel.habits.count) { r in
+                        if habitModel.habits[r].hidden == false {
+                            HStack{
+                                Button(habitModel.habits[r].title) {
+                                    changeViewPresented = true
+                                }.sheet(isPresented: $changeViewPresented, content: {
+                                    ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
+                                })
+                                if habitModel.habits[r].durationBased {
+                                    Text("Total \(habitModel.habits[r].hoursTotal) hours")
+                                } else {
+                                    Text("\(habitModel.habits[r].checkedEntryNum) times hited")
+                                }
+                                Text(String(habitModel.habits[r].scoreTotal))
                             }
-                            Text(String(habitModel.habits[r].scoreTotal))
                         }
                     }
                 }

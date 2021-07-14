@@ -51,6 +51,12 @@ struct ChangeHabitView: View {
                         }
                     }
                     
+                    Button("Archive Habits") {
+                        changeHabitViewPresented = false
+                        habitModel.habits[habitIndex].archive()
+                        habitModel.refresh.toggle()
+                    }
+                    
                     Button("Delete Habits") {
                         changeHabitViewPresented = false
                         entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
@@ -82,5 +88,7 @@ struct ChangeHabitView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
         ChangeHabitView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
+            .environmentObject(EntryModel())
+            .environmentObject(HabitModel())
     }
 }
