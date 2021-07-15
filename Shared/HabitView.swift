@@ -18,8 +18,8 @@ struct HabitView: View {
         VStack{
             if habitModel.habits.count > 0{
                 TabView{
-                    ForEach(0..<habitModel.habits.count) { r in
-                        if habitModel.habits[r].hidden == false {
+                    ForEach(0..<habitModel.habits.count,id: \.self) { r in
+                        //if habitModel.habits[r].hidden == false {
                             HStack{
                                 Button(habitModel.habits[r].title) {
                                     changeViewPresented = true
@@ -33,7 +33,7 @@ struct HabitView: View {
                                 }
                                 Text(String(habitModel.habits[r].scoreTotal))
                             }
-                        }
+                        //}
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
