@@ -18,7 +18,7 @@ class HabitModel: ObservableObject{
     var activeIdpos = 0
     
     init(){
-        parseJason()
+        parseJson()
         // Update idmax
         if habits.count != 0{
             for r in 0...habits.count-1{
@@ -31,7 +31,7 @@ class HabitModel: ObservableObject{
         updateIdIndexing()
     }
     
-    func parseJason(){
+    func parseJson(){
         // String path
         let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")
         if let path = pathString{
@@ -55,6 +55,41 @@ class HabitModel: ObservableObject{
         }
     }
     
+    func writeJson(){
+        do{
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(habits)
+            let pathString = Bundle.main.path(forResource: "habitsList", ofType: "json")
+            if let path = pathString{
+                let url=URL(fileURLWithPath: path)
+                do{
+                    try data.write(to: url)
+                    do {
+                        let savedData = try Data(contentsOf: url)
+                        if let savedString = String(data: savedData, encoding: .utf8){
+                            print("New Json = " + savedString)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    // Manually update change for two thing:
+    // 1. toggle the self.refresh to refresh the views
+    // 2. write to Json
+    func updateChange() {
+        refresh.toggle()
+        writeJson()
+    }
+    
     func addHabit (inDurationbased:Bool, inTitleIcon:String, inTitle:String, inDefaultScore:Int, inColorTag:Int, inHidden:Bool){
         idmax += 1
         let newHabit = Habit()
@@ -67,7 +102,7 @@ class HabitModel: ObservableObject{
         newHabit.hidden = inHidden
         habits.append(newHabit)
         updateIdIndexing()
-        // Write to json
+        updateChange()
     }
     
     func updateIdIndexing (){
@@ -93,7 +128,7 @@ class HabitModel: ObservableObject{
         }
         habits.remove(at: indexing)
         updateIdIndexing()
-        // Write to json
+        updateChange()
     }
     
 }

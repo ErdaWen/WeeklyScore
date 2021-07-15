@@ -46,7 +46,7 @@ struct ChangeHabitView: View {
                     } else {
                         Button("Change to duration-based") {
                             habitModel.habits[habitIndex].changeDurationBased()
-                            habitModel.refresh.toggle()
+                            habitModel.updateChange()
                             changeHabitViewPresented = false
                         }
                     }
@@ -54,7 +54,7 @@ struct ChangeHabitView: View {
                     Button("Archive Habits") {
                         changeHabitViewPresented = false
                         habitModel.habits[habitIndex].archive()
-                        habitModel.refresh.toggle()
+                        habitModel.updateChange()
                     }
                     
                     Button("Delete Habits") {
@@ -70,7 +70,7 @@ struct ChangeHabitView: View {
                 }), trailing: Button(action:{
                     changeHabitViewPresented = false
                     habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
-                    habitModel.refresh.toggle()
+                    habitModel.updateChange()
                 }, label: {
                     Text("Save")
                 }))

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Habit:Decodable,Identifiable{
+class Habit:Codable,Identifiable{
     // Contents
     var id:Int
     var durationBased:Bool
