@@ -16,6 +16,8 @@ class HabitModel: ObservableObject{
     var idIndexing = [Int?]()
     // activeIdpos records the active habit in add schedule view
     var activeIdpos = 0
+    // habitIndex is the index in ChangeHabitView
+    var habitIndex = 0
     
     init(){
         parseJason()

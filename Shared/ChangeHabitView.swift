@@ -12,8 +12,6 @@ struct ChangeHabitView: View {
     @EnvironmentObject var habitModel:HabitModel
     @Binding var changeHabitViewPresented:Bool
     
-    var habitIndex: Int
-    
     @State var inputTitleIcon = ""
     @State var inputTitle = ""
     @State var inputDefaultScore = 10
@@ -23,7 +21,7 @@ struct ChangeHabitView: View {
     var body: some View {
         NavigationView(){
             // habitIndex may overflow when deleting the last element, need to check
-            if habitIndex < habitModel.habits.count {
+            if habitModel.habitIndex < habitModel.habits.count {
                 Form{
                     // MARK:Title and color (HStack)
                     HStack(){
@@ -39,13 +37,13 @@ struct ChangeHabitView: View {
                     // MARK:Score (Stepper)
                     Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
                     // MARK: Change duration-based
-                    if habitModel.habits[habitIndex].durationBased {
+                    if habitModel.habits[habitModel.habitIndex].durationBased {
                         Button("Change to time-based") {
-                            habitModel.habits[habitIndex].changeDurationBased()
+                            habitModel.habits[habitModel.habitIndex].changeDurationBased()
                         }
                     } else {
                         Button("Change to duration-based") {
-                            habitModel.habits[habitIndex].changeDurationBased()
+                            habitModel.habits[habitModel.habitIndex].changeDurationBased()
                             habitModel.refresh.toggle()
                             changeHabitViewPresented = false
                         }
@@ -53,15 +51,15 @@ struct ChangeHabitView: View {
                     
                     Button("Archive Habits") {
                         changeHabitViewPresented = false
-                        habitModel.habits[habitIndex].archive()
+                        habitModel.habits[habitModel.habitIndex].archive()
                         habitModel.refresh.toggle()
                     }
                     
                     Button("Delete Habits") {
                         changeHabitViewPresented = false
-                        entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
+                        entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitModel.habitIndex].id)
                         entryModel.refresh.toggle()
-                        habitModel.deleteHabit(indexing:habitIndex)
+                        habitModel.deleteHabit(indexing:habitModel.habitIndex)
                     }
                     
                     // MARK: View title and button
@@ -69,17 +67,17 @@ struct ChangeHabitView: View {
                     Text("Cancel")
                 }), trailing: Button(action:{
                     changeHabitViewPresented = false
-                    habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
+                    habitModel.habits[habitModel.habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
                     habitModel.refresh.toggle()
                 }, label: {
                     Text("Save")
                 }))
             }
         }.onAppear(){
-            inputTitleIcon = habitModel.habits[habitIndex].titleIcon
-            inputTitle = habitModel.habits[habitIndex].title
-            inputDefaultScore = habitModel.habits[habitIndex].defaultScore
-            inputColorTag = habitModel.habits[habitIndex].colorTag
+            inputTitleIcon = habitModel.habits[habitModel.habitIndex].titleIcon
+            inputTitle = habitModel.habits[habitModel.habitIndex].title
+            inputDefaultScore = habitModel.habits[habitModel.habitIndex].defaultScore
+            inputColorTag = habitModel.habits[habitModel.habitIndex].colorTag
         }
     }
 }
@@ -87,7 +85,7 @@ struct ChangeHabitView: View {
 struct ChangeHabitView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        ChangeHabitView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
+        ChangeHabitView(changeHabitViewPresented: $dummyBool)
             .environmentObject(EntryModel())
             .environmentObject(HabitModel())
     }

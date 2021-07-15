@@ -22,9 +22,10 @@ struct HabitView: View {
                         if habitModel.habits[r].hidden == false {
                             HStack{
                                 Button(habitModel.habits[r].title) {
+                                    habitModel.habitIndex = r
                                     changeViewPresented = true
                                 }.sheet(isPresented: $changeViewPresented, content: {
-                                    ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
+                                    ChangeHabitView(changeHabitViewPresented: $changeViewPresented)
                                 })
                                 if habitModel.habits[r].durationBased {
                                     Text("Total \(habitModel.habits[r].hoursTotal) hours")
