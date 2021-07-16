@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddHabitView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     
     @State var inputDurationBased = true
-    @State var inputTitleIcon = ""
+    @State var inputTitleIcon = "☑️"
     @State var inputTitle = ""
     @State var inputDefaultScore = 10
     @State var inputColorTag = 0
@@ -25,7 +26,15 @@ struct AddHabitView: View {
             Form{
                 // MARK:Title and color (HStack)
                 HStack(){
-                    TextField("🏁",text:$inputTitleIcon).frame(width:35)
+                    EmojiTextField(text: $inputTitleIcon, placeholder: "").onChange(of: inputTitleIcon, perform: { value in
+                        if let lastChar = inputTitleIcon.last{
+                            inputTitleIcon = String(lastChar)
+                        }
+                        if inputTitleIcon.isEmpty{
+                            inputTitleIcon = "❓"
+                        }
+                    }).frame(width:35)
+                    //TextField("🏁",text:$inputTitleIcon).frame(width:35)
                     Divider()
                     TextField("Title",text:$inputTitle)
                     Divider()

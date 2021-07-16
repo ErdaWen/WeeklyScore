@@ -27,7 +27,14 @@ struct ChangeHabitView: View {
                 Form{
                     // MARK:Title and color (HStack)
                     HStack(){
-                        TextField("🏁",text:$inputTitleIcon).frame(width:35)
+                        EmojiTextField(text: $inputTitleIcon, placeholder: "").onChange(of: inputTitleIcon, perform: { value in
+                            if let lastChar = inputTitleIcon.last{
+                                inputTitleIcon = String(lastChar)
+                            }
+                            if inputTitleIcon.isEmpty{
+                                inputTitleIcon = "❓"
+                            }
+                        }).frame(width:35)
                         Divider()
                         TextField("Title",text:$inputTitle)
                         Divider()
