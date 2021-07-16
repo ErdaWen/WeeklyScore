@@ -100,16 +100,16 @@
 		C8BCDFFB26918075006E7D7E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
+				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
-				C88EC1382692B378005A4DAB /* HabitView.swift */,
-				C88EC13B2692BB27005A4DAB /* AddHabitView.swift */,
 				00C72FA526963CC00028EF5C /* AddEntryView.swift */,
 				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
-				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
+				C88EC1382692B378005A4DAB /* HabitView.swift */,
+				C88EC13B2692BB27005A4DAB /* AddHabitView.swift */,
 				003A248A269BFD7800BDB239 /* ChangeHabitView.swift */,
+				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

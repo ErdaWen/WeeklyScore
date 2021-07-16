@@ -174,7 +174,6 @@ struct ChangeCompletionView: View {
             .navigationBarItems(
                 leading: Button(action:{
                     changeCompletionViewPresented = false
-                    entryModel.refresh.toggle()
                 }, label: {
                     Text("Cancel")
                 })
@@ -192,7 +191,7 @@ struct ChangeCompletionView: View {
                     // Execute change to habit for records
                     habitModel.habits[habitIndex].changeHours(inScoreAdded: inputScoreGained-orgScoreGained, inHoursAdded: inputHoursGained-orgHoursGained, inCheckedAdded: checkChanged)
                     changeCompletionViewPresented = false
-                    entryModel.refresh.toggle()
+                    entryModel.updateChange()
                 }, label: {
                     Text("Save")
                 }))

@@ -21,7 +21,7 @@ struct ScheduleView: View {
             if entryModel.entries.count > 0 {
                 TabView{
                     // , id:\.self
-                    ForEach(0..<entryModel.entries.count){ r in
+                    ForEach(0..<entryModel.entries.count,id: \.self){ r in
                         HStack(){
                             VStack{
                                 if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{

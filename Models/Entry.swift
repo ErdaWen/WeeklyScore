@@ -9,7 +9,7 @@ import Foundation
 
 // time slot structure for Duration based habits
 
-class Entry: Decodable,Identifiable {
+class Entry: Codable,Identifiable {
     var id:Int
     var habitid:Int
     var score:Int

@@ -89,13 +89,13 @@ struct ChangeScheduleView: View {
                     }), trailing: Button(action:{
                         if habitModel.habits[inputHabitidpos].durationBased {
                             entryModel.entries[entryIndex].changeProp(inHabitid: habitModel.habits[inputHabitidpos].id, inScore: inputScore, inBeginTime: inputBeginTime, inEndTime: inputEndTime)
-                            entryModel.refresh.toggle()
+                            entryModel.updateChange()
                             changeScheduleViewPresented = false
                         } else {
                             // If the habit is hit-based, the endtime is set to begin time
                             entryModel.entries[entryIndex].changeProp(inHabitid: habitModel.habits[inputHabitidpos].id, inScore: inputScore, inBeginTime: inputBeginTime, inEndTime: inputBeginTime)
                             habitModel.activeIdpos = inputHabitidpos
-                            entryModel.refresh.toggle()
+                            entryModel.updateChange()
                             changeScheduleViewPresented = false
                         }
                     }, label: {

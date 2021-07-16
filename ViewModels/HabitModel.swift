@@ -67,7 +67,7 @@ class HabitModel: ObservableObject{
                     do {
                         let savedData = try Data(contentsOf: url)
                         if let savedString = String(data: savedData, encoding: .utf8){
-                            print("New Json = " + savedString)
+                            print("New Habit Json = " + savedString)
                         }
                     } catch {
                         print(error)
@@ -82,7 +82,7 @@ class HabitModel: ObservableObject{
         }
     }
     
-    // Manually update change for two thing:
+    // Manually update change for two things:
     // 1. toggle the self.refresh to refresh the views
     // 2. write to Json
     func updateChange() {
