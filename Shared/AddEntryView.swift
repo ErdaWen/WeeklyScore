@@ -14,7 +14,7 @@ struct AddEntryView: View {
     @State var inputHabitidpos = 0
     @State var inputScore = 0
     @State var inputBeginTime = Date()
-    @State var inputEndTime = Date()
+    @State var inputEndTime = Date() + 3600
     @State var showEndTimeWarning = false
     
     @Binding var addEntryViewPresented:Bool
@@ -40,7 +40,11 @@ struct AddEntryView: View {
                     Stepper("Score: \(inputScore)", value: $inputScore, in: 0...20)
                     // MARK: begin time and end time picker
                     if habitModel.habits[inputHabitidpos].durationBased {
-                        DatePicker("Starts", selection: $inputBeginTime)
+                        DatePicker("Starts", selection: $inputBeginTime).onChange(of: inputBeginTime, perform: { value in
+                            if inputEndTime<inputBeginTime{
+                                inputEndTime = inputBeginTime
+                            }
+                        })
                         DatePicker("Ends", selection: $inputEndTime).onChange(of: inputEndTime, perform: { value in
                             if inputEndTime<inputBeginTime{
                                 inputEndTime = inputBeginTime
@@ -50,7 +54,7 @@ struct AddEntryView: View {
                             }
                         })
                         if showEndTimeWarning{
-                            Text("Ends before it begins")
+                            Text("must ends after event begins")
                         }
                     } else {
                         DatePicker("Time", selection: $inputBeginTime)

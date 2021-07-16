@@ -35,7 +35,7 @@ class EntryModel: ObservableObject{
             do{
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
+                //decoder.dateDecodingStrategy = .iso8601
                 // Parse json
                 do{
                     let entryData = try decoder.decode([Entry].self, from: data)
@@ -53,6 +53,7 @@ class EntryModel: ObservableObject{
     func writeJson(){
         do{
             let encoder = JSONEncoder()
+            //encoder.dateDecodingStrategy = .iso8601
             let data = try encoder.encode(entries)
             let pathString = Bundle.main.path(forResource: "entriesList", ofType: "json")
             if let path = pathString{

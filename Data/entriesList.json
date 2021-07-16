@@ -4,8 +4,8 @@
     "habitid" : 1,
     "score" : 20,
     "hidden" : false,
-    "beginTime" : "2021-07-4T12:30:00Z",
-    "endTime" : "2021-07-4T17:30:00Z",
+    "beginTime" : 647094600,
+    "endTime" : 647112600,
     "scoreGained" : 10,
     "checked" : true,
     "hoursGained" : 2
@@ -15,8 +15,8 @@
     "habitid" : 3,
     "score" : 5,
     "hidden" : false,
-    "beginTime" : "2021-07-5T12:30:00Z",
-    "endTime" : "2021-07-5T12:30:00Z",
+    "beginTime" : 647181000,
+    "endTime" : 647181000,
     "scoreGained" : 0,
     "checked" : false,
     "hoursGained" : 0
