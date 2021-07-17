@@ -34,7 +34,7 @@ struct ChangeScheduleView: View {
                         Text("Uncheck the schedule first")
                         Button(action:
                                 {
-                                    habitModel.habits[inputHabitidpos].changeHours(inScoreAdded: -entryModel.entries[entryIndex].scoreGained, inHoursAdded: -entryModel.entries[entryIndex].hoursGained, inCheckedAdded: entryModel.entries[entryIndex].checked ? -1 : 0)
+                                    habitModel.habits[inputHabitidpos].changeHours(inScoreAdded: -entryModel.entries[entryIndex].scoreGained, inHoursAdded: -Double(entryModel.entries[entryIndex].minutesGained)/60.0, inCheckedAdded: entryModel.entries[entryIndex].checked ? -1 : 0)
                                     entryModel.deleteEntry(indexing: entryIndex)
                                     changeScheduleViewPresented = false
                                 }, label: {
@@ -77,7 +77,7 @@ struct ChangeScheduleView: View {
                         Button(action:
                                 {
                                     changeScheduleViewPresented = false
-                                    habitModel.habits[inputHabitidpos].changeHours(inScoreAdded: -entryModel.entries[entryIndex].scoreGained, inHoursAdded: -entryModel.entries[entryIndex].hoursGained, inCheckedAdded: entryModel.entries[entryIndex].checked ? -1 : 0)
+                                    habitModel.habits[inputHabitidpos].changeHours(inScoreAdded: -entryModel.entries[entryIndex].scoreGained, inHoursAdded: -Double(entryModel.entries[entryIndex].minutesGained)/60.0, inCheckedAdded: entryModel.entries[entryIndex].checked ? -1 : 0)
                                     entryModel.deleteEntry(indexing: entryIndex)
                                 }, label: {
                                     Text("Delete this event")

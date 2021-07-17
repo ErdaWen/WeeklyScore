@@ -8,7 +8,7 @@
     "endTime" : 647112600,
     "scoreGained" : 10,
     "checked" : true,
-    "hoursGained" : 2
+    "minutesGained" :120
   },
   {
     "id" : 2,
@@ -19,6 +19,6 @@
     "endTime" : 647181000,
     "scoreGained" : 0,
     "checked" : false,
-    "hoursGained" : 0
+    "minutesGained" : 0
   }
 ]

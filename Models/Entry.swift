@@ -24,7 +24,7 @@ class Entry: Codable,Identifiable {
     var checked:Bool
     //Duration-based
     var endTime:Date
-    var hoursGained:Double
+    var minutesGained:Int
     
     init(){
         id = 0
@@ -38,13 +38,13 @@ class Entry: Codable,Identifiable {
         checked = false
         //Duration-based
         endTime = Date()
-        hoursGained = 0.0
+        minutesGained = 0
     }
     
-    func changeCompletion (inscoreGained:Int, inhoursGained:Double, inChecked:Bool){
+    func changeCompletion (inscoreGained:Int, inMinutesGained:Int, inChecked:Bool){
         // Change entry itself
         scoreGained = inscoreGained
-        hoursGained = inhoursGained
+        minutesGained = inMinutesGained
         checked = inChecked
         // habit.changeHours should always be called after this function
     }
