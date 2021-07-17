@@ -29,6 +29,7 @@ struct ChangeScheduleView: View {
                 Form{
                     // When deleting the last element, entryIndex may overflow
                     
+                    // If the schedule is checked, only delete function is allowed
                     if entryModel.entries[entryIndex].checked {
                         Text("Uncheck the schedule first")
                         Button(action:
@@ -41,6 +42,7 @@ struct ChangeScheduleView: View {
                                 })
                         
                     } else {
+                    // The schedule is unchecked
                         // MARK: Habit list
                         HStack(){
                             Picker("Habbit",selection:$inputHabitidpos){

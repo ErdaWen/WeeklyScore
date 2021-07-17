@@ -14,7 +14,7 @@ struct AddEntryView: View {
     @State var inputHabitidpos = 0
     @State var inputScore = 0
     @State var inputBeginTime = Date()
-    @State var inputEndTime = Date() + 3600
+    @State var inputEndTime = Date()
     @State var showEndTimeWarning = false
     
     @Binding var addEntryViewPresented:Bool
@@ -87,6 +87,8 @@ struct AddEntryView: View {
         }.onAppear(){
             inputHabitidpos = habitModel.activeIdpos
             inputScore = habitModel.habits[inputHabitidpos].defaultScore
+            inputBeginTime = entryModel.startOfThisWeek()
+            inputEndTime = entryModel.startOfThisWeek() + 3600
         }
     }
 }

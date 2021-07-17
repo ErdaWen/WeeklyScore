@@ -125,4 +125,14 @@ class EntryModel: ObservableObject{
         formatter.dateFormat = "HH:mm E, d MMM y"
         return (formatter.string(from: inputTime))
     }
+    
+    func startOfThisWeek() -> Date {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .weekOfYear]), from: date)
+        let startOfWeek = calendar.date(from: components)!
+        return startOfWeek
+    }
+    
 }
