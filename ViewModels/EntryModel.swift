@@ -135,4 +135,22 @@ class EntryModel: ObservableObject{
         return startOfWeek
     }
     
+    func calculateScore(weekOffset:Int) -> (Int,Int) {
+        let statBeginTime = startOfThisWeek().addingTimeInterval(Double(604800 * weekOffset))
+        let statEndTime = statBeginTime + 604800
+        
+        print(printTime(inputTime: statBeginTime))
+        print(printTime(inputTime: statBeginTime))
+        var statScoreTotal = 0
+        var statScoreGained = 0
+        
+        for r in entries {
+            if (r.beginTime >= statBeginTime) && (r.beginTime < statEndTime) {
+                statScoreTotal += r.score
+                statScoreGained += r.scoreGained
+            }
+        }
+        return (statScoreTotal,statScoreGained)
+    }
+    
 }

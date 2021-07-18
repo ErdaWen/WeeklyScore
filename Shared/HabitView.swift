@@ -13,9 +13,19 @@ struct HabitView: View {
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
+    @State var statScore = 0
+    @State var statScoreGained = 0
     
     var body: some View {
         VStack{
+            HStack(spacing:20){
+                Text("Static")
+                Text("\(statScoreGained)/\(statScore)")
+            }.onAppear(){
+                let statScores = entryModel.calculateScore(weekOffset: 0)
+                statScore = statScores.0
+                statScoreGained = statScores.1
+            }
             if habitModel.habits.count > 0{
                 TabView{
                     ForEach(0..<habitModel.habits.count,id: \.self) { r in
