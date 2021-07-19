@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChangeHabitView: View {
+struct ChangeItemView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     @Binding var changeHabitViewPresented:Bool
@@ -94,7 +94,7 @@ struct ChangeHabitView: View {
 struct ChangeHabitView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        ChangeHabitView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
+        ChangeItemView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
             .environmentObject(EntryModel())
             .environmentObject(HabitModel())
     }

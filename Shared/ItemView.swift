@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HabitView: View {
+struct ItemView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     
@@ -34,7 +34,7 @@ struct HabitView: View {
                                 Button(habitModel.habits[r].title) {
                                     changeViewPresented = true
                                 }.sheet(isPresented: $changeViewPresented, content: {
-                                    ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
+                                    ChangeItemView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
                                 })
                                 if habitModel.habits[r].durationBased {
                                     Text("Total \(habitModel.habits[r].hoursTotal) hours")
@@ -49,7 +49,7 @@ struct HabitView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
             Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
-                AddHabitView(addHabitViewPresented: $addViewPresented)
+                AddItemView(addHabitViewPresented: $addViewPresented)
             })
         }
         .padding()
@@ -58,6 +58,6 @@ struct HabitView: View {
 
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitView().environmentObject(HabitModel()).environmentObject(EntryModel())
+        ItemView().environmentObject(HabitModel()).environmentObject(EntryModel())
     }
 }
