@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0034906A26A5435B001B8DBB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034906826A5435B001B8DBB /* DataModel.xcdatamodeld */; };
+		0034906B26A5435B001B8DBB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034906826A5435B001B8DBB /* DataModel.xcdatamodeld */; };
+		0034907026A54748001B8DBB /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906C26A54748001B8DBB /* Item+CoreDataClass.swift */; };
+		0034907126A54748001B8DBB /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906C26A54748001B8DBB /* Item+CoreDataClass.swift */; };
+		0034907226A54748001B8DBB /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906D26A54748001B8DBB /* Item+CoreDataProperties.swift */; };
+		0034907326A54748001B8DBB /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906D26A54748001B8DBB /* Item+CoreDataProperties.swift */; };
+		0034907426A54748001B8DBB /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906E26A54748001B8DBB /* Schedule+CoreDataClass.swift */; };
+		0034907526A54748001B8DBB /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906E26A54748001B8DBB /* Schedule+CoreDataClass.swift */; };
+		0034907626A54748001B8DBB /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906F26A54748001B8DBB /* Schedule+CoreDataProperties.swift */; };
+		0034907726A54748001B8DBB /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034906F26A54748001B8DBB /* Schedule+CoreDataProperties.swift */; };
 		003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
 		003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
@@ -44,6 +54,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0034906926A5435B001B8DBB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		0034906C26A54748001B8DBB /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0034906D26A54748001B8DBB /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0034906E26A54748001B8DBB /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0034906F26A54748001B8DBB /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		003A248A269BFD7800BDB239 /* ChangeHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHabitView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
@@ -172,8 +187,13 @@
 		C8BCE027269269BF006E7D7E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0034906C26A54748001B8DBB /* Item+CoreDataClass.swift */,
+				0034906D26A54748001B8DBB /* Item+CoreDataProperties.swift */,
+				0034906E26A54748001B8DBB /* Schedule+CoreDataClass.swift */,
+				0034906F26A54748001B8DBB /* Schedule+CoreDataProperties.swift */,
 				C8BCE02826926A25006E7D7E /* habitsList.json */,
 				C8BCE03126927060006E7D7E /* entriesList.json */,
+				0034906826A5435B001B8DBB /* DataModel.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -285,13 +305,18 @@
 				C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */,
 				003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
+				0034907026A54748001B8DBB /* Item+CoreDataClass.swift in Sources */,
+				0034907626A54748001B8DBB /* Schedule+CoreDataProperties.swift in Sources */,
+				0034906A26A5435B001B8DBB /* DataModel.xcdatamodeld in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
+				0034907426A54748001B8DBB /* Schedule+CoreDataClass.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02226918B4D006E7D7E /* Habit.swift in Sources */,
 				C88EC13C2692BB27005A4DAB /* AddHabitView.swift in Sources */,
 				C88EC1392692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
+				0034907226A54748001B8DBB /* Item+CoreDataProperties.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,13 +331,18 @@
 				C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */,
 				003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
+				0034907126A54748001B8DBB /* Item+CoreDataClass.swift in Sources */,
+				0034907726A54748001B8DBB /* Schedule+CoreDataProperties.swift in Sources */,
+				0034906B26A5435B001B8DBB /* DataModel.xcdatamodeld in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
+				0034907526A54748001B8DBB /* Schedule+CoreDataClass.swift in Sources */,
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */,
 				C88EC13D2692BB27005A4DAB /* AddHabitView.swift in Sources */,
 				C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
+				0034907326A54748001B8DBB /* Item+CoreDataProperties.swift in Sources */,
 				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +585,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0034906826A5435B001B8DBB /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0034906926A5435B001B8DBB /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 0034906926A5435B001B8DBB /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C8BCDFF726918075006E7D7E /* Project object */;
 }
