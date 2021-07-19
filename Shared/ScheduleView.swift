@@ -12,6 +12,12 @@ struct ScheduleView: View {
     
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(sortDescriptors: [],animation: .default)
+    private var schedules: FetchedResults<Schedule>
+    
     @State var addViewPresented = false
     @State var completionViewPresented = false
     @State var changeViewPresented = false

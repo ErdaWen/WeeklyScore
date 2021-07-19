@@ -11,6 +11,9 @@ struct ItemView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     
+    @FetchRequest(sortDescriptors: [],animation: .default)
+    private var items: FetchedResults<Item>
+    
     @State var addViewPresented = false
     @State var changeViewPresented = false
     @State var statScore = 0
