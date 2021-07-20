@@ -20,7 +20,7 @@ extension Item {
     @NSManaged public var defaultScore: Int64
     @NSManaged public var durationBased: Bool
     @NSManaged public var hidden: Bool
-    @NSManaged public var minuteTotal: Double
+    @NSManaged public var minuteTotal: Int64
     @NSManaged public var id: UUID?
     @NSManaged public var scoreTotal: Int64
     @NSManaged public var title: String?

@@ -17,6 +17,8 @@ struct ScheduleView: View {
 
     @FetchRequest(sortDescriptors: [],animation: .default)
     private var schedules: FetchedResults<Schedule>
+    @FetchRequest(sortDescriptors: [],animation: .default)
+    private var items: FetchedResults<Item>
     
     @State var addViewPresented = false
     @State var completionViewPresented = false
