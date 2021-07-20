@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 7/18/21.
+//  Created by Erda Wen on 7/19/21.
 //
 //
 
@@ -16,17 +16,17 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item")
     }
 
-    @NSManaged public var id: Int64
-    @NSManaged public var durationBased: Bool
-    @NSManaged public var titleIcon: String
-    @NSManaged public var title: String
-    @NSManaged public var defaultScore: Int64
     @NSManaged public var colorTag: Int64
+    @NSManaged public var defaultScore: Int64
+    @NSManaged public var durationBased: Bool
     @NSManaged public var hidden: Bool
-    @NSManaged public var checkedScheduleNum: Int64
+    @NSManaged public var minuteTotal: Double
+    @NSManaged public var id: UUID?
     @NSManaged public var scoreTotal: Int64
-    @NSManaged public var hoursTotal: Double
-    @NSManaged public var schedules: NSSet
+    @NSManaged public var title: String?
+    @NSManaged public var titleIcon: String?
+    @NSManaged public var checkedTotal: Int64
+    @NSManaged public var schedules: NSSet?
 
 }
 
