@@ -1,5 +1,5 @@
 //
-//  GeneralServer.swift
+//  DateServer.swift
 //  WeeklyScore
 //
 //  Created by Erda Wen on 7/19/21.
