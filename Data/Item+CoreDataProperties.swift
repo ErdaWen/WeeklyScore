@@ -26,7 +26,7 @@ extension Item {
     @NSManaged public var defaultScore: Int64
     @NSManaged public var colorTag: Int64
     @NSManaged public var checkedTotal: Int64
-    @NSManaged public var schedules: NSSet?
+    @NSManaged public var schedules: NSSet
 
 }
 

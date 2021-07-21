@@ -17,6 +17,8 @@
 		0034918426A7E9C8001B8DBB /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034917D26A7E9C8001B8DBB /* Schedule+CoreDataClass.swift */; };
 		0034918526A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034917E26A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift */; };
 		0034918626A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034917E26A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift */; };
+		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
+		0034918926A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
 		003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
 		003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
@@ -59,6 +61,7 @@
 		0034917C26A7E9C8001B8DBB /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0034917D26A7E9C8001B8DBB /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0034917E26A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		003A248A269BFD7800BDB239 /* ChangeHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHabitView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleView.swift; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 		C8BCDFFB26918075006E7D7E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0034918726A7EE02001B8DBB /* Persistence.swift */,
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
@@ -300,6 +304,7 @@
 				0034917F26A7E9C8001B8DBB /* Item+CoreDataClass.swift in Sources */,
 				0034918526A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
+				0034918826A7EE02001B8DBB /* Persistence.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				0034918326A7E9C8001B8DBB /* Schedule+CoreDataClass.swift in Sources */,
@@ -326,6 +331,7 @@
 				0034918026A7E9C8001B8DBB /* Item+CoreDataClass.swift in Sources */,
 				0034918626A7E9C8001B8DBB /* Schedule+CoreDataProperties.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
+				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				0034918426A7E9C8001B8DBB /* Schedule+CoreDataClass.swift in Sources */,
