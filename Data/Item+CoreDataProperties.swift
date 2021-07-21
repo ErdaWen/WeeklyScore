@@ -16,8 +16,8 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item")
     }
 
-    @NSManaged public var titleIcon: String?
-    @NSManaged public var title: String?
+    @NSManaged public var titleIcon: String
+    @NSManaged public var title: String
     @NSManaged public var scoreTotal: Int64
     @NSManaged public var minutesTotal: Int64
     @NSManaged public var id: UUID?

@@ -24,9 +24,9 @@ extension Schedule {
     @NSManaged public var journal: String?
     @NSManaged public var id: UUID?
     @NSManaged public var hidden: Bool
-    @NSManaged public var endTime: Date?
+    @NSManaged public var endTime: Date
     @NSManaged public var checked: Bool
-    @NSManaged public var beginTime: Date?
+    @NSManaged public var beginTime: Date
     @NSManaged public var items: NSSet
 
 }
