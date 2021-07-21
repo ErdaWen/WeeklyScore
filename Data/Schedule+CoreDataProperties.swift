@@ -27,7 +27,7 @@ extension Schedule {
     @NSManaged public var endTime: Date?
     @NSManaged public var checked: Bool
     @NSManaged public var beginTime: Date?
-    @NSManaged public var items: NSSet?
+    @NSManaged public var items: NSSet
 
 }
 
