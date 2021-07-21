@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddEntryView: View {
+struct AddScheduleView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
     
@@ -96,6 +96,6 @@ struct AddEntryView: View {
 struct AddEntryView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        AddEntryView(addEntryViewPresented:$dummyBool)
+        AddScheduleView(addEntryViewPresented:$dummyBool)
     }
 }

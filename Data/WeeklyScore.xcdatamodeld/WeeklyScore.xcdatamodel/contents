@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="checkedTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="colorTag" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultScore" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="durationBased" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hidden" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="minutesTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="scoreTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="titleIcon" attributeType="String"/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Schedule" inverseName="items" inverseEntity="Schedule"/>
+    </entity>
+    <entity name="Schedule" representedClassName="Schedule" syncable="YES">
+        <attribute name="beginTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="checked" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hidden" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="journal" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="minutesGained" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="score" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="scoreGained" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="schedules" inverseEntity="Item"/>
+    </entity>
+    <elements>
+        <element name="Schedule" positionX="-45" positionY="0" width="128" height="209"/>
+        <element name="Item" positionX="-18" positionY="27" width="128" height="194"/>
+    </elements>
+</model>
