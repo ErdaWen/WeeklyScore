@@ -8,38 +8,42 @@
 import SwiftUI
 
 struct AddScheduleView: View {
-    @EnvironmentObject var entryModel:EntryModel
-    @EnvironmentObject var habitModel:HabitModel
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var items: FetchedResults<Item>
     
-    @State var inputHabitidpos = 0
-    @State var inputScore = 0
+    @State var itemId = 0
+    @State var inputScore:Int64 = 0
     @State var inputBeginTime = Date()
     @State var inputEndTime = Date()
     @State var showEndTimeWarning = false
     
-    @Binding var addEntryViewPresented:Bool
+    @Binding var addScheduleViewPresented:Bool
     
     var body: some View {
         
         NavigationView(){
             // If habit list is not empty
-            if inputHabitidpos != -1 {
+            if items.count != 0 {
                 Form{
                     // MARK: Habit list
                     HStack(){
-                        Picker("Habbit",selection:$inputHabitidpos){
-                            ForEach(0...habitModel.habits.count-1, id:\.self){ r in
-                                Text(habitModel.habits[r].titleIcon+habitModel.habits[r].title)
+                        Picker("Habbit",selection:$itemId){
+                            ForEach(0...items.count-1, id:\.self){ r in
+                                Text(items[r].titleIcon + items[r].title)
                                     .tag(r)
                             }
-                        }.onChange(of: inputHabitidpos, perform: { value in
-                            inputScore = habitModel.habits[inputHabitidpos].defaultScore
+                        }.onChange(of: itemId, perform: { value in
+                            inputScore = items[itemId].defaultScore
                         })
                     }
                     // MARK: score (Stepper)
                     Stepper("Score: \(inputScore)", value: $inputScore, in: 0...20)
                     // MARK: begin time and end time picker
-                    if habitModel.habits[inputHabitidpos].durationBased {
+                    if items[itemId].durationBased {
                         DatePicker("Starts", selection: $inputBeginTime).onChange(of: inputBeginTime, perform: { value in
                             if inputEndTime<inputBeginTime{
                                 inputEndTime = inputBeginTime
@@ -62,19 +66,49 @@ struct AddScheduleView: View {
                     
                 }.navigationBarTitle("Add New Schedule",displayMode: .inline)
                 .navigationBarItems(
-                    leading: Button(action:{ addEntryViewPresented = false}, label: {
+                    leading: Button(action:{ addScheduleViewPresented = false}, label: {
                     Text("Cancel")
                 }), trailing: Button(action:{
-                    if habitModel.habits[inputHabitidpos].durationBased {
-                        entryModel.addEntry(inHabitid: habitModel.habits[inputHabitidpos].id, inScore: inputScore, inBeginTime: inputBeginTime, inEndTime: inputEndTime, inHidden: false)
-                        habitModel.activeIdpos = inputHabitidpos
-                        addEntryViewPresented = false
+                    if items[itemId].durationBased {
+                        let newSchedule = Schedule(context: viewContext)
+                        newSchedule.id = UUID()
+                        newSchedule.beginTime = inputBeginTime
+                        newSchedule.endTime = inputEndTime
+                        newSchedule.items = items[itemId]
+                        newSchedule.score = inputScore
+                        newSchedule.hidden = false
+                        newSchedule.statusDefault = true
+                        newSchedule.checked = false
+                        newSchedule.scoreGained = 0
+                        newSchedule.minutesGained = 0
+                        do{
+                            try viewContext.save()
+                            addScheduleViewPresented = false
+                        } catch {
+                            print("Cannot generate new item")
+                            print(error)
+                        }
                     } else {
                         // If the habit is hit-based, the endtime is set to begin time
                         // (so that when later on the habit change to duration-based, the hours are still kind of valid)
-                        entryModel.addEntry(inHabitid: habitModel.habits[inputHabitidpos].id, inScore: inputScore, inBeginTime: inputBeginTime, inEndTime: inputBeginTime, inHidden: false)
-                        habitModel.activeIdpos = inputHabitidpos
-                        addEntryViewPresented = false
+                        let newSchedule = Schedule(context: viewContext)
+                        newSchedule.id = UUID()
+                        newSchedule.beginTime = inputBeginTime
+                        newSchedule.endTime = inputBeginTime
+                        newSchedule.items = items[itemId]
+                        newSchedule.score = inputScore
+                        newSchedule.hidden = false
+                        newSchedule.statusDefault = true
+                        newSchedule.checked = false
+                        newSchedule.scoreGained = 0
+                        newSchedule.minutesGained = 0
+                        do{
+                            try viewContext.save()
+                            addScheduleViewPresented = false
+                        } catch {
+                            print("Cannot generate new item")
+                            print(error)
+                        }
                     }
                                         }, label: {
                                             Text("Add")
@@ -85,10 +119,10 @@ struct AddScheduleView: View {
             }
             
         }.onAppear(){
-            inputHabitidpos = habitModel.activeIdpos
-            inputScore = habitModel.habits[inputHabitidpos].defaultScore
-            inputBeginTime = entryModel.startOfThisWeek()
-            inputEndTime = entryModel.startOfThisWeek() + 3600
+            itemId = 0
+            inputScore = items[itemId].defaultScore
+            inputBeginTime = DateServer.startOfThisWeek()
+            inputEndTime = DateServer.startOfThisWeek() + 3600
         }
     }
 }
@@ -96,6 +130,6 @@ struct AddScheduleView: View {
 struct AddEntryView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        AddScheduleView(addEntryViewPresented:$dummyBool)
+        AddScheduleView(addScheduleViewPresented:$dummyBool)
     }
 }

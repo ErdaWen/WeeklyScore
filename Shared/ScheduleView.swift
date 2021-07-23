@@ -54,7 +54,7 @@ struct ScheduleView: View {
             }
             
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
-                AddScheduleView(addEntryViewPresented: $addViewPresented)
+                AddScheduleView(addScheduleViewPresented: $addViewPresented)
             })
         }
     }
