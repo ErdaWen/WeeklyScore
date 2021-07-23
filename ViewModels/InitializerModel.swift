@@ -61,7 +61,7 @@ class InitializerModel: ObservableObject{
         item_workout.checkedTotal = 0
         item_workout.minutesTotal = 0
         item_workout.scoreTotal = 0
-        item_study.lastUse = Date()
+        item_workout.lastUse = Date()
 
         let item_getup = Item(context: managedObjectContext)
         item_getup.id = UUID()
@@ -72,10 +72,10 @@ class InitializerModel: ObservableObject{
         item_getup.colorTag = 2
         item_getup.defaultMinutes = 0
         item_getup.defaultScore = 5
-        item_getup.checkedTotal = 1
+        item_getup.checkedTotal = 0
         item_getup.minutesTotal = 0
-        item_getup.scoreTotal = 5
-        item_study.lastUse = Date()
+        item_getup.scoreTotal = 0
+        item_getup.lastUse = Date()
         
         let schedule_study = Schedule(context: managedObjectContext)
         schedule_study.id = UUID()
@@ -95,10 +95,10 @@ class InitializerModel: ObservableObject{
         schedule_getup.hidden = false
         schedule_getup.beginTime = DateServer.startOfThisWeek() + 28800
         schedule_getup.endTime = DateServer.startOfThisWeek() + 28800
-        schedule_getup.score = 5
-        schedule_getup.checked = true
+        schedule_getup.score = 0
+        schedule_getup.checked = false
         schedule_getup.statusDefault = false
         schedule_getup.minutesGained = 0
-        schedule_getup.scoreGained = 5
+        schedule_getup.scoreGained = 0
     }
 }

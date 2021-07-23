@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [],
         animation: .default)
@@ -67,13 +67,14 @@ struct AddScheduleView: View {
                 }.navigationBarTitle("Add New Schedule",displayMode: .inline)
                 .navigationBarItems(
                     leading: Button(action:{ addScheduleViewPresented = false}, label: {
-                    Text("Cancel")
-                }), trailing: Button(action:{
-                    if items[itemId].durationBased {
+                        Text("Cancel")
+                    }), trailing: Button(action:{
+                        items[itemId].lastUse = Date()
+                        
                         let newSchedule = Schedule(context: viewContext)
                         newSchedule.id = UUID()
                         newSchedule.beginTime = inputBeginTime
-                        newSchedule.endTime = inputEndTime
+                        newSchedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
                         newSchedule.items = items[itemId]
                         newSchedule.score = inputScore
                         newSchedule.hidden = false
@@ -83,36 +84,16 @@ struct AddScheduleView: View {
                         newSchedule.minutesGained = 0
                         do{
                             try viewContext.save()
+                            print("Saved")
                             addScheduleViewPresented = false
                         } catch {
                             print("Cannot generate new item")
                             print(error)
                         }
-                    } else {
-                        // If the habit is hit-based, the endtime is set to begin time
-                        // (so that when later on the habit change to duration-based, the hours are still kind of valid)
-                        let newSchedule = Schedule(context: viewContext)
-                        newSchedule.id = UUID()
-                        newSchedule.beginTime = inputBeginTime
-                        newSchedule.endTime = inputBeginTime
-                        newSchedule.items = items[itemId]
-                        newSchedule.score = inputScore
-                        newSchedule.hidden = false
-                        newSchedule.statusDefault = true
-                        newSchedule.checked = false
-                        newSchedule.scoreGained = 0
-                        newSchedule.minutesGained = 0
-                        do{
-                            try viewContext.save()
-                            addScheduleViewPresented = false
-                        } catch {
-                            print("Cannot generate new item")
-                            print(error)
-                        }
-                    }
-                                        }, label: {
-                                            Text("Add")
-                                        }))
+                        
+                    }, label: {
+                        Text("Add")
+                    }))
             } else {
                 // Habit list is empty
                 Text("No habit, add habit first")
