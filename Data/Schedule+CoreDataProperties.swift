@@ -25,8 +25,9 @@ extension Schedule {
     @NSManaged public var location: String?
     @NSManaged public var minutesGained: Int64
     @NSManaged public var notes: String?
-    @NSManaged public var score: String?
+    @NSManaged public var score: Int64
     @NSManaged public var scoreGained: Int64
+    @NSManaged public var statusDefault: Bool
     @NSManaged public var items: Item
 
 }
