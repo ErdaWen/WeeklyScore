@@ -10,30 +10,34 @@ import UIKit
 
 struct ScheduleView: View {
     
-    @EnvironmentObject var entryModel:EntryModel
-    @EnvironmentObject var habitModel:HabitModel
     @State var addViewPresented = false
     @State var completionViewPresented = false
     @State var changeViewPresented = false
     
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var schedules: FetchedResults<Schedule>
+    
     var body: some View {
         VStack{
-            if entryModel.entries.count > 0 {
+            if schedules.count > 0 {
                 TabView{
                     // , id:\.self
-                    ForEach(0..<entryModel.entries.count,id: \.self){ r in
+                    ForEach(0..<schedules.count,id: \.self){ r in
                         HStack(){
                             VStack{
-                                if let posInd = habitModel.idIndexing[entryModel.entries[r].habitid]{
-                                    Button(habitModel.habits[posInd].title){
+                                Button(schedules[r].items.title){
                                         changeViewPresented.toggle()
                                     }.sheet(isPresented: $changeViewPresented, content: {
                                         ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, entryIndex: r)
                                     })
-                                }
-                                Text(entryModel.printTime(inputTime: entryModel.entries[r].beginTime))
-                                Text(entryModel.printTime(inputTime: entryModel.entries[r].endTime))
-                                Text("\(entryModel.entries[r].scoreGained)/\(entryModel.entries[r].score)")
+                                
+                                Text(DateServer.printTime(inputTime: schedules[r].beginTime))
+                                Text(DateServer.printTime(inputTime: schedules[r].endTime))
+                                Text("\(schedules[r].scoreGained)/\(schedules[r].score)")
                             }
                             
                             Button("Record\(r)") {

@@ -10,13 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @State var initzer = InitializerModel()
     
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [],
-        animation: .default)
-    private var items: FetchedResults<Item>
-    
     @State var tabIndex = 1
     
     var body: some View {
