@@ -47,6 +47,7 @@ class InitializerModel: ObservableObject{
         item_study.checkedTotal = 1
         item_study.minutesTotal = 120
         item_study.scoreTotal = 10
+        item_study.lastUse = Date()
         
         let item_workout = Item(context: managedObjectContext)
         item_workout.id = UUID()
@@ -60,8 +61,8 @@ class InitializerModel: ObservableObject{
         item_workout.checkedTotal = 0
         item_workout.minutesTotal = 0
         item_workout.scoreTotal = 0
-        
-        
+        item_study.lastUse = Date()
+
         let item_getup = Item(context: managedObjectContext)
         item_getup.id = UUID()
         item_getup.hidden = false
@@ -74,6 +75,7 @@ class InitializerModel: ObservableObject{
         item_getup.checkedTotal = 1
         item_getup.minutesTotal = 0
         item_getup.scoreTotal = 5
+        item_study.lastUse = Date()
         
         let schedule_study = Schedule(context: managedObjectContext)
         schedule_study.id = UUID()

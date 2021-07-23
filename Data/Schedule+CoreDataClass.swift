@@ -2,7 +2,7 @@
 //  Schedule+CoreDataClass.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 7/22/21.
+//  Created by Erda Wen on 7/23/21.
 //
 //
 
