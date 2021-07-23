@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var initzer = InitializerModel()
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -43,8 +45,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

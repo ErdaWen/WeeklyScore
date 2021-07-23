@@ -26,6 +26,7 @@ extension Item {
     @NSManaged public var scoreTotal: Int64
     @NSManaged public var title: String
     @NSManaged public var titleIcon: String
+    @NSManaged public var defaultMinutes: Int64
     @NSManaged public var schedules: NSSet?
 
 }
