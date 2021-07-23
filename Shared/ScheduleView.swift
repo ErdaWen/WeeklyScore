@@ -50,7 +50,7 @@ struct ScheduleView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             } else {
-                Text("No Schedule")
+                Text("No Schedules")
             }
             
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
@@ -60,8 +60,8 @@ struct ScheduleView: View {
     }
 }
 
-//struct ScheduleView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScheduleView().environmentObject(HabitModel()).environmentObject(EntryModel())
-//    }
-//}
+struct ScheduleView_Previews: PreviewProvider {
+    static var previews: some View {
+        ScheduleView().environmentObject(HabitModel()).environmentObject(EntryModel())
+    }
+}

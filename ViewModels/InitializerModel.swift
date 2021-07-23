@@ -9,7 +9,7 @@ import Foundation
 
 class InitializerModel: ObservableObject{
     
-    let moContext = PersistenceController.shared.container.viewContext
+    let managedObjectContext = PersistenceController.shared.container.viewContext
     
     init() {
         checkLoadedData()
@@ -25,7 +25,7 @@ class InitializerModel: ObservableObject{
     func preLoadData() {
         buildData()
         do{
-            try moContext.save()
+            try managedObjectContext.save()
             UserDefaults.standard.setValue(true, forKey: Constants.isDataPreloaded)
             print ("Initialized Data")
         } catch {
@@ -35,7 +35,7 @@ class InitializerModel: ObservableObject{
     }
     
     func buildData(){
-        let item_study = Item(context: moContext)
+        let item_study = Item(context: managedObjectContext)
         item_study.id = UUID()
         item_study.hidden = false
         item_study.titleIcon = "📚"
@@ -48,7 +48,7 @@ class InitializerModel: ObservableObject{
         item_study.minutesTotal = 120
         item_study.scoreTotal = 10
         
-        let item_workout = Item(context: moContext)
+        let item_workout = Item(context: managedObjectContext)
         item_workout.id = UUID()
         item_workout.hidden = false
         item_workout.titleIcon = "💪"
@@ -62,7 +62,7 @@ class InitializerModel: ObservableObject{
         item_workout.scoreTotal = 0
         
         
-        let item_getup = Item(context: moContext)
+        let item_getup = Item(context: managedObjectContext)
         item_getup.id = UUID()
         item_getup.hidden = false
         item_getup.titleIcon = "☀️"
@@ -75,7 +75,7 @@ class InitializerModel: ObservableObject{
         item_getup.minutesTotal = 0
         item_getup.scoreTotal = 5
         
-        let schedule_study = Schedule(context: moContext)
+        let schedule_study = Schedule(context: managedObjectContext)
         schedule_study.id = UUID()
         schedule_study.items = item_study
         schedule_study.hidden = false
@@ -87,7 +87,7 @@ class InitializerModel: ObservableObject{
         schedule_study.minutesGained = 120
         schedule_study.scoreGained = 10
         
-        let schedule_getup = Schedule(context: moContext)
+        let schedule_getup = Schedule(context: managedObjectContext)
         schedule_getup.id = UUID()
         schedule_getup.items = item_getup
         schedule_getup.hidden = false
