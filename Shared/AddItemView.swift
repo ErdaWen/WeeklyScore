@@ -11,6 +11,11 @@ import UIKit
 struct AddItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var tags: FetchedResults<Tag>
+    
     @State var inputDurationBased = true
     @State var inputTitleIcon = "☑️"
     @State var inputTitle = ""
@@ -18,6 +23,7 @@ struct AddItemView: View {
     @State var inputDefaultMinutes:Int64 = 60
     @State var inputDefaultMinutesString = "60"
     @State var inputColorTag:Int64 = 0
+    @State var tagid = 0 
     
     @Binding var addItemViewPresented:Bool
     
@@ -38,10 +44,13 @@ struct AddItemView: View {
                     Divider()
                     TextField("Title",text:$inputTitle)
                     Divider()
-                    Picker("",selection:$inputColorTag){
-                        Rectangle().frame(width: 40, height: 40).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).cornerRadius(8.0).tag(0)
-                        Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
+                    
+                    Picker("",selection:$tagid){
+                        ForEach(0...tags.count-1, id:\.self) { r in
+                            Rectangle().frame(width: 40, height: 40).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0).tag(r)
+                        }
                     }.frame(width: 50)
+                    
                 }
                 // MARK:Habit Type: Duration/time-based (Segmented picker)
                 Picker("", selection:$inputDurationBased){
@@ -71,6 +80,8 @@ struct AddItemView: View {
             .navigationBarItems (leading: Button(action:{ addItemViewPresented = false}, label: {
                 Text("Cancel")
             }), trailing: Button(action:{
+                // Check item name
+                //......
                 let newItem = Item(context: viewContext)
                 newItem.id = UUID()
                 newItem.hidden = false
@@ -84,6 +95,7 @@ struct AddItemView: View {
                 newItem.minutesTotal = 0
                 newItem.scoreTotal = 0
                 newItem.lastUse = Date()
+                newItem.tags = tags[tagid]
                 do{
                     try viewContext.save()
                     print("saved")

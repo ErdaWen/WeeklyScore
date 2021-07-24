@@ -35,6 +35,16 @@ class Initializer: ObservableObject{
     }
     
     func buildData(){
+        let tag_red = Tag(context: managedObjectContext)
+        tag_red.id = UUID()
+        tag_red.name = "Carrer"
+        tag_red.colorName = "tag_color_red"
+        
+        let tag_blue = Tag(context: managedObjectContext)
+        tag_blue.id = UUID()
+        tag_blue.name = "Carrer"
+        tag_blue.colorName = "tag_color_blue"
+        
         let item_study = Item(context: managedObjectContext)
         item_study.id = UUID()
         item_study.hidden = false
@@ -48,6 +58,7 @@ class Initializer: ObservableObject{
         item_study.minutesTotal = 120
         item_study.scoreTotal = 10
         item_study.lastUse = Date()
+        item_study.tags = tag_red
         
         let item_workout = Item(context: managedObjectContext)
         item_workout.id = UUID()
@@ -62,6 +73,7 @@ class Initializer: ObservableObject{
         item_workout.minutesTotal = 0
         item_workout.scoreTotal = 0
         item_workout.lastUse = Date()
+        item_workout.tags = tag_blue
 
         let item_getup = Item(context: managedObjectContext)
         item_getup.id = UUID()
@@ -76,6 +88,7 @@ class Initializer: ObservableObject{
         item_getup.minutesTotal = 0
         item_getup.scoreTotal = 0
         item_getup.lastUse = Date()
+        item_getup.tags = tag_red
         
         let schedule_study = Schedule(context: managedObjectContext)
         schedule_study.id = UUID()
