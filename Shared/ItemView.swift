@@ -23,7 +23,7 @@ struct ItemView: View {
     var body: some View {
         VStack{
             HStack(spacing:20){
-                Text("Static")
+                Text("Statistic")
                 Text("\(statScoreGained)/\(statScore)")
             }.onAppear(){
 //                let statScores = entryModel.calculateScore(weekOffset: 0)
@@ -35,6 +35,7 @@ struct ItemView: View {
                     ForEach(0..<items.count, id: \.self) { r in
                         //if habitModel.habits[r].hidden == false {
                             HStack{
+                                Rectangle().frame(width: 40, height: 40).foregroundColor(Color(items[r].tags.colorName)).cornerRadius(8.0)
                                 Button(items[r].titleIcon + items[r].title) {
                                     changeViewPresented = true
                                 }.sheet(isPresented: $changeViewPresented, content: {

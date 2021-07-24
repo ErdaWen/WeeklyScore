@@ -88,7 +88,7 @@ class Initializer: ObservableObject{
         item_getup.minutesTotal = 0
         item_getup.scoreTotal = 0
         item_getup.lastUse = Date()
-        item_getup.tags = tag_red
+        item_getup.tags = tag_blue
         
         let schedule_study = Schedule(context: managedObjectContext)
         schedule_study.id = UUID()

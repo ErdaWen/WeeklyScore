@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ChangeItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var tags: FetchedResults<Tag>
+    
     @Binding var changeItemViewPresented:Bool
     
     var item: Item
@@ -19,6 +24,7 @@ struct ChangeItemView: View {
     @State var inputColorTag:Int64 = 0
     @State var inputDefaultMinutes:Int64 = 0
     @State var inputDefaultMinutesString = "0"
+    @State var tagid = 0 
     
     var body: some View {
         NavigationView(){
@@ -36,9 +42,10 @@ struct ChangeItemView: View {
                         Divider()
                         TextField("Title",text:$inputTitle)
                         Divider()
-                        Picker("",selection:$inputColorTag){
-                            Rectangle().frame(width: 40, height: 40).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).cornerRadius(8.0).tag(0)
-                            Rectangle().frame(width: 40, height: 40).foregroundColor(.green).tag(1)
+                        Picker("",selection:$tagid){
+                            ForEach(0...tags.count-1, id:\.self) { r in
+                                Rectangle().frame(width: 40, height: 40).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0).tag(r)
+                            }
                         }.frame(width: 50)
                     }
                     // MARK:Score (Stepper)
@@ -88,12 +95,14 @@ struct ChangeItemView: View {
                     item.defaultScore = inputDefaultScore
                     item.defaultMinutes = inputDefaultMinutes
                     item.colorTag = inputColorTag
+                    item.tags = tags[tagid]
 
                 }, label: {
                     Text("Save")
                 }))
             
         }.onAppear(){
+            tagid = tags.firstIndex(where: {$0.id == item.tags.id}) ?? 0
             inputTitleIcon = item.titleIcon
             inputTitle = item.title
             inputDefaultScore = item.defaultScore
