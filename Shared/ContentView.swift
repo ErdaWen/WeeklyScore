@@ -32,9 +32,6 @@ struct ContentView: View {
                     }
                 }.tag(2)
         }
-        .environmentObject(HabitModel())
-        .environmentObject(EntryModel())
-        
     }
 }
 

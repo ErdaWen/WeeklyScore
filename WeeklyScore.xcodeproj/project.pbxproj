@@ -55,10 +55,6 @@
 		C8BCE02A26926A25006E7D7E /* habitsList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE02826926A25006E7D7E /* habitsList.json */; };
 		C8BCE03226927060006E7D7E /* entriesList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entriesList.json */; };
 		C8BCE03326927060006E7D7E /* entriesList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entriesList.json */; };
-		C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCE034269276F2006E7D7E /* HabitModel.swift */; };
-		C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCE034269276F2006E7D7E /* HabitModel.swift */; };
-		C8F94BFA26927F9900DD3703 /* EntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F94BF926927F9900DD3703 /* EntryModel.swift */; };
-		C8F94BFB26927F9900DD3703 /* EntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F94BF926927F9900DD3703 /* EntryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,8 +87,6 @@
 		C8BCE02426921FFF006E7D7E /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		C8BCE02826926A25006E7D7E /* habitsList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habitsList.json; sourceTree = "<group>"; };
 		C8BCE03126927060006E7D7E /* entriesList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = entriesList.json; sourceTree = "<group>"; };
-		C8BCE034269276F2006E7D7E /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
-		C8F94BF926927F9900DD3703 /* EntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +188,6 @@
 		C8BCE01F269181B4006E7D7E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				C8BCE034269276F2006E7D7E /* HabitModel.swift */,
-				C8F94BF926927F9900DD3703 /* EntryModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -315,13 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8F94BFA26927F9900DD3703 /* EntryModel.swift in Sources */,
 				0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE0D26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
-				C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */,
 				00AE2E3226A949A000F77898 /* Constants.swift in Sources */,
 				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
@@ -345,13 +335,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8F94BFB26927F9900DD3703 /* EntryModel.swift in Sources */,
 				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE0E26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
-				C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */,
 				00AE2E3326A949A000F77898 /* Constants.swift in Sources */,
 				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,

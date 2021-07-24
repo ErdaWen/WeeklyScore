@@ -62,6 +62,6 @@ struct ItemView: View {
 
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView().environmentObject(HabitModel()).environmentObject(EntryModel())
+        ItemView()
     }
 }
