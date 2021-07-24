@@ -32,13 +32,13 @@ struct ItemView: View {
             }
             if items.count > 0{
                 TabView{
-                    ForEach(0..<items.count,id: \.self) { r in
+                    ForEach(0..<items.count, id: \.self) { r in
                         //if habitModel.habits[r].hidden == false {
                             HStack{
                                 Button(items[r].titleIcon + items[r].title) {
                                     changeViewPresented = true
                                 }.sheet(isPresented: $changeViewPresented, content: {
-                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, habitIndex: r)
+                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
                                 })
                                 if items[r].durationBased {
                                     Text("Total \(items[r].minutesTotal) minutes")

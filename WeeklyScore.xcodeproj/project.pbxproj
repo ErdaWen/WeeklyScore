@@ -19,14 +19,14 @@
 		003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
-		00A5FDFD26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */; };
-		00A5FDFE26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */; };
-		00A5FDFF26AB78CE002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFA26AB78CE002F38B1 /* Item+CoreDataProperties.swift */; };
-		00A5FE0026AB78CE002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFA26AB78CE002F38B1 /* Item+CoreDataProperties.swift */; };
-		00A5FE0126AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFB26AB78CE002F38B1 /* Schedule+CoreDataClass.swift */; };
-		00A5FE0226AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFB26AB78CE002F38B1 /* Schedule+CoreDataClass.swift */; };
-		00A5FE0326AB78CE002F38B1 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFC26AB78CE002F38B1 /* Schedule+CoreDataProperties.swift */; };
-		00A5FE0426AB78CE002F38B1 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDFC26AB78CE002F38B1 /* Schedule+CoreDataProperties.swift */; };
+		00A5FE0926ABE259002F38B1 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0526ABE259002F38B1 /* Schedule+CoreDataClass.swift */; };
+		00A5FE0A26ABE259002F38B1 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0526ABE259002F38B1 /* Schedule+CoreDataClass.swift */; };
+		00A5FE0B26ABE259002F38B1 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0626ABE259002F38B1 /* Schedule+CoreDataProperties.swift */; };
+		00A5FE0C26ABE259002F38B1 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0626ABE259002F38B1 /* Schedule+CoreDataProperties.swift */; };
+		00A5FE0D26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0726ABE259002F38B1 /* Item+CoreDataClass.swift */; };
+		00A5FE0E26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0726ABE259002F38B1 /* Item+CoreDataClass.swift */; };
+		00A5FE0F26ABE259002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0826ABE259002F38B1 /* Item+CoreDataProperties.swift */; };
+		00A5FE1026ABE259002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE0826ABE259002F38B1 /* Item+CoreDataProperties.swift */; };
 		00AE2E3226A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00AE2E3326A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
@@ -68,10 +68,10 @@
 		0034918E26A7F48F001B8DBB /* InitializerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializerModel.swift; sourceTree = "<group>"; };
 		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
-		00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		00A5FDFA26AB78CE002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		00A5FDFB26AB78CE002F38B1 /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
-		00A5FDFC26AB78CE002F38B1 /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00A5FE0526ABE259002F38B1 /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00A5FE0626ABE259002F38B1 /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00A5FE0726ABE259002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00A5FE0826ABE259002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00AE2E3126A949A000F77898 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
@@ -116,6 +116,10 @@
 		0034918A26A7F036001B8DBB /* Servers */ = {
 			isa = PBXGroup;
 			children = (
+				00A5FE0526ABE259002F38B1 /* Schedule+CoreDataClass.swift */,
+				00A5FE0626ABE259002F38B1 /* Schedule+CoreDataProperties.swift */,
+				00A5FE0726ABE259002F38B1 /* Item+CoreDataClass.swift */,
+				00A5FE0826ABE259002F38B1 /* Item+CoreDataProperties.swift */,
 				0034918B26A7F06B001B8DBB /* DateServer.swift */,
 				00AE2E3126A949A000F77898 /* Constants.swift */,
 			);
@@ -203,10 +207,6 @@
 		C8BCE027269269BF006E7D7E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */,
-				00A5FDFA26AB78CE002F38B1 /* Item+CoreDataProperties.swift */,
-				00A5FDFB26AB78CE002F38B1 /* Schedule+CoreDataClass.swift */,
-				00A5FDFC26AB78CE002F38B1 /* Schedule+CoreDataProperties.swift */,
 				C8BCE02826926A25006E7D7E /* habitsList.json */,
 				C8BCE03126927060006E7D7E /* entriesList.json */,
 				0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */,
@@ -315,10 +315,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A5FDFF26AB78CE002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				C8F94BFA26927F9900DD3703 /* EntryModel.swift in Sources */,
-				00A5FE0326AB78CE002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				0034918F26A7F48F001B8DBB /* InitializerModel.swift in Sources */,
+				00A5FE0D26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
@@ -327,15 +326,16 @@
 				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
-				00A5FDFD26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				0034918826A7EE02001B8DBB /* Persistence.swift in Sources */,
+				00A5FE0F26ABE259002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
+				00A5FE0926ABE259002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02226918B4D006E7D7E /* Habit.swift in Sources */,
 				C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */,
-				00A5FE0126AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				C88EC1392692B378005A4DAB /* ItemView.swift in Sources */,
+				00A5FE0B26ABE259002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
@@ -345,10 +345,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A5FE0026AB78CE002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				C8F94BFB26927F9900DD3703 /* EntryModel.swift in Sources */,
-				00A5FE0426AB78CE002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				0034919026A7F48F001B8DBB /* InitializerModel.swift in Sources */,
+				00A5FE0E26ABE259002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
@@ -357,15 +356,16 @@
 				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
-				00A5FDFE26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
+				00A5FE1026ABE259002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
+				00A5FE0A26ABE259002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */,
 				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
-				00A5FE0226AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */,
+				00A5FE0C26ABE259002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);

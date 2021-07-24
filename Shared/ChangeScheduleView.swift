@@ -106,6 +106,8 @@ struct ChangeScheduleView: View {
                     }, label: {
                         Text("Save")
                     }))
+            } else {
+                Text("Habit is archived")
             }
         }.onAppear(){
             itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1

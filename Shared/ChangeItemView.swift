@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct ChangeItemView: View {
-    @EnvironmentObject var entryModel:EntryModel
-    @EnvironmentObject var habitModel:HabitModel
+    @Environment(\.managedObjectContext) private var viewContext
     @Binding var changeItemViewPresented:Bool
     
-    var habitIndex: Int
+    var item: Item
     
     @State var inputTitleIcon = ""
     @State var inputTitle = ""
-    @State var inputDefaultScore = 10
-    @State var inputColorTag = 0
-    
+    @State var inputDefaultScore:Int64 = 10
+    @State var inputColorTag:Int64 = 0
+    @State var inputDefaultMinutes:Int64 = 0
+    @State var inputDefaultMinutesString = "0"
     
     var body: some View {
         NavigationView(){
-            // habitIndex may overflow when deleting the last element, need to check
-            if habitIndex < habitModel.habits.count {
                 Form{
                     // MARK:Title and color (HStack)
                     HStack(){
@@ -45,30 +43,39 @@ struct ChangeItemView: View {
                     }
                     // MARK:Score (Stepper)
                     Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
+                    // MARK: Change default minuites:
+                    if item.durationBased {
+                    TextField("Minute", text: $inputDefaultMinutesString)
+                        // the input is a string
+                        .keyboardType(.numberPad)
+                        // update actual var here
+                        .onChange(of: inputDefaultMinutesString, perform: { value in
+                            if let inputnumber = Double(inputDefaultMinutesString) {
+                                // protect the number being Int
+                                inputDefaultMinutesString = String(Int(inputnumber))
+                                inputDefaultMinutes = Int64(inputnumber)
+                            }
+                        })
+                    }
                     // MARK: Change duration-based
-                    if habitModel.habits[habitIndex].durationBased {
+                    if item.durationBased {
                         Button("Change to time-based") {
-                            habitModel.habits[habitIndex].changeDurationBased()
+                            item.durationBased = false
                         }
                     } else {
                         Button("Change to duration-based") {
-                            habitModel.habits[habitIndex].changeDurationBased()
-                            habitModel.updateChange()
-                            changeItemViewPresented = false
+                            item.durationBased = true
                         }
                     }
                     
                     Button("Archive Habits") {
                         changeItemViewPresented = false
-                        habitModel.habits[habitIndex].archive()
-                        habitModel.updateChange()
+                        item.hidden = true
                     }
                     
                     Button("Delete Habits") {
                         changeItemViewPresented = false
-                        entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
-                        entryModel.refresh.toggle()
-                        habitModel.deleteHabit(indexing:habitIndex)
+                        viewContext.delete(item)
                     }
                     
                     // MARK: View title and button
@@ -76,26 +83,31 @@ struct ChangeItemView: View {
                     Text("Cancel")
                 }), trailing: Button(action:{
                     changeItemViewPresented = false
-                    habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
-                    habitModel.updateChange()
+                    item.titleIcon = inputTitleIcon
+                    item.title = inputTitle
+                    item.defaultScore = inputDefaultScore
+                    item.defaultMinutes = inputDefaultMinutes
+                    item.colorTag = inputColorTag
+
                 }, label: {
                     Text("Save")
                 }))
-            }
+            
         }.onAppear(){
-            inputTitleIcon = habitModel.habits[habitIndex].titleIcon
-            inputTitle = habitModel.habits[habitIndex].title
-            inputDefaultScore = habitModel.habits[habitIndex].defaultScore
-            inputColorTag = habitModel.habits[habitIndex].colorTag
+            inputTitleIcon = item.titleIcon
+            inputTitle = item.title
+            inputDefaultScore = item.defaultScore
+            inputDefaultMinutes = item.defaultMinutes
+            inputColorTag = item.colorTag
         }
     }
 }
 
-struct ChangeHabitView_Previews: PreviewProvider {
-    @State static var dummyBool = true
-    static var previews: some View {
-        ChangeItemView(changeItemViewPresented: $dummyBool, habitIndex: 1)
-            .environmentObject(EntryModel())
-            .environmentObject(HabitModel())
-    }
-}
+//struct ChangeHabitView_Previews: PreviewProvider {
+//    @State static var dummyBool = true
+//    static var previews: some View {
+//        ChangeItemView(changeItemViewPresented: $dummyBool, habitIndex: 1)
+//            .environmentObject(EntryModel())
+//            .environmentObject(HabitModel())
+//    }
+//}
