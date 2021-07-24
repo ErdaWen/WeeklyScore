@@ -24,7 +24,7 @@ struct ContentView: View {
                     }
                 }.tag(1)
             // MARK: Habit View
-            HabitView()
+            ItemView()
                 .tabItem {
                     VStack{
                         Image (systemName: "star")

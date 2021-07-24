@@ -23,7 +23,6 @@ struct ChangeCompletionView: View {
     @State var inputMinutesGainedString = "0"
     @State var inputChecked = false
     
-    
     @State var itemMinute:Int64 = 0
     // For duration-based habit, the status goes 3 ways
     // This var should be adjusted with the inputchecked at the same time

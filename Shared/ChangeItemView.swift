@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct ChangeHabitView: View {
+struct ChangeItemView: View {
     @EnvironmentObject var entryModel:EntryModel
     @EnvironmentObject var habitModel:HabitModel
-    @Binding var changeHabitViewPresented:Bool
+    @Binding var changeItemViewPresented:Bool
     
     var habitIndex: Int
     
@@ -54,28 +54,28 @@ struct ChangeHabitView: View {
                         Button("Change to duration-based") {
                             habitModel.habits[habitIndex].changeDurationBased()
                             habitModel.updateChange()
-                            changeHabitViewPresented = false
+                            changeItemViewPresented = false
                         }
                     }
                     
                     Button("Archive Habits") {
-                        changeHabitViewPresented = false
+                        changeItemViewPresented = false
                         habitModel.habits[habitIndex].archive()
                         habitModel.updateChange()
                     }
                     
                     Button("Delete Habits") {
-                        changeHabitViewPresented = false
+                        changeItemViewPresented = false
                         entryModel.deleteAllEntryRelated(deletedHabitId: habitModel.habits[habitIndex].id)
                         entryModel.refresh.toggle()
                         habitModel.deleteHabit(indexing:habitIndex)
                     }
                     
                     // MARK: View title and button
-                }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ changeHabitViewPresented = false}, label: {
+                }.navigationBarTitle("Add New Habit",displayMode: .inline).navigationBarItems(leading: Button(action:{ changeItemViewPresented = false}, label: {
                     Text("Cancel")
                 }), trailing: Button(action:{
-                    changeHabitViewPresented = false
+                    changeItemViewPresented = false
                     habitModel.habits[habitIndex].changeProp(inTitleIcon: inputTitleIcon, inTitle: inputTitle, inDefaultScore: inputDefaultScore, inColorTag: inputColorTag)
                     habitModel.updateChange()
                 }, label: {
@@ -94,7 +94,7 @@ struct ChangeHabitView: View {
 struct ChangeHabitView_Previews: PreviewProvider {
     @State static var dummyBool = true
     static var previews: some View {
-        ChangeHabitView(changeHabitViewPresented: $dummyBool, habitIndex: 1)
+        ChangeItemView(changeItemViewPresented: $dummyBool, habitIndex: 1)
             .environmentObject(EntryModel())
             .environmentObject(HabitModel())
     }

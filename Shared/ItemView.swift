@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct HabitView: View {
-    @EnvironmentObject var entryModel:EntryModel
-    @EnvironmentObject var habitModel:HabitModel
+struct ItemView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [],
+        animation: .default)
+    private var items: FetchedResults<Item>
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
@@ -22,26 +26,26 @@ struct HabitView: View {
                 Text("Static")
                 Text("\(statScoreGained)/\(statScore)")
             }.onAppear(){
-                let statScores = entryModel.calculateScore(weekOffset: 0)
-                statScore = statScores.0
-                statScoreGained = statScores.1
+//                let statScores = entryModel.calculateScore(weekOffset: 0)
+//                statScore = statScores.0
+//                statScoreGained = statScores.1
             }
-            if habitModel.habits.count > 0{
+            if items.count > 0{
                 TabView{
-                    ForEach(0..<habitModel.habits.count,id: \.self) { r in
+                    ForEach(0..<items.count,id: \.self) { r in
                         //if habitModel.habits[r].hidden == false {
                             HStack{
-                                Button(habitModel.habits[r].title) {
+                                Button(items[r].titleIcon + items[r].title) {
                                     changeViewPresented = true
                                 }.sheet(isPresented: $changeViewPresented, content: {
-                                    ChangeHabitView(changeHabitViewPresented: $changeViewPresented, habitIndex: r)
+                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, habitIndex: r)
                                 })
-                                if habitModel.habits[r].durationBased {
-                                    Text("Total \(habitModel.habits[r].hoursTotal) hours")
+                                if items[r].durationBased {
+                                    Text("Total \(items[r].minutesTotal) minutes")
                                 } else {
-                                    Text("\(habitModel.habits[r].checkedEntryNum) times hited")
+                                    Text("\(items[r].checkedTotal) times hited")
                                 }
-                                Text(String(habitModel.habits[r].scoreTotal))
+                                Text(String(items[r].scoreTotal))
                             }
                         //}
                     }
@@ -49,7 +53,7 @@ struct HabitView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
             Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
-                AddHabitView(addHabitViewPresented: $addViewPresented)
+                AddItemView(addItemViewPresented: $addViewPresented)
             })
         }
         .padding()
@@ -58,6 +62,6 @@ struct HabitView: View {
 
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitView().environmentObject(HabitModel()).environmentObject(EntryModel())
+        ItemView().environmentObject(HabitModel()).environmentObject(EntryModel())
     }
 }

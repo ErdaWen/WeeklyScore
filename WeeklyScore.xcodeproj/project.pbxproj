@@ -15,8 +15,8 @@
 		0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918B26A7F06B001B8DBB /* DateServer.swift */; };
 		0034918F26A7F48F001B8DBB /* InitializerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918E26A7F48F001B8DBB /* InitializerModel.swift */; };
 		0034919026A7F48F001B8DBB /* InitializerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918E26A7F48F001B8DBB /* InitializerModel.swift */; };
-		003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
-		003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeHabitView.swift */; };
+		003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
+		003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		00A5FDFD26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */; };
@@ -37,10 +37,10 @@
 		00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
 		C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
-		C88EC1392692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
-		C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* HabitView.swift */; };
-		C88EC13C2692BB27005A4DAB /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddHabitView.swift */; };
-		C88EC13D2692BB27005A4DAB /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddHabitView.swift */; };
+		C88EC1392692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
+		C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
+		C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddItemView.swift */; };
+		C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddItemView.swift */; };
 		C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01126918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
@@ -66,7 +66,7 @@
 		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0034918B26A7F06B001B8DBB /* DateServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServer.swift; sourceTree = "<group>"; };
 		0034918E26A7F48F001B8DBB /* InitializerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializerModel.swift; sourceTree = "<group>"; };
-		003A248A269BFD7800BDB239 /* ChangeHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHabitView.swift; sourceTree = "<group>"; };
+		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		00A5FDF926AB78CE002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00A5FDFA26AB78CE002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
-		C88EC1382692B378005A4DAB /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
-		C88EC13B2692BB27005A4DAB /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		C88EC1382692B378005A4DAB /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		C88EC13B2692BB27005A4DAB /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyScoreApp.swift; sourceTree = "<group>"; };
 		C8BCDFFD26918075006E7D7E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8BCDFFE26918079006E7D7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,9 +146,9 @@
 				00C72FA526963CC00028EF5C /* AddScheduleView.swift */,
 				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
 				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
-				C88EC1382692B378005A4DAB /* HabitView.swift */,
-				C88EC13B2692BB27005A4DAB /* AddHabitView.swift */,
-				003A248A269BFD7800BDB239 /* ChangeHabitView.swift */,
+				C88EC1382692B378005A4DAB /* ItemView.swift */,
+				C88EC13B2692BB27005A4DAB /* AddItemView.swift */,
+				003A248A269BFD7800BDB239 /* ChangeItemView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 				009B248D26A239BE0087467A /* EmojiTextField.swift */,
 			);
@@ -324,7 +324,7 @@
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
 				C8BCE035269276F3006E7D7E /* HabitModel.swift in Sources */,
 				00AE2E3226A949A000F77898 /* Constants.swift in Sources */,
-				003A248B269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
+				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				C8BCE02526921FFF006E7D7E /* Entry.swift in Sources */,
 				00A5FDFD26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */,
@@ -333,9 +333,9 @@
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02226918B4D006E7D7E /* Habit.swift in Sources */,
-				C88EC13C2692BB27005A4DAB /* AddHabitView.swift in Sources */,
+				C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				00A5FE0126AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
-				C88EC1392692B378005A4DAB /* HabitView.swift in Sources */,
+				C88EC1392692B378005A4DAB /* ItemView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
@@ -354,7 +354,7 @@
 				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
 				C8BCE036269276F3006E7D7E /* HabitModel.swift in Sources */,
 				00AE2E3326A949A000F77898 /* Constants.swift in Sources */,
-				003A248C269BFD7800BDB239 /* ChangeHabitView.swift in Sources */,
+				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				C8BCE02626921FFF006E7D7E /* Entry.swift in Sources */,
 				00A5FDFE26AB78CE002F38B1 /* Item+CoreDataClass.swift in Sources */,
@@ -363,9 +363,9 @@
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C8BCE02326918B4D006E7D7E /* Habit.swift in Sources */,
-				C88EC13D2692BB27005A4DAB /* AddHabitView.swift in Sources */,
+				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				00A5FE0226AB78CE002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
-				C88EC13A2692B378005A4DAB /* HabitView.swift in Sources */,
+				C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
 				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
