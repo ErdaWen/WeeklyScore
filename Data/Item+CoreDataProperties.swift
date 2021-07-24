@@ -17,7 +17,6 @@ extension Item {
     }
 
     @NSManaged public var checkedTotal: Int64
-    @NSManaged public var colorTag: Int64
     @NSManaged public var defaultMinutes: Int64
     @NSManaged public var defaultScore: Int64
     @NSManaged public var durationBased: Bool

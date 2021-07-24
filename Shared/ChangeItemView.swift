@@ -21,7 +21,6 @@ struct ChangeItemView: View {
     @State var inputTitleIcon = ""
     @State var inputTitle = ""
     @State var inputDefaultScore:Int64 = 10
-    @State var inputColorTag:Int64 = 0
     @State var inputDefaultMinutes:Int64 = 0
     @State var inputDefaultMinutesString = "0"
     @State var tagid = 0 
@@ -61,6 +60,9 @@ struct ChangeItemView: View {
                                 // protect the number being Int
                                 inputDefaultMinutesString = String(Int(inputnumber))
                                 inputDefaultMinutes = Int64(inputnumber)
+                            } else {
+                                inputDefaultMinutesString = "0"
+                                inputDefaultMinutes = 0
                             }
                         })
                     }
@@ -94,7 +96,6 @@ struct ChangeItemView: View {
                     item.title = inputTitle
                     item.defaultScore = inputDefaultScore
                     item.defaultMinutes = inputDefaultMinutes
-                    item.colorTag = inputColorTag
                     item.tags = tags[tagid]
 
                 }, label: {
@@ -107,7 +108,6 @@ struct ChangeItemView: View {
             inputTitle = item.title
             inputDefaultScore = item.defaultScore
             inputDefaultMinutes = item.defaultMinutes
-            inputColorTag = item.colorTag
         }
     }
 }

@@ -51,7 +51,6 @@ class Initializer: ObservableObject{
         item_study.titleIcon = "📚"
         item_study.title = "Study!"
         item_study.durationBased = true
-        item_study.colorTag = 1
         item_study.defaultScore = 20
         item_study.defaultMinutes = 120
         item_study.checkedTotal = 1
@@ -66,7 +65,6 @@ class Initializer: ObservableObject{
         item_workout.titleIcon = "💪"
         item_workout.title = "Workout!"
         item_workout.durationBased = true
-        item_workout.colorTag = 2
         item_workout.defaultMinutes = 60
         item_workout.defaultScore = 10
         item_workout.checkedTotal = 0
@@ -81,7 +79,6 @@ class Initializer: ObservableObject{
         item_getup.titleIcon = "☀️"
         item_getup.title = "Get up!"
         item_getup.durationBased = false
-        item_getup.colorTag = 2
         item_getup.defaultMinutes = 0
         item_getup.defaultScore = 5
         item_getup.checkedTotal = 0

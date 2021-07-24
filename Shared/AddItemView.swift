@@ -22,8 +22,7 @@ struct AddItemView: View {
     @State var inputDefaultScore:Int64 = 10
     @State var inputDefaultMinutes:Int64 = 60
     @State var inputDefaultMinutesString = "60"
-    @State var inputColorTag:Int64 = 0
-    @State var tagid = 0 
+    @State var tagid = 0
     
     @Binding var addItemViewPresented:Bool
     
@@ -71,6 +70,9 @@ struct AddItemView: View {
                             // protect the number being Int
                             inputDefaultMinutesString = String(Int(inputnumber))
                             inputDefaultMinutes = Int64(inputnumber)
+                        } else {
+                            inputDefaultMinutesString = "0"
+                            inputDefaultMinutes = 0
                         }
                     })
                 }
@@ -88,7 +90,6 @@ struct AddItemView: View {
                 newItem.titleIcon = inputTitleIcon
                 newItem.title = inputTitle
                 newItem.durationBased = inputDurationBased
-                newItem.colorTag = inputColorTag
                 newItem.defaultMinutes = inputDurationBased ? inputDefaultMinutes : 0
                 newItem.defaultScore = inputDefaultScore
                 newItem.checkedTotal = 0

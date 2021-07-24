@@ -27,10 +27,10 @@
 		00A5FE5226AC9EBC002F38B1 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4926AC9EBC002F38B1 /* Tag+CoreDataClass.swift */; };
 		00A5FE5326AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4A26AC9EBC002F38B1 /* Tag+CoreDataProperties.swift */; };
 		00A5FE5426AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4A26AC9EBC002F38B1 /* Tag+CoreDataProperties.swift */; };
-		00A5FE5526AC9EBC002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4B26AC9EBC002F38B1 /* Item+CoreDataClass.swift */; };
-		00A5FE5626AC9EBC002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4B26AC9EBC002F38B1 /* Item+CoreDataClass.swift */; };
-		00A5FE5726AC9EBC002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4C26AC9EBC002F38B1 /* Item+CoreDataProperties.swift */; };
-		00A5FE5826AC9EBC002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE4C26AC9EBC002F38B1 /* Item+CoreDataProperties.swift */; };
+		00A5FE5B26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
+		00A5FE5C26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
+		00A5FE5D26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */; };
+		00A5FE5E26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */; };
 		00AE2E3226A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00AE2E3326A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
@@ -68,8 +68,8 @@
 		00A5FE4826AC9EBC002F38B1 /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00A5FE4926AC9EBC002F38B1 /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00A5FE4A26AC9EBC002F38B1 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		00A5FE4B26AC9EBC002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		00A5FE4C26AC9EBC002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00AE2E3126A949A000F77898 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
@@ -193,12 +193,12 @@
 		C8BCE027269269BF006E7D7E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */,
+				00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */,
 				00A5FE4726AC9EBC002F38B1 /* Schedule+CoreDataClass.swift */,
 				00A5FE4826AC9EBC002F38B1 /* Schedule+CoreDataProperties.swift */,
 				00A5FE4926AC9EBC002F38B1 /* Tag+CoreDataClass.swift */,
 				00A5FE4A26AC9EBC002F38B1 /* Tag+CoreDataProperties.swift */,
-				00A5FE4B26AC9EBC002F38B1 /* Item+CoreDataClass.swift */,
-				00A5FE4C26AC9EBC002F38B1 /* Item+CoreDataProperties.swift */,
 				C8BCE02826926A25006E7D7E /* habitsList.json */,
 				C8BCE03126927060006E7D7E /* entriesList.json */,
 				0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */,
@@ -307,7 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A5FE5726AC9EBC002F38B1 /* Item+CoreDataProperties.swift in Sources */,
+				00A5FE5D26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00A5FE5326AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */,
@@ -318,7 +318,7 @@
 				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918826A7EE02001B8DBB /* Persistence.swift in Sources */,
-				00A5FE5526AC9EBC002F38B1 /* Item+CoreDataClass.swift in Sources */,
+				00A5FE5B26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00A5FE4D26AC9EBC002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				00A5FE4F26AC9EBC002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
@@ -335,7 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A5FE5826AC9EBC002F38B1 /* Item+CoreDataProperties.swift in Sources */,
+				00A5FE5E26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00A5FE5426AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */,
@@ -346,7 +346,7 @@
 				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
-				00A5FE5626AC9EBC002F38B1 /* Item+CoreDataClass.swift in Sources */,
+				00A5FE5C26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */,
 				00A5FE4E26AC9EBC002F38B1 /* Schedule+CoreDataClass.swift in Sources */,
 				00A5FE5026AC9EBC002F38B1 /* Schedule+CoreDataProperties.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
