@@ -18,8 +18,6 @@ struct ItemView: View {
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
-    @State var statScore = 0
-    @State var statScoreGained = 0
     
     var body: some View {
         VStack{
