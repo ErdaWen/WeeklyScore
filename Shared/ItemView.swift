@@ -14,6 +14,7 @@ struct ItemView: View {
         sortDescriptors: [],
         animation: .default)
     private var items: FetchedResults<Item>
+    @EnvironmentObject var propertiesModel:PropertiesModel
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
@@ -24,11 +25,9 @@ struct ItemView: View {
         VStack{
             HStack(spacing:20){
                 Text("Statistic")
-                Text("\(statScoreGained)/\(statScore)")
+                Text("\(propertiesModel.gainedScoreThisWeek)/\(propertiesModel.totalScoreThisWeek)")
             }.onAppear(){
-//                let statScores = entryModel.calculateScore(weekOffset: 0)
-//                statScore = statScores.0
-//                statScoreGained = statScores.1
+                propertiesModel.updateScores()
             }
             if items.count > 0{
                 TabView{
