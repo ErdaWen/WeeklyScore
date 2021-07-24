@@ -31,6 +31,8 @@
 		00A5FE5C26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
 		00A5FE5D26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */; };
 		00A5FE5E26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */; };
+		00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
+		00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
 		00AE2E3226A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00AE2E3326A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
@@ -70,6 +72,7 @@
 		00A5FE4A26AC9EBC002F38B1 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesModel.swift; sourceTree = "<group>"; };
 		00AE2E3126A949A000F77898 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 		C8BCE01F269181B4006E7D7E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -309,6 +313,7 @@
 			files = (
 				00A5FE5D26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */,
+				00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00A5FE5326AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */,
 				0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
@@ -337,6 +342,7 @@
 			files = (
 				00A5FE5E26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */,
 				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
+				00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				00A5FE5426AC9EBC002F38B1 /* Tag+CoreDataProperties.swift in Sources */,
 				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
