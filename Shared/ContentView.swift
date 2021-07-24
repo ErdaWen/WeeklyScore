@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var initzer = InitializerModel()
+    @State var initzer = Initializer()
     
     @State var tabIndex = 1
     

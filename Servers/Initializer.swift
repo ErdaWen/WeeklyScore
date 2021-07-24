@@ -7,7 +7,7 @@
 
 import Foundation
 
-class InitializerModel: ObservableObject{
+class Initializer: ObservableObject{
     
     let managedObjectContext = PersistenceController.shared.container.viewContext
     
