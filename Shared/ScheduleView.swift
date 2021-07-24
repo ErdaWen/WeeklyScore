@@ -30,7 +30,7 @@ struct ScheduleView: View {
                         HStack(){
                             VStack{
                                 // MARK: Title, as well as the change schedule button
-                                Button(schedules[r].items.title){
+                                Button(schedules[r].items.titleIcon + schedules[r].items.title){
                                         changeViewPresented.toggle()
                                     }.sheet(isPresented: $changeViewPresented, content: {
                                         ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedules[r])
@@ -44,7 +44,7 @@ struct ScheduleView: View {
                             Button("Record\(r)") {
                                 completionViewPresented.toggle()
                             }.sheet(isPresented: $completionViewPresented, content: {
-                                ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,entryIndex:r)
+                                ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,schedule: schedules[r])
                             })
                         }
                     }
