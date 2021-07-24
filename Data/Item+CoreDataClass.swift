@@ -2,7 +2,7 @@
 //  Item+CoreDataClass.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 7/23/21.
+//  Created by Erda Wen on 7/24/21.
 //
 //
 

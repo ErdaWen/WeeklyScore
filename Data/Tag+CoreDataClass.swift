@@ -1,5 +1,5 @@
 //
-//  Schedule+CoreDataClass.swift
+//  Tag+CoreDataClass.swift
 //  WeeklyScore
 //
 //  Created by Erda Wen on 7/24/21.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Schedule)
-public class Schedule: NSManagedObject {
+@objc(Tag)
+public class Tag: NSManagedObject {
 
 }
