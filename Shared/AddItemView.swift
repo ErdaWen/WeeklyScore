@@ -27,58 +27,94 @@ struct AddItemView: View {
     @Binding var addItemViewPresented:Bool
     
     var body: some View {
-        NavigationView(){
-            Form{
-                // MARK:Title and color (HStack)
-                HStack(){
-                    EmojiTextField(text: $inputTitleIcon, placeholder: "").onChange(of: inputTitleIcon, perform: { value in
-                        if let lastChar = inputTitleIcon.last{
-                            inputTitleIcon = String(lastChar)
+        //NavigationView(){
+            ScrollView{
+                VStack(spacing:20){
+                    HStack(spacing:10){
+                        // MARK:TitleIcon
+                        VStack(alignment: .leading, spacing: 7.0){
+                            Text("Icon")
+                                .font(.system(size: 15))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(.light)
+                            ZStack(alignment: .center){
+                                RoundedRectangle(cornerRadius: 8.0)
+                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
+                                EmojiTextField(text: $inputTitleIcon, placeholder: "")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(Color("text_black"))
+                                    .onChange(of: inputTitleIcon, perform: { value in
+                                    if let lastChar = inputTitleIcon.last{
+                                        inputTitleIcon = String(lastChar)
+                                    }
+                                    if inputTitleIcon.isEmpty{
+                                        inputTitleIcon = "❓"
+                                    }
+                                    }).padding(15)
+                                    .frame(width:50,height: 50)
+                            }
+                            .frame(width:50,height: 50)
                         }
-                        if inputTitleIcon.isEmpty{
-                            inputTitleIcon = "❓"
+                        
+                        // MARK:Title
+                        VStack(alignment: .leading, spacing: 7.0){
+                            Text("Title")
+                                .font(.system(size: 15))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(.light)
+                            ZStack(alignment: .center){
+                                RoundedRectangle(cornerRadius: 8.0)
+                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
+                                TextField("New Habit",text:$inputTitle)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(Color("text_black"))
+                                    .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
+                            }
+                            .frame(height: 50)
                         }
-                    }).frame(width:35)
-                    //TextField("🏁",text:$inputTitleIcon).frame(width:35)
-                    Divider()
-                    TextField("Title",text:$inputTitle)
-                    Divider()
+                    }
+                    // MARK:Habit Type: Duration/time-based (Segmented picker)
+                    Picker("", selection:$inputDurationBased){
+                        Text("Duration").tag(true)
+                        Text("Time-based").tag(false)
+                    }.pickerStyle(SegmentedPickerStyle()).frame(width: 250)
+                    // MARK:Default score (Stepper)
+                    Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
+                    // MARK: Default hours (Textfield)
                     
-                    Picker("",selection:$tagid){
+                    if inputDurationBased {
+                    TextField("Minute", text: $inputDefaultMinutesString)
+                        // the input is a string
+                        .keyboardType(.numberPad)
+                        // update actual var here
+                        .onChange(of: inputDefaultMinutesString, perform: { value in
+                            if let inputnumber = Double(inputDefaultMinutesString) {
+                                // protect the number being Int
+                                inputDefaultMinutesString = String(Int(inputnumber))
+                                inputDefaultMinutes = Int64(inputnumber)
+                            } else {
+                                inputDefaultMinutesString = "0"
+                                inputDefaultMinutes = 0
+                            }
+                        })
+                    }
+                    Picker("Choose a tag",selection:$tagid){
                         ForEach(0...tags.count-1, id:\.self) { r in
-                            Rectangle().frame(width: 40, height: 40).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0).tag(r)
+                            HStack(spacing:10.0){
+                                Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
+                                Text(tags[r].name)
+                                    .font(.system(size: 20))
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color("text_black"))
+                            }.tag(r)
                         }
                     }.frame(width: 50)
                     
-                }
-                // MARK:Habit Type: Duration/time-based (Segmented picker)
-                Picker("", selection:$inputDurationBased){
-                    Text("Duration").tag(true)
-                    Text("Time-based").tag(false)
-                }.pickerStyle(SegmentedPickerStyle()).frame(width: 250)
-                // MARK:Default score (Stepper)
-                Stepper("Default Score: \(inputDefaultScore)", value: $inputDefaultScore, in: 0...20)
-                // MARK: Default hours (Textfield)
-                
-                if inputDurationBased {
-                TextField("Minute", text: $inputDefaultMinutesString)
-                    // the input is a string
-                    .keyboardType(.numberPad)
-                    // update actual var here
-                    .onChange(of: inputDefaultMinutesString, perform: { value in
-                        if let inputnumber = Double(inputDefaultMinutesString) {
-                            // protect the number being Int
-                            inputDefaultMinutesString = String(Int(inputnumber))
-                            inputDefaultMinutes = Int64(inputnumber)
-                        } else {
-                            inputDefaultMinutesString = "0"
-                            inputDefaultMinutes = 0
-                        }
-                    })
-                }
-                
-                // MARK: View title and button
-            }.navigationBarTitle("Add New Habit",displayMode: .inline)
+                    // MARK: View title and button
+                    Spacer()
+                }.padding(20.0)
+            }
+            .navigationBarTitle("Add New Habit",displayMode: .inline)
             .navigationBarItems (leading: Button(action:{ addItemViewPresented = false}, label: {
                 Text("Cancel")
             }), trailing: Button(action:{
@@ -108,7 +144,7 @@ struct AddItemView: View {
                 
             }, label: {Text("Add")})
             )
-        }
+        //}
     }
 }
 

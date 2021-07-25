@@ -37,12 +37,12 @@ class Initializer: ObservableObject{
     func buildData(){
         let tag_red = Tag(context: managedObjectContext)
         tag_red.id = UUID()
-        tag_red.name = "Carrer"
+        tag_red.name = "Career"
         tag_red.colorName = "tag_color_red"
         
         let tag_blue = Tag(context: managedObjectContext)
         tag_blue.id = UUID()
-        tag_blue.name = "Carrer"
+        tag_blue.name = "Health"
         tag_blue.colorName = "tag_color_blue"
         
         let item_study = Item(context: managedObjectContext)
