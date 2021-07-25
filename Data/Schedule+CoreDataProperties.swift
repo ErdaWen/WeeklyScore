@@ -28,6 +28,8 @@ extension Schedule {
     @NSManaged public var score: Int64
     @NSManaged public var scoreGained: Int64
     @NSManaged public var statusDefault: Bool
+    @NSManaged public var reminder: Bool
+    @NSManaged public var reminderTime: Int64
     @NSManaged public var items: Item
 
 }

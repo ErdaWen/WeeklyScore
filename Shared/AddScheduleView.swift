@@ -19,6 +19,8 @@ struct AddScheduleView: View {
     @State var inputScore:Int64 = 0
     @State var inputBeginTime = Date()
     @State var inputEndTime = Date()
+    @State var inputReminder = false
+    @State var inputReminderTime:Int64 = 0
     @State var showEndTimeWarning = false
     
     @Binding var addScheduleViewPresented:Bool
@@ -63,7 +65,19 @@ struct AddScheduleView: View {
                     } else {
                         DatePicker("Time", selection: $inputBeginTime)
                     }
-                    
+                    //MARK: Reminder
+                    Toggle("Reminder", isOn:$inputReminder)
+                    if inputReminder {
+                        Picker("Remind in ",selection:$inputReminderTime){
+                            Text("Happens").tag(0)
+                            Text("5 min").tag(5)
+                            Text("10 min").tag(10)
+                            Text("15 min").tag(15)
+                            Text("30 min").tag(30)
+                            Text("45 min").tag(45)
+                            Text("1 hour").tag(60)
+                        }
+                    }
                 }.navigationBarTitle("Add New Schedule",displayMode: .inline)
                 .navigationBarItems(
                     leading: Button(action:{ addScheduleViewPresented = false}, label: {
@@ -82,6 +96,8 @@ struct AddScheduleView: View {
                         newSchedule.checked = false
                         newSchedule.scoreGained = 0
                         newSchedule.minutesGained = 0
+                        newSchedule.reminder = inputReminder
+                        newSchedule.reminderTime = inputReminderTime
                         do{
                             try viewContext.save()
                             print("Saved")
