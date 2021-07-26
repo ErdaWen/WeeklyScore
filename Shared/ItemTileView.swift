@@ -14,8 +14,9 @@ struct ItemTileView: View {
     var body: some View {
         ZStack{
             //MARK: Outline in the back
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 9)
                 .stroke(Color(item.tags.colorName),style:StrokeStyle(lineWidth: 1))
+                .padding(1)
             //MARK: Inside outline
             //MARK: Left
             HStack(spacing:5){
@@ -25,18 +26,18 @@ struct ItemTileView: View {
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color(item.tags.colorName).opacity(0.3))
                         Text(item.titleIcon)
-                            .font(.system(size: 20))
-                    }.frame(width: 45, height: 60)
-                    .padding(.leading, 8)
+                            .font(.system(size: 15))
+                    }.frame(width: 40, height: 58)
+                    .padding(.leading, 7)
                 } else {
                     //MARK: Icon with Circle
                     ZStack{
-                        Circle()
+                        RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(Color(item.tags.colorName).opacity(0.3))
                         Text(item.titleIcon)
-                            .font(.system(size: 30))
-                    }.frame(width: 45, height: 60)
-                    .padding(.leading, 8)
+                            .font(.system(size: 15))
+                    }.frame(width: 40, height: 58)
+                    .padding(.leading, 7)
                 }
                 //MARK: Right
                 VStack(spacing:5){
@@ -78,9 +79,9 @@ struct ItemTileView: View {
                         }
                         Spacer()
                     }
-                }.frame(height:60).padding(.init(.init(top: 5, leading: 0, bottom: 5, trailing: 8)))
+                }.frame(height:60).padding(.trailing, 7)
             }
-        }.frame(height: 70)
+        }.frame(height: 72)
     }
 }
 

@@ -29,7 +29,7 @@ struct ItemView: View {
                     .scaledToFit()
                     .padding(.top, 30)
                     .foregroundColor(Color("text_black"))
-                    .frame(width: 50, height: 50)
+                    .frame(width: 54, height: 54)
                 
             }
             .sheet(isPresented: $addViewPresented, content: {
@@ -38,29 +38,26 @@ struct ItemView: View {
             
             if items.count > 0{
                 ScrollView(){
-                    VStack(spacing:20){
-                        ForEach(0..<items.count) { r in
-                            if items[r].hidden == false {
+                    VStack{
+                        ForEach(items) { item in
+                            if item.hidden == false {
                                 Button {
-                                    changeId = r
+                                    changeId = items.firstIndex(where: {$0.id == item.id}) ?? 0
                                     changeViewPresented = true
                                 } label: {
-                                    ItemTileView(item: items[r])
+                                    ItemTileView(item: item)
                                 }
                             }
                         }
                         Spacer()
                     }
-                    .background(EmptyView()
-                                    .sheet(isPresented: $changeViewPresented, content: {
-                                        ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
-                                    })
-                    )
-                    
+                    .sheet(isPresented:$changeViewPresented, content: {
+                        ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
+                    })
                 }
             }
         }
-        .padding(.init(top: 10, leading: 50, bottom: 10, trailing: 50))
+        .padding(.init(top: 10, leading: 35, bottom: 10, trailing: 35))
     }
 }
 

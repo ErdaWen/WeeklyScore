@@ -49,6 +49,7 @@ struct ChangeItemView: View {
                     item.title = inputTitle
                     item.defaultScore = inputDefaultScore
                     item.defaultMinutes = inputDefaultMinutes
+                    item.durationBased = inputDurationBased
                     item.tags = tags[tagid]
                     tags[tagid].lastUse = Date()
                     do{
@@ -256,6 +257,7 @@ struct ChangeItemView: View {
             inputTitle = item.title
             inputDefaultScore = item.defaultScore
             inputDefaultMinutes = item.defaultMinutes
+            inputDefaultMinutesString = String(inputDefaultMinutes)
             inputDurationBased = item.durationBased
         }
     }
