@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemTileView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     var item:Item
     
     var body: some View {

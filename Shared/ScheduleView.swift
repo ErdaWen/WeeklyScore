@@ -11,58 +11,43 @@ import UIKit
 struct ScheduleView: View {
     
     @State var addViewPresented = false
-    @State var completionViewPresented = false
-    @State var changeViewPresented = false
+    @State var showDeduct = false
     
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [],
-        animation: .default)
-    private var schedules: FetchedResults<Schedule>
-    
+    @Environment(\.managedObjectContext) private var viewContext    
     @EnvironmentObject var propertiesModel:PropertiesModel
 
     
     var body: some View {
         VStack{
-            HStack(spacing:20){
-                Text("Statistic")
-                Text("\(propertiesModel.gainedScoreThisWeek)/\(propertiesModel.totalScoreThisWeek)")
-            }.onAppear(){
+            HStack(spacing:10){
+                if showDeduct {
+                    Text("-\(propertiesModel.deductScoreThisWeek)")
+                        .font(.system(size: 25))
+                        .foregroundColor(Color("text_red"))
+                        .fontWeight(.light)
+                } else{
+                    Text("-\(propertiesModel.gainedScoreThisWeek)")
+                        .font(.system(size: 25))
+                        .foregroundColor(Color("text_green"))
+                        .fontWeight(.light)
+                }
+                Image(systemName: "line.diagonal")
+                    .foregroundColor(Color("text_black"))
+                Text("\(propertiesModel.totalScoreThisWeek)")
+                    .font(.system(size: 25))
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.light)
+            }
+            .onAppear(){
                 propertiesModel.updateScores()
             }
-            if schedules.count > 0 {
-                TabView{
-                    // , id:\.self
-                    ForEach(0..<schedules.count,id: \.self){ r in
-                        HStack(){
-                            VStack{
-                                // MARK: Title, as well as the change schedule button
-                                Button(schedules[r].items.titleIcon + schedules[r].items.title){
-                                        changeViewPresented.toggle()
-                                    }.sheet(isPresented: $changeViewPresented, content: {
-                                        ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedules[r])
-                                    })
-                                
-                                Text(DateServer.printTime(inputTime: schedules[r].beginTime))
-                                Text(DateServer.printTime(inputTime: schedules[r].endTime))
-                                Text("\(schedules[r].scoreGained)/\(schedules[r].score)")
-                            }
-                            // MARK: Record button
-                            Button("Record\(r)") {
-                                completionViewPresented.toggle()
-                            }.sheet(isPresented: $completionViewPresented, content: {
-                                ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,schedule: schedules[r])
-                            })
-                        }
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            } else {
-                Text("No Schedules")
+            .onTapGesture {
+                showDeduct.toggle()
             }
+            .animation(.default)
             
+            ScheduleListView()
+
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
                 AddScheduleView(addScheduleViewPresented: $addViewPresented)
             })

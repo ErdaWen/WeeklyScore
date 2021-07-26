@@ -11,6 +11,7 @@ import CoreData
 class PropertiesModel: ObservableObject {
     @Published var totalScoreThisWeek:Int64 = 0
     @Published var gainedScoreThisWeek:Int64 = 0
+    @Published var deductScoreThisWeek:Int64 = 0
     init(){
         updateScores()
     }
@@ -26,12 +27,18 @@ class PropertiesModel: ObservableObject {
             if schedules.count>0{
                 var tempScore:Int64 = 0
                 var tempGainedScore:Int64 = 0
+                var tempDeductScore: Int64 = 0
                 for r in 0..<schedules.count {
                     tempScore += schedules[r].score
                     tempGainedScore += schedules[r].scoreGained
+                    // Calculate deducted socre, when status is not defualt, the score is deducted
+                    if !schedules[r].statusDefault{
+                        tempDeductScore += schedules[r].score - schedules[r].scoreGained
+                    }
                 }
                 totalScoreThisWeek = tempScore
                 gainedScoreThisWeek = tempGainedScore
+                deductScoreThisWeek =  tempDeductScore
             } else {
                 totalScoreThisWeek = 0
                 gainedScoreThisWeek = 0

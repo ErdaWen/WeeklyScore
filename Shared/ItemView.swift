@@ -38,7 +38,7 @@ struct ItemView: View {
             
             if items.count > 0{
                 ScrollView(){
-                    VStack{
+                    VStack(spacing:25){
                         ForEach(items) { item in
                             if item.hidden == false {
                                 Button {

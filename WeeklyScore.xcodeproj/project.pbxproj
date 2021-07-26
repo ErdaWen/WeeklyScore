@@ -31,6 +31,8 @@
 		008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
+		009C422326AF3C2D00A783F0 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleListView.swift */; };
+		009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleListView.swift */; };
 		00A5FE5B26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
 		00A5FE5C26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
 		00A5FE5D26ACC30A002F38B1 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */; };
@@ -76,12 +78,13 @@
 		008DC8F926AE7129009AB91C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		008DC8FC26AE814F009AB91C /* ItemTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTileView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
+		009C422226AF3C2D00A783F0 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
 		00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesModel.swift; sourceTree = "<group>"; };
 		00AE2E3126A949A000F77898 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleView.swift; sourceTree = "<group>"; };
-		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCompletionView.swift; sourceTree = "<group>"; };
+		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
+		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1382692B378005A4DAB /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
@@ -126,6 +129,55 @@
 			path = Servers;
 			sourceTree = "<group>";
 		};
+		009C422526AF3C4A00A783F0 /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				0034918726A7EE02001B8DBB /* Persistence.swift */,
+				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
+				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
+			);
+			name = Top;
+			sourceTree = "<group>";
+		};
+		009C422826AF3CBA00A783F0 /* ItemView */ = {
+			isa = PBXGroup;
+			children = (
+				C88EC1382692B378005A4DAB /* ItemView.swift */,
+				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
+				009C422926AF3CEA00A783F0 /* Sheets */,
+			);
+			name = ItemView;
+			sourceTree = "<group>";
+		};
+		009C422926AF3CEA00A783F0 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				C88EC13B2692BB27005A4DAB /* AddItemView.swift */,
+				003A248A269BFD7800BDB239 /* ChangeItemView.swift */,
+			);
+			name = Sheets;
+			sourceTree = "<group>";
+		};
+		009C422A26AF3D0D00A783F0 /* ScheduleView */ = {
+			isa = PBXGroup;
+			children = (
+				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
+				009C422226AF3C2D00A783F0 /* ScheduleListView.swift */,
+				009C422B26AF3D3800A783F0 /* Sheets */,
+			);
+			name = ScheduleView;
+			sourceTree = "<group>";
+		};
+		009C422B26AF3D3800A783F0 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				00C72FA526963CC00028EF5C /* AddScheduleView.swift */,
+				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
+				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
+			);
+			name = Sheets;
+			sourceTree = "<group>";
+		};
 		C8BCDFF626918075006E7D7E = {
 			isa = PBXGroup;
 			children = (
@@ -143,20 +195,12 @@
 		C8BCDFFB26918075006E7D7E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0034918726A7EE02001B8DBB /* Persistence.swift */,
-				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
-				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
-				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
-				00C72FA526963CC00028EF5C /* AddScheduleView.swift */,
-				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
-				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
-				C88EC1382692B378005A4DAB /* ItemView.swift */,
-				C88EC13B2692BB27005A4DAB /* AddItemView.swift */,
-				003A248A269BFD7800BDB239 /* ChangeItemView.swift */,
+				009C422526AF3C4A00A783F0 /* Top */,
+				009C422A26AF3D0D00A783F0 /* ScheduleView */,
+				009C422826AF3CBA00A783F0 /* ItemView */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 				009B248D26A239BE0087467A /* EmojiTextField.swift */,
 				008DC8F926AE7129009AB91C /* SettingView.swift */,
-				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -339,6 +383,7 @@
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
+				009C422326AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
 				008DC8F726AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */,
 				C88EC1392692B378005A4DAB /* ItemView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
@@ -370,6 +415,7 @@
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
+				009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
 				008DC8F826AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */,
 				C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
