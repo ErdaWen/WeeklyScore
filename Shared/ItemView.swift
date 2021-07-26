@@ -17,6 +17,7 @@ struct ItemView: View {
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
+    @State var changeId = 0
     
     var body: some View {
         VStack(spacing:30){
@@ -37,56 +38,26 @@ struct ItemView: View {
             
             if items.count > 0{
                 ScrollView(){
-                    LazyVStack(spacing:20){
+                    VStack(spacing:20){
                         ForEach(0..<items.count) { r in
                             if items[r].hidden == false {
                                 Button {
+                                    changeId = r
                                     changeViewPresented = true
                                 } label: {
                                     ItemTileView(item: items[r])
                                 }
-                                .sheet(isPresented: $changeViewPresented, content: {
-                                    //ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
-                                    Text("\(r)")
-                                })
                             }
                         }
-                        
-//                        ForEach(items) { item in
-//                            if item.hidden == false {
-//                                Button {
-//                                    changeViewPresented = true
-//                                } label: {
-//                                    ItemTileView(item: item)
-//                                }
-//                                .sheet(isPresented: $changeViewPresented, content: {
-//                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:item)
-//                                })
-//                                //.sheet(isPresented: $changeViewPresented, content: {
-//                                //    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:item)
-//                                //})
-//                            }
-//                        }
                         Spacer()
-                        
-                        //                        HStack{
-                        //                            Rectangle().frame(width: 40, height: 40).foregroundColor(Color(items[r].tags.colorName)).cornerRadius(8.0)
-                        //                            Button(items[r].titleIcon + items[r].title) {
-                        //                                changeViewPresented = true
-                        //                            }.sheet(isPresented: $changeViewPresented, content: {
-                        //                                ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
-                        //                            })
-                        //                            if items[r].durationBased {
-                        //                                Text("Total \(items[r].minutesTotal) minutes")
-                        //                            } else {
-                        //                                Text("\(items[r].checkedTotal) times hited")
-                        //                            }
-                        //                            Text(String(items[r].scoreTotal))
-                        //                        }
                     }
+                    .background(EmptyView()
+                                    .sheet(isPresented: $changeViewPresented, content: {
+                                        ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
+                                    })
+                    )
+                    
                 }
-                
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
         }
         .padding(.init(top: 10, leading: 50, bottom: 10, trailing: 50))
