@@ -75,7 +75,7 @@ struct AddItemView: View {
             }.padding(25)
             
             ScrollView{
-                VStack(spacing:25){
+                VStack(spacing:22){
                     HStack(spacing:10){
                         
                         // MARK:TitleIcon
@@ -132,6 +132,7 @@ struct AddItemView: View {
                                 .foregroundColor(Color(tags[tagid].colorName)).opacity(0.3)
                                 .frame(width: 150, height: 30)
                                 .padding(.leading, 5)
+                                .padding(.trailing, 5)
                             if inputDurationBased {Spacer()}
                         }.animation(.default)
                         HStack(){
@@ -154,7 +155,7 @@ struct AddItemView: View {
                                     .frame(width: 150, alignment: .center)
                             })
                         }
-                    }.frame(width: 300, height: 40)
+                    }.frame(width: 300, height: 40,alignment: .center)
                     
                     
                     HStack(spacing:10){
@@ -214,20 +215,26 @@ struct AddItemView: View {
                     }.animation(.default)
                     
                     //MARK: Tags
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 8.0)
-                            .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                        Picker("",selection:$tagid){
-                            ForEach(0...tags.count-1, id:\.self) { r in
-                                HStack(spacing:10.0){
-                                    Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
-                                    Text(tags[r].name)
-                                        .font(.system(size: 20))
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("text_black"))
-                                }.tag(r)
+                    VStack(alignment:.leading, spacing:7.0){
+                        Text("Choose a tag")
+                            .font(.system(size: 15))
+                            .foregroundColor(Color("text_black"))
+                            .fontWeight(.light)
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 8.0)
+                                .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
+                            Picker("",selection:$tagid){
+                                ForEach(0...tags.count-1, id:\.self) { r in
+                                    HStack(spacing:10.0){
+                                        Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
+                                        Text(tags[r].name)
+                                            .font(.system(size: 20))
+                                            .fontWeight(.light)
+                                            .foregroundColor(Color("text_black"))
+                                    }.tag(r)
+                                }
                             }
-                        }.frame(width: 50)
+                        }
                     }
                     Spacer()
                 }.padding(20.0)

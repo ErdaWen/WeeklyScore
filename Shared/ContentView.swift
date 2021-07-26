@@ -16,18 +16,17 @@ struct ContentView: View {
             // MARK: Schedule View
             ScheduleView()
                 .tabItem {
-                    VStack{
+                   
                         Image (systemName: "calendar")
-                        Text ("Schedule")
-                    }
+
+                    
                 }.tag(1)
             // MARK: Habit View
             ItemView()
                 .tabItem {
-                    VStack{
+                    
                         Image (systemName: "star")
-                        Text ("Habits")
-                    }
+                    
                 }.tag(2)
         }
     }
