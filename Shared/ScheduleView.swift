@@ -45,7 +45,26 @@ struct ScheduleView: View {
                 showDeduct.toggle()
             }
             .animation(.default)
-            
+            .padding(.bottom,3)
+            GeometryReader{ geo in
+                ZStack(alignment: .leading){
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color("text_black"),style:StrokeStyle(lineWidth: 1))
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(width: geo.frame(in: .global)
+                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
+                        )
+                        .foregroundColor(Color("text_green"))
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(width: geo.frame(in: .global)
+                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek)
+                        )
+                        .foregroundColor(Color("text_red"))
+                }
+            }
+            .frame(height:10)
+            .padding(.leading,80)
+            .padding(.trailing,80)
             ScheduleListView()
 
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
