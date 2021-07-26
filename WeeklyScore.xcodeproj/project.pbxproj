@@ -27,6 +27,8 @@
 		008DC8F826AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */; };
 		008DC8FA26AE7129009AB91C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F926AE7129009AB91C /* SettingView.swift */; };
 		008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F926AE7129009AB91C /* SettingView.swift */; };
+		008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
+		008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		00A5FE5B26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */; };
@@ -72,6 +74,7 @@
 		008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
 		008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		008DC8F926AE7129009AB91C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		008DC8FC26AE814F009AB91C /* ItemTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTileView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		00A5FE5926ACC30A002F38B1 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00A5FE5A26ACC30A002F38B1 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 				009B248D26A239BE0087467A /* EmojiTextField.swift */,
 				008DC8F926AE7129009AB91C /* SettingView.swift */,
+				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -328,6 +332,7 @@
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918826A7EE02001B8DBB /* Persistence.swift in Sources */,
 				00A5FE5B26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */,
+				008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
@@ -358,6 +363,7 @@
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
 				00A5FE5C26ACC30A002F38B1 /* Item+CoreDataClass.swift in Sources */,
+				008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,

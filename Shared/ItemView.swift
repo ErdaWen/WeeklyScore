@@ -19,7 +19,7 @@ struct ItemView: View {
     @State var changeViewPresented = false
     
     var body: some View {
-        VStack{
+        VStack(spacing:30){
             Button {
                 addViewPresented.toggle()
             } label: {
@@ -28,38 +28,68 @@ struct ItemView: View {
                     .scaledToFit()
                     .padding(.top, 30)
                     .foregroundColor(Color("text_black"))
-                    .frame(width: 60, height: 60)
-
+                    .frame(width: 50, height: 50)
+                
             }
             .sheet(isPresented: $addViewPresented, content: {
                 AddItemView(addItemViewPresented: $addViewPresented)
             })
-
+            
             if items.count > 0{
-                TabView{
-                    ForEach(0..<items.count, id: \.self) { r in
-                        //if habitModel.habits[r].hidden == false {
-                            HStack{
-                                Rectangle().frame(width: 40, height: 40).foregroundColor(Color(items[r].tags.colorName)).cornerRadius(8.0)
-                                Button(items[r].titleIcon + items[r].title) {
+                ScrollView(){
+                    LazyVStack(spacing:20){
+                        ForEach(0..<items.count) { r in
+                            if items[r].hidden == false {
+                                Button {
                                     changeViewPresented = true
-                                }.sheet(isPresented: $changeViewPresented, content: {
-                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
-                                })
-                                if items[r].durationBased {
-                                    Text("Total \(items[r].minutesTotal) minutes")
-                                } else {
-                                    Text("\(items[r].checkedTotal) times hited")
+                                } label: {
+                                    ItemTileView(item: items[r])
                                 }
-                                Text(String(items[r].scoreTotal))
+                                .sheet(isPresented: $changeViewPresented, content: {
+                                    //ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
+                                    Text("\(r)")
+                                })
                             }
-                        //}
+                        }
+                        
+//                        ForEach(items) { item in
+//                            if item.hidden == false {
+//                                Button {
+//                                    changeViewPresented = true
+//                                } label: {
+//                                    ItemTileView(item: item)
+//                                }
+//                                .sheet(isPresented: $changeViewPresented, content: {
+//                                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:item)
+//                                })
+//                                //.sheet(isPresented: $changeViewPresented, content: {
+//                                //    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:item)
+//                                //})
+//                            }
+//                        }
+                        Spacer()
+                        
+                        //                        HStack{
+                        //                            Rectangle().frame(width: 40, height: 40).foregroundColor(Color(items[r].tags.colorName)).cornerRadius(8.0)
+                        //                            Button(items[r].titleIcon + items[r].title) {
+                        //                                changeViewPresented = true
+                        //                            }.sheet(isPresented: $changeViewPresented, content: {
+                        //                                ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[r])
+                        //                            })
+                        //                            if items[r].durationBased {
+                        //                                Text("Total \(items[r].minutesTotal) minutes")
+                        //                            } else {
+                        //                                Text("\(items[r].checkedTotal) times hited")
+                        //                            }
+                        //                            Text(String(items[r].scoreTotal))
+                        //                        }
                     }
                 }
+                
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
         }
-        .padding()
+        .padding(.init(top: 10, leading: 50, bottom: 10, trailing: 50))
     }
 }
 

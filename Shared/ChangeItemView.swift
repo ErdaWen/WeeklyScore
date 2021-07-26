@@ -116,6 +116,7 @@ struct ChangeItemView: View {
                     
                     
                     // MARK:Habit Type: Duration/time-based (Segmented picker)
+                    // MARK: warning to be added
                     ZStack(){
                         RoundedRectangle(cornerRadius: 8)
                             .foregroundColor(Color("background_grey"))
@@ -230,6 +231,7 @@ struct ChangeItemView: View {
                         }
                     }
                     Button("Archive Habit...") {
+                        // MARK: warning to be added
                         changeItemViewPresented = false
                         item.hidden = true
                     }
@@ -237,6 +239,7 @@ struct ChangeItemView: View {
                     .font(.system(size: 20))
                     
                     Button("Delete Habit...") {
+                        // MARK: warning to be added
                         changeItemViewPresented = false
                         viewContext.delete(item)
                     }
@@ -244,7 +247,7 @@ struct ChangeItemView: View {
                     .font(.system(size: 20))
                     
                     Spacer()
-                }.padding(20.0)
+                }.padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
             }
         }
         .onAppear(){

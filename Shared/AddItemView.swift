@@ -235,7 +235,7 @@ struct AddItemView: View {
                         }
                     }
                     Spacer()
-                }.padding(20.0)
+                }.padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
             }
         }
         //}
