@@ -35,15 +35,48 @@ class Initializer: ObservableObject{
     }
     
     func buildData(){
-        let tag_red = Tag(context: managedObjectContext)
-        tag_red.id = UUID()
-        tag_red.name = "Career"
-        tag_red.colorName = "tag_color_red"
+        
+        let tag_magenta = Tag(context: managedObjectContext)
+        tag_magenta.id = UUID()
+        tag_magenta.name = "Magenta"
+        tag_magenta.colorName = "tag_color_magenta"
+        tag_magenta.lastUse = Date()
+        
+        let tag_cyan = Tag(context: managedObjectContext)
+        tag_cyan.id = UUID()
+        tag_cyan.name = "Cyan"
+        tag_cyan.colorName = "tag_color_cyan"
+        tag_cyan.lastUse = Date()
+        
+        let tag_green = Tag(context: managedObjectContext)
+        tag_green.id = UUID()
+        tag_green.name = "Green"
+        tag_green.colorName = "tag_color_green"
+        tag_green.lastUse = Date()
+        
+        let tag_yellow = Tag(context: managedObjectContext)
+        tag_yellow.id = UUID()
+        tag_yellow.name = "Yellow"
+        tag_yellow.colorName = "tag_color_yellow"
+        tag_yellow.lastUse = Date()
+        
+        let tag_orange = Tag(context: managedObjectContext)
+        tag_orange.id = UUID()
+        tag_orange.name = "Orange"
+        tag_orange.colorName = "tag_color_orange"
+        tag_orange.lastUse = Date()
         
         let tag_blue = Tag(context: managedObjectContext)
         tag_blue.id = UUID()
         tag_blue.name = "Health"
         tag_blue.colorName = "tag_color_blue"
+        tag_blue.lastUse = Date()
+        
+        let tag_red = Tag(context: managedObjectContext)
+        tag_red.id = UUID()
+        tag_red.name = "Career"
+        tag_red.colorName = "tag_color_red"
+        tag_red.lastUse = Date()
         
         let item_study = Item(context: managedObjectContext)
         item_study.id = UUID()

@@ -12,7 +12,7 @@ struct AddItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [],
+        sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
         animation: .default)
     private var tags: FetchedResults<Tag>
     
@@ -27,9 +27,8 @@ struct AddItemView: View {
     @Binding var addItemViewPresented:Bool
     
     var body: some View {
-        //NavigationView(){
+        //MARK: Navigation Bar
         VStack{
-            //MARK: Navigation Bar
             HStack{
                 Button(action:{ addItemViewPresented = false}
                        , label: {
@@ -39,7 +38,6 @@ struct AddItemView: View {
                        })
                 Spacer()
                 Text("New Habit")
-                    .fontWeight(.bold)
                     .font(.system(size: 20))
 
                 Spacer()
@@ -59,6 +57,7 @@ struct AddItemView: View {
                     newItem.scoreTotal = 0
                     newItem.lastUse = Date()
                     newItem.tags = tags[tagid]
+                    tags[tagid].lastUse = Date()
                     do{
                         try viewContext.save()
                         print("saved")
@@ -76,10 +75,11 @@ struct AddItemView: View {
             }.padding(25)
             
             ScrollView{
-                VStack(spacing:20){
+                VStack(spacing:25){
                     HStack(spacing:10){
+                        
                         // MARK:TitleIcon
-                        VStack(alignment: .leading, spacing: 7.0){
+                        VStack(alignment: .center, spacing: 8.0){
                             Text("Icon")
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("text_black"))
@@ -159,7 +159,7 @@ struct AddItemView: View {
                     
                     HStack(spacing:10){
                         // MARK: Default score
-                        VStack(alignment: .leading, spacing: 7.0){
+                        VStack(alignment: .leading, spacing: 8.0){
                             Text("Default score")
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("text_black"))

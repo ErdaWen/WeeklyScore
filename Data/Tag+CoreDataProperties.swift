@@ -2,7 +2,7 @@
 //  Tag+CoreDataProperties.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 7/24/21.
+//  Created by Erda Wen on 7/25/21.
 //
 //
 
@@ -16,9 +16,10 @@ extension Tag {
         return NSFetchRequest<Tag>(entityName: "Tag")
     }
 
-    @NSManaged public var name: String
     @NSManaged public var colorName: String
     @NSManaged public var id: UUID?
+    @NSManaged public var name: String
+    @NSManaged public var lastUse: Date
     @NSManaged public var items: NSSet
 
 }
