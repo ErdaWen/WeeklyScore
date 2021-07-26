@@ -21,8 +21,17 @@ struct ScheduleView: View {
         animation: .default)
     private var schedules: FetchedResults<Schedule>
     
+    @EnvironmentObject var propertiesModel:PropertiesModel
+
+    
     var body: some View {
         VStack{
+            HStack(spacing:20){
+                Text("Statistic")
+                Text("\(propertiesModel.gainedScoreThisWeek)/\(propertiesModel.totalScoreThisWeek)")
+            }.onAppear(){
+                propertiesModel.updateScores()
+            }
             if schedules.count > 0 {
                 TabView{
                     // , id:\.self

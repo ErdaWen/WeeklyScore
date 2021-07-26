@@ -11,22 +11,30 @@ struct ItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [],
+        sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
         animation: .default)
     private var items: FetchedResults<Item>
-    @EnvironmentObject var propertiesModel:PropertiesModel
     
     @State var addViewPresented = false
     @State var changeViewPresented = false
     
     var body: some View {
         VStack{
-            HStack(spacing:20){
-                Text("Statistic")
-                Text("\(propertiesModel.gainedScoreThisWeek)/\(propertiesModel.totalScoreThisWeek)")
-            }.onAppear(){
-                propertiesModel.updateScores()
+            Button {
+                addViewPresented.toggle()
+            } label: {
+                Image(systemName: "plus.square")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.top, 30)
+                    .foregroundColor(Color("text_black"))
+                    .frame(width: 60, height: 60)
+
             }
+            .sheet(isPresented: $addViewPresented, content: {
+                AddItemView(addItemViewPresented: $addViewPresented)
+            })
+
             if items.count > 0{
                 TabView{
                     ForEach(0..<items.count, id: \.self) { r in
@@ -50,9 +58,6 @@ struct ItemView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
-            Button("Add Habit") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
-                AddItemView(addItemViewPresented: $addViewPresented)
-            })
         }
         .padding()
     }

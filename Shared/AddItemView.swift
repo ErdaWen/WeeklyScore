@@ -42,8 +42,6 @@ struct AddItemView: View {
 
                 Spacer()
                 Button(action:{
-                    // Check item name
-                    //......
                     let newItem = Item(context: viewContext)
                     newItem.id = UUID()
                     newItem.hidden = false
