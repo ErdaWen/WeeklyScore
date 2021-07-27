@@ -63,10 +63,6 @@
 		C8BCE01226918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
 		C8BCE01326918079006E7D7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
 		C8BCE01426918079006E7D7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
-		C8BCE02926926A25006E7D7E /* habitsList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE02826926A25006E7D7E /* habitsList.json */; };
-		C8BCE02A26926A25006E7D7E /* habitsList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE02826926A25006E7D7E /* habitsList.json */; };
-		C8BCE03226927060006E7D7E /* entriesList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entriesList.json */; };
-		C8BCE03326927060006E7D7E /* entriesList.json in Resources */ = {isa = PBXBuildFile; fileRef = C8BCE03126927060006E7D7E /* entriesList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,8 +99,6 @@
 		C8BCE00B26918079006E7D7E /* WeeklyScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8BCE00D26918079006E7D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8BCE00E26918079006E7D7E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		C8BCE02826926A25006E7D7E /* habitsList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = habitsList.json; sourceTree = "<group>"; };
-		C8BCE03126927060006E7D7E /* entriesList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = entriesList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,8 +257,6 @@
 				008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */,
 				00A4FFE426B0B36D00C8DC05 /* AppAttributes+CoreDataClass.swift */,
 				00A4FFE526B0B36D00C8DC05 /* AppAttributes+CoreDataProperties.swift */,
-				C8BCE02826926A25006E7D7E /* habitsList.json */,
-				C8BCE03126927060006E7D7E /* entriesList.json */,
 				0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */,
 			);
 			path = Data;
@@ -348,8 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8BCE02926926A25006E7D7E /* habitsList.json in Resources */,
-				C8BCE03226927060006E7D7E /* entriesList.json in Resources */,
 				C8BCE01326918079006E7D7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,8 +348,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8BCE02A26926A25006E7D7E /* habitsList.json in Resources */,
-				C8BCE03326927060006E7D7E /* entriesList.json in Resources */,
 				C8BCE01426918079006E7D7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
