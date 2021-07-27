@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChangeCompletionView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var propertiesModel:PropertiesModel
+
     
     @Binding var changeCompletionViewPresented:Bool
     
@@ -195,6 +197,7 @@ struct ChangeCompletionView: View {
                     do{
                         try viewContext.save()
                         print("saved")
+                        propertiesModel.updateScores()
                         changeCompletionViewPresented = false
                     } catch {
                         print("Cannot save item")

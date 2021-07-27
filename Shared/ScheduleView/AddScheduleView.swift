@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var propertiesModel:PropertiesModel
     
     @FetchRequest(
         sortDescriptors: [],
@@ -101,6 +102,7 @@ struct AddScheduleView: View {
                         do{
                             try viewContext.save()
                             print("Saved")
+                            propertiesModel.updateScores()
                             addScheduleViewPresented = false
                         } catch {
                             print("Cannot generate new item")

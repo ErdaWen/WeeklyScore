@@ -13,8 +13,9 @@ struct ScheduleView: View {
     @State var addViewPresented = false
     @State var showDeduct = false
     @State var weekFromNow = 0
-    @State var dayNumbers:[Int]
-    @State var weekdayNumbers:[Int]
+    @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
+    @State var weekdayNumbers:[String] = ["M", "T", "W", "T", "F", "S", "S"]
+    @State var startDay = ""
     @State var dayFromDay1 = 0
     
     @Environment(\.managedObjectContext) private var viewContext    
@@ -52,7 +53,7 @@ struct ScheduleView: View {
             .animation(.default)
             .padding(.bottom,2)
             
-            //MARK: Bar
+            //MARK: Score bar
             GeometryReader{ geo in
                 ZStack(alignment: .leading){
                     RoundedRectangle(cornerRadius: 5)
@@ -81,10 +82,14 @@ struct ScheduleView: View {
                 // Background tile
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(Color("background_grey"))
+                
                 HStack{
                     //MARK: Week minus
                     Button {
                         weekFromNow -= 1
+                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
+                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
+                        startDay = DateServer.generateStartDay(offset:weekFromNow)
                     } label: {
                         Image(systemName: "arrowtriangle.backward.square")
                             .resizable()
@@ -95,21 +100,28 @@ struct ScheduleView: View {
                     .padding(.leading,10)
                     Spacer()
                     
-                    //MARK: Week plus
+                    //MARK: Week restore
                     Button {
                         weekFromNow = 0
+                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
+                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
+                        startDay = DateServer.generateStartDay(offset:weekFromNow)
                         
                     } label: {
-                        Text(weekFromNow == 0 ? "This week" : "Week \(weekFromNow)" )
+                        Text(weekFromNow == 0 ? "This week" : "Week of " + startDay )
                             .foregroundColor(Color("text_black"))
                             .font(.system(size: 16))
                             .fontWeight(.light)
                     }
                     
+                    //MARK: Week plus
+
                     Spacer()
                     Button {
                         weekFromNow += 1
-                        
+                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
+                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
+                        startDay = DateServer.generateStartDay(offset:weekFromNow)
                     } label: {
                         Image(systemName: "arrowtriangle.right.square")
                             .resizable()
@@ -124,18 +136,21 @@ struct ScheduleView: View {
             .padding(.leading, 20)
             .padding(.trailing, 20)
             .padding(.top,10)
+            .animation(.default)
             
             //MARK: Day picker
             
             ZStack(alignment:.leading){
                 GeometryReader { geo in
-                    //Background tile
+                    //MARK: Selection tile
                     Rectangle()
                         .frame(width:geo.frame(in: .global)
                                 .width / 8)
                         .foregroundColor(Color("background_grey"))
                         .padding(.leading, geo.frame(in: .global)
                                     .width / 8 * CGFloat(dayFromDay1 + 1))
+                        .animation(.default)
+
                     
                     //MARK: List icon
                     HStack(spacing:0){
@@ -166,16 +181,17 @@ struct ScheduleView: View {
                             VStack(alignment: .center, spacing: 2){
                                 if (dayFromDay1 != -1)
                                 {
-                                    Text("\(5 + r)")
+                                    Text("\(dayNumbers[r])")
                                         .font(.system(size: 18))
                                         .foregroundColor(Color("text_black"))
                                         .fontWeight(.light)
                                 }
-                                Text("Day")
+                                Text("\(weekdayNumbers[r])")
                                     .font(.system(size: 12))
                                     .foregroundColor(Color("text_black"))
                                     .fontWeight(.light)
                             }
+                            .animation(.easeInOut)
                             .frame(width: geo.frame(in: .global)
                                     .width / 8 )
                             .padding(.top, 3)
@@ -190,12 +206,16 @@ struct ScheduleView: View {
                         }
                     }
                 }
+                .onAppear(){
+                    dayNumbers = DateServer.generateDays(offset:weekFromNow)
+                    weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
+                    startDay = DateServer.generateStartDay(offset:weekFromNow)
+                }
             }
-            .frame(height: (dayFromDay1 == -1) ? 29 : 44)
+            .frame(height: (dayFromDay1 == -1) ? 25 : 45)
             .padding(.leading, 40)
             .padding(.trailing, 40)
             .padding(.top,0)
-            .animation(.default)
             
             ScheduleListView()
             

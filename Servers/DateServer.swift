@@ -40,4 +40,41 @@ class DateServer {
         }
         return startOfWeek
     }
+    
+    static func generateDays(offset:Int) -> [Int]{
+        var days: [Int] = []
+        var date = startOfThisWeek()
+        var temdate = Date()
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
+        for r in 0...6 {
+            temdate = Calendar.current.date(byAdding: .day, value: r, to: date)!
+            let components = Calendar.current.dateComponents([.day], from: temdate)
+            days.append(components.day ?? 0)
+        }
+        return days
+    }
+    
+    static func generateWeekdays(offset:Int) -> [String]{
+        var weekdays: [String] = []
+        var date = startOfThisWeek()
+        var temdate = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
+        for r in 0...6 {
+            temdate = Calendar.current.date(byAdding: .day, value: r, to: date)!
+            weekdays.append(dateFormatter.string(from: temdate))
+        }
+        return weekdays
+    }
+    
+    static func generateStartDay (offset:Int) -> String {
+        var date = startOfThisWeek()
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd"
+        return dateFormatter.string(from: date)
+    }
+    
 }
