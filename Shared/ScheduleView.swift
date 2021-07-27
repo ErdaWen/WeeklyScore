@@ -17,7 +17,7 @@ struct ScheduleView: View {
     
     @Environment(\.managedObjectContext) private var viewContext    
     @EnvironmentObject var propertiesModel:PropertiesModel
-
+    
     
     var body: some View {
         VStack(spacing:0){
@@ -49,6 +49,7 @@ struct ScheduleView: View {
             }
             .animation(.default)
             .padding(.bottom,2)
+            
             //MARK: Bar
             GeometryReader{ geo in
                 ZStack(alignment: .leading){
@@ -70,10 +71,128 @@ struct ScheduleView: View {
             .padding(.leading,110)
             .padding(.trailing,110)
             .padding(.bottom,1)
-            ScheduleListView()
+            //MARK: WeekTitle
+            ZStack{
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(Color("background_grey"))
+                HStack{
+                    Button {
+                        weekFromNow -= 1
+                    } label: {
+                        Image(systemName: "arrowtriangle.backward.square")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(Color("text_black"))
+                    }
+                    .frame(width: 20, height: 20)
+                    .padding(.leading,10)
+                    Spacer()
+                    
+                    Button {
+                        weekFromNow = 0
+                        
+                    } label: {
+                        Text(weekFromNow == 0 ? "This week" : "Week \(weekFromNow)" )
+                            .foregroundColor(Color("text_black"))
+                            .font(.system(size: 16))
+                            .fontWeight(.light)
+                    }
+                    
+                    Spacer()
+                    Button {
+                        weekFromNow += 1
+                        
+                    } label: {
+                        Image(systemName: "arrowtriangle.right.square")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(Color("text_black"))
+                    }
+                    .frame(width: 20, height: 20)
+                    .padding(.trailing,10)
+                }
+            }
+            .frame(height:38)
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
+            .padding(.top,10)
+            
+            //MARK: Day picker
+            
+            ZStack(alignment:.leading){
+                GeometryReader { geo in
+                    Rectangle()
+                        .frame(width:geo.frame(in: .global)
+                                .width / 8)
+                        .foregroundColor(Color("background_grey"))
+                        .padding(.leading, geo.frame(in: .global)
+                                    .width / 8 * CGFloat(dayFromDay1 + 1))
+                    HStack(spacing:0){
+                        VStack(alignment: .center, spacing: 2){
+                            Image(systemName: "list.dash")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.top,6)
+                                .frame(width: geo.frame(in: .global)
+                                        .width / 8 - 20 )
+                            if (dayFromDay1 != -1)
+                            {
+                                Text("List")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("text_black"))
+                                    .fontWeight(.light)
+                                    .padding(.top, 6)
+                            }
+                        }
+                        .frame(width: geo.frame(in: .global).width / 8 )
+                        .onTapGesture {
+                            dayFromDay1 = -1
+                        }
+
+                        
+                        ForEach(0...6, id:\.self){ r in
+                            
+                            VStack(alignment: .center, spacing: 2){
+                                if (dayFromDay1 != -1)
+                                {
+                                    Text("\(5 + r)")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(Color("text_black"))
+                                        .fontWeight(.light)
+                                }
+                                Text("Day")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("text_black"))
+                                    .fontWeight(.light)
+                            }
+                            .frame(width: geo.frame(in: .global)
+                                    .width / 8 )
+                            .padding(.top, 3)
+                            .padding(.leading, 0)
+                            .padding(.leading, 0)
+                            .padding(.trailing, 0)
+
+                            .onTapGesture {
+                                dayFromDay1 = r
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            .frame(height: (dayFromDay1 == -1) ? 29 : 44)
+            .padding(.leading, 40)
+            .padding(.trailing, 40)
+            .padding(.top,0)
+            .animation(.default)
+            
+            
+
+            
+            //ScheduleListView()
             
             Spacer()
-
+            
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
                 AddScheduleView(addScheduleViewPresented: $addViewPresented)
             })

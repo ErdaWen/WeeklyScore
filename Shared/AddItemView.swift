@@ -120,7 +120,7 @@ struct AddItemView: View {
                     }.animation(.default)
                     
                     
-                    // MARK:Habit Type: Duration/time-based (Segmented picker)
+                    // MARK:Habit Type: Duration/time-based picker
                     ZStack(){
                         RoundedRectangle(cornerRadius: 8)
                             .foregroundColor(Color("background_grey"))
