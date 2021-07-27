@@ -15,7 +15,7 @@ struct ItemTileView: View {
     var body: some View {
         ZStack{
             //MARK: Outline in the back
-            RoundedRectangle(cornerRadius: 9)
+            RoundedRectangle(cornerRadius: 11)
                 .stroke(Color(item.tags.colorName),style:StrokeStyle(lineWidth: 1))
                 .padding(1)
             //MARK: Inside outline
@@ -25,7 +25,7 @@ struct ItemTileView: View {
                     //MARK: Icon with Rectangular
                     ZStack{
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(Color(item.tags.colorName).opacity(0.3))
+                            .foregroundColor(Color(item.tags.colorName).opacity(0.2))
                         Text(item.titleIcon)
                             .font(.system(size: 15))
                     }.frame(width: 40, height: 58)
@@ -34,7 +34,7 @@ struct ItemTileView: View {
                     //MARK: Icon with Circle
                     ZStack{
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(Color(item.tags.colorName).opacity(0.3))
+                            .foregroundColor(Color(item.tags.colorName).opacity(0.2))
                         Text(item.titleIcon)
                             .font(.system(size: 15))
                     }.frame(width: 40, height: 58)
@@ -45,7 +45,7 @@ struct ItemTileView: View {
                     //MARK: Title
                     ZStack{
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(Color(item.tags.colorName).opacity(0.3))
+                            .foregroundColor(Color(item.tags.colorName).opacity(0.2))
                         Text(item.title)
                             .font(.system(size: 15))
                             .fontWeight(.light)

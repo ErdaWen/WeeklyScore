@@ -18,6 +18,7 @@ struct ItemView: View {
     @State var addViewPresented = false
     @State var changeViewPresented = false
     @State var changeId = 0
+    @State var showArchive = false
     
     var body: some View {
         VStack(spacing:30){
@@ -35,12 +36,40 @@ struct ItemView: View {
             .sheet(isPresented: $addViewPresented, content: {
                 AddItemView(addItemViewPresented: $addViewPresented)
             })
-            
-            if items.count > 0{
-                ScrollView(){
-                    VStack(spacing:25){
+                        
+            ScrollView(){
+                VStack(spacing:20){
+                    // Habits
+                    ForEach(items) { item in
+                        if !item.hidden {
+                            Button {
+                                changeId = items.firstIndex(where: {$0.id == item.id}) ?? 0
+                                changeViewPresented = true
+                            } label: {
+                                ItemTileView(item: item)
+                            }
+                        }
+                    }
+                    //MARK: Show archive button
+                    Button {
+                        showArchive.toggle()
+                    } label: {
+                        if showArchive{
+                            Text("Hide archived habits...")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(.light)
+                        } else {
+                            Text("Show archived habits...")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(.light)
+                        }
+                    }.padding(.top,20)
+                    //MARK: Archived habits
+                    if showArchive{
                         ForEach(items) { item in
-                            if item.hidden == false {
+                            if item.hidden {
                                 Button {
                                     changeId = items.firstIndex(where: {$0.id == item.id}) ?? 0
                                     changeViewPresented = true
@@ -49,12 +78,12 @@ struct ItemView: View {
                                 }
                             }
                         }
-                        Spacer()
                     }
-                    .sheet(isPresented:$changeViewPresented, content: {
-                        ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
-                    })
+                    Spacer()
                 }
+                .sheet(isPresented:$changeViewPresented, content: {
+                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
+                })
             }
         }
         .padding(.init(top: 10, leading: 35, bottom: 10, trailing: 35))
