@@ -147,5 +147,10 @@ class Initializer: ObservableObject{
         schedule_getup.scoreGained = 0
         schedule_getup.reminder = false
         schedule_getup.reminderTime = 0
+        
+        let appAttributes = AppAttributes(context: managedObjectContext)
+        appAttributes.nightMode = true
+        appAttributes.weekStartDay = 0
+        
     }
 }

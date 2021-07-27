@@ -29,7 +29,7 @@ struct ScheduleView: View {
                         .foregroundColor(Color("text_red"))
                         .fontWeight(.light)
                 } else{
-                    Text("-\(propertiesModel.gainedScoreThisWeek)")
+                    Text("\(propertiesModel.gainedScoreThisWeek)")
                         .font(.system(size: 25))
                         .foregroundColor(Color("text_green"))
                         .fontWeight(.light)
@@ -62,7 +62,7 @@ struct ScheduleView: View {
                         .foregroundColor(Color("text_green").opacity(0.6))
                     RoundedRectangle(cornerRadius: 5)
                         .frame(width: geo.frame(in: .global)
-                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek)
+                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
                         )
                         .foregroundColor(Color("text_red"))
                 }
