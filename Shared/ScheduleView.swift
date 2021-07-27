@@ -13,6 +13,8 @@ struct ScheduleView: View {
     @State var addViewPresented = false
     @State var showDeduct = false
     @State var weekFromNow = 0
+    @State var dayNumbers:[Int]
+    @State var weekdayNumbers:[Int]
     @State var dayFromDay1 = 0
     
     @Environment(\.managedObjectContext) private var viewContext    
@@ -55,27 +57,32 @@ struct ScheduleView: View {
                 ZStack(alignment: .leading){
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color("text_black"),style:StrokeStyle(lineWidth: 1))
-                    RoundedRectangle(cornerRadius: 5)
-                        .frame(width: geo.frame(in: .global)
-                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
-                        )
-                        .foregroundColor(Color("text_green").opacity(0.6))
-                    RoundedRectangle(cornerRadius: 5)
-                        .frame(width: geo.frame(in: .global)
-                                .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
-                        )
-                        .foregroundColor(Color("text_red"))
+                    if propertiesModel.totalScoreThisWeek != 0 {
+                        RoundedRectangle(cornerRadius: 5)
+                            .frame(width: geo.frame(in: .global)
+                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
+                            )
+                            .foregroundColor(Color("text_green").opacity(0.6))
+                        RoundedRectangle(cornerRadius: 5)
+                            .frame(width: geo.frame(in: .global)
+                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
+                            )
+                            .foregroundColor(Color("text_red"))
+                    }
                 }
             }
             .frame(height:8)
             .padding(.leading,110)
             .padding(.trailing,110)
             .padding(.bottom,1)
+            
             //MARK: WeekTitle
             ZStack{
+                // Background tile
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(Color("background_grey"))
                 HStack{
+                    //MARK: Week minus
                     Button {
                         weekFromNow -= 1
                     } label: {
@@ -88,6 +95,7 @@ struct ScheduleView: View {
                     .padding(.leading,10)
                     Spacer()
                     
+                    //MARK: Week plus
                     Button {
                         weekFromNow = 0
                         
@@ -121,12 +129,15 @@ struct ScheduleView: View {
             
             ZStack(alignment:.leading){
                 GeometryReader { geo in
+                    //Background tile
                     Rectangle()
                         .frame(width:geo.frame(in: .global)
                                 .width / 8)
                         .foregroundColor(Color("background_grey"))
                         .padding(.leading, geo.frame(in: .global)
                                     .width / 8 * CGFloat(dayFromDay1 + 1))
+                    
+                    //MARK: List icon
                     HStack(spacing:0){
                         VStack(alignment: .center, spacing: 2){
                             Image(systemName: "list.dash")
@@ -149,7 +160,7 @@ struct ScheduleView: View {
                             dayFromDay1 = -1
                         }
 
-                        
+                        //MARK: Seven days
                         ForEach(0...6, id:\.self){ r in
                             
                             VStack(alignment: .center, spacing: 2){
@@ -186,10 +197,7 @@ struct ScheduleView: View {
             .padding(.top,0)
             .animation(.default)
             
-            
-
-            
-            //ScheduleListView()
+            ScheduleListView()
             
             Spacer()
             

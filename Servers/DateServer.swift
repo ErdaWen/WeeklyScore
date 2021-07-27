@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreData
+
 
 class DateServer {
     static func printTime(inputTime:Date) -> String {
@@ -15,11 +17,27 @@ class DateServer {
     }
     
     static func startOfThisWeek() -> Date {
+        var startDay:Int64 = 0
+        
+        let managedObjectContext = PersistenceController.shared.container.viewContext
+        let fetchRequest: NSFetchRequest<AppAttributes> = AppAttributes.fetchRequest()
+        do{
+            let attributes = try managedObjectContext.fetch(fetchRequest)
+            startDay = attributes[0].weekStartDay
+        } catch {
+            print("Cannot get week start day attribute")
+            print(error)
+        }
+
         let date = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents(
             Set<Calendar.Component>([.yearForWeekOfYear, .weekOfYear]), from: date)
-        let startOfWeek = calendar.date(from: components)!
+        let thisMonday = calendar.date(from: components)!
+        var startOfWeek = Calendar.current.date(byAdding: .day, value: Int(startDay), to: thisMonday)!
+        if startOfWeek > date {
+            startOfWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1 , to: startOfWeek)!
+        }
         return startOfWeek
     }
 }

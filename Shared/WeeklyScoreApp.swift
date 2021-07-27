@@ -15,8 +15,8 @@ struct WeeklyScoreApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(PropertiesModel())
                 .environmentObject(Initializer())
+                .environmentObject(PropertiesModel())
         }
     }
 }

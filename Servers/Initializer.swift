@@ -23,15 +23,29 @@ class Initializer: ObservableObject{
     }
     
     func preLoadData() {
+        buildAttributes()
+        do{
+            try managedObjectContext.save()
+            print ("Attributes Initialized")
+        } catch {
+            print(error)
+            print("Fail to initialize global attributes")
+        }
         buildData()
         do{
             try managedObjectContext.save()
             UserDefaults.standard.setValue(true, forKey: Constants.isDataPreloaded)
-            print ("Initialized Data")
+            print ("Data Initialized")
         } catch {
             print(error)
-            print("Fail to initialize")
+            print("Fail to initialize habits and schedules")
         }
+    }
+    
+    func buildAttributes(){
+        let appAttributes = AppAttributes(context: managedObjectContext)
+        appAttributes.nightMode = true
+        appAttributes.weekStartDay = 3
     }
     
     func buildData(){
@@ -147,10 +161,6 @@ class Initializer: ObservableObject{
         schedule_getup.scoreGained = 0
         schedule_getup.reminder = false
         schedule_getup.reminderTime = 0
-        
-        let appAttributes = AppAttributes(context: managedObjectContext)
-        appAttributes.nightMode = true
-        appAttributes.weekStartDay = 0
-        
+            
     }
 }
