@@ -55,6 +55,17 @@ struct ScheduleListView: View {
                 print(error)
             }
         }
+        .onChange(of: startDate) { _ in
+            let endDate = DateServer.addOneWeek(date: startDate)
+            let fetchRequest = Schedule.schedulefetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startDate as NSDate, endDate as NSDate)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
+            do {
+                schedules = try viewContext.fetch(fetchRequest)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 

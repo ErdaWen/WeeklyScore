@@ -17,6 +17,7 @@ struct ScheduleView: View {
     @State var weekdayNumbers:[String] = ["M", "T", "W", "T", "F", "S", "S"]
     @State var startDay = ""
     @State var dayFromDay1 = 0
+    @State var selectedDateStart = Date()
     
     @Environment(\.managedObjectContext) private var viewContext    
     @EnvironmentObject var propertiesModel:PropertiesModel
@@ -90,6 +91,7 @@ struct ScheduleView: View {
                         dayNumbers = DateServer.generateDays(offset:weekFromNow)
                         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
                         startDay = DateServer.generateStartDay(offset:weekFromNow)
+                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
                     } label: {
                         Image(systemName: "arrowtriangle.backward.square")
                             .resizable()
@@ -106,7 +108,7 @@ struct ScheduleView: View {
                         dayNumbers = DateServer.generateDays(offset:weekFromNow)
                         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
                         startDay = DateServer.generateStartDay(offset:weekFromNow)
-                        
+                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
                     } label: {
                         Text(weekFromNow == 0 ? "This week" : "Week of " + startDay )
                             .foregroundColor(Color("text_black"))
@@ -122,6 +124,7 @@ struct ScheduleView: View {
                         dayNumbers = DateServer.generateDays(offset:weekFromNow)
                         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
                         startDay = DateServer.generateStartDay(offset:weekFromNow)
+                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
                     } label: {
                         Image(systemName: "arrowtriangle.right.square")
                             .resizable()
@@ -173,6 +176,7 @@ struct ScheduleView: View {
                         .frame(width: geo.frame(in: .global).width / 8 )
                         .onTapGesture {
                             dayFromDay1 = -1
+                            selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
                         }
 
                         //MARK: Seven days
@@ -201,6 +205,7 @@ struct ScheduleView: View {
 
                             .onTapGesture {
                                 dayFromDay1 = r
+                                selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
                             }
                             
                         }
@@ -218,13 +223,10 @@ struct ScheduleView: View {
             .padding(.top,0)
             
             if dayFromDay1 == -1 {
-                ScheduleListView(startDate:DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1))
-
+                ScheduleListView(startDate:selectedDateStart)
             } else {
                 
             }
-            
-            
             
             Spacer()
             

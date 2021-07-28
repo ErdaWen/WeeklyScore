@@ -130,7 +130,8 @@ struct ChangeScheduleView: View {
             } else {
                 Text("Habit is archived")
             }
-        }.onAppear(){
+        }
+        .onAppear(){
             itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
             inputScore = schedule.score
             inputBeginTime = schedule.beginTime
@@ -138,6 +139,7 @@ struct ChangeScheduleView: View {
             inputReminder = schedule.reminder
             inputReminderTime = schedule.reminderTime
         }
+        
     }
 }
 
