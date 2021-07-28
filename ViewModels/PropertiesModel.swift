@@ -18,10 +18,10 @@ class PropertiesModel: ObservableObject {
     
     func updateScores(){
         let beginDate = DateServer.startOfThisWeek()
-        let endDate = beginDate + 604800
+        let endDate = DateServer.addOneWeek(date: beginDate)
         let managedObjectContext = PersistenceController.shared.container.viewContext
-        let fetchRequest: NSFetchRequest<Schedule> = Schedule.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (endTime < %@)", beginDate as NSDate, endDate as NSDate)
+        let fetchRequest = Schedule.schedulefetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", beginDate as NSDate, endDate as NSDate)
         do{
             let schedules = try managedObjectContext.fetch(fetchRequest)
             if schedules.count>0{

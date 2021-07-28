@@ -217,7 +217,14 @@ struct ScheduleView: View {
             .padding(.trailing, 40)
             .padding(.top,0)
             
-            ScheduleListView()
+            if dayFromDay1 == -1 {
+                ScheduleListView(startDate:DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1))
+
+            } else {
+                
+            }
+            
+            
             
             Spacer()
             

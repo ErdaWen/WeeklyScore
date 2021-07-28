@@ -12,7 +12,7 @@ import CoreData
 
 extension Schedule {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Schedule> {
+    @nonobjc public class func schedulefetchRequest() -> NSFetchRequest<Schedule> {
         return NSFetchRequest<Schedule>(entityName: "Schedule")
     }
 

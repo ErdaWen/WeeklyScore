@@ -77,4 +77,19 @@ class DateServer {
         return dateFormatter.string(from: date)
     }
     
+    static func genrateDateStemp (offset:Int, daysOfWeek: Int) -> Date {
+        var date = startOfThisWeek()
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
+        date = Calendar.current.date(byAdding: .day, value: daysOfWeek, to: date)!
+        return date
+    }
+    
+    static func addOneWeek (date:Date) -> Date {
+        return Calendar.current.date(byAdding: .weekOfYear,value: 1, to: date)!
+    }
+    
+    static func addOneDay (date:Date) -> Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: date)!
+    }
+    
 }

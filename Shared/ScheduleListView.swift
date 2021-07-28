@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct ScheduleListView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @State var startDate:Date
 
-    @FetchRequest(
-        sortDescriptors: [],
-        animation: .default)
-    private var schedules: FetchedResults<Schedule>
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @State var schedules = [Schedule]()
 
     @State var completionViewPresented = false
     @State var changeViewPresented = false
+    
     
     var body: some View {
         TabView{
@@ -42,6 +42,17 @@ struct ScheduleListView: View {
                         ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,schedule: schedules[r])
                     })
                 }
+            }
+        }
+        .onAppear(){
+            let endDate = DateServer.addOneWeek(date: startDate)
+            let fetchRequest = Schedule.schedulefetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startDate as NSDate, endDate as NSDate)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
+            do {
+                schedules = try viewContext.fetch(fetchRequest)
+            } catch {
+                print(error)
             }
         }
     }
