@@ -16,6 +16,12 @@ class DateServer {
         return (formatter.string(from: inputTime))
     }
     
+    static func printShortTime(inputTime:Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return (formatter.string(from: inputTime))
+    }
+    
     static func startOfThisWeek() -> Date {
         var startDay:Int64 = 0
         
@@ -69,6 +75,7 @@ class DateServer {
         return weekdays
     }
     
+    // Given the week offset, generate date String of the first day
     static func generateStartDay (offset:Int) -> String {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
@@ -77,10 +84,18 @@ class DateServer {
         return dateFormatter.string(from: date)
     }
     
+    // Given week and date offset, generate new date
     static func genrateDateStemp (offset:Int, daysOfWeek: Int) -> Date {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
         date = Calendar.current.date(byAdding: .day, value: daysOfWeek, to: date)!
+        return date
+    }
+    
+    // Given week offset, generate new date
+    static func genrateWeekStemp (offset:Int) -> Date {
+        var date = startOfThisWeek()
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
         return date
     }
     

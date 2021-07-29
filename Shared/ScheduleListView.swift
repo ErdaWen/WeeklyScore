@@ -13,9 +13,7 @@ struct ScheduleListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var schedules = [Schedule]()
-
-    @State var completionViewPresented = false
-    @State var changeViewPresented = false
+    @State var zoomin = true
     
     func initiateView() {
         schedules = []
@@ -39,31 +37,36 @@ struct ScheduleListView: View {
         VStack{
             Text(DateServer.printTime(inputTime: propertiesModel.startDate))
             if schedules.count != 0{
-                TabView{
+                VStack{
                     // , id:\.self
                     ForEach(0..<schedules.count,id: \.self){ r in
-                        VStack(){
-                            VStack{
-                                // MARK: Title, as well as the change schedule button
-                                Button(schedules[r].items.titleIcon + schedules[r].items.title){
-                                        changeViewPresented.toggle()
-                                    }.sheet(isPresented: $changeViewPresented, content: {
-                                        ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedules[r])
-                                    })
-                                
-                                Text(DateServer.printTime(inputTime: schedules[r].beginTime))
-                                Text(DateServer.printTime(inputTime: schedules[r].endTime))
-                                Text("\(schedules[r].scoreGained)/\(schedules[r].score)")
-                            }
-                            // MARK: Record button
-                            Button("Record\(r)") {
-                                completionViewPresented.toggle()
-                            }.sheet(isPresented: $completionViewPresented, content: {
-                                ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,schedule: schedules[r])
-                            })
-                        }
+                        
+                        ScheduleTileView(schedule: schedules[r])
+                            .frame(height: zoomin ? 45 : 25)
+                            
+//                        VStack(){
+//                            VStack{
+//                                // MARK: Title, as well as the change schedule button
+//                                Button(schedules[r].items.titleIcon + schedules[r].items.title){
+//                                        changeViewPresented.toggle()
+//                                    }.sheet(isPresented: $changeViewPresented, content: {
+//                                        ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedules[r])
+//                                    })
+//
+//                                Text(DateServer.printTime(inputTime: schedules[r].beginTime))
+//                                Text(DateServer.printTime(inputTime: schedules[r].endTime))
+//                                Text("\(schedules[r].scoreGained)/\(schedules[r].score)")
+//                            }
+//                            // MARK: Record button
+//                            Button("Record\(r)") {
+//                                completionViewPresented.toggle()
+//                            }.sheet(isPresented: $completionViewPresented, content: {
+//                                ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented,schedule: schedules[r])
+//                            })
+//                        }
                     }
                 }
+                .padding(.horizontal,20)
             }
         }
         .onAppear(){

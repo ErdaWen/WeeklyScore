@@ -13,13 +13,14 @@ class PropertiesModel: ObservableObject {
     @Published var gainedScoreThisWeek:Int64 = 0
     @Published var deductScoreThisWeek:Int64 = 0
     @Published var startDate = DateServer.startOfThisWeek()
+    @Published var startWeek = DateServer.startOfThisWeek()
     
     init(){
         updateScores()
     }
     
     func updateScores(){
-        let beginDate = startDate
+        let beginDate = startWeek
         let endDate = DateServer.addOneWeek(date: beginDate)
         let managedObjectContext = PersistenceController.shared.container.viewContext
         let fetchRequest = Schedule.schedulefetchRequest()
