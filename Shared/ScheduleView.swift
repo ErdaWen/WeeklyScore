@@ -14,7 +14,7 @@ struct ScheduleView: View {
     @State var showDeduct = false
     @State var weekFromNow = 0
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
-    @State var weekdayNumbers:[String] = ["M", "T", "W", "T", "F", "S", "S"]
+    @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
     @State var startDay = ""
     @State var dayFromDay1 = 0
     @State var selectedDateStart = Date()
@@ -28,6 +28,7 @@ struct ScheduleView: View {
         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
         startDay = DateServer.generateStartDay(offset:weekFromNow)
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+        propertiesModel.updateScores()
     }
     
     var body: some View {
@@ -193,7 +194,7 @@ struct ScheduleView: View {
                                     .foregroundColor(Color("text_black"))
                                     .fontWeight(.light)
                             }
-                            .animation(.easeInOut)
+                            .animation(.none)
                             .frame(width: geo.frame(in: .global)
                                     .width / 8 )
                             .padding(.top, 3)
@@ -215,8 +216,12 @@ struct ScheduleView: View {
             .padding(.trailing, 40)
             .padding(.top,0)
             
-            
-            ScheduleListView()
+            if  dayFromDay1 == -1 {
+                ScheduleListView()
+
+            } else {
+                
+            }
 
             
             Spacer()
