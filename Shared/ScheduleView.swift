@@ -23,6 +23,13 @@ struct ScheduleView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     
+    func updateDate() {
+        dayNumbers = DateServer.generateDays(offset:weekFromNow)
+        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
+        startDay = DateServer.generateStartDay(offset:weekFromNow)
+        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+    }
+    
     var body: some View {
         VStack(spacing:0){
             //MARK: Score
@@ -88,10 +95,7 @@ struct ScheduleView: View {
                     //MARK: Week minus
                     Button {
                         weekFromNow -= 1
-                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
-                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
-                        startDay = DateServer.generateStartDay(offset:weekFromNow)
-                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+                        updateDate()
                     } label: {
                         Image(systemName: "arrowtriangle.backward.square")
                             .resizable()
@@ -105,10 +109,7 @@ struct ScheduleView: View {
                     //MARK: Week restore
                     Button {
                         weekFromNow = 0
-                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
-                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
-                        startDay = DateServer.generateStartDay(offset:weekFromNow)
-                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+                        updateDate()
                     } label: {
                         Text(weekFromNow == 0 ? "This week" : "Week of " + startDay )
                             .foregroundColor(Color("text_black"))
@@ -121,10 +122,7 @@ struct ScheduleView: View {
                     Spacer()
                     Button {
                         weekFromNow += 1
-                        dayNumbers = DateServer.generateDays(offset:weekFromNow)
-                        weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
-                        startDay = DateServer.generateStartDay(offset:weekFromNow)
-                        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+                        updateDate()
                     } label: {
                         Image(systemName: "arrowtriangle.right.square")
                             .resizable()
@@ -176,7 +174,7 @@ struct ScheduleView: View {
                         .frame(width: geo.frame(in: .global).width / 8 )
                         .onTapGesture {
                             dayFromDay1 = -1
-                            selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+                            updateDate()
                         }
 
                         //MARK: Seven days
@@ -205,16 +203,14 @@ struct ScheduleView: View {
 
                             .onTapGesture {
                                 dayFromDay1 = r
-                                selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+                                updateDate()
                             }
                             
                         }
                     }
                 }
                 .onAppear(){
-                    dayNumbers = DateServer.generateDays(offset:weekFromNow)
-                    weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
-                    startDay = DateServer.generateStartDay(offset:weekFromNow)
+                    updateDate()
                 }
             }
             .frame(height: (dayFromDay1 == -1) ? 25 : 45)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleListView: View {
-    @State var startDate:Date
+    var startDate:Date
 
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -17,6 +17,17 @@ struct ScheduleListView: View {
     @State var completionViewPresented = false
     @State var changeViewPresented = false
     
+    func initiateView() {
+        let endDate = DateServer.addOneWeek(date: startDate)
+        let fetchRequest = Schedule.schedulefetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startDate as NSDate, endDate as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
+        do {
+            schedules = try viewContext.fetch(fetchRequest)
+        } catch {
+            print(error)
+        }
+    }
     
     var body: some View {
         TabView{
@@ -45,26 +56,7 @@ struct ScheduleListView: View {
             }
         }
         .onAppear(){
-            let endDate = DateServer.addOneWeek(date: startDate)
-            let fetchRequest = Schedule.schedulefetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startDate as NSDate, endDate as NSDate)
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
-            do {
-                schedules = try viewContext.fetch(fetchRequest)
-            } catch {
-                print(error)
-            }
-        }
-        .onChange(of: startDate) { _ in
-            let endDate = DateServer.addOneWeek(date: startDate)
-            let fetchRequest = Schedule.schedulefetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startDate as NSDate, endDate as NSDate)
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
-            do {
-                schedules = try viewContext.fetch(fetchRequest)
-            } catch {
-                print(error)
-            }
+            initiateView()
         }
     }
 }
