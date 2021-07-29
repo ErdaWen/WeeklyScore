@@ -27,7 +27,7 @@ struct ScheduleView: View {
         dayNumbers = DateServer.generateDays(offset:weekFromNow)
         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
         startDay = DateServer.generateStartDay(offset:weekFromNow)
-        selectedDateStart = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+        propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
     }
     
     var body: some View {
@@ -209,26 +209,24 @@ struct ScheduleView: View {
                         }
                     }
                 }
-                .onAppear(){
-                    updateDate()
-                }
             }
             .frame(height: (dayFromDay1 == -1) ? 25 : 45)
             .padding(.leading, 40)
             .padding(.trailing, 40)
             .padding(.top,0)
             
-            if dayFromDay1 == -1 {
-                ScheduleListView(startDate:selectedDateStart)
-            } else {
-                
-            }
+            
+            ScheduleListView()
+
             
             Spacer()
             
             Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
                 AddScheduleView(addScheduleViewPresented: $addViewPresented)
             })
+        }
+        .onAppear(){
+            updateDate()
         }
     }
 }

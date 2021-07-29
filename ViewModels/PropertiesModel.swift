@@ -12,6 +12,8 @@ class PropertiesModel: ObservableObject {
     @Published var totalScoreThisWeek:Int64 = 0
     @Published var gainedScoreThisWeek:Int64 = 0
     @Published var deductScoreThisWeek:Int64 = 0
+    @Published var startDate = DateServer.startOfThisWeek()
+    
     init(){
         updateScores()
     }
