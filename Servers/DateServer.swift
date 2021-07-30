@@ -10,6 +10,7 @@ import CoreData
 
 
 class DateServer {
+    //MARK: Print functions
     static func printTime(inputTime:Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm E, d MMM y"
@@ -22,6 +23,14 @@ class DateServer {
         return (formatter.string(from: inputTime))
     }
     
+    static func printWeekday(inputTime:Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        return (formatter.string(from: inputTime))
+    }
+    
+    
+    //MARK: Generate time stamp of this week / today
     static func startOfThisWeek() -> Date {
         var startDay:Int64 = 0
         
@@ -56,6 +65,8 @@ class DateServer {
         return today
     }
     
+    //MARK: Functions that generate string arrays for date picker
+    
     static func generateDays(offset:Int) -> [Int]{
         var days: [Int] = []
         var date = startOfThisWeek()
@@ -84,7 +95,6 @@ class DateServer {
         return weekdays
     }
     
-    // Given the week offset, generate date String of the first day
     static func generateStartDay (offset:Int) -> String {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
@@ -93,7 +103,7 @@ class DateServer {
         return dateFormatter.string(from: date)
     }
     
-    // Given week and date offset, generate new date
+    //MARK: Given week and date offset, generate new date
     static func genrateDateStemp (offset:Int, daysOfWeek: Int) -> Date {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
@@ -101,19 +111,30 @@ class DateServer {
         return date
     }
     
-    // Given week offset, generate new date
-    static func genrateWeekStemp (offset:Int) -> Date {
+    static func genrateDateStemp (startOfWeek:Date, daysOfWeek: Int) -> Date {
+        var date = startOfWeek
+        date = Calendar.current.date(byAdding: .day, value: daysOfWeek, to: date)!
+        return date
+    }
+    
+    static func genrateDateStemp (offset:Int) -> Date {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
         return date
     }
     
+    //MARK: Add cetain time
     static func addOneWeek (date:Date) -> Date {
         return Calendar.current.date(byAdding: .weekOfYear,value: 1, to: date)!
     }
     
+    
     static func addOneDay (date:Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: date)!
+    }
+    
+    static func minusOneDay (date:Date) -> Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: date)!
     }
     
 }

@@ -44,13 +44,36 @@ struct ScheduleListView: View {
                     if schedules.count != 0{
                         VStack{
                             ForEach(0...6,id: \.self){ offDay in
+                                let dayLookingAt = DateServer.genrateDateStemp(startOfWeek: propertiesModel.startWeek, daysOfWeek: offDay)
+                                if dayLookingAt == DateServer.startOfToday() {
+                                    Text("Today")
+                                        .foregroundColor(Color("text_black").opacity(0.5))
+                                        .font(.system(size: 12))
+                                } else if dayLookingAt == DateServer.minusOneDay(date: DateServer.startOfToday()) {
+                                    Text("Yesterday")
+                                        .foregroundColor(Color("text_black").opacity(0.5))
+                                        .font(.system(size: 12))
+                                } else if dayLookingAt == DateServer.addOneDay(date: DateServer.startOfToday()) {
+                                    Text("Tomorrow")
+                                        .foregroundColor(Color("text_black").opacity(0.5))
+                                        .font(.system(size: 12))
+                                } else {
+                                    Text(DateServer.printWeekday(inputTime: dayLookingAt))
+                                        .foregroundColor(Color("text_black").opacity(0.5))
+                                        .font(.system(size: 12))
+                                }
+//                                ForEach(schedules){ schedule in
+//                                    if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
+//                                        ScheduleTileView(schedule: schedule)
+//                                            .frame(height: zoomin ? 65 : 45)
+//                                    }
+//                                }
+                            }// end divider ForEach
+                            
+                            ForEach(schedules){ schedule in
                                 
-                            }
-                            // , id:\.self
-                            ForEach(0..<schedules.count,id: \.self){ r in
-                                
-                                ScheduleTileView(schedule: schedules[r])
-                                    .frame(height: zoomin ? 65 : 45)
+                                    ScheduleTileView(schedule: schedule)
+                                        .frame(height: zoomin ? 65 : 45)
                                 
                             }
                         }

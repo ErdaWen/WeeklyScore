@@ -27,7 +27,7 @@ struct ScheduleView: View {
         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
         startDay = DateServer.generateStartDay(offset:weekFromNow)
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
-        propertiesModel.startWeek = DateServer.genrateWeekStemp(offset: weekFromNow)
+        propertiesModel.startWeek = DateServer.genrateDateStemp(offset: weekFromNow)
         propertiesModel.updateScores()
     }
     
