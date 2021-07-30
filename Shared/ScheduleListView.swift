@@ -12,6 +12,7 @@ struct ScheduleListView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State var addViewPresented = false
     @State var schedules = [Schedule]()
     @State var zoomin = true
     
@@ -35,18 +36,21 @@ struct ScheduleListView: View {
     
     var body: some View {
         VStack{
-            ZStack{
+            ZStack(alignment:.top){
                 
                 ScrollView{
                     Spacer()
-                        .frame(height:50)
+                        .frame(height:25)
                     if schedules.count != 0{
                         VStack{
+                            ForEach(0...6,id: \.self){ offDay in
+                                
+                            }
                             // , id:\.self
                             ForEach(0..<schedules.count,id: \.self){ r in
                                 
                                 ScheduleTileView(schedule: schedules[r])
-                                    .frame(height: zoomin ? 45 : 25)
+                                    .frame(height: zoomin ? 65 : 45)
                                 
                             }
                         }
@@ -59,14 +63,61 @@ struct ScheduleListView: View {
                             .fontWeight(.light)
                             .font(.system(size: 12))
                     }
-                    
-                }
-                // Buttons
+                } //end ScoreView
+                .animation(.default)
+                
+                //MARK: Buttons
+                
                 HStack{
                     Spacer()
+                    Button {
+                        addViewPresented = true
+                    } label: {
+                        Image(systemName: "plus.square")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 10)
+                            .frame(height:22)
+                            .foregroundColor(Color("text_black"))
+                            .background(
+                                RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                            )
+                    }
+                    .sheet(isPresented: $addViewPresented, content: {
+                        AddScheduleView(addScheduleViewPresented: $addViewPresented)
+                    })
                     
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus.square.on.square")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 10)
+                            .frame(height:22)
+                            .foregroundColor(Color("text_black"))
+                            .background(
+                                RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                            )
+                    }
+                    Button {
+                        zoomin.toggle()
+                    } label: {
+                        if schedules.count != 0 {
+                            Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.horizontal, 10)
+                                .frame(height:22)
+                                .foregroundColor(Color("text_black"))
+                                .background(
+                                    RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                )
+                        }
+                    }
                     Spacer()
-                }
+                } //end Buttons HStack
                 
             }
             

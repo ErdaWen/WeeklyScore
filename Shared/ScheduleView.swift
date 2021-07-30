@@ -10,7 +10,6 @@ import UIKit
 
 struct ScheduleView: View {
     
-    @State var addViewPresented = false
     @State var showDeduct = false
     @State var weekFromNow = 0
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
@@ -227,9 +226,6 @@ struct ScheduleView: View {
             
             Spacer()
             
-            Button("Add Schedule") {addViewPresented.toggle()}.sheet(isPresented: $addViewPresented, content: {
-                AddScheduleView(addScheduleViewPresented: $addViewPresented)
-            })
         }
         .onAppear(){
             updateDate()

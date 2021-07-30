@@ -16,7 +16,6 @@ struct ItemView: View {
     private var items: FetchedResults<Item>
     
     @State var addViewPresented = false
-    @State var changeViewPresented = false
     @State var changeId = 0
     @State var showArchive = false
     

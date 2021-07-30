@@ -47,6 +47,15 @@ class DateServer {
         return startOfWeek
     }
     
+    static func startOfToday() -> Date {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: date)
+        let today = calendar.date(from: components)!
+        return today
+    }
+    
     static func generateDays(offset:Int) -> [Int]{
         var days: [Int] = []
         var date = startOfThisWeek()
