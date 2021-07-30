@@ -42,12 +42,7 @@ struct ItemView: View {
                     // Habits
                     ForEach(items) { item in
                         if !item.hidden {
-                            Button {
-                                changeId = items.firstIndex(where: {$0.id == item.id}) ?? 0
-                                changeViewPresented = true
-                            } label: {
-                                ItemTileView(item: item)
-                            }
+                            ItemTileView(item: item)
                         }
                     }
                     //MARK: Show archive button
@@ -70,20 +65,13 @@ struct ItemView: View {
                     if showArchive{
                         ForEach(items) { item in
                             if item.hidden {
-                                Button {
-                                    changeId = items.firstIndex(where: {$0.id == item.id}) ?? 0
-                                    changeViewPresented = true
-                                } label: {
-                                    ItemTileView(item: item)
-                                }
+                                ItemTileView(item: item)
                             }
                         }
                     }
                     Spacer()
                 }
-                .sheet(isPresented:$changeViewPresented, content: {
-                    ChangeItemView(changeItemViewPresented: $changeViewPresented, item:items[changeId])
-                })
+
             }
         }
         .padding(.init(top: 10, leading: 35, bottom: 10, trailing: 35))

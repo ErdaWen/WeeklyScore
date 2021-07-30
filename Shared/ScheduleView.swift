@@ -212,7 +212,7 @@ struct ScheduleView: View {
                     }
                 }
             }
-            .frame(height: (dayFromDay1 == -1) ? 25 : 45)
+            .frame(height: (dayFromDay1 == -1) ? 30 : 45)
             .padding(.leading, 40)
             .padding(.trailing, 40)
             .padding(.top,0)

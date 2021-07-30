@@ -11,6 +11,8 @@ struct ItemTileView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     var item:Item
+    @State var changeViewPresented = false
+
     
     var body: some View {
         ZStack{
@@ -83,6 +85,12 @@ struct ItemTileView: View {
                 }.frame(height:60).padding(.trailing, 7)
             }
         }.frame(height: 72)
+        .onTapGesture {
+            changeViewPresented = true
+        }
+                        .sheet(isPresented:$changeViewPresented, content: {
+                            ChangeItemView(changeItemViewPresented: $changeViewPresented, item:item)
+                        })
     }
 }
 
