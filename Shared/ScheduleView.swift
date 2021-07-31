@@ -217,7 +217,7 @@ struct ScheduleView: View {
             .padding(.top,0)
             
             if  dayFromDay1 == -1 {
-                ScheduleListView()
+                ScheduleListEntry(startDate: propertiesModel.startDate)
 
             } else {
                 

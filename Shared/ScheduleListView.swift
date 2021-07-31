@@ -9,30 +9,12 @@ import SwiftUI
 
 struct ScheduleListView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
-    
+    @FetchRequest var schedules: FetchedResults<Schedule>
+
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var addViewPresented = false
-    @State var schedules = [Schedule]()
     @State var zoomin = true
-    
-    func initiateView() {
-        schedules = []
-        print(schedules)
-        let endDate = DateServer.addOneWeek(date: propertiesModel.startDate)
-        let fetchRequest = Schedule.schedulefetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, endDate as NSDate)
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true)]
-        do {
-            schedules = try viewContext.fetch(fetchRequest)
-        } catch {
-            print(error)
-        }
-        print("Fetched starts " + DateServer.printTime(inputTime: propertiesModel.startDate))
-        print("Fetched ends " + DateServer.printTime(inputTime: endDate))
-        print(schedules)
-        
-    }
     
     var body: some View {
         VStack{
@@ -143,17 +125,6 @@ struct ScheduleListView: View {
                 } //end Buttons HStack
                 
             }
-            
-        }
-        .onAppear(){
-            print("\n")
-            print("Start date initiated as " + DateServer.printTime(inputTime: propertiesModel.startDate))
-            initiateView()
-        }
-        .onChange(of: propertiesModel.startDate) { _ in
-            print("\n")
-            print("Start date changes to " + DateServer.printTime(inputTime: propertiesModel.startDate))
-            initiateView()
             
         }
     }
