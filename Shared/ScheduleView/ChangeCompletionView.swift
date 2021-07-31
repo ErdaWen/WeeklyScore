@@ -185,6 +185,7 @@ struct ChangeCompletionView: View {
                     schedule.scoreGained = inputScoreGained
                     schedule.minutesGained = inputMinutesGained
                     schedule.checked = inputChecked
+                    schedule.statusDefault = false
                     
                     // Calculate check changed
                     if orgChecked != inputChecked{

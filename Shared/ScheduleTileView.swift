@@ -50,7 +50,7 @@ struct ScheduleTileView: View {
                 ZStack(alignment:.top){
                     //MARK: Background tile
                     RoundedRectangle(cornerRadius: 8)
-                                   .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.2))
+                                   .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                     
                     HStack{
                         //MARK: Title
@@ -58,7 +58,7 @@ struct ScheduleTileView: View {
                             .foregroundColor(Color("text_black"))
                             .font(.system(size: 15))
                             .padding(.leading, 8)
-                            .padding(.top,4)
+                            .padding(.top,1)
                         Spacer()
                         
                         //MARK: Score
@@ -67,7 +67,7 @@ struct ScheduleTileView: View {
                             if schedule.statusDefault {
                                 Text("\(schedule.score)")
                                     .foregroundColor(Color("text_black"))
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 12))
                                     .fontWeight(.light)
                                     .padding(.trailing, 5)
                                     .padding(.bottom, 5)
