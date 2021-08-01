@@ -91,10 +91,10 @@ struct ChangeScheduleView: View {
                                 items[itemId].checkedTotal -= schedule.checked ? 1 : 0
                                 viewContext.delete(schedule)
                                 do{
+                                    changeScheduleViewPresented = false
                                     try viewContext.save()
                                     propertiesModel.updateScores()
                                     print("saved")
-                                    changeScheduleViewPresented = false
                                 } catch {
                                     print("Cannot generate new item")
                                     print(error)

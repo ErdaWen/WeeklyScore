@@ -25,10 +25,12 @@ struct ScheduleTileView: View {
                     .font(.system(size: 12))
                     .padding(.leading, 20)
             } else {
+                if schedule.id != nil{
                 Text(DateServer.printShortTime(inputTime: schedule.beginTime))
                     .foregroundColor(Color("text_black").opacity(0.5))
                     .font(.system(size: 12))
                     .padding(.leading, 20)
+                }
             }
             
             //MAKR: Tile itself
