@@ -55,7 +55,7 @@ struct ScheduleTileView: View {
                 ZStack(alignment:.top){
                     //MARK: Background tile
                     RoundedRectangle(cornerRadius: 8)
-                                   .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
+                                   .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.2))
                     
                     HStack{
                         //MARK: Title

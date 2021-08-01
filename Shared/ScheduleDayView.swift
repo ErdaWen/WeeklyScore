@@ -10,9 +10,9 @@ import SwiftUI
 struct ScheduleDayView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest var schedules: FetchedResults<Schedule>
     
+    @FetchRequest var schedules: FetchedResults<Schedule>
+    @State var timeNow = Date()
     @State var addViewPresented = false
     var body: some View {
         ZStack(alignment: .top){
@@ -22,23 +22,23 @@ struct ScheduleDayView: View {
                     .frame(height:30)
                 ZStack(alignment: .topLeading){
                     //MARK: Timeline background
-                    
-                        ForEach (0...24, id:\.self){ r in
-                            HStack(alignment:.center, spacing:5){
-                                Text("\(r):00")
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.leading, 20)
-                                VStack{
-                                    Divider()
-                                }
+                    ForEach (0...24, id:\.self){ r in
+                        HStack(alignment:.center, spacing:5){
+                            Text("\(r):00")
+                                .foregroundColor(Color("text_black").opacity(0.5))
+                                .font(.system(size: 12))
+                                .padding(.leading, 20)
+                            VStack{
+                                Divider()
                             }
-                            .frame(height:10)
-                            .padding(.top, CGFloat( Double(r) * 60.0) )
                         }
+                        .frame(height:10)
+                        .padding(.top, CGFloat( Double(r) * 60.0) )
+                    }
                     // end time line plot VStack
-                    ZStack{
-                        ForEach(schedules){ schedule in
+                    
+                    //MARK: All schedules
+                    ForEach(schedules){ schedule in
                         
                         let startMin = DateServer.getMinutes(date: schedule.beginTime)
                         let endMin = DateServer.getMinutes(date: schedule.endTime)
@@ -54,7 +54,7 @@ struct ScheduleDayView: View {
                                     .padding(.leading, 50)
                                 Spacer()
                             }
-                         
+                            
                         } else {
                             
                             VStack(spacing:0){
@@ -67,9 +67,34 @@ struct ScheduleDayView: View {
                             }
                             
                         }
-                        }
                     }
-
+                    
+                    //MARK:Now line
+                    if propertiesModel.startDate == DateServer.startOfToday() {
+                        let startMin = DateServer.getMinutes(date: timeNow)
+                        let startCord = 60.0 * Double(startMin) / 60.0
+                        VStack{
+                            Spacer()
+                                .frame(height:CGFloat(startCord))
+                            HStack(alignment:.center, spacing:5){
+                                Text("Now")
+                                    .foregroundColor(Color("text_red"))
+                                    .font(.system(size: 12))
+                                    .padding(.leading, 20)
+                                    .background(
+                                        RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
+                                    )
+                                VStack{
+                                    Divider()
+                                        .background(Color("text_red"))
+                                }
+                            }
+                            .frame(height:10)
+                            Spacer()
+                        }
+                        
+                    } // end now bar
+                    
                 } // end ZStack
                 .padding(.leading,0)
                 .padding(.trailing , 20)
@@ -85,11 +110,11 @@ struct ScheduleDayView: View {
                     Image(systemName: "plus.square")
                         .resizable()
                         .scaledToFit()
-                        .padding(.horizontal, 10)
+                        .padding(.horizontal, 16)
                         .frame(height:22)
                         .foregroundColor(Color("text_black"))
                         .background(
-                            RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                            RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                         )
                 }
                 .sheet(isPresented: $addViewPresented, content: {
@@ -103,11 +128,11 @@ struct ScheduleDayView: View {
                     Image(systemName: "plus.square.on.square")
                         .resizable()
                         .scaledToFit()
-                        .padding(.horizontal, 10)
+                        .padding(.horizontal, 16)
                         .frame(height:22)
                         .foregroundColor(Color("text_black"))
                         .background(
-                            RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                            RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                         )
                 }
                 Spacer()
@@ -118,10 +143,13 @@ struct ScheduleDayView: View {
                 VStack(){
                     Spacer()
                     Text("No schedules for selected day")
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: 18))
+                        .fontWeight(.light)
                     Spacer()
                 }
             }
-
+            
         }// end button + scroll ZStack
         
     }

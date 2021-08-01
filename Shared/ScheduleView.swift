@@ -114,12 +114,12 @@ struct ScheduleView: View {
                     } label: {
                         Text(weekFromNow == 0 ? "This week" : "Week of " + startDay )
                             .foregroundColor(Color("text_black"))
-                            .font(.system(size: 16))
+                            .font(.system(size: 18))
                             .fontWeight(.light)
                     }
                     
                     //MARK: Week plus
-
+                    
                     Spacer()
                     Button {
                         weekFromNow += 1
@@ -152,7 +152,7 @@ struct ScheduleView: View {
                         .padding(.leading, geo.frame(in: .global)
                                     .width / 8 * CGFloat(dayFromDay1 + 1))
                         .animation(.default)
-
+                    
                     
                     //MARK: List icon
                     HStack(spacing:0){
@@ -177,18 +177,17 @@ struct ScheduleView: View {
                             dayFromDay1 = -1
                             updateDate()
                         }
-
+                        
                         //MARK: Seven days
                         ForEach(0...6, id:\.self){ r in
                             
                             VStack(alignment: .center, spacing: 2){
-                                if (dayFromDay1 != -1)
-                                {
-                                    Text("\(dayNumbers[r])")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
-                                        .fontWeight(.light)
-                                }
+                                
+                                Text("\(dayNumbers[r])")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                                    .fontWeight(.light)
+                                
                                 Text("\(weekdayNumbers[r])")
                                     .font(.system(size: 12))
                                     .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
@@ -201,7 +200,7 @@ struct ScheduleView: View {
                             .padding(.leading, 0)
                             .padding(.leading, 0)
                             .padding(.trailing, 0)
-
+                            
                             .onTapGesture {
                                 dayFromDay1 = r
                                 updateDate()
@@ -211,7 +210,7 @@ struct ScheduleView: View {
                     }
                 }
             }
-            .frame(height: (dayFromDay1 == -1) ? 30 : 45)
+            .frame(height: 45)
             .padding(.leading, 40)
             .padding(.trailing, 40)
             .padding(.top,0)
@@ -219,12 +218,12 @@ struct ScheduleView: View {
             if  dayFromDay1 == -1 {
                 ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                          , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
-
+                
             } else {
                 ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                         , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
             }
-
+            
             
             Spacer()
             

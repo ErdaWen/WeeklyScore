@@ -21,7 +21,7 @@ struct ScheduleListView: View {
                 
                 ScrollView{
                     Spacer()
-                        .frame(height:25)
+                        .frame(height:30)
                     if schedules.count != 0{
                         VStack{
                             ForEach(0...6,id: \.self){ offDay in
@@ -97,7 +97,7 @@ struct ScheduleListView: View {
                             .frame(height:22)
                             .foregroundColor(Color("text_black"))
                             .background(
-                                RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
                     }
                     .sheet(isPresented: $addViewPresented, content: {
@@ -115,7 +115,7 @@ struct ScheduleListView: View {
                             .frame(height:22)
                             .foregroundColor(Color("text_black"))
                             .background(
-                                RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
                     }
                     Button {
@@ -129,12 +129,14 @@ struct ScheduleListView: View {
                                 .frame(height:22)
                                 .foregroundColor(Color("text_black"))
                                 .background(
-                                    RadialGradient(gradient: Gradient(colors: [.white.opacity(1),.white.opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                    RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                                 )
                         }
                     }
                     Spacer()
                 } //end Buttons HStack
+                .padding(.top,5)
+
                 
             }
             
