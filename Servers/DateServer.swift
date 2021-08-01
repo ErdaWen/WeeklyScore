@@ -32,18 +32,7 @@ class DateServer {
     
     //MARK: Generate time stamp of this week / today
     static func startOfThisWeek() -> Date {
-        var startDay:Int64 = 0
-        
-        let managedObjectContext = PersistenceController.shared.container.viewContext
-        let fetchRequest: NSFetchRequest<AppAttributes> = AppAttributes.fetchRequest()
-        do{
-            let attributes = try managedObjectContext.fetch(fetchRequest)
-            startDay = attributes[0].weekStartDay
-        } catch {
-            print("Cannot get week start day attribute")
-            print(error)
-        }
-
+        let startDay = UserDefaults.standard.integer(forKey: "weekStartDay")
         let date = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents(

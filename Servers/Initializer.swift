@@ -46,6 +46,11 @@ class Initializer: ObservableObject{
         let appAttributes = AppAttributes(context: managedObjectContext)
         appAttributes.nightMode = true
         appAttributes.weekStartDay = 3
+        
+        UserDefaults.standard.set(true, forKey: "nightMode")
+        UserDefaults.standard.set(3,forKey:"weekStartDay")
+        UserDefaults.standard.set(false,forKey: "zoomedIn")
+        UserDefaults.standard.set(0,forKey: "autoCompleteMode")
     }
     
     func buildData(){

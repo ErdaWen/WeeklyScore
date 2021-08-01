@@ -13,7 +13,7 @@ struct ScheduleListView: View {
 
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
-    @State var zoomin = true
+    @State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
     
     var body: some View {
         VStack{
@@ -120,6 +120,7 @@ struct ScheduleListView: View {
                     }
                     Button {
                         zoomin.toggle()
+                        UserDefaults.standard.set(zoomin,forKey: "zoomedIn")
                     } label: {
                         if schedules.count != 0 {
                             Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
