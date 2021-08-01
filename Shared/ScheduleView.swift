@@ -28,7 +28,7 @@ struct ScheduleView: View {
     let fsScore:CGFloat = 18.0
     let fsTitle:CGFloat = 18.0
     let fsSub:CGFloat = 12.0
-    let sIcon:CGFloat = 22
+    let sButton:CGFloat = 22
     let mScores:CGFloat = 10
     let mScoreTitle:CGFloat = 5
     let mTitle:CGFloat = 20
@@ -107,7 +107,7 @@ struct ScheduleView: View {
                     } label: {
                         Image(systemName: "arrowtriangle.backward.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
                     }
-                    .frame(width: sIcon, height: sIcon).padding(.leading,mButton)
+                    .frame(width: sButton, height: sButton).padding(.leading,mButton)
                     
                     Spacer()
                     
@@ -128,7 +128,7 @@ struct ScheduleView: View {
                     } label: {
                         Image(systemName: "arrowtriangle.right.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
                     }
-                    .frame(width: sIcon, height: sIcon).padding(.trailing,mButton)
+                    .frame(width: sButton, height: sButton).padding(.trailing,mButton)
                 }
             }// end week title
             .frame(height:hTitle).padding(.horizontal, mTitle).animation(.default)
@@ -186,6 +186,8 @@ struct ScheduleView: View {
                 } //end GeoReader
             } // end day picker
             .frame(height: hPicker).padding(.horizontal, mPicker)
+            
+            Divider().background(Color("background_grey"))
             
             //MARK: Main content view
             if  dayFromDay1 == -1 {

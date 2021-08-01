@@ -15,6 +15,10 @@ struct ScheduleListView: View {
     @State var addViewPresented = false
     @State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
     
+    let mButtonUp:CGFloat = 10
+    let sButton:CGFloat = 22
+    let mButtons:CGFloat = 10
+    
     var body: some View {
         VStack{
             ZStack(alignment:.top){
@@ -73,12 +77,17 @@ struct ScheduleListView: View {
                         }
                         .padding(.horizontal,20)
                     }
-                    
                     else {
-                        Text("No schedules for the selected week")
-                            .foregroundColor(Color("text_black"))
-                            .fontWeight(.light)
-                            .font(.system(size: 12))
+                        
+                            VStack(){
+                                Spacer()
+                                Text("No schedules for selected week")
+                                    .foregroundColor(Color("text_black"))
+                                    .font(.system(size: 18))
+                                    .fontWeight(.light)
+                                Spacer()
+                            }
+                        
                     }
                 } //end ScoreView
                 .animation(.default)
@@ -91,13 +100,11 @@ struct ScheduleListView: View {
                         addViewPresented = true
                     } label: {
                         Image(systemName: "plus.square")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.horizontal, 10)
-                            .frame(height:22)
+                            .resizable().scaledToFit()
+                            .padding(.horizontal, mButtons).frame(height:sButton)
                             .foregroundColor(Color("text_black"))
                             .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
                     }
                     .sheet(isPresented: $addViewPresented, content: {
@@ -109,13 +116,11 @@ struct ScheduleListView: View {
                         
                     } label: {
                         Image(systemName: "plus.square.on.square")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.horizontal, 10)
-                            .frame(height:22)
+                            .resizable().scaledToFit()
+                            .padding(.horizontal, mButtons).frame(height:sButton)
                             .foregroundColor(Color("text_black"))
                             .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
                     }
                     Button {
@@ -124,19 +129,17 @@ struct ScheduleListView: View {
                     } label: {
                         if schedules.count != 0 {
                             Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
-                                .resizable()
-                                .scaledToFit()
-                                .padding(.horizontal, 10)
-                                .frame(height:22)
+                                .resizable().scaledToFit()
+                                .padding(.horizontal, mButtons).frame(height:sButton)
                                 .foregroundColor(Color("text_black"))
                                 .background(
-                                    RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                                 )
                         }
                     }
                     Spacer()
                 } //end Buttons HStack
-                .padding(.top,5)
+                .padding(.top,mButtonUp)
 
                 
             }
