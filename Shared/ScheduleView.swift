@@ -34,8 +34,10 @@ struct ScheduleView: View {
     let mTitle:CGFloat = 20
     let hTitle:CGFloat = 38
     let rTitle:CGFloat = 12
+    let mDateWeekday:CGFloat = 2
     let mPicker:CGFloat = 40
     let hPicker:CGFloat = 45
+    let pPickerTextVer:CGFloat = 3
     let mButton:CGFloat = 10
 
     
@@ -141,7 +143,6 @@ struct ScheduleView: View {
                         .padding(.leading, geo.frame(in: .global).width / 8 * CGFloat(dayFromDay1 + 1))
                         .animation(.default)
                     
-                    
                     HStack(spacing:0){
                         //MARK: List icon
                         VStack(alignment: .center, spacing: 2){
@@ -161,21 +162,19 @@ struct ScheduleView: View {
                         //MARK: Seven days
                         ForEach(0...6, id:\.self){ r in
                             
-                            VStack(alignment: .center, spacing: 2){
+                            VStack(alignment: .center, spacing: mDateWeekday){
                                 
                                 Text("\(dayNumbers[r])")
-                                    .font(.system(size: fsTitle))
+                                    .font(.system(size: fsTitle)).fontWeight(.light)
                                     .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
-                                    .fontWeight(.light)
-                                
+                                    
                                 Text("\(weekdayNumbers[r])")
-                                    .font(.system(size: fsSub))
+                                    .font(.system(size: fsSub)).fontWeight(.light)
                                     .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
-                                    .fontWeight(.light)
                             }
                             .animation(.none)
                             .frame(width: geo.frame(in: .global).width / 8 )
-                            .padding(.top, 3)
+                            .padding(.top, pPickerTextVer)
                             
                             .onTapGesture {
                                 dayFromDay1 = r
@@ -186,8 +185,7 @@ struct ScheduleView: View {
                     
                 } //end GeoReader
             } // end day picker
-            .frame(height: hPicker)
-            .padding(.horizontal, mPicker)
+            .frame(height: hPicker).padding(.horizontal, mPicker)
             
             //MARK: Main content view
             if  dayFromDay1 == -1 {

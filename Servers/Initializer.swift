@@ -24,13 +24,7 @@ class Initializer: ObservableObject{
     
     func preLoadData() {
         buildAttributes()
-        do{
-            try managedObjectContext.save()
-            print ("Attributes Initialized")
-        } catch {
-            print(error)
-            print("Fail to initialize global attributes")
-        }
+
         buildData()
         do{
             try managedObjectContext.save()
@@ -43,9 +37,6 @@ class Initializer: ObservableObject{
     }
     
     func buildAttributes(){
-        let appAttributes = AppAttributes(context: managedObjectContext)
-        appAttributes.nightMode = true
-        appAttributes.weekStartDay = 3
         
         UserDefaults.standard.set(true, forKey: "nightMode")
         UserDefaults.standard.set(3,forKey:"weekStartDay")
