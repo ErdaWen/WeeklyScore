@@ -45,6 +45,7 @@ class PropertiesModel: ObservableObject {
             } else {
                 totalScoreThisWeek = 0
                 gainedScoreThisWeek = 0
+                deductScoreThisWeek = 0
             }
         } catch{
             totalScoreThisWeek = 0

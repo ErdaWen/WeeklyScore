@@ -99,7 +99,8 @@ class Initializer: ObservableObject{
         item_study.title = "Study!"
         item_study.durationBased = true
         item_study.defaultScore = 20
-        item_study.defaultMinutes = 120
+        item_study.defaultMinutes = 180
+        item_study.defaultBeginTime = DateServer.startOfThisWeek() + 32400
         item_study.checkedTotal = 1
         item_study.minutesTotal = 120
         item_study.scoreTotal = 10
@@ -114,6 +115,7 @@ class Initializer: ObservableObject{
         item_workout.durationBased = true
         item_workout.defaultMinutes = 60
         item_workout.defaultScore = 10
+        item_workout.defaultBeginTime = DateServer.startOfThisWeek() + 64800
         item_workout.checkedTotal = 0
         item_workout.minutesTotal = 0
         item_workout.scoreTotal = 0
@@ -128,6 +130,7 @@ class Initializer: ObservableObject{
         item_getup.durationBased = false
         item_getup.defaultMinutes = 0
         item_getup.defaultScore = 5
+        item_getup.defaultBeginTime = DateServer.startOfThisWeek() + 28800
         item_getup.checkedTotal = 1
         item_getup.minutesTotal = 0
         item_getup.scoreTotal = 0

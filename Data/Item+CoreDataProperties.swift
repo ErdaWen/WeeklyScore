@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 7/24/21.
+//  Created by Erda Wen on 8/1/21.
 //
 //
 
@@ -27,6 +27,7 @@ extension Item {
     @NSManaged public var scoreTotal: Int64
     @NSManaged public var title: String
     @NSManaged public var titleIcon: String
+    @NSManaged public var defaultBeginTime: Date
     @NSManaged public var schedules: NSSet
     @NSManaged public var tags: Tag
 

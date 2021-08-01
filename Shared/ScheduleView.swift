@@ -21,7 +21,6 @@ struct ScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext    
     @EnvironmentObject var propertiesModel:PropertiesModel
     
-    
     func updateDate() {
         dayNumbers = DateServer.generateDays(offset:weekFromNow)
         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
@@ -35,24 +34,28 @@ struct ScheduleView: View {
         VStack(spacing:0){
             //MARK: Score
             HStack(spacing:10){
-                if showDeduct {
+                if propertiesModel.deductScoreThisWeek != 0 {
                     Text("-\(propertiesModel.deductScoreThisWeek)")
-                        .font(.system(size: 25))
+                        .font(.system(size: 18))
                         .foregroundColor(Color("text_red"))
                         .fontWeight(.light)
-                } else{
-                    Text("\(propertiesModel.gainedScoreThisWeek)")
-                        .font(.system(size: 25))
-                        .foregroundColor(Color("text_green"))
+                Text(",")
+                        .font(.system(size: 18))
+                        .foregroundColor(Color("text_black"))
                         .fontWeight(.light)
                 }
+                Text("\(propertiesModel.gainedScoreThisWeek)")
+                        .font(.system(size: 18))
+                        .foregroundColor(Color("text_green"))
+                        .fontWeight(.light)
                 Image(systemName: "line.diagonal")
                     .foregroundColor(Color("text_black"))
                 Text("\(propertiesModel.totalScoreThisWeek)")
-                    .font(.system(size: 25))
+                    .font(.system(size: 18))
                     .foregroundColor(Color("text_black"))
                     .fontWeight(.light)
             }
+            .padding(.bottom,5)
             .onAppear(){
                 propertiesModel.updateScores()
             }
@@ -60,31 +63,30 @@ struct ScheduleView: View {
                 showDeduct.toggle()
             }
             .animation(.default)
-            .padding(.bottom,2)
             
-            //MARK: Score bar
-            GeometryReader{ geo in
-                ZStack(alignment: .leading){
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color("text_black"),style:StrokeStyle(lineWidth: 1))
-                    if propertiesModel.totalScoreThisWeek != 0 {
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: geo.frame(in: .global)
-                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
-                            )
-                            .foregroundColor(Color("text_green").opacity(0.6))
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: geo.frame(in: .global)
-                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
-                            )
-                            .foregroundColor(Color("text_red"))
-                    }
-                }
-            }
-            .frame(height:8)
-            .padding(.leading,110)
-            .padding(.trailing,110)
-            .padding(.bottom,1)
+//            //MARK: Score bar
+//            GeometryReader{ geo in
+//                ZStack(alignment: .leading){
+//                    RoundedRectangle(cornerRadius: 5)
+//                        .stroke(Color("text_black"),style:StrokeStyle(lineWidth: 1))
+//                    if propertiesModel.totalScoreThisWeek != 0 {
+//                        RoundedRectangle(cornerRadius: 5)
+//                            .frame(width: geo.frame(in: .global)
+//                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
+//                            )
+//                            .foregroundColor(Color("text_green").opacity(0.6))
+//                        RoundedRectangle(cornerRadius: 5)
+//                            .frame(width: geo.frame(in: .global)
+//                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
+//                            )
+//                            .foregroundColor(Color("text_red"))
+//                    }
+//                }
+//            }
+//            .frame(height:8)
+//            .padding(.leading,110)
+//            .padding(.trailing,110)
+//            .padding(.bottom,1)
             
             //MARK: WeekTitle
             ZStack{
@@ -137,7 +139,6 @@ struct ScheduleView: View {
             .frame(height:38)
             .padding(.leading, 20)
             .padding(.trailing, 20)
-            .padding(.top,10)
             .animation(.default)
             
             //MARK: Day picker

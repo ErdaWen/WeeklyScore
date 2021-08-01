@@ -14,6 +14,9 @@ struct ScheduleDayView: View {
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var timeNow = Date()
     @State var addViewPresented = false
+    @State var interCord = 50.0
+        
+    
     var body: some View {
         ZStack(alignment: .top){
             
@@ -33,7 +36,7 @@ struct ScheduleDayView: View {
                             }
                         }
                         .frame(height:10)
-                        .padding(.top, CGFloat( Double(r) * 60.0) )
+                        .padding(.top, CGFloat( Double(r) * interCord) )
                     }
                     // end time line plot VStack
                     
@@ -42,8 +45,8 @@ struct ScheduleDayView: View {
                         
                         let startMin = DateServer.getMinutes(date: schedule.beginTime)
                         let endMin = DateServer.getMinutes(date: schedule.endTime)
-                        let startCord = 6 + 60.0 * Double(startMin) / 60.0
-                        let heightCord = max(60 * Double(endMin - startMin) / 60.0, 10)
+                        let startCord = 6 + interCord * Double(startMin) / 60.0
+                        let heightCord = max(interCord * Double(endMin - startMin) / 60.0, 25)
                         
                         if schedule.items.durationBased{
                             VStack(spacing:0){
@@ -72,7 +75,7 @@ struct ScheduleDayView: View {
                     //MARK:Now line
                     if propertiesModel.startDate == DateServer.startOfToday() {
                         let startMin = DateServer.getMinutes(date: timeNow)
-                        let startCord = 60.0 * Double(startMin) / 60.0
+                        let startCord = interCord * Double(startMin) / 60.0
                         VStack{
                             Spacer()
                                 .frame(height:CGFloat(startCord))
