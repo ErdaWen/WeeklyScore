@@ -27,6 +27,8 @@
 		0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
 		0072757826B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */; };
 		0072757926B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */; };
+		0072757B26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
+		0072757C26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		008DC8EF26AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
 		008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
 		008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
@@ -82,6 +84,7 @@
 		0072757126B65D0E00FAA32D /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		0072757426B7190300FAA32D /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0072757A26B7280600FAA32D /* CordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CordServer.swift; sourceTree = "<group>"; };
 		008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
 		008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 				0034918B26A7F06B001B8DBB /* DateServer.swift */,
 				00AE2E3126A949A000F77898 /* Constants.swift */,
 				0034918E26A7F48F001B8DBB /* Initializer.swift */,
+				0072757A26B7280600FAA32D /* CordServer.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -390,6 +394,7 @@
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
 				0072756C26B6179600FAA32D /* ScheduleListEntry.swift in Sources */,
+				0072757B26B7280600FAA32D /* CordServer.swift in Sources */,
 				0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
@@ -427,6 +432,7 @@
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
 				0072756D26B6179600FAA32D /* ScheduleListEntry.swift in Sources */,
+				0072757C26B7280600FAA32D /* CordServer.swift in Sources */,
 				0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,

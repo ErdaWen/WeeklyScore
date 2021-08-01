@@ -43,12 +43,14 @@ struct ScheduleDayView: View {
                     //MARK: All schedules
                     ForEach(schedules){ schedule in
                         
-                        let startMin = DateServer.getMinutes(date: schedule.beginTime)
-                        let endMin = DateServer.getMinutes(date: schedule.endTime)
-                        let startCord = 6 + interCord * Double(startMin) / 60.0
-                        let heightCord = max(interCord * Double(endMin - startMin) / 60.0, 25)
+//                        let startMin = DateServer.getMinutes(date: schedule.beginTime)
+//                        let endMin = DateServer.getMinutes(date: schedule.endTime)
+//                        let startCord = 6 + interCord * Double(startMin) / 60.0
+//                        let heightCord = max(interCord * Double(endMin - startMin) / 60.0, 25)
                         
-                        if schedule.items.durationBased{
+                        let (startCord,heightCord) = CordServer.calculateCord(startTime: schedule.beginTime, endTime: schedule.endTime, today: propertiesModel.startDate, unit: interCord, durationBased: schedule.items.durationBased)
+                        
+                        //if schedule.items.durationBased{
                             VStack(spacing:0){
                                 Spacer()
                                     .frame(height:CGFloat(startCord))
@@ -58,18 +60,18 @@ struct ScheduleDayView: View {
                                 Spacer()
                             }
                             
-                        } else {
-                            
-                            VStack(spacing:0){
-                                Spacer()
-                                    .frame(height:CGFloat(startCord)-12.5)
-                                ScheduleTileView(schedule: schedule, showTime:false)
-                                    .frame(height:25)
-                                    .padding(.leading, 50)
-                                Spacer()
-                            }
-                            
-                        }
+//                        } else {
+//
+//                            VStack(spacing:0){
+//                                Spacer()
+//                                    .frame(height:CGFloat(startCord)-12.5)
+//                                ScheduleTileView(schedule: schedule, showTime:false)
+//                                    .frame(height:25)
+//                                    .padding(.leading, 50)
+//                                Spacer()
+//                            }
+//
+//                        }
                     }
                     
                     //MARK:Now line

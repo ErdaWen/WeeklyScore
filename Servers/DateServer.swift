@@ -65,6 +65,14 @@ class DateServer {
         return today
     }
     
+    static func startOfToday(date:Date) -> Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: date)
+        let today = calendar.date(from: components)!
+        return today
+    }
+    
     static func combineDayTime(day:Date,time:Date) -> Date {
         let calendar = Calendar.current
         var dayComponents = calendar.dateComponents(
@@ -119,6 +127,14 @@ class DateServer {
     }
     
     //MARK: Given week and date offset, generate new date
+    //offset:week
+    
+    static func genrateDateStemp (offset:Int) -> Date {
+        var date = startOfThisWeek()
+        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
+        return date
+    }
+    
     static func genrateDateStemp (offset:Int, daysOfWeek: Int) -> Date {
         var date = startOfThisWeek()
         date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
@@ -132,10 +148,10 @@ class DateServer {
         return date
     }
     
-    static func genrateDateStemp (offset:Int) -> Date {
-        var date = startOfThisWeek()
-        date = Calendar.current.date(byAdding: .weekOfYear, value: offset, to: date)!
-        return date
+    
+    
+    static func isSameDay (date1:Date,date2:Date){
+        
     }
     
     static func getMinutes(date:Date) -> Int {

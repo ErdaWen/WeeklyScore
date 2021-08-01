@@ -105,7 +105,7 @@ struct ScheduleView: View {
                             .scaledToFit()
                             .foregroundColor(Color("text_black"))
                     }
-                    .frame(width: 20, height: 20)
+                    .frame(width: 22, height: 22)
                     .padding(.leading,10)
                     Spacer()
                     
@@ -132,10 +132,10 @@ struct ScheduleView: View {
                             .scaledToFit()
                             .foregroundColor(Color("text_black"))
                     }
-                    .frame(width: 20, height: 20)
+                    .frame(width: 22, height: 22)
                     .padding(.trailing,10)
                 }
-            }
+            }// end week title
             .frame(height:38)
             .padding(.leading, 20)
             .padding(.trailing, 20)
@@ -155,8 +155,8 @@ struct ScheduleView: View {
                         .animation(.default)
                     
                     
-                    //MARK: List icon
                     HStack(spacing:0){
+                        //MARK: List icon
                         VStack(alignment: .center, spacing: 2){
                             Image(systemName: "list.dash")
                                 .resizable()
@@ -206,11 +206,11 @@ struct ScheduleView: View {
                                 dayFromDay1 = r
                                 updateDate()
                             }
-                            
-                        }
-                    }
-                }
-            }
+                        }// end seven days
+                    } // end 8 icons
+                    
+                } //end GeoReader
+            } // end day picker
             .frame(height: 45)
             .padding(.leading, 40)
             .padding(.trailing, 40)
@@ -222,7 +222,7 @@ struct ScheduleView: View {
                 
             } else {
                 ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
-                                                        , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
+                                                        , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
             }
             
             
