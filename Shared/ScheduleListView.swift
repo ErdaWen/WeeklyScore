@@ -27,43 +27,63 @@ struct ScheduleListView: View {
                         VStack{
                             ForEach(0...6,id: \.self){ offDay in
                                 let dayLookingAt = DateServer.genrateDateStemp(startOfWeek: propertiesModel.startWeek, daysOfWeek: offDay)
-                                if dayLookingAt == DateServer.startOfToday() {
-                                    Text("Today")
-                                        .foregroundColor(Color("text_black").opacity(0.5))
-                                        .font(.system(size: 12))
-                                } else if dayLookingAt == DateServer.minusOneDay(date: DateServer.startOfToday()) {
-                                    Text("Yesterday")
-                                        .foregroundColor(Color("text_black").opacity(0.5))
-                                        .font(.system(size: 12))
-                                } else if dayLookingAt == DateServer.addOneDay(date: DateServer.startOfToday()) {
-                                    Text("Tomorrow")
-                                        .foregroundColor(Color("text_black").opacity(0.5))
-                                        .font(.system(size: 12))
-                                } else {
-                                    Text(DateServer.printWeekday(inputTime: dayLookingAt))
-                                        .foregroundColor(Color("text_black").opacity(0.5))
-                                        .font(.system(size: 12))
+                                let schedulesFiltered = schedules.filter { schedule in
+                                    return (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt))
                                 }
-//                                ForEach(schedules){ schedule in
-//                                    if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
-//                                        ScheduleTileView(schedule: schedule)
-//                                            .frame(height: zoomin ? 65 : 45)
-//                                    }
-//                                }
+                                if (schedulesFiltered.count > 0) || (dayLookingAt == DateServer.startOfToday()){
+                                    // Day Divider
+                                    if dayLookingAt == DateServer.startOfToday() {
+                                        if schedulesFiltered.count == 0 {
+                                            Text("No schedules for today")
+                                                .foregroundColor(Color("text_black").opacity(0.5))
+                                                .font(.system(size: 12))
+                                                .padding(.top,5)
+                                        } else {
+                                            Text("Today")
+                                                .foregroundColor(Color("text_black").opacity(0.5))
+                                                .font(.system(size: 12))
+                                                .padding(.top,5)
+                                        }
+                                    } else if dayLookingAt == DateServer.minusOneDay(date: DateServer.startOfToday()) {
+                                        Text("Yesterday")
+                                            .foregroundColor(Color("text_black").opacity(0.5))
+                                            .font(.system(size: 12))
+                                            .padding(.top,5)
+                                    } else if dayLookingAt == DateServer.addOneDay(date: DateServer.startOfToday()) {
+                                        Text("Tomorrow")
+                                            .foregroundColor(Color("text_black").opacity(0.5))
+                                            .font(.system(size: 12))
+                                            .padding(.top,5)
+
+                                    } else {
+                                        Text(DateServer.printWeekday(inputTime: dayLookingAt))
+                                            .foregroundColor(Color("text_black").opacity(0.5))
+                                            .font(.system(size: 12))
+                                            .padding(.top,5)
+                                    }
+                                    
+                                    ForEach(schedulesFiltered){ schedule in
+                                        if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
+                                            ScheduleTileView(schedule: schedule)
+                                                .frame(height: zoomin ? 65 : 45)
+                                        }
+                                    }
+                                }
+
                             }// end divider ForEach
-                            
-                            ForEach(schedules){ schedule in
-                                
-                                    ScheduleTileView(schedule: schedule)
-                                        .frame(height: zoomin ? 65 : 45)
-                                
-                            }
+//
+//                            ForEach(schedules){ schedule in
+//
+//                                    ScheduleTileView(schedule: schedule)
+//                                        .frame(height: zoomin ? 65 : 45)
+//
+//                            }
                         }
                         .padding(.horizontal,20)
                     }
                     
                     else {
-                        Text("No entries for the selected week")
+                        Text("No schedules for the selected week")
                             .foregroundColor(Color("text_black"))
                             .fontWeight(.light)
                             .font(.system(size: 12))
