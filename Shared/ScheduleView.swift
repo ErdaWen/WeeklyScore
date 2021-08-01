@@ -186,12 +186,12 @@ struct ScheduleView: View {
                                 {
                                     Text("\(dayNumbers[r])")
                                         .font(.system(size: 18))
-                                        .foregroundColor(Color("text_black"))
+                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
                                         .fontWeight(.light)
                                 }
                                 Text("\(weekdayNumbers[r])")
                                     .font(.system(size: 12))
-                                    .foregroundColor(Color("text_black"))
+                                    .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
                                     .fontWeight(.light)
                             }
                             .animation(.none)
@@ -221,7 +221,8 @@ struct ScheduleView: View {
                                                          , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
 
             } else {
-                
+                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
+                                                        , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
             }
 
             
@@ -231,6 +232,7 @@ struct ScheduleView: View {
         .onAppear(){
             updateDate()
         }
+        .animation(.default)
     }
 }
 

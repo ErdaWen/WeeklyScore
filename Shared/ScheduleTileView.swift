@@ -10,6 +10,7 @@ import SwiftUI
 struct ScheduleTileView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     var schedule:Schedule
+    var showTime:Bool
     
     @State var completionViewPresented = false
     @State var changeViewPresented = false
@@ -19,20 +20,22 @@ struct ScheduleTileView: View {
         VStack(alignment: .leading, spacing: 3) {
             
             //MARK: Time Title
-            if schedule.items.durationBased {
-                Text(DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime))
-                    .foregroundColor(Color("text_black").opacity(0.5))
-                    .font(.system(size: 12))
-                    .padding(.leading, 20)
-            } else {
-                if schedule.id != nil{
-                Text(DateServer.printShortTime(inputTime: schedule.beginTime))
-                    .foregroundColor(Color("text_black").opacity(0.5))
-                    .font(.system(size: 12))
-                    .padding(.leading, 20)
+            if showTime{
+                if schedule.items.durationBased {
+                    Text(DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime))
+                        .foregroundColor(Color("text_black").opacity(0.5))
+                        .font(.system(size: 12))
+                        .padding(.leading, 20)
+                } else {
+                    if schedule.id != nil{
+                    Text(DateServer.printShortTime(inputTime: schedule.beginTime))
+                        .foregroundColor(Color("text_black").opacity(0.5))
+                        .font(.system(size: 12))
+                        .padding(.leading, 20)
+                    }
                 }
             }
-            
+
             //MAKR: Tile itself
             HStack(spacing:0){
                 //MARK: Small handle
@@ -56,11 +59,15 @@ struct ScheduleTileView: View {
                     
                     HStack{
                         //MARK: Title
-                        Text(schedule.items.titleIcon + " " + schedule.items.title)
+                        VStack{
+                            Text(schedule.items.titleIcon + " " + schedule.items.title)
                             .foregroundColor(Color("text_black"))
                             .font(.system(size: 15))
                             .padding(.leading, 8)
-                            .padding(.top,1)
+                            .padding(.top,5)
+                            Spacer()
+                        }
+
                         Spacer()
                         
                         //MARK: Score

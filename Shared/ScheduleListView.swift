@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ScheduleListView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
-    @FetchRequest var schedules: FetchedResults<Schedule>
-
     @Environment(\.managedObjectContext) private var viewContext
-    
+
+    @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
     @State var zoomin = true
     
@@ -64,7 +63,7 @@ struct ScheduleListView: View {
                                     
                                     ForEach(schedulesFiltered){ schedule in
                                         if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
-                                            ScheduleTileView(schedule: schedule)
+                                            ScheduleTileView(schedule: schedule, showTime:true)
                                                 .frame(height: zoomin ? 65 : 45)
                                         }
                                     }
