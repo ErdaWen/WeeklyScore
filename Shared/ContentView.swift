@@ -15,12 +15,28 @@ struct ContentView: View {
         TabView(selection: $tabIndex){
             // MARK: Schedule View
             ScheduleView()
-                .tabItem {Image (systemName: "calendar.badge.clock")}.tag(1)
+                .tabItem {
+                    VStack{
+                        Image (systemName: "calendar.badge.clock")
+                        Text ("Schedule").fontWeight(.light)
+                    }
+                }.tag(1)
             // MARK: Habit View
             ItemView()
-                .tabItem {Image (systemName: "flag")}.tag(2)
+                .tabItem {
+                    VStack{
+                        Image (systemName: "flag")
+                        Text ("Habits").fontWeight(.light)
+                    }
+                    
+                }.tag(2)
             SettingView()
-                .tabItem{Image (systemName:"gear")}.tag(3)
+                .tabItem{
+                    VStack{
+                        Image (systemName:"gear")
+                        Text("Settings").fontWeight(.light)
+                    }
+                }.tag(3)
         }
     }
 }
