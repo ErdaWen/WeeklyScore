@@ -217,7 +217,8 @@ struct ScheduleView: View {
             .padding(.top,0)
             
             if  dayFromDay1 == -1 {
-                ScheduleListEntry(startDate: propertiesModel.startDate)
+                ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
+                                                         , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
 
             } else {
                 
