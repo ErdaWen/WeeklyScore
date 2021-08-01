@@ -28,6 +28,61 @@ struct ChangeScheduleView: View {
     @State var inputReminder = false
     @State var inputReminderTime:Int64 = 0
     
+    func initValues(){
+        itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
+        inputScore = schedule.score
+        inputBeginTime = schedule.beginTime
+        inputEndTime = schedule.endTime
+        inputReminder = schedule.reminder
+        inputReminderTime = schedule.reminderTime
+    }
+    
+    func updateDefaulte () {
+        inputScore = items[itemId].defaultScore
+        inputBeginTime = DateServer.combineDayTime(day: Date(), time: items[itemId].defaultBeginTime)
+        inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
+    }
+    
+    func deleteSchedule(){
+        items[itemId].scoreTotal -= schedule.scoreGained
+        items[itemId].minutesTotal -= schedule.minutesGained
+        items[itemId].checkedTotal -= schedule.checked ? 1 : 0
+        viewContext.delete(schedule)
+        do{
+            changeScheduleViewPresented = false
+            try viewContext.save()
+            propertiesModel.updateScores()
+            print("saved")
+        } catch {
+            print("Cannot generate new item")
+            print(error)
+        }
+    }
+    
+    func saveSchedule(){
+        
+        items[itemId].lastUse = Date()
+        items[itemId].defaultBeginTime = inputBeginTime
+        items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
+        items[itemId].defaultScore = inputScore
+        
+            schedule.items = items[itemId]
+            schedule.beginTime = inputBeginTime
+            schedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
+            schedule.score = inputScore
+            schedule.reminder = inputReminder
+            schedule.reminderTime = inputReminderTime
+            do{
+                try viewContext.save()
+                print("saved")
+                propertiesModel.updateScores()
+                changeScheduleViewPresented = false
+            } catch {
+                print("Cannot save item")
+                print(error)
+            }
+    }
+    
     var body: some View {
         NavigationView(){
             // Index may overflow when deleting the last element, need to check
@@ -47,7 +102,7 @@ struct ChangeScheduleView: View {
                                         .tag(r)
                                 }
                             }.onChange(of: itemId, perform: { value in
-                                inputScore = items[itemId].defaultScore
+                                updateDefaulte ()
                             })
                         }
                         // MARK: score (Stepper)
@@ -86,20 +141,7 @@ struct ChangeScheduleView: View {
                     
                     Button(action:
                             {
-                                items[itemId].scoreTotal -= schedule.scoreGained
-                                items[itemId].minutesTotal -= schedule.minutesGained
-                                items[itemId].checkedTotal -= schedule.checked ? 1 : 0
-                                viewContext.delete(schedule)
-                                do{
-                                    changeScheduleViewPresented = false
-                                    try viewContext.save()
-                                    propertiesModel.updateScores()
-                                    print("saved")
-                                } catch {
-                                    print("Cannot generate new item")
-                                    print(error)
-                                }
-                                
+                                deleteSchedule()
                             }, label: {
                                 Text("Delete this event")
                             })
@@ -109,21 +151,7 @@ struct ChangeScheduleView: View {
                     leading: Button(action:{ changeScheduleViewPresented = false}, label: {
                         Text("Cancel")
                     }), trailing: Button(action:{
-                        schedule.items = items[itemId]
-                        schedule.beginTime = inputBeginTime
-                        schedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
-                        schedule.score = inputScore
-                        schedule.reminder = inputReminder
-                        schedule.reminderTime = inputReminderTime
-                        do{
-                            try viewContext.save()
-                            print("saved")
-                            propertiesModel.updateScores()
-                            changeScheduleViewPresented = false
-                        } catch {
-                            print("Cannot save item")
-                            print(error)
-                        }
+                        saveSchedule()
                     }, label: {
                         Text("Save")
                     }))
@@ -132,12 +160,7 @@ struct ChangeScheduleView: View {
             }
         }
         .onAppear(){
-            itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
-            inputScore = schedule.score
-            inputBeginTime = schedule.beginTime
-            inputEndTime = schedule.endTime
-            inputReminder = schedule.reminder
-            inputReminderTime = schedule.reminderTime
+            initValues()
         }
         
     }

@@ -121,7 +121,7 @@ struct ScheduleDayView: View {
                         )
                 }
                 .sheet(isPresented: $addViewPresented, content: {
-                    AddScheduleView(addScheduleViewPresented: $addViewPresented)
+                    AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
                 })
                 
                 

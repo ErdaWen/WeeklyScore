@@ -15,6 +15,7 @@ struct AddScheduleView: View {
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
         animation: .default)
     private var items: FetchedResults<Item>
+    var initDate: Date
     
     @State var itemId = 0
     @State var inputScore:Int64 = 0
@@ -29,7 +30,7 @@ struct AddScheduleView: View {
     
     func updateDefaulte () {
         inputScore = items[itemId].defaultScore
-        inputBeginTime = DateServer.combineDayTime(day: Date(), time: items[itemId].defaultBeginTime)
+        inputBeginTime = DateServer.combineDayTime(day: initDate, time: items[itemId].defaultBeginTime)
         inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
     }
     
@@ -37,6 +38,7 @@ struct AddScheduleView: View {
         items[itemId].lastUse = Date()
         items[itemId].defaultBeginTime = inputBeginTime
         items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
+        items[itemId].defaultScore = inputScore
         
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
@@ -147,9 +149,9 @@ struct AddScheduleView: View {
     }
 }
 
-struct AddEntryView_Previews: PreviewProvider {
-    @State static var dummyBool = true
-    static var previews: some View {
-        AddScheduleView(addScheduleViewPresented:$dummyBool)
-    }
-}
+//struct AddEntryView_Previews: PreviewProvider {
+//    @State static var dummyBool = true
+//    static var previews: some View {
+//        AddScheduleView(addScheduleViewPresented:$dummyBool)
+//    }
+//}
