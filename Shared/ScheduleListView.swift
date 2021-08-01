@@ -71,13 +71,6 @@ struct ScheduleListView: View {
                                 }
 
                             }// end divider ForEach
-//
-//                            ForEach(schedules){ schedule in
-//
-//                                    ScheduleTileView(schedule: schedule)
-//                                        .frame(height: zoomin ? 65 : 45)
-//
-//                            }
                         }
                         .padding(.horizontal,20)
                     }

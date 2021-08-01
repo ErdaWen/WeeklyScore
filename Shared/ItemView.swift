@@ -39,35 +39,52 @@ struct ItemView: View {
             ScrollView(){
                 VStack(spacing:20){
                     // Habits
-                    ForEach(items) { item in
-                        if !item.hidden {
-                            ItemTileView(item: item)
+
+                        let itemFiltered = items.filter { item in
+                            return item.hidden == false
                         }
-                    }
-                    //MARK: Show archive button
-                    Button {
-                        showArchive.toggle()
-                    } label: {
-                        if showArchive{
-                            Text("Hide archived habits...")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                        } else {
-                            Text("Show archived habits...")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                        }
-                    }.padding(.top,20)
-                    //MARK: Archived habits
-                    if showArchive{
-                        ForEach(items) { item in
-                            if item.hidden {
+                        ForEach(itemFiltered) { item in
                                 ItemTileView(item: item)
+                        }
+
+                    
+                    let itemFiltered = items.filter { item in
+                        return item.hidden == true
+                    }
+                    if itemFiltered.count > 0 {
+                        //MARK: Show archive button
+                        Button {
+                            showArchive.toggle()
+                        } label: {
+                            if showArchive{
+                                Text("Hide archived habits...")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color("text_black"))
+                                    .fontWeight(.light)
+                            } else {
+                                Text("Show \(itemFiltered.count) archived " + (itemFiltered.count == 1 ? "habit..." : "habits..."))
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color("text_black"))
+                                    .fontWeight(.light)
+                            }
+                        }.padding(.top,20)
+                        //MARK: Archived habits
+                        if showArchive{
+                            ForEach(items) { item in
+                                if item.hidden {
+                                    ItemTileView(item: item)
+                                }
                             }
                         }
+                    } else {
+                        Text("No archived habits")
+                            .font(.system(size: 18))
+                            .foregroundColor(Color("text_black"))
+                            .fontWeight(.light)
+                            .padding(.top,20)
                     }
+
+                    
                     Spacer()
                 }
 

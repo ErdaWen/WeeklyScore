@@ -114,14 +114,24 @@ struct AddScheduleView: View {
                     }))
             } else {
                 // Habit list is empty
-                Text("No habit, add habit first")
+                VStack{
+                    Text("You have no habits, add habit first")
+                    Button {
+                        addScheduleViewPresented = false
+                    } label: {
+                        Text("OK")
+                    }
+
+                }
             }
             
         }.onAppear(){
-            itemId = 0
-            inputScore = items[itemId].defaultScore
-            inputBeginTime = DateServer.startOfThisWeek()
-            inputEndTime = DateServer.startOfThisWeek() + 3600
+            if items.count > 0{
+                itemId = 0
+                inputScore = items[itemId].defaultScore
+                inputBeginTime = DateServer.startOfToday()
+                inputEndTime = DateServer.startOfToday() + 3600
+            }
         }
     }
 }
