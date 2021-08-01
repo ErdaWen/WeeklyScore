@@ -65,6 +65,21 @@ class DateServer {
         return today
     }
     
+    static func combineDayTime(day:Date,time:Date) -> Date {
+        let calendar = Calendar.current
+        var dayComponents = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: day)
+        let timeComponents = calendar.dateComponents(
+            Set<Calendar.Component>([.hour, .minute]), from: time)
+       
+        dayComponents.hour = timeComponents.hour
+        dayComponents.minute = timeComponents.minute
+        
+        let combinedDate = calendar.date(from: dayComponents)!
+        return combinedDate
+        
+    }
+    
     //MARK: Functions that generate string arrays for date picker
     
     static func generateDays(offset:Int) -> [Int]{

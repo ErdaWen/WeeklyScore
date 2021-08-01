@@ -19,9 +19,6 @@ struct AddItemView: View {
     @State var inputDurationBased = true
     @State var inputTitleIcon = "☑️"
     @State var inputTitle = ""
-    @State var inputDefaultScore:Int64 = 10
-    @State var inputDefaultMinutes:Int64 = 60
-    @State var inputDefaultMinutesString = "60"
     @State var tagid = 0
     
     @Binding var addItemViewPresented:Bool
@@ -48,8 +45,9 @@ struct AddItemView: View {
                     newItem.titleIcon = inputTitleIcon
                     newItem.title = inputTitle
                     newItem.durationBased = inputDurationBased
-                    newItem.defaultMinutes = inputDurationBased ? inputDefaultMinutes : 0
-                    newItem.defaultScore = inputDefaultScore
+                    newItem.defaultMinutes = inputDurationBased ? 60 : 0
+                    newItem.defaultScore = 10
+                    newItem.defaultBeginTime = DateServer.startOfToday() + 28800
                     newItem.checkedTotal = 0
                     newItem.minutesTotal = 0
                     newItem.scoreTotal = 0
@@ -156,61 +154,62 @@ struct AddItemView: View {
                     }.frame(width: 300, height: 40,alignment: .center)
                     
                     
-                    HStack(spacing:10){
-                        // MARK: Default score
-                        VStack(alignment: .leading, spacing: 8.0){
-                            Text("Default score")
-                                .font(.system(size: 15))
-                                .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                            ZStack(alignment: .center){
-                                RoundedRectangle(cornerRadius: 8.0)
-                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                                HStack{
-                                    Text("\(inputDefaultScore)")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(Color("text_black"))
-                                    Spacer()
-                                    Stepper("", value: $inputDefaultScore, in: 0...20)
-                                        .frame(width:100,height: 50)
-                                }
-                                .padding(.leading,10)
-                                .padding(.trailing,10)
-                            }
-                        }
-                        
-                        // MARK:Default minutes
-                        if inputDurationBased{
-                            VStack(alignment: .leading, spacing: 7.0){
-                                Text("Default minuite")
-                                    .font(.system(size: 15))
-                                    .foregroundColor(Color("text_black"))
-                                    .fontWeight(.light)
-                                ZStack(alignment: .center){
-                                    RoundedRectangle(cornerRadius: 8.0)
-                                        .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                                    TextField("Minute", text: $inputDefaultMinutesString)
-                                        // the input is a string
-                                        .keyboardType(.numberPad)
-                                        // update actual var here
-                                        .onChange(of: inputDefaultMinutesString, perform: { value in
-                                            if let inputnumber = Double(inputDefaultMinutesString) {
-                                                // protect the number being Int
-                                                inputDefaultMinutesString = String(Int(inputnumber))
-                                                inputDefaultMinutes = Int64(inputnumber)
-                                            } else {
-                                                inputDefaultMinutesString = "0"
-                                                inputDefaultMinutes = 0
-                                            }
-                                        })
-                                        .font(.system(size: 20))
-                                        .foregroundColor(Color("text_black"))
-                                        .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
-                                }
-                                .frame(height: 50)
-                            }
-                        }
-                    }.animation(.default)
+//                    HStack(spacing:10){
+//                        // MARK: Default score
+//                        VStack(alignment: .leading, spacing: 8.0){
+//                            Text("Default score")
+//                                .font(.system(size: 15))
+//                                .foregroundColor(Color("text_black"))
+//                                .fontWeight(.light)
+//                            ZStack(alignment: .center){
+//                                RoundedRectangle(cornerRadius: 8.0)
+//                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
+//                                HStack{
+//                                    Text("\(inputDefaultScore)")
+//                                        .font(.system(size: 20))
+//                                        .foregroundColor(Color("text_black"))
+//                                    Spacer()
+//                                    Stepper("", value: $inputDefaultScore, in: 0...20)
+//                                        .frame(width:100,height: 50)
+//                                }
+//                                .padding(.leading,10)
+//                                .padding(.trailing,10)
+//                            }
+//                        }
+//
+//                        // MARK:Default minutes
+//                        if inputDurationBased{
+//                            VStack(alignment: .leading, spacing: 7.0){
+//                                Text("Default minuite")
+//                                    .font(.system(size: 15))
+//                                    .foregroundColor(Color("text_black"))
+//                                    .fontWeight(.light)
+//                                ZStack(alignment: .center){
+//                                    RoundedRectangle(cornerRadius: 8.0)
+//                                        .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
+//                                    TextField("Minute", text: $inputDefaultMinutesString)
+//                                        // the input is a string
+//                                        .keyboardType(.numberPad)
+//                                        // update actual var here
+//                                        .onChange(of: inputDefaultMinutesString, perform: { value in
+//                                            if let inputnumber = Double(inputDefaultMinutesString) {
+//                                                // protect the number being Int
+//                                                inputDefaultMinutesString = String(Int(inputnumber))
+//                                                inputDefaultMinutes = Int64(inputnumber)
+//                                            } else {
+//                                                inputDefaultMinutesString = "0"
+//                                                inputDefaultMinutes = 0
+//                                            }
+//                                        })
+//                                        .font(.system(size: 20))
+//                                        .foregroundColor(Color("text_black"))
+//                                        .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
+//                                }
+//                                .frame(height: 50)
+//                            }
+//                        }
+//                    }//End Default settings
+//                    .animation(.default)
                     
                     //MARK: Tags
                     VStack(alignment:.leading, spacing:7.0){

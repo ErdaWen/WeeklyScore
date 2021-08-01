@@ -12,7 +12,7 @@ struct AddScheduleView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     @FetchRequest(
-        sortDescriptors: [],
+        sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
         animation: .default)
     private var items: FetchedResults<Item>
     
@@ -25,6 +25,42 @@ struct AddScheduleView: View {
     @State var showEndTimeWarning = false
     
     @Binding var addScheduleViewPresented:Bool
+    
+    
+    func updateDefaulte () {
+        inputScore = items[itemId].defaultScore
+        inputBeginTime = DateServer.combineDayTime(day: Date(), time: items[itemId].defaultBeginTime)
+        inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
+    }
+    
+    func saveSchedule() {
+        items[itemId].lastUse = Date()
+        items[itemId].defaultBeginTime = inputBeginTime
+        items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
+        
+        let newSchedule = Schedule(context: viewContext)
+        newSchedule.id = UUID()
+        newSchedule.beginTime = inputBeginTime
+        newSchedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
+        newSchedule.items = items[itemId]
+        newSchedule.score = inputScore
+        newSchedule.hidden = false
+        newSchedule.statusDefault = true
+        newSchedule.checked = false
+        newSchedule.scoreGained = 0
+        newSchedule.minutesGained = 0
+        newSchedule.reminder = inputReminder
+        newSchedule.reminderTime = inputReminderTime
+        do{
+            try viewContext.save()
+            print("Saved")
+            propertiesModel.updateScores()
+            addScheduleViewPresented = false
+        } catch {
+            print("Cannot generate new item")
+            print(error)
+        }
+    }
     
     var body: some View {
         
@@ -40,7 +76,7 @@ struct AddScheduleView: View {
                                     .tag(r)
                             }
                         }.onChange(of: itemId, perform: { value in
-                            inputScore = items[itemId].defaultScore
+                            updateDefaulte ()
                         })
                     }
                     // MARK: score (Stepper)
@@ -84,30 +120,7 @@ struct AddScheduleView: View {
                     leading: Button(action:{ addScheduleViewPresented = false}, label: {
                         Text("Cancel")
                     }), trailing: Button(action:{
-                        items[itemId].lastUse = Date()
-                        
-                        let newSchedule = Schedule(context: viewContext)
-                        newSchedule.id = UUID()
-                        newSchedule.beginTime = inputBeginTime
-                        newSchedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
-                        newSchedule.items = items[itemId]
-                        newSchedule.score = inputScore
-                        newSchedule.hidden = false
-                        newSchedule.statusDefault = true
-                        newSchedule.checked = false
-                        newSchedule.scoreGained = 0
-                        newSchedule.minutesGained = 0
-                        newSchedule.reminder = inputReminder
-                        newSchedule.reminderTime = inputReminderTime
-                        do{
-                            try viewContext.save()
-                            print("Saved")
-                            propertiesModel.updateScores()
-                            addScheduleViewPresented = false
-                        } catch {
-                            print("Cannot generate new item")
-                            print(error)
-                        }
+                        saveSchedule()
                         
                     }, label: {
                         Text("Add")
@@ -128,9 +141,7 @@ struct AddScheduleView: View {
         }.onAppear(){
             if items.count > 0{
                 itemId = 0
-                inputScore = items[itemId].defaultScore
-                inputBeginTime = DateServer.startOfToday()
-                inputEndTime = DateServer.startOfToday() + 3600
+                updateDefaulte ()
             }
         }
     }
