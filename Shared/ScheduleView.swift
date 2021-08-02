@@ -17,7 +17,7 @@ struct ScheduleView: View {
     // week offset
     @State var weekFromNow = 0
     // day offset
-    @State var dayFromDay1 = 0
+    @State var dayFromDay1 = -1
     
     // String arrays for title and day picker dispaly
     @State var startDay = ""
