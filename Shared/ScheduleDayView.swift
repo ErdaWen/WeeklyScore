@@ -16,6 +16,10 @@ struct ScheduleDayView: View {
     @State var addViewPresented = false
     @State var interCord = 50.0
     
+    @GestureState var pinchStarted = false
+    //@State var pinchValue: CGFloat = 0
+    @State var lastInterCord = 50.0
+    
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 16
@@ -90,7 +94,6 @@ struct ScheduleDayView: View {
                 .padding(.trailing , 20)
             } // end scrollView
             
-            
             //MARK: Buttons
             HStack{
                 Spacer()
@@ -136,7 +139,27 @@ struct ScheduleDayView: View {
                 }
             }
             
-        }// end button + scroll ZStack
+        }
+        .gesture(
+            MagnificationGesture()
+//                    .updating($pinchStarted, body: { value, out, _ in
+//                        out = true
+//                    })
+                .onChanged({ value in
+
+                   print("value: \(value)")
+                        interCord = min(max(lastInterCord * Double(value),30),80)
+
+          
+                })
+                .onEnded({ value in
+                    lastInterCord = interCord
+
+
+                })
+        )
+        
+        // end button + scroll ZStack
         
     }
 }

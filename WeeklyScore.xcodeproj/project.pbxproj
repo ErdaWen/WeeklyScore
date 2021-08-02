@@ -19,8 +19,6 @@
 		003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		0072756626B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
 		0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
-		0072756C26B6179600FAA32D /* ScheduleListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756B26B6179600FAA32D /* ScheduleListEntry.swift */; };
-		0072756D26B6179600FAA32D /* ScheduleListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756B26B6179600FAA32D /* ScheduleListEntry.swift */; };
 		0072757226B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
 		0072757326B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
 		0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
@@ -76,7 +74,6 @@
 		0034918E26A7F48F001B8DBB /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		0072756526B32A7B00FAA32D /* ScheduleTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTileView.swift; sourceTree = "<group>"; };
-		0072756B26B6179600FAA32D /* ScheduleListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListEntry.swift; sourceTree = "<group>"; };
 		0072757126B65D0E00FAA32D /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		0072757426B7190300FAA32D /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -169,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
-				0072756B26B6179600FAA32D /* ScheduleListEntry.swift */,
 				009C422226AF3C2D00A783F0 /* ScheduleListView.swift */,
 				0072757126B65D0E00FAA32D /* ScheduleDayView.swift */,
 				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
@@ -383,7 +379,6 @@
 				008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
-				0072756C26B6179600FAA32D /* ScheduleListEntry.swift in Sources */,
 				0072757B26B7280600FAA32D /* CordServer.swift in Sources */,
 				0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
@@ -419,7 +414,6 @@
 				008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
-				0072756D26B6179600FAA32D /* ScheduleListEntry.swift in Sources */,
 				0072757C26B7280600FAA32D /* CordServer.swift in Sources */,
 				0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
 				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,

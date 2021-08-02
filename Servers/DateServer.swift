@@ -147,7 +147,6 @@ class DateServer {
         let calendar = Calendar.current
         let hours = calendar.component(.hour, from:date)
         let minutes = calendar.component(.minute, from: date)
-        print("date:" + printShortTime(inputTime: date) + ", \(60 * hours + minutes)")
         return (60 * hours + minutes)
     }
     
