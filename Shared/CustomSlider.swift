@@ -28,9 +28,9 @@ struct CustomSlider: View {
                     Circle()
                         .foregroundColor(Color("text_black"))
                         .frame(width: 8 )
-                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue)))
+                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue))-4)
                 }
-                .frame(height:10)
+                .frame(height:15)
                 .gesture(DragGesture(minimumDistance: 0)
                             .onChanged({ value in
                                 interCord

@@ -39,6 +39,7 @@ struct ScheduleView: View {
     let hPicker:CGFloat = 45
     let pPickerTextVer:CGFloat = 3
     let mButton:CGFloat = 10
+    let minDragDist:CGFloat = 40
 
     
     func updateDate() {
@@ -194,11 +195,29 @@ struct ScheduleView: View {
                 // Week view need to filter out the schedules with BEGIN time within the week range
                 ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                          , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
-                
+                    .gesture(DragGesture(minimumDistance: minDragDist)
+                                .onEnded({ value in
+                                    if value.translation.width < 0{
+                                        dayFromDay1 += 1
+                                        updateDate()
+                                    }
+                                }))
+
             } else {
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
                 ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                         , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
+                    .gesture(DragGesture(minimumDistance: minDragDist)
+                                .onEnded({ value in
+                                    if value.translation.width < 0{
+                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
+                                        updateDate()
+                                    }
+                                    if value.translation.width > 0{
+                                        dayFromDay1 -= 1
+                                        updateDate()
+                                    }
+                                }))
             } // end main content
             
             // Push things upward
