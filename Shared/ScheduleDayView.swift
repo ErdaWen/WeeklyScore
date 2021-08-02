@@ -147,7 +147,8 @@ struct ScheduleDayView: View {
                     Spacer()
                     CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
                         .padding(.horizontal,100)
-                        .frame(height:20)
+                        .padding(.bottom,15)
+                        .frame(height:15)
                 }
                 
             }         // end button + scroll ZStack

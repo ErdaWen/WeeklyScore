@@ -13,25 +13,39 @@ struct CustomSlider: View {
     var maxValue:Double
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .foregroundColor(Color("text_black").opacity(0.3))
-                    .frame(height:2)
-                Circle()
-                    .foregroundColor(Color("text_black"))
-                    .frame(width: 8 )
-                    .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue)))
-            }
-            .frame(height:10)
-            .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged({ value in
-                            interCord
-                                = min(max(minValue,
-                                          minValue + Double(value.location.x) / Double(geometry.size.width) * (maxValue - minValue)
-                                ) , maxValue)
-                        }))
+        HStack(alignment: .center, spacing: 5){
+            
+            Image(systemName: "minus.magnifyingglass")
+                .resizable().scaledToFit()
+                .frame(height:15)
+                .foregroundColor(Color("text_black").opacity(0.3))
+                
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .foregroundColor(Color("text_black").opacity(0.3))
+                        .frame(height:2)
+                    Circle()
+                        .foregroundColor(Color("text_black"))
+                        .frame(width: 8 )
+                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue)))
+                }
+                .frame(height:10)
+                .gesture(DragGesture(minimumDistance: 0)
+                            .onChanged({ value in
+                                interCord
+                                    = min(max(minValue,
+                                              minValue + Double(value.location.x) / Double(geometry.size.width) * (maxValue - minValue)
+                                    ) , maxValue)
+                            }))
+            } // end geoReader
+            
+            Image(systemName: "plus.magnifyingglass")
+                .resizable().scaledToFit()
+                .frame(height:15)
+                .foregroundColor(Color("text_black").opacity(0.3))
         }
+        
         
     }
 }
