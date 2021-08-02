@@ -42,6 +42,8 @@ class Initializer: ObservableObject{
         UserDefaults.standard.set(3,forKey:"weekStartDay")
         UserDefaults.standard.set(false,forKey: "zoomedIn")
         UserDefaults.standard.set(0,forKey: "autoCompleteMode")
+        UserDefaults.standard.set(false,forKey: "showLocation")
+        UserDefaults.standard.set(30,forKey: "maxScore")
     }
     
     func buildData(){

@@ -20,6 +20,8 @@ struct ChangeScheduleView: View {
     
     var schedule: Schedule
     
+    let maxScore = max(UserDefaults.standard.integer(forKey: "maxScore"),10)
+    
     @State var itemId = 0
     @State var inputScore:Int64 = 0
     @State var inputBeginTime = Date()
@@ -106,7 +108,7 @@ struct ChangeScheduleView: View {
                             })
                         }
                         // MARK: score (Stepper)
-                        Stepper("Score: \(inputScore)", value: $inputScore, in: 0...20)
+                        Stepper("Score: \(inputScore)", value: $inputScore, in: 0...Int64(maxScore))
                         // MARK: begin time and end time picker
                         if items[itemId].durationBased {
                             DatePicker("Starts", selection: $inputBeginTime)

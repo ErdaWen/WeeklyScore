@@ -38,12 +38,12 @@ struct ScheduleListView: View {
                                     if dayLookingAt == DateServer.startOfToday() {
                                         if schedulesFiltered.count == 0 {
                                             Text("No schedules for today")
-                                                .foregroundColor(Color("text_black").opacity(0.5))
+                                                .foregroundColor(Color("text_black"))
                                                 .font(.system(size: 12))
                                                 .padding(.top,5)
                                         } else {
                                             Text("Today")
-                                                .foregroundColor(Color("text_black").opacity(0.5))
+                                                .foregroundColor(Color("text_black"))
                                                 .font(.system(size: 12))
                                                 .padding(.top,5)
                                         }
