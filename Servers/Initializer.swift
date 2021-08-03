@@ -44,6 +44,8 @@ class Initializer: ObservableObject{
         UserDefaults.standard.set(0,forKey: "autoCompleteMode")
         UserDefaults.standard.set(false,forKey: "showLocation")
         UserDefaults.standard.set(30,forKey: "maxScore")
+        UserDefaults.standard.set(false,forKey: "onDayView")
+
     }
     
     func buildData(){
