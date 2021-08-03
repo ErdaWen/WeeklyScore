@@ -78,7 +78,7 @@ struct ScheduleListView: View {
                         }// end if
                     } //end ScheduleView
                     .onAppear(){
-                        scrollView.scrollTo(2,anchor: .top)
+                        scrollView.scrollTo(2,anchor: .center)
                     }
                     .padding(.horizontal,20)
                     .animation(.default)

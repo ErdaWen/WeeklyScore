@@ -131,6 +131,12 @@ class DateServer {
         return date
     }
     
+    static func genrateDateStemp (daysOfWeek: Int) -> Date {
+        var date = startOfThisWeek()
+        date = Calendar.current.date(byAdding: .day, value: daysOfWeek, to: date)!
+        return date
+    }
+    
     static func genrateDateStemp (startOfWeek:Date, daysOfWeek: Int) -> Date {
         var date = startOfWeek
         date = Calendar.current.date(byAdding: .day, value: daysOfWeek, to: date)!

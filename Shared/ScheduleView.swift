@@ -49,6 +49,11 @@ struct ScheduleView: View {
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
         propertiesModel.startWeek = DateServer.genrateDateStemp(offset: weekFromNow)
         propertiesModel.updateScores()
+        if dayFromDay1 == -1{
+            UserDefaults.standard.set(false,forKey: "dayView")
+        } else {
+            UserDefaults.standard.set(true, forKey: "dayView")
+        }
     }
     
     var body: some View {
@@ -104,6 +109,7 @@ struct ScheduleView: View {
                     //MARK: Week minus
                     Button {
                         weekFromNow -= 1
+                        dayFromDay1 = -1
                         updateDate()
                     } label: {
                         Image(systemName: "arrowtriangle.backward.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
@@ -115,6 +121,7 @@ struct ScheduleView: View {
                     //MARK: Week restore
                     Button {
                         weekFromNow = 0
+                        dayFromDay1 = -1
                         updateDate()
                     } label: {
                         Text(weekFromNow == 0 ? "This week" : "Week of " + startDay ).foregroundColor(Color("text_black")).font(.system(size: fsTitle)).fontWeight(.light)
@@ -125,6 +132,7 @@ struct ScheduleView: View {
                     //MARK: Week plus
                     Button {
                         weekFromNow += 1
+                        dayFromDay1 = -1
                         updateDate()
                     } label: {
                         Image(systemName: "arrowtriangle.right.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
@@ -195,35 +203,46 @@ struct ScheduleView: View {
                 // Week view need to filter out the schedules with BEGIN time within the week range
                 ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                          , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
-                    .gesture(DragGesture(minimumDistance: minDragDist)
-                                .onEnded({ value in
-                                    if value.translation.width < 0{
-                                        dayFromDay1 += 1
-                                        updateDate()
-                                    }
-                                }))
+//                    .gesture(DragGesture(minimumDistance: minDragDist)
+//                                .onEnded({ value in
+//                                    if value.translation.width < 0{
+//                                        dayFromDay1 += 1
+//                                        updateDate()
+//                                    }
+//                                }))
 
             } else {
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
                 ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                         , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
-                    .gesture(DragGesture(minimumDistance: minDragDist)
-                                .onEnded({ value in
-                                    if value.translation.width < 0{
-                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
-                                        updateDate()
-                                    }
-                                    if value.translation.width > 0{
-                                        dayFromDay1 -= 1
-                                        updateDate()
-                                    }
-                                }))
+//                    .gesture(DragGesture(minimumDistance: minDragDist)
+//                                .onEnded({ value in
+//                                    if value.translation.width < 0{
+//                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
+//                                        updateDate()
+//                                    }
+//                                    if value.translation.width > 0{
+//                                        dayFromDay1 -= 1
+//                                        updateDate()
+//                                    }
+//                                }))
             } // end main content
             
             // Push things upward
             Spacer()
         } // end all VStack
-        .onAppear(){updateDate()}
+        .onAppear(){
+            let dayView = UserDefaults.standard.bool(forKey: "dayView")
+            if dayView {
+                for r in 0...6 {
+                    if DateServer.genrateDateStemp(daysOfWeek: r) == DateServer.startOfToday(){
+                        dayFromDay1 = r
+                    }
+                }
+            }
+            updateDate()
+            
+        }
         .animation(.default)
     }
 }
