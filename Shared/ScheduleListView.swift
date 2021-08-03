@@ -38,12 +38,12 @@ struct ScheduleListView: View {
                                     if dayLookingAt == DateServer.startOfToday() {
                                         if schedulesFiltered.count == 0 {
                                             Text("No schedules for today")
-                                                .foregroundColor(Color("text_black"))
+                                                .foregroundColor(Color("text_red"))
                                                 .font(.system(size: 12))
                                                 .padding(.top,5)
                                         } else {
                                             Text("Today")
-                                                .foregroundColor(Color("text_black"))
+                                                .foregroundColor(Color("text_red"))
                                                 .font(.system(size: 12))
                                                 .padding(.top,5)
                                         }
@@ -76,18 +76,6 @@ struct ScheduleListView: View {
                             }// end divider ForEach
                         }
                         .padding(.horizontal,20)
-                    }
-                    else {
-                        
-                            VStack(){
-                                Spacer()
-                                Text("No schedules for selected week")
-                                    .foregroundColor(Color("text_black"))
-                                    .font(.system(size: 18))
-                                    .fontWeight(.light)
-                                Spacer()
-                            }
-                        
                     }
                 } //end ScoreView
                 .animation(.default)
@@ -141,6 +129,19 @@ struct ScheduleListView: View {
                 } //end Buttons HStack
                 .padding(.top,mButtonUp)
 
+                if schedules.count == 0 {
+                    
+                        VStack(){
+                            Spacer()
+                            Text("No schedules for selected week")
+                                .foregroundColor(Color("text_black"))
+                                .font(.system(size: 18))
+                                .fontWeight(.light)
+                            Spacer()
+                        }
+                    
+                }
+                
                 
             }
             

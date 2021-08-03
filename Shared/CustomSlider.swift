@@ -13,11 +13,11 @@ struct CustomSlider: View {
     var maxValue:Double
     
     var body: some View {
-        HStack(alignment: .center, spacing: 5){
+        HStack(alignment: .bottom, spacing: 5){
             
             Image(systemName: "minus.magnifyingglass")
                 .resizable().scaledToFit()
-                .frame(height:15)
+                .frame(height:18)
                 .foregroundColor(Color("text_black").opacity(0.3))
                 
             GeometryReader { geometry in
@@ -27,10 +27,10 @@ struct CustomSlider: View {
                         .frame(height:2)
                     Circle()
                         .foregroundColor(Color("text_black"))
-                        .frame(width: 8 )
-                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue))-4)
+                        .frame(width: 10 )
+                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue))-5)
                 }
-                .frame(height:15)
+                .frame(height:55)
                 .gesture(DragGesture(minimumDistance: 0)
                             .onChanged({ value in
                                 interCord
@@ -42,7 +42,7 @@ struct CustomSlider: View {
             
             Image(systemName: "plus.magnifyingglass")
                 .resizable().scaledToFit()
-                .frame(height:15)
+                .frame(height:18)
                 .foregroundColor(Color("text_black").opacity(0.3))
         }
         
