@@ -23,13 +23,15 @@ struct ScheduleDayView: View {
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 16
+    let mTitleButton:CGFloat = 5
+    let topSpacing:CGFloat = 30
     
     var body: some View {
         ScrollViewReader { scrollview in
             ZStack(alignment: .top){
                 ScrollView{
                     Spacer()
-                        .frame(height:30)
+                        .frame(height:topSpacing)
                     ZStack(alignment: .topLeading){
                         //MARK: Timeline background
                         ForEach (0...24, id:\.self){ r in
@@ -107,6 +109,7 @@ struct ScheduleDayView: View {
                         Image(systemName: "plus.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
+                            .padding(.vertical, mTitleButton)
                             .foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
@@ -123,6 +126,7 @@ struct ScheduleDayView: View {
                         Image(systemName: "plus.square.on.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
+                            .padding(.vertical, mTitleButton)
                             .foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
@@ -146,7 +150,8 @@ struct ScheduleDayView: View {
                 VStack{
                     Spacer()
                     CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                        .padding(.horizontal,100)
+                        .padding(.leading,80)
+                        .padding(.trailing,70)
                         .padding(.bottom,18)
                         .frame(height:55)
                 }

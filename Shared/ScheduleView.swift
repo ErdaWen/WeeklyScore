@@ -62,12 +62,12 @@ struct ScheduleView: View {
             //MARK: Scores
             HStack(spacing:mScores){
                 if propertiesModel.deductScoreThisWeek != 0 {
-                    Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red")).fontWeight(.light)
+                    Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red"))
                     Text(",").font(.system(size: fsTitle)).foregroundColor(Color("text_black")).fontWeight(.light)
                 }
-                Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green")).fontWeight(.light)
+                Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green"))
                 Image(systemName: "line.diagonal").foregroundColor(Color("text_black"))
-                Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black")).fontWeight(.light)
+                Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black"))
             }
             .padding(.bottom, mScoreTitle)
             .onAppear(){
@@ -155,11 +155,11 @@ struct ScheduleView: View {
                     HStack(spacing:0){
                         //MARK: List icon
                         VStack(alignment: .center, spacing: 2){
-                            Image(systemName: "list.dash").resizable().scaledToFit().padding(.top,6).frame(width: geo.frame(in: .global).width / 8 - 20 )
+                            Image(systemName: "list.dash").resizable().scaledToFit().padding(.top,8).frame(width: geo.frame(in: .global).width / 8 - 20, height:20 )
                             // hide text "list" when selected
                             if (dayFromDay1 != -1)
                             {
-                                Text("List").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 6)
+                                Text("List").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
                             }
                         }
                         .frame(width: geo.frame(in: .global).width / 8 )
@@ -174,11 +174,11 @@ struct ScheduleView: View {
                             VStack(alignment: .center, spacing: mDateWeekday){
                                 
                                 Text("\(dayNumbers[r])")
-                                    .font(.system(size: fsTitle)).fontWeight(.light)
+                                    .font(.system(size: fsTitle)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
                                     .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
                                     
                                 Text("\(weekdayNumbers[r])")
-                                    .font(.system(size: fsSub)).fontWeight(.light)
+                                    .font(.system(size: fsSub)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
                                     .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
                             }
                             .animation(.none)
@@ -213,19 +213,22 @@ struct ScheduleView: View {
 
             } else {
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
-                                                        , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
-//                    .gesture(DragGesture(minimumDistance: minDragDist)
-//                                .onEnded({ value in
-//                                    if value.translation.width < 0{
-//                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
-//                                        updateDate()
-//                                    }
-//                                    if value.translation.width > 0{
-//                                        dayFromDay1 -= 1
-//                                        updateDate()
-//                                    }
-//                                }))
+                withAnimation{
+                    ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
+                                                            , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
+    //                    .gesture(DragGesture(minimumDistance: minDragDist)
+    //                                .onEnded({ value in
+    //                                    if value.translation.width < 0{
+    //                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
+    //                                        updateDate()
+    //                                    }
+    //                                    if value.translation.width > 0{
+    //                                        dayFromDay1 -= 1
+    //                                        updateDate()
+    //                                    }
+    //                                }))
+                }
+                
             } // end main content
             
             // Push things upward

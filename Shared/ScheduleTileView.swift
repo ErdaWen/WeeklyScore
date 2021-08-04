@@ -25,7 +25,7 @@ struct ScheduleTileView: View {
     let wHandle:CGFloat = 8
     let mHandle:CGFloat = 6
     let rTile:CGFloat = 8
-    let opTile:Double = 0.2
+    let opTile:Double = 0.15
     let pTextHor:CGFloat = 8
     let pTextVer:CGFloat = 5
     let pTextHorTight:CGFloat = 5
@@ -63,48 +63,52 @@ struct ScheduleTileView: View {
                         .padding(.horizontal, mHandle-2)
 
                 }
-                //MARK: Center tile
-                ZStack(alignment:.top){
-                    //MARK: Background tile
-                    RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
-                    
-                    HStack{
-                        //MARK: Title
-                        VStack{
-                            Text(schedule.items.titleIcon + " " + schedule.items.title)
-                            .foregroundColor(Color("text_black"))
-                            .font(.system(size: fsTitle))
-                            .padding(.leading, pTextHor)
-                            .padding(.top,pTextVer)
-                            Spacer()
-                        }
-
-                        Spacer()
+                
+                
+                Button {
+                        changeViewPresented = true
+                } label: {
+                    //MARK: Center tile
+                    ZStack(alignment:.top){
+                        //MARK: Background tile
+                        RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
                         
-                        //MARK: Score
-                        VStack{
-                            Spacer()
-                            if schedule.statusDefault {
-                                Text("\(schedule.score)")
-                                    .foregroundColor(Color("text_black"))
-                                    .font(.system(size: fsSub)).fontWeight(.light)
-                                    .padding(.trailing, pTextHorTight)
-                                    .padding(.bottom, pTextVer)
-                            } else {
-                                Text("\(schedule.scoreGained) / \(schedule.score)")
-                                    .foregroundColor(Color("text_black"))
-                                    .font(.system(size: fsSub))
-                                    .fontWeight(.light)
-                                    .padding(.trailing, pTextHorTight)
-                                    .padding(.bottom, pTextVer)
+                        HStack{
+                            //MARK: Title
+                            VStack{
+                                Text(schedule.items.titleIcon + " " + schedule.items.title)
+                                    .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
+                                .font(.system(size: fsTitle))
+                                .padding(.leading, pTextHor)
+                                .padding(.top,pTextVer)
+                                Spacer()
                             }
-                        }//end score VStack
-                        
-                    }
-                } // End center tile ZStack
-                .onTapGesture {
-                    changeViewPresented = true
-                }
+
+                            Spacer()
+                            
+                            //MARK: Score
+                            VStack{
+                                Spacer()
+                                if schedule.statusDefault {
+                                    Text("\(schedule.score)")
+                                        .foregroundColor(Color("text_black"))
+                                        .font(.system(size: fsSub)).fontWeight(.light)
+                                        .padding(.trailing, pTextHorTight)
+                                        .padding(.bottom, pTextVer)
+                                } else {
+                                    Text("\(schedule.scoreGained) / \(schedule.score)")
+                                        .foregroundColor(Color("text_black"))
+                                        .font(.system(size: fsSub))
+                                        .fontWeight(.light)
+                                        .padding(.trailing, pTextHorTight)
+                                        .padding(.bottom, pTextVer)
+                                }
+                            }//end score VStack
+                            
+                        }
+                    } // End center tile ZStack
+
+                }//end Button Label
                 .sheet(isPresented: $changeViewPresented) {
                     ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
                 }

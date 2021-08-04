@@ -17,7 +17,10 @@ struct ScheduleListView: View {
     
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
-    let mButtons:CGFloat = 10
+    let mButtons:CGFloat = 16
+    let mTitleButton:CGFloat = 3
+    let topSpacing:CGFloat = 40
+
     
     var body: some View {
         VStack{
@@ -25,7 +28,7 @@ struct ScheduleListView: View {
                 
                 ScrollView{
                     Spacer()
-                        .frame(height:30)
+                        .frame(height:topSpacing)
                     if schedules.count != 0{
                         VStack{
                             ForEach(0...6,id: \.self){ offDay in
@@ -39,12 +42,14 @@ struct ScheduleListView: View {
                                         if schedulesFiltered.count == 0 {
                                             Text("No schedules for today")
                                                 .foregroundColor(Color("text_red"))
+                                                .fontWeight(.bold)
                                                 .font(.system(size: 12))
                                                 .padding(.top,5)
                                         } else {
                                             Text("Today")
                                                 .foregroundColor(Color("text_red"))
                                                 .font(.system(size: 12))
+                                                .fontWeight(.bold)
                                                 .padding(.top,5)
                                         }
                                     } else if dayLookingAt == DateServer.minusOneDay(date: DateServer.startOfToday()) {
@@ -90,6 +95,7 @@ struct ScheduleListView: View {
                         Image(systemName: "plus.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
+                            .padding(.vertical, mTitleButton)
                             .foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
@@ -106,11 +112,19 @@ struct ScheduleListView: View {
                         Image(systemName: "plus.square.on.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
+                            .padding(.vertical, mTitleButton)
                             .foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
                     }
+                    
+                    Spacer()
+                } //end Buttons HStack
+                .padding(.top,mButtonUp)
+                
+                VStack{
+                    Spacer()
                     Button {
                         zoomin.toggle()
                         UserDefaults.standard.set(zoomin,forKey: "zoomedIn")
@@ -119,15 +133,14 @@ struct ScheduleListView: View {
                             Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
                                 .resizable().scaledToFit()
                                 .padding(.horizontal, mButtons).frame(height:sButton)
-                                .foregroundColor(Color("text_black"))
+                                .foregroundColor(Color("text_black").opacity(0.5))
                                 .background(
                                     RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                                 )
+                                .padding(.bottom, 20)
                         }
                     }
-                    Spacer()
-                } //end Buttons HStack
-                .padding(.top,mButtonUp)
+                }
 
                 if schedules.count == 0 {
                     
@@ -135,7 +148,7 @@ struct ScheduleListView: View {
                             Spacer()
                             Text("No schedules for selected week")
                                 .foregroundColor(Color("text_black"))
-                                .font(.system(size: 18))
+                                .font(.system(size: 15))
                                 .fontWeight(.light)
                             Spacer()
                         }
