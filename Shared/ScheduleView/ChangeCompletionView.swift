@@ -16,9 +16,6 @@ struct ChangeCompletionView: View {
     
     var schedule: Schedule
     @State var habitId = 0
-    @State var orgScoreGained:Int64 = 0
-    @State var orgMinutesGained:Int64 = 0
-    @State var orgChecked = false
     @State var checkChanged:Int64 = 0
     @State var inputScoreGained:Int64 = 0
     @State var inputMinutesGained:Int64 = 0
@@ -33,6 +30,34 @@ struct ChangeCompletionView: View {
     // passivestateChange is false if the picker is jumped because of input hour is not as required
     @State var activeStateChange = true
     
+    func saveSchedule() {
+        // Calculate check changed
+
+        if schedule.checked != inputChecked{
+            checkChanged = inputChecked ? 1 : -1
+        }
+        
+        // Execute change to habit for records
+        schedule.items.checkedTotal += checkChanged
+        schedule.items.scoreTotal += inputScoreGained - schedule.scoreGained
+        schedule.items.minutesTotal += inputMinutesGained - schedule.minutesGained
+        
+        // Execute change to entry
+        schedule.scoreGained = inputScoreGained
+        schedule.minutesGained = inputMinutesGained
+        schedule.checked = inputChecked
+        schedule.statusDefault = false
+                
+        do{
+            try viewContext.save()
+            print("saved")
+            propertiesModel.updateScores()
+            changeCompletionViewPresented = false
+        } catch {
+            print("Cannot save item")
+            print(error)
+        }
+    }
     
     var body: some View {
         NavigationView{
@@ -154,11 +179,8 @@ struct ChangeCompletionView: View {
                 inputMinutesGained = schedule.minutesGained
                 inputMinutesGainedString = String(inputMinutesGained)
                 inputChecked = schedule.checked
-                orgScoreGained = inputScoreGained
-                orgMinutesGained = inputMinutesGained
-                orgChecked = inputChecked
-                
-                itemMinute=Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+
+                itemMinute = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
                 // Calculate the complete states
                 if inputChecked {
                     if (inputMinutesGained == itemMinute) && (inputScoreGained == schedule.score) {
@@ -181,29 +203,7 @@ struct ChangeCompletionView: View {
                     Text("Cancel")
                 })
                 ,trailing: Button(action:{
-                    // Execute change to entry
-                    schedule.scoreGained = inputScoreGained
-                    schedule.minutesGained = inputMinutesGained
-                    schedule.checked = inputChecked
-                    schedule.statusDefault = false
-                    
-                    // Calculate check changed
-                    if orgChecked != inputChecked{
-                        checkChanged = inputChecked ? 1 : -1
-                    }
-                    // Execute change to habit for records
-                    schedule.items.checkedTotal += checkChanged
-                    schedule.items.scoreTotal += inputScoreGained-orgScoreGained
-                    schedule.items.minutesTotal += inputMinutesGained-orgMinutesGained
-                    do{
-                        try viewContext.save()
-                        print("saved")
-                        propertiesModel.updateScores()
-                        changeCompletionViewPresented = false
-                    } catch {
-                        print("Cannot save item")
-                        print(error)
-                    }
+                    saveSchedule()
                     
                 }, label: {
                     Text("Save")

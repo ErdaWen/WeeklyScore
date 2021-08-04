@@ -148,7 +148,7 @@ struct ScheduleListView: View {
                             Spacer()
                             Text("No schedules for selected week")
                                 .foregroundColor(Color("text_black"))
-                                .font(.system(size: 15))
+                                .font(.system(size: 18))
                                 .fontWeight(.light)
                             Spacer()
                         }

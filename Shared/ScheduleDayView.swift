@@ -23,7 +23,7 @@ struct ScheduleDayView: View {
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 16
-    let mTitleButton:CGFloat = 5
+    let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 30
     
     var body: some View {
@@ -77,13 +77,17 @@ struct ScheduleDayView: View {
                                     Text("Now")
                                         .foregroundColor(Color("text_red"))
                                         .font(.system(size: 12))
-                                        .padding(.leading, 20)
+                                        .padding(.leading, 25)
                                         .background(
                                             RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
                                         )
                                     VStack{
-                                        Divider()
-                                            .background(Color("text_red"))
+//                                        Divider()
+//                                            .background(Color("text_red"))
+//                                            .frame(height:5)
+                                        Rectangle()
+                                            .fill(Color("text_red"))
+                                            .frame(height:1.5)
                                     }
                                 }
                                 .frame(height:10)

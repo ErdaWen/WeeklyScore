@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ScheduleTileView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     var schedule:Schedule
@@ -30,6 +31,35 @@ struct ScheduleTileView: View {
     let pTextVer:CGFloat = 5
     let pTextHorTight:CGFloat = 5
     let mTileFlag:CGFloat = 3
+    
+    func saveSchedule(inputChecked:Bool, inputScoreGained:Int64, inputMinutesGained:Int64) {
+        // Calculate check changed
+        var checkChanged:Int64 = 0
+        
+        if schedule.checked != inputChecked{
+            checkChanged = inputChecked ? 1 : -1
+        }
+        
+        // Execute change to habit for records
+        schedule.items.checkedTotal += checkChanged
+        schedule.items.scoreTotal += inputScoreGained - schedule.scoreGained
+        schedule.items.minutesTotal += inputMinutesGained - schedule.minutesGained
+        
+        // Execute change to entry
+        schedule.scoreGained = inputScoreGained
+        schedule.minutesGained = inputMinutesGained
+        schedule.checked = inputChecked
+        schedule.statusDefault = false
+                
+        do{
+            try viewContext.save()
+            print("saved")
+            propertiesModel.updateScores()
+        } catch {
+            print("Cannot save item")
+            print(error)
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: mTimeTile) {
@@ -121,6 +151,10 @@ struct ScheduleTileView: View {
                             .foregroundColor(Color("text_black"))
                             .padding(.leading, mTileFlag)
                             .padding(.bottom, pTextVer)
+                            .onTapGesture {
+                                let totMin = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+                                saveSchedule(inputChecked: true, inputScoreGained: schedule.score, inputMinutesGained: totMin)
+                            }
                             .onLongPressGesture {
                                 completionViewPresented = true
                             }
@@ -132,6 +166,10 @@ struct ScheduleTileView: View {
                             .foregroundColor(Color("text_black"))
                             .padding(.leading, mTileFlag)
                             .padding(.bottom, pTextVer)
+                            .onTapGesture {
+                                let totMin = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+                                saveSchedule(inputChecked: schedule.checked ? false : true, inputScoreGained: schedule.checked ? 0: schedule.score, inputMinutesGained: schedule.checked ? 0: totMin)
+                            }
                             .onLongPressGesture {
                                 completionViewPresented = true
                             }
