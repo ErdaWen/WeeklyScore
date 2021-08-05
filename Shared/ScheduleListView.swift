@@ -13,7 +13,8 @@ struct ScheduleListView: View {
 
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
-    @State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
+    //@State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
+    @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
     
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
@@ -73,7 +74,7 @@ struct ScheduleListView: View {
                                     ForEach(schedulesFiltered){ schedule in
                                         if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
                                             ScheduleTileView(schedule: schedule, showTime:true)
-                                                .frame(height: zoomin ? 65 : 45)
+                                                .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor) + 20)
                                         }
                                     }
                                 }
@@ -125,22 +126,31 @@ struct ScheduleListView: View {
                 
                 VStack{
                     Spacer()
-                    Button {
-                        zoomin.toggle()
-                        UserDefaults.standard.set(zoomin,forKey: "zoomedIn")
-                    } label: {
-                        if schedules.count != 0 {
-                            Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
-                                .resizable().scaledToFit()
-                                .padding(.horizontal, mButtons).frame(height:sButton)
-                                .padding(.vertical, 20)
-                                .foregroundColor(Color("text_black").opacity(0.5))
-                                .background(
-                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 15)
-                                )
-                        }
-                    }
+                    CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                        .padding(.leading,80)
+                        .padding(.trailing,70)
+                        .padding(.bottom,18)
+                        .frame(height:55)
                 }
+                
+//                VStack{
+//                    Spacer()
+//                    Button {
+//                        zoomin.toggle()
+//                        UserDefaults.standard.set(zoomin,forKey: "zoomedIn")
+//                    } label: {
+//                        if schedules.count != 0 {
+//                            Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
+//                                .resizable().scaledToFit()
+//                                .padding(.horizontal, mButtons).frame(height:sButton)
+//                                .padding(.vertical, 20)
+//                                .foregroundColor(Color("text_black").opacity(0.5))
+//                                .background(
+//                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 15)
+//                                )
+//                        }
+//                    }
+//                }
 
                 if schedules.count == 0 {
                     

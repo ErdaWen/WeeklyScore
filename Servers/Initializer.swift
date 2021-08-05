@@ -51,6 +51,7 @@ class Initializer: ObservableObject{
         UserDefaults.standard.set(30,forKey: "maxScore")
         // Record whether shows calendar view by default
         UserDefaults.standard.set(true,forKey: "onDayView")
+        UserDefaults.standard.set(12.5, forKey: "listScaleFactor")
 
     }
     

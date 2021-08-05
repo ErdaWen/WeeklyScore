@@ -1,14 +1,14 @@
 //
-//  CustomSlider.swift
+//  CustomSlider_list.swift
 //  WeeklyScore
 //
-//  Created by Erda Wen on 8/2/21.
+//  Created by Erda Wen on 8/4/21.
 //
 
 import SwiftUI
 
-struct CustomSlider: View {
-    @Binding var interCord: Double
+struct CustomSlider_list: View {
+    @Binding var factor: Double
     var minValue:Double
     var maxValue:Double
     
@@ -28,16 +28,15 @@ struct CustomSlider: View {
                     Circle()
                         .foregroundColor(Color("text_black"))
                         .frame(width: 10 )
-                        .padding(.leading, geometry.size.width * CGFloat((interCord-minValue)/(maxValue-minValue))-5)
+                        .padding(.leading, geometry.size.width * CGFloat((factor-minValue)/(maxValue-minValue))-5)
                 }
                 .frame(height:55)
                 .gesture(DragGesture(minimumDistance: 0)
                             .onChanged({ value in
-                                interCord
-                                    = min(max(minValue,
-                                              minValue + Double(value.location.x) / Double(geometry.size.width) * (maxValue - minValue)
-                                    ) , maxValue)
-                            }))
+                                factor = min(max(minValue, minValue + Double(value.location.x) / Double(geometry.size.width) * (maxValue - minValue)) , maxValue)
+                                UserDefaults.standard.setValue(factor, forKey: "listScaleFactor")
+                            })
+                )
             } // end geoReader
             
             Image(systemName: "plus.magnifyingglass")
@@ -50,8 +49,10 @@ struct CustomSlider: View {
     }
 }
 
-//struct CustomSlider_Previews: PreviewProvider {
+
+
+//struct CustomSlider_list_Previews: PreviewProvider {
 //    static var previews: some View {
-//        CustomSlider()
+//        CustomSlider_list()
 //    }
 //}
