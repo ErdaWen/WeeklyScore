@@ -15,6 +15,11 @@ class Initializer: ObservableObject{
         checkLoadedData()
     }
     
+    
+    func autoRecord(mode: Int){
+        
+    }
+    
     func checkLoadedData() {
         let status = UserDefaults.standard.bool(forKey: Constants.isDataPreloaded)
         if status == false {
@@ -173,4 +178,6 @@ class Initializer: ObservableObject{
         schedule_getup.reminderTime = 0
             
     }
+    
+
 }

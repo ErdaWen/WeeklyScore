@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CoreData
-
 
 class DateServer {
     //MARK: Print functions
