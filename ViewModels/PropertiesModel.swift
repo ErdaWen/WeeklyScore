@@ -18,6 +18,7 @@ class PropertiesModel: ObservableObject {
     // Record the timestamp of the start of selected week and day
     @Published var startDate = DateServer.startOfThisWeek()
     @Published var startWeek = DateServer.startOfThisWeek()
+    @Published var dumUpdate = true
     
     init(){
         updateScores()

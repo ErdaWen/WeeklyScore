@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChangeItemView: View {
+    @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
@@ -24,7 +25,32 @@ struct ChangeItemView: View {
 //    @State var inputDefaultMinutes:Int64 = 0
 //    @State var inputDefaultMinutesString = "0"
     @State var inputDurationBased = false
-    @State var tagid = 0 
+    @State var tagid = 0
+    
+    
+    func saveItem(){
+        // Check item name
+        //......
+        changeItemViewPresented = false
+        item.titleIcon = inputTitleIcon
+        item.title = inputTitle
+//                    item.defaultScore = inputDefaultScore
+//                    item.defaultMinutes = inputDefaultMinutes
+        item.durationBased = inputDurationBased
+        item.tags = tags[tagid]
+        tags[tagid].lastUse = Date()
+        
+        // Save
+        do{
+            try viewContext.save()
+            propertiesModel.dumUpdate.toggle()
+            print("saved")
+            changeItemViewPresented = false
+        } catch {
+            print("Cannot save item")
+            print(error)
+        }
+    }
     
     var body: some View {
         VStack{
@@ -46,25 +72,7 @@ struct ChangeItemView: View {
                 
                 //MARK: Save button
                 Button(action:{
-                    // Check item name
-                    //......
-                    changeItemViewPresented = false
-                    item.titleIcon = inputTitleIcon
-                    item.title = inputTitle
-//                    item.defaultScore = inputDefaultScore
-//                    item.defaultMinutes = inputDefaultMinutes
-                    item.durationBased = inputDurationBased
-                    item.tags = tags[tagid]
-                    tags[tagid].lastUse = Date()
-                    // Save
-                    do{
-                        try viewContext.save()
-                        print("saved")
-                        changeItemViewPresented = false
-                    } catch {
-                        print("Cannot save item")
-                        print(error)
-                    }
+                    saveItem()
                 }, label: {
                     Text("  Save")
                         .foregroundColor(Color("text_blue"))

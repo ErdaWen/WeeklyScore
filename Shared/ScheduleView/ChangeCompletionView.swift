@@ -52,6 +52,7 @@ struct ChangeCompletionView: View {
             try viewContext.save()
             print("saved")
             propertiesModel.updateScores()
+            propertiesModel.dumUpdate.toggle()
             changeCompletionViewPresented = false
         } catch {
             print("Cannot save item")

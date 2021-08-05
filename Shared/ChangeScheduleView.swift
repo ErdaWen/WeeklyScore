@@ -39,9 +39,8 @@ struct ChangeScheduleView: View {
         inputReminderTime = schedule.reminderTime
     }
     
-    func updateDefaulte () {
+    func updateDefault () {
         inputScore = items[itemId].defaultScore
-        inputBeginTime = DateServer.combineDayTime(day: Date(), time: items[itemId].defaultBeginTime)
         inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
     }
     
@@ -78,6 +77,7 @@ struct ChangeScheduleView: View {
                 try viewContext.save()
                 print("saved")
                 propertiesModel.updateScores()
+                propertiesModel.dumUpdate.toggle()
                 changeScheduleViewPresented = false
             } catch {
                 print("Cannot save item")
@@ -104,7 +104,7 @@ struct ChangeScheduleView: View {
                                         .tag(r)
                                 }
                             }.onChange(of: itemId, perform: { value in
-                                updateDefaulte ()
+                                updateDefault ()
                             })
                         }
                         // MARK: score (Stepper)

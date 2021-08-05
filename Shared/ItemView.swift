@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ItemView: View {
+    @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
@@ -44,7 +45,7 @@ struct ItemView: View {
                             return item.hidden == false
                         }
                         ForEach(itemFiltered) { item in
-                                ItemTileView(item: item)
+                            ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                         }
 
                     
@@ -72,7 +73,7 @@ struct ItemView: View {
                         if showArchive{
                             ForEach(items) { item in
                                 if item.hidden {
-                                    ItemTileView(item: item)
+                                    ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                                 }
                             }
                         }

@@ -11,6 +11,7 @@ struct ItemTileView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     var item:Item
+    var dumUpdate:Bool
     @State var changeViewPresented = false
 
     

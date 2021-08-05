@@ -59,6 +59,7 @@ struct AddScheduleView: View {
             try viewContext.save()
             print("Saved")
             propertiesModel.updateScores()
+            propertiesModel.dumUpdate.toggle()
             addScheduleViewPresented = false
         } catch {
             print("Cannot generate new item")

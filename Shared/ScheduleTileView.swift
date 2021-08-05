@@ -55,6 +55,7 @@ struct ScheduleTileView: View {
             try viewContext.save()
             print("saved")
             propertiesModel.updateScores()
+            propertiesModel.dumUpdate.toggle()
         } catch {
             print("Cannot save item")
             print(error)

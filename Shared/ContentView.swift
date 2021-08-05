@@ -27,6 +27,7 @@ struct ContentView: View {
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
                     withAnimation(.easeInOut){
                         propertiesModel.updateScores()
+                        propertiesModel.dumUpdate.toggle()
                         autoRecordNotification = true
                     }
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
