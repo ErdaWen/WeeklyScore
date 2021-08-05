@@ -16,10 +16,6 @@ class Initializer: ObservableObject{
     }
     
     
-    func autoRecord(mode: Int){
-        
-    }
-    
     func checkLoadedData() {
         let status = UserDefaults.standard.bool(forKey: Constants.isDataPreloaded)
         if status == false {

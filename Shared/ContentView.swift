@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @State var tabIndex = 1
     
     var body: some View {
@@ -37,6 +38,15 @@ struct ContentView: View {
                         Text("Settings").fontWeight(.light)
                     }
                 }.tag(3)
+        }
+        .onAppear(){
+            let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
+            if mode != 3 {
+                let changedSchedules = AutoRecordServer.autoRecord(mode: mode, weekStart: DateServer.startOfThisWeek())
+                print(changedSchedules)
+            }
+            // Auto recored
+            // propertiesModel.updateScores()
         }
     }
 }

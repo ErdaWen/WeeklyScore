@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		00214CB726BB98D7001FE49D /* CustomSlider_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CB626BB98D7001FE49D /* CustomSlider_list.swift */; };
 		00214CB826BB98D7001FE49D /* CustomSlider_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CB626BB98D7001FE49D /* CustomSlider_list.swift */; };
+		00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */; };
+		00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */; };
 		0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
@@ -73,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		00214CB626BB98D7001FE49D /* CustomSlider_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider_list.swift; sourceTree = "<group>"; };
+		00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRecordServer.swift; sourceTree = "<group>"; };
 		0034916026A7E677001B8DBB /* WeeklyScore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeeklyScore.xcdatamodel; sourceTree = "<group>"; };
 		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0034918B26A7F06B001B8DBB /* DateServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServer.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 				00AE2E3126A949A000F77898 /* Constants.swift */,
 				0034918E26A7F48F001B8DBB /* Initializer.swift */,
 				0072757A26B7280600FAA32D /* CordServer.swift */,
+				00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -394,6 +398,7 @@
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
+				00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				00214CB726BB98D7001FE49D /* CustomSlider_list.swift in Sources */,
 				0072757826B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */,
 				009C422326AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
@@ -431,6 +436,7 @@
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
 				008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
+				00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				00214CB826BB98D7001FE49D /* CustomSlider_list.swift in Sources */,
 				0072757926B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */,
 				009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
