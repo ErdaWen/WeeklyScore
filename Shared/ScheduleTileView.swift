@@ -152,10 +152,14 @@ struct ScheduleTileView: View {
                             .padding(.leading, mTileFlag)
                             .padding(.bottom, pTextVer)
                             .onTapGesture {
-                                let totMin = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+                                let totMin = DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
                                 saveSchedule(inputChecked: true, inputScoreGained: schedule.score, inputMinutesGained: totMin)
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                    impactMed.impactOccurred()
                             }
                             .onLongPressGesture {
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                    impactMed.impactOccurred()
                                 completionViewPresented = true
                             }
                             .sheet(isPresented: $completionViewPresented) {
@@ -167,10 +171,14 @@ struct ScheduleTileView: View {
                             .padding(.leading, mTileFlag)
                             .padding(.bottom, pTextVer)
                             .onTapGesture {
-                                let totMin = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+                                let totMin = DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
                                 saveSchedule(inputChecked: schedule.checked ? false : true, inputScoreGained: schedule.checked ? 0: schedule.score, inputMinutesGained: schedule.checked ? 0: totMin)
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                    impactMed.impactOccurred()
                             }
                             .onLongPressGesture {
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                    impactMed.impactOccurred()
                                 completionViewPresented = true
                             }
                             .sheet(isPresented: $completionViewPresented) {

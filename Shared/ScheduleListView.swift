@@ -133,11 +133,11 @@ struct ScheduleListView: View {
                             Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
                                 .resizable().scaledToFit()
                                 .padding(.horizontal, mButtons).frame(height:sButton)
+                                .padding(.vertical, 20)
                                 .foregroundColor(Color("text_black").opacity(0.5))
                                 .background(
-                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
+                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 15)
                                 )
-                                .padding(.bottom, 20)
                         }
                     }
                 }

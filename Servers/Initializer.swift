@@ -40,11 +40,17 @@ class Initializer: ObservableObject{
         
         UserDefaults.standard.set(true, forKey: "nightMode")
         UserDefaults.standard.set(3,forKey:"weekStartDay")
+        // Zoom in status in ListView
         UserDefaults.standard.set(false,forKey: "zoomedIn")
+        // auto complete mode:
+        // 0: mark as complete
+        // 1: mark as incomplete
+        // 3: mark as not recorded
         UserDefaults.standard.set(0,forKey: "autoCompleteMode")
         UserDefaults.standard.set(false,forKey: "showLocation")
         UserDefaults.standard.set(30,forKey: "maxScore")
-        UserDefaults.standard.set(false,forKey: "onDayView")
+        // Record whether shows calendar view by default
+        UserDefaults.standard.set(true,forKey: "onDayView")
 
     }
     

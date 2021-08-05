@@ -137,18 +137,20 @@ class DateServer {
         return date
     }
     
-    
-    
-    static func isSameDay (date1:Date,date2:Date){
-        
-    }
-    
     static func getMinutes(date:Date) -> Int {
         let calendar = Calendar.current
         let hours = calendar.component(.hour, from:date)
         let minutes = calendar.component(.minute, from: date)
         return (60 * hours + minutes)
     }
+    
+    // Different from getMinnutes(endDate) - getMinnutes(startDate)
+    // This function considers the absolute interval of minutes
+    // so day-time saving will not be an issue
+    static func getTotMin(beginTime:Date,endTime:Date) -> Int64 {
+        return Int64((endTime.timeIntervalSinceReferenceDate - beginTime.timeIntervalSinceReferenceDate)/60)
+    }
+    
     
     //MARK: Add cetain time
     static func addOneWeek (date:Date) -> Date {

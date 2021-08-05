@@ -180,7 +180,7 @@ struct ChangeCompletionView: View {
                 inputMinutesGainedString = String(inputMinutesGained)
                 inputChecked = schedule.checked
 
-                itemMinute = Int64((schedule.endTime.timeIntervalSinceReferenceDate - schedule.beginTime.timeIntervalSinceReferenceDate)/60)
+                itemMinute = DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
                 // Calculate the complete states
                 if inputChecked {
                     if (inputMinutesGained == itemMinute) && (inputScoreGained == schedule.score) {
