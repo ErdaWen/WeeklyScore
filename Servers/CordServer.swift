@@ -38,14 +38,11 @@ class CordServer {
     }
     static func calculateHeight(startTime:Date, endTime:Date, factor:Double) -> CGFloat {
         let totMin = DateServer.getTotMin(beginTime: startTime, endTime: endTime)
-        print("Min: \(totMin)")
-        print("Factor \(factor)")
         let minHeight = 25.0
         var logHeight = minHeight
         if endTime > startTime {
             logHeight = minHeight + max(log2(Double(totMin)/30.0)*factor,0)
         }
-        print(logHeight)
         return CGFloat(logHeight)
     }
 
