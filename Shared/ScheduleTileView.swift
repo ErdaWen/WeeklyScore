@@ -94,7 +94,6 @@ struct ScheduleTileView: View {
 
                 }
                 
-                
                 Button {
                         changeViewPresented = true
                 } label: {
@@ -120,7 +119,7 @@ struct ScheduleTileView: View {
                             VStack{
                                 Spacer()
                                 if schedule.statusDefault {
-                                    Text("\(schedule.score)")
+                                    Text("? / \(schedule.score)")
                                         .foregroundColor(Color("text_black"))
                                         .font(.system(size: fsSub)).fontWeight(.light)
                                         .padding(.trailing, pTextHorTight)

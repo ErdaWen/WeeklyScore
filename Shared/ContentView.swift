@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var propertiesModel:PropertiesModel
+    
     @State var tabIndex = 1
     @State var autoRecordNotification = false
     let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
@@ -23,14 +25,15 @@ struct ContentView: View {
             if changedSchedules.count > 0 {
                 
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
-                    withAnimation(.default){
+                    withAnimation(.easeInOut){
+                        propertiesModel.updateScores()
                         autoRecordNotification = true
                     }
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
                             impactMed.impactOccurred()
                 }
                 Timer.scheduledTimer(withTimeInterval: 6, repeats: false) { timer in
-                    withAnimation(.default){
+                    withAnimation(.easeInOut){
                         autoRecordNotification = false
                     }
                 }
@@ -38,7 +41,6 @@ struct ContentView: View {
         }// end if mode!=3
     }
 
-    
     var body: some View {
         ZStack(alignment:.top){
                 
@@ -74,8 +76,8 @@ struct ContentView: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 8)
                             .foregroundColor(Color( mode == 0 ? "text_green" : "text_red"))
-                        Text("\(changedSchedules.count) " + (changedSchedules.count == 1 ? "schedule " : "schedules ") + "marked as " + (mode == 0 ? "complete automatically." : "incomplete automatically..."))
-                            .font(.system(size: 15))
+                        Text("\(changedSchedules.count) " + (changedSchedules.count == 1 ? "schedule " : "schedules ") + "marked as " + (mode == 0 ? "complete automatically..." : "incomplete automatically..."))
+                            .font(.system(size: 12))
                             .foregroundColor(Color("text_black"))
                     }
                     .frame(height:20)
@@ -87,7 +89,9 @@ struct ContentView: View {
             
         }
         .onAppear(){
-            autoRecord()
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                autoRecord()
+            }
             print("excecuted auto record")
 
         }
