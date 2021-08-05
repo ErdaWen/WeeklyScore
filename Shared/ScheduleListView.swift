@@ -16,11 +16,13 @@ struct ScheduleListView: View {
     //@State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
     
+    let mHorizon:CGFloat = 20
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 16
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 40
+    
 
     
     var body: some View {
@@ -74,15 +76,15 @@ struct ScheduleListView: View {
                                     ForEach(schedulesFiltered){ schedule in
                                         if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
                                             ScheduleTileView(schedule: schedule, showTime:true)
-                                                .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor) + 20)
+                                                .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor,minHeight:25,maxHeight:100) + 20)
                                         }
                                     }
                                 }
 
                             }// end divider ForEach
                         }
-                        .padding(.horizontal,20)
-                    }
+                        .padding(.horizontal, mHorizon)
+                    } //end if there is schedule
                 } //end ScoreView
                 .animation(.default)
                 

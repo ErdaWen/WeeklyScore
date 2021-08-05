@@ -20,78 +20,79 @@ struct ItemView: View {
     @State var changeId = 0
     @State var showArchive = false
     
+    let mHorizon:CGFloat = 30
+    let mButton:CGFloat = 25
+    let mButtonTiles:CGFloat = 30
+    let sButton:CGFloat = 22
+    let mTiles:CGFloat = 15
+    let hTiles:CGFloat = 70
+    let fsTitle:CGFloat = 18
+    
     var body: some View {
-        VStack(spacing:30){
+        VStack(spacing:mButtonTiles){
+            //MARK: Add Habit Button
             Button {
                 addViewPresented.toggle()
             } label: {
                 Image(systemName: "plus.square")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.top, 30)
-                    .foregroundColor(Color("text_black"))
-                    .frame(width: 54, height: 54)
+                    .resizable().scaledToFit()
+                    .frame(width: sButton, height: sButton).padding(.top, mButton).foregroundColor(Color("text_black"))
                 
             }
             .sheet(isPresented: $addViewPresented, content: {
                 AddItemView(addItemViewPresented: $addViewPresented)
             })
-                        
+            
             ScrollView(){
-                VStack(spacing:20){
-                    // Habits
-
-                        let itemFiltered = items.filter { item in
-                            return item.hidden == false
-                        }
-                        ForEach(itemFiltered) { item in
-                            ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
-                        }
-
+                VStack(spacing:mTiles){
+                    //MARK: Habits Not Archived
                     
+                    let itemFiltered = items.filter { item in
+                        return item.hidden == false
+                    }
+                    ForEach(itemFiltered) { item in
+                        ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
+                            .frame(height:hTiles)
+                    }
+                    
+                    //MARK: Habits Archived
                     let itemFiltered = items.filter { item in
                         return item.hidden == true
                     }
+                    
                     if itemFiltered.count > 0 {
                         //MARK: Show archive button
                         Button {
                             showArchive.toggle()
                         } label: {
                             if showArchive{
-                                Text("Hide archived habits...")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color("text_black"))
-                                    .fontWeight(.light)
+                                Text("Hide archived habits...").font(.system(size: fsTitle)).foregroundColor(Color("text_black")).fontWeight(.light)
                             } else {
-                                Text("Show \(itemFiltered.count) archived " + (itemFiltered.count == 1 ? "habit..." : "habits..."))
-                                    .font(.system(size: 18))
-                                    .foregroundColor(Color("text_black"))
-                                    .fontWeight(.light)
+                                Text("Show \(itemFiltered.count) archived " + (itemFiltered.count == 1 ? "habit..." : "habits...")).font(.system(size: fsTitle)).foregroundColor(Color("text_black")).fontWeight(.light)
                             }
-                        }.padding(.top,20)
+                        }.padding(.top,mButton)
+                        
                         //MARK: Archived habits
                         if showArchive{
-                            ForEach(items) { item in
-                                if item.hidden {
-                                    ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
-                                }
+                            ForEach(itemFiltered) { item in
+                                ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
+                                    .frame(height:hTiles)
                             }
                         }
                     } else {
                         Text("No archived habits")
-                            .font(.system(size: 18))
+                            .font(.system(size: fsTitle))
                             .foregroundColor(Color("text_black"))
                             .fontWeight(.light)
-                            .padding(.top,20)
+                            .padding(.top,mButton)
                     }
-
-                    
                     Spacer()
                 }
-
+                
             }
-        }
-        .padding(.init(top: 10, leading: 35, bottom: 10, trailing: 35))
+        } // end whole view VStack
+        .padding(.horizontal, mHorizon)
+        
     }
 }
 
