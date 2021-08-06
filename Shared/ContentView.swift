@@ -58,7 +58,7 @@ struct ContentView: View {
                 ItemView()
                     .tabItem {
                         VStack{
-                            Image (systemName: "flag.2.crossed")
+                            Image (systemName: "flag")
                             Text ("Habits").fontWeight(.light)
                         }
                         

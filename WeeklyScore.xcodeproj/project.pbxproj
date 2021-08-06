@@ -140,6 +140,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0026288126BDF07700A755D2 /* DayView */ = {
+			isa = PBXGroup;
+			children = (
+				0072757126B65D0E00FAA32D /* ScheduleDayView.swift */,
+			);
+			name = DayView;
+			sourceTree = "<group>";
+		};
 		0034918A26A7F036001B8DBB /* Servers */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +206,7 @@
 			children = (
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
 				0092DD2F26BCC76B00750557 /* List */,
-				0072757126B65D0E00FAA32D /* ScheduleDayView.swift */,
+				0026288126BDF07700A755D2 /* DayView */,
 				0072757D26B873F400FAA32D /* CustomSlider.swift */,
 				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
 				009C422B26AF3D3800A783F0 /* Sheets */,

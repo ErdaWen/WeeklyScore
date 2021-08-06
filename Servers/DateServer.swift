@@ -164,4 +164,29 @@ class DateServer {
         return Calendar.current.date(byAdding: .day, value: -1, to: date)!
     }
     
+    //MARK: Describe day / week
+    
+    static func describeDay (date:Date) -> (String,Bool){
+        let today = startOfToday()
+        var isToday = false
+        var description = printWeekday(inputTime: date)
+        if date == today {
+            isToday = true
+            description = "Today"
+        } else if date == minusOneDay(date: today) {
+            description = "Yesterday"
+        } else if date == addOneDay(date: today) {
+            description = "Tommorrow"
+        }
+        return(description,isToday)
+    }
+    
+    static func describeWeek (offset:Int) -> String {
+        var description = "Week of "+generateStartDay(offset: offset)
+        if offset == 0{
+            description = "This Week"
+        }
+        return description
+    }
+
 }

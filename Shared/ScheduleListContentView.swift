@@ -28,50 +28,27 @@ struct ScheduleListContentView: View {
             if schedules.count != 0{
                 VStack{
                     ForEach(0...6,id: \.self){ offDay in
+                        //MARK: Filter data
                         let dayLookingAt = DateServer.genrateDateStemp(startOfWeek: propertiesModel.startWeek, daysOfWeek: offDay)
                         let schedulesFiltered = schedules.filter { schedule in
                             return (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt))
                         }
-                        if (schedulesFiltered.count > 0) || (dayLookingAt == DateServer.startOfToday()){
-                            // Day Divider
-                            if dayLookingAt == DateServer.startOfToday() {
-                                if schedulesFiltered.count == 0 {
-                                    Text("No schedules for today")
-                                        .foregroundColor(Color("text_red"))
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 12))
-                                        .padding(.top,5)
-                                } else {
-                                    Text("Today")
-                                        .foregroundColor(Color("text_red"))
-                                        .font(.system(size: 12))
-                                        .fontWeight(.bold)
-                                        .padding(.top,5)
-                                }
-                            } else if dayLookingAt == DateServer.minusOneDay(date: DateServer.startOfToday()) {
-                                Text("Yesterday")
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.top,5)
-                            } else if dayLookingAt == DateServer.addOneDay(date: DateServer.startOfToday()) {
-                                Text("Tomorrow")
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.top,5)
-
-                            } else {
-                                Text(DateServer.printWeekday(inputTime: dayLookingAt))
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.top,5)
-                            }
-                            
-                            ForEach(schedulesFiltered){ schedule in
-                                if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
-                                    ScheduleTileView(schedule: schedule, showTime:true, showTitle:true)
-                                        .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor,minHeight:25,maxHeight:100) + 20)
-                                }
-                            }
+                        // Genrate title
+                        let (dayDescription, isToday) = DateServer.describeDay(date: dayLookingAt)
+                        if isToday {
+                            Text((schedulesFiltered.count > 0) ? "Today" : "No schedules for today")
+                                .foregroundColor(Color("text_red")).font(.system(size: 12)).fontWeight(.bold)
+                                .padding(.top,5)
+                        } else if (schedulesFiltered.count > 0) {
+                            Text(dayDescription)
+                                .foregroundColor(Color("text_black").opacity(0.5))
+                                .font(.system(size: 12))
+                                .padding(.top,5)
+                        }
+                        //MARK: Generate tiles
+                        ForEach(schedulesFiltered){ schedule in
+                                ScheduleTileView(schedule: schedule, showTime:true, showTitle:true)
+                                    .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor,minHeight:25,maxHeight:100) + 20)
                         }
 
                     }// end divider ForEach
