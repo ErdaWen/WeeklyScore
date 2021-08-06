@@ -14,7 +14,12 @@ struct ScheduleListView: View {
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
     //@State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
+    @Binding var previewMode:Bool
+    
+    //Use factor for ordinary list view
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
+    //Use interCord for previewMode
+    @State var interCord = 50.0
     
     let mHorizon:CGFloat = 20
     let mButtonUp:CGFloat = 10
@@ -22,16 +27,21 @@ struct ScheduleListView: View {
     let mButtons:CGFloat = 16
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 40
-    
+
+
 
     
     var body: some View {
         VStack{
             ZStack(alignment:.top){
                 
-                ScheduleListContent(schedules: self.schedules,factor:self.factor)
+                if previewMode{
+                    ScheduleListPreviewView(schedules: self.schedules,interCord:self.interCord)
+                } else {
+                    ScheduleListContentView(schedules: self.schedules,factor:self.factor)
+                }
                 
-                //MARK: Buttons
+                //MARK: Top Buttons
                 
                 HStack{
                     Spacer()
@@ -66,36 +76,47 @@ struct ScheduleListView: View {
                     }
                     
                     Spacer()
-                } //end Buttons HStack
+                } //end top Buttons HStack
                 .padding(.top,mButtonUp)
+                // end top buttons
                 
+                // MARK: Preview button & Sliders
                 VStack{
                     Spacer()
-                    CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                        .padding(.leading,80)
-                        .padding(.trailing,70)
-                        .padding(.bottom,18)
-                        .frame(height:55)
+                    HStack(spacing: mButtons){
+                        if previewMode {
+                            Button {
+                                previewMode.toggle()
+                                UserDefaults.standard.set(previewMode,forKey: "previewMode")
+                            } label: {
+                                Image(systemName: "list.dash")
+                                    .resizable().scaledToFit()
+                                    .frame(height:12)
+                                    .padding(.leading,80)
+                            }
+                            
+                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                                .padding(.trailing,70)
+                                .padding(.bottom,18)
+                                .frame(height:55)
+                        } else {
+                            Button {
+                                previewMode.toggle()
+                                UserDefaults.standard.set(previewMode,forKey: "previewMode")
+                            } label: {
+                                Image(systemName: "eye")
+                                    .resizable().scaledToFit()
+                                    .frame(height:12)
+                                    .padding(.leading,80)
+                            }
+                            
+                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                                .padding(.trailing,70)
+                                .padding(.bottom,18)
+                                .frame(height:55)
+                        }
+                    }
                 }
-                
-//                VStack{
-//                    Spacer()
-//                    Button {
-//                        zoomin.toggle()
-//                        UserDefaults.standard.set(zoomin,forKey: "zoomedIn")
-//                    } label: {
-//                        if schedules.count != 0 {
-//                            Image(systemName: zoomin ? "minus.magnifyingglass" : "arrow.up.left.and.down.right.magnifyingglass")
-//                                .resizable().scaledToFit()
-//                                .padding(.horizontal, mButtons).frame(height:sButton)
-//                                .padding(.vertical, 20)
-//                                .foregroundColor(Color("text_black").opacity(0.5))
-//                                .background(
-//                                    RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 15)
-//                                )
-//                        }
-//                    }
-//                }
 
                 if schedules.count == 0 {
                     
@@ -108,7 +129,7 @@ struct ScheduleListView: View {
                             Spacer()
                         }
                     
-                }
+                }// end display No schedule
                 
                 
             }

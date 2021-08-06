@@ -18,7 +18,7 @@ struct ScheduleDayView: View {
     
     @GestureState var pinchStarted = false
     //@State var pinchValue: CGFloat = 0
-    @State var lastInterCord = 50.0
+    //@State var lastInterCord = 50.0
     
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22

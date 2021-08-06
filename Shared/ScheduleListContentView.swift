@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScheduleListContent: View {
+struct ScheduleListContentView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     

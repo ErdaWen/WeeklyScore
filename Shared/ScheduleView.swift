@@ -23,6 +23,7 @@ struct ScheduleView: View {
     @State var startDay = ""
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
     @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+    @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
     
     // appearence related
     let fsScore:CGFloat = 18.0
@@ -202,7 +203,7 @@ struct ScheduleView: View {
             if  dayFromDay1 == -1 {
                 // Week view need to filter out the schedules with BEGIN time within the week range
                 ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
-                                                         , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default))
+                                                         , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default),previewMode:$previewMode)
 //                    .gesture(DragGesture(minimumDistance: minDragDist)
 //                                .onEnded({ value in
 //                                    if value.translation.width < 0{

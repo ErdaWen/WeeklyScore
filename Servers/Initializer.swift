@@ -53,6 +53,7 @@ class Initializer: ObservableObject{
         // Record whether shows calendar view by default
         UserDefaults.standard.set(true,forKey: "onDayView")
         UserDefaults.standard.set(12.5, forKey: "listScaleFactor")
+        UserDefaults.standard.set(false,forKey: "previewMode")
 
     }
     
