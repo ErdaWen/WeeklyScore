@@ -174,6 +174,23 @@
 			name = Preview;
 			sourceTree = "<group>";
 		};
+		0026288A26BDF9FB00A755D2 /* SharedElement */ = {
+			isa = PBXGroup;
+			children = (
+				0072757D26B873F400FAA32D /* CustomSlider.swift */,
+				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
+			);
+			name = SharedElement;
+			sourceTree = "<group>";
+		};
+		0026288B26BDFADD00A755D2 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				009B248D26A239BE0087467A /* EmojiTextField.swift */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 		0034918A26A7F036001B8DBB /* Servers */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,22 +203,25 @@
 			path = Servers;
 			sourceTree = "<group>";
 		};
-		0092DD2F26BCC76B00750557 /* List */ = {
+		0092DD2F26BCC76B00750557 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
 				0026288826BDF7EF00A755D2 /* RegularList */,
 				0026288926BDF81F00A755D2 /* Preview */,
 			);
-			name = List;
+			name = ListView;
 			sourceTree = "<group>";
 		};
-		009C422526AF3C4A00A783F0 /* Top */ = {
+		009C422526AF3C4A00A783F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
+				009C422A26AF3D0D00A783F0 /* ScheduleView */,
+				009C422826AF3CBA00A783F0 /* ItemView */,
+				008DC8F926AE7129009AB91C /* SettingView.swift */,
 			);
-			name = Top;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		009C422826AF3CBA00A783F0 /* ItemView */ = {
@@ -210,6 +230,7 @@
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
 				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
 				009C422926AF3CEA00A783F0 /* Sheets */,
+				0026288B26BDFADD00A755D2 /* Elements */,
 			);
 			name = ItemView;
 			sourceTree = "<group>";
@@ -228,10 +249,9 @@
 			children = (
 				C88EC1352692B358005A4DAB /* ScheduleView.swift */,
 				0026288226BDF11600A755D2 /* ScoreBarView.swift */,
-				0092DD2F26BCC76B00750557 /* List */,
+				0092DD2F26BCC76B00750557 /* ListView */,
 				0026288126BDF07700A755D2 /* DayView */,
-				0072757D26B873F400FAA32D /* CustomSlider.swift */,
-				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
+				0026288A26BDF9FB00A755D2 /* SharedElement */,
 				009C422B26AF3D3800A783F0 /* Sheets */,
 			);
 			name = ScheduleView;
@@ -265,12 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				0034918726A7EE02001B8DBB /* Persistence.swift */,
-				009C422526AF3C4A00A783F0 /* Top */,
-				009C422A26AF3D0D00A783F0 /* ScheduleView */,
-				009C422826AF3CBA00A783F0 /* ItemView */,
+				009C422526AF3C4A00A783F0 /* Views */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
-				009B248D26A239BE0087467A /* EmojiTextField.swift */,
-				008DC8F926AE7129009AB91C /* SettingView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

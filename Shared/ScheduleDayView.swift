@@ -16,6 +16,8 @@ struct ScheduleDayView: View {
     @State var addViewPresented = false
     @State var interCord = 50.0
     
+    let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    
     @GestureState var pinchStarted = false
     //@State var pinchValue: CGFloat = 0
     //@State var lastInterCord = 50.0
@@ -161,6 +163,9 @@ struct ScheduleDayView: View {
                 }
                 
             }         // end button + scroll ZStack
+            .onReceive(updateTimer) { _ in
+                timeNow = Date()
+            }
         } //end ScrollViewReader
 //        .gesture(
 //            MagnificationGesture()

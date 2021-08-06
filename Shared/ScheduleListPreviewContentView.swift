@@ -14,6 +14,7 @@ struct ScheduleListPreviewContentView: View {
     
     var schedules: FetchedResults<Schedule>
     var interCord:Double
+    var timeNow:Date
     
     let wThreshhold:CGFloat = 100
     
@@ -26,8 +27,7 @@ struct ScheduleListPreviewContentView: View {
                         let schedulesFiltered = schedules.filter { schedule in
                             return (schedule.beginTime >= dayLookingAt) && (schedule.endTime < DateServer.addOneDay(date: dayLookingAt))
                         }
-                        // VStack that contains one days view
-                        
+                        //MARK: VStack that contains one days view
                         ZStack(alignment: .top){
                             ForEach(schedulesFiltered){ schedule in
                                 // Calcualte cordinate
@@ -50,7 +50,7 @@ struct ScheduleListPreviewContentView: View {
                             
                             //MARK:Today circle
                             if dayLookingAt == DateServer.startOfToday(){
-                                let startMin = DateServer.getMinutes(date: Date())
+                                let startMin = DateServer.getMinutes(date: timeNow)
                                 let startCord = interCord * Double(startMin) / 60.0
                                 VStack(spacing:0){
                                     Spacer()
@@ -60,11 +60,11 @@ struct ScheduleListPreviewContentView: View {
                                 }
                                 
                             }
-                            
                         }
                         .padding(.trailing, 2)
                         .frame(width: geo.frame(in: .global).width / 8  )
                     } else {
+                        //MARK: day == -1 empty VStack
                         VStack{}.frame(width: geo.frame(in: .global).width / 8 )
                     }// end if offDay != -1
                 } // end foreach -1...6

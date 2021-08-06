@@ -17,7 +17,7 @@ struct AddItemView: View {
     private var tags: FetchedResults<Tag>
     
     @State var inputDurationBased = true
-    @State var inputTitleIcon = "☑️"
+    @State var inputTitleIcon = ""
     @State var inputTitle = ""
     @State var tagid = 0
     

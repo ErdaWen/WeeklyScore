@@ -68,7 +68,7 @@ struct ScheduleListPreviewView: View {
                             
                             // Zstack within the picker frame
                             ZStack{
-                                ScheduleListPreviewContentView(schedules: schedules, interCord: interCord)
+                                ScheduleListPreviewContentView(schedules: schedules, interCord: interCord, timeNow:timeNow)
                             }.padding(.horizontal, mPicker) // end ZStack with picker frame
                             
                             //MARK:Now line
