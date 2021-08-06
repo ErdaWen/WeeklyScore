@@ -21,6 +21,7 @@ struct ItemView: View {
     @State var showArchive = false
     
     let mHorizon:CGFloat = 30
+    let topSpace:CGFloat = 35
     let mButton:CGFloat = 25
     let mButtonTiles:CGFloat = 30
     let sButton:CGFloat = 22
@@ -36,7 +37,7 @@ struct ItemView: View {
             } label: {
                 Image(systemName: "plus.square")
                     .resizable().scaledToFit()
-                    .frame(width: sButton, height: sButton).padding(.top, mButton).foregroundColor(Color("text_black"))
+                    .frame(width: sButton, height: sButton).padding(.top, topSpace).foregroundColor(Color("text_black"))
                 
             }
             .sheet(isPresented: $addViewPresented, content: {
