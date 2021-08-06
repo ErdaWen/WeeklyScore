@@ -28,8 +28,12 @@ struct ScheduleListPreviewView: View {
                         GeometryReader { geo in
                             HStack(spacing:0){
                                 ForEach(-1...6,id: \.self){ offDay in
-                                    Spacer().frame(width: geo.frame(in: .global).width / 8 - 0.25)
-                                    Divider()
+                                    HStack{
+                                        Spacer()
+                                        Divider()
+
+                                    }
+                                    .frame(width: geo.frame(in: .global).width / 8)
                                 }
                             }
                         }// end GeoReader

@@ -41,6 +41,7 @@ struct ScheduleView: View {
     let pPickerTextVer:CGFloat = 3
     let mButton:CGFloat = 10
     let minDragDist:CGFloat = 40
+    let wDividerCompensate:CGFloat = 0
 
     
     func updateDate() {
@@ -195,7 +196,7 @@ struct ScheduleView: View {
                                 }
                                 }
                             }
-                            .frame(width: geo.frame(in: .global).width / 8 + 0.125)
+                            .frame(width: geo.frame(in: .global).width / 8 + wDividerCompensate)
                             .padding(.top, pPickerTextVer)
                             
                             .onTapGesture {
