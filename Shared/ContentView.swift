@@ -72,6 +72,7 @@ struct ContentView: View {
                     }.tag(3)
             }
             
+            //MARK: autorecord noification bar
             if autoRecordNotification{
                 VStack{
                     ZStack{

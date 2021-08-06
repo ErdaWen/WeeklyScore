@@ -52,8 +52,7 @@ struct ScheduleListView: View {
                         Image(systemName: "plus.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton)
-                            .foregroundColor(Color("text_black"))
+                            .padding(.vertical, mTitleButton).foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
@@ -69,8 +68,7 @@ struct ScheduleListView: View {
                         Image(systemName: "plus.square.on.square")
                             .resizable().scaledToFit()
                             .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton)
-                            .foregroundColor(Color("text_black"))
+                            .padding(.vertical, mTitleButton).foregroundColor(Color("text_black"))
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
@@ -132,8 +130,8 @@ struct ScheduleListView: View {
                     }
                 }
 
+                // "No schedules" overlay
                 if schedules.count == 0 {
-                    
                         VStack(){
                             Spacer()
                             Text("No schedules for selected week")

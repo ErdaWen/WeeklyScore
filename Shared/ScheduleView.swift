@@ -26,12 +26,9 @@ struct ScheduleView: View {
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
     
     // appearence related
-    let fsScore:CGFloat = 18.0
     let fsTitle:CGFloat = 18.0
     let fsSub:CGFloat = 12.0
     let sButton:CGFloat = 22
-    let mScores:CGFloat = 10
-    let mScoreTitle:CGFloat = 5
     let mTitle:CGFloat = 20
     let hTitle:CGFloat = 38
     let rTitle:CGFloat = 12
@@ -42,7 +39,7 @@ struct ScheduleView: View {
     let mButton:CGFloat = 10
     let minDragDist:CGFloat = 40
     let wDividerCompensate:CGFloat = 0
-
+    
     
     func updateDate() {
         dayNumbers = DateServer.generateDays(offset:weekFromNow)
@@ -62,44 +59,7 @@ struct ScheduleView: View {
         VStack(spacing:0){
             
             //MARK: Scores
-            HStack(spacing:mScores){
-                if propertiesModel.deductScoreThisWeek != 0 {
-                    Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red"))
-                    Text(",").font(.system(size: fsTitle)).foregroundColor(Color("text_black")).fontWeight(.light)
-                }
-                Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green"))
-                Image(systemName: "line.diagonal").foregroundColor(Color("text_black"))
-                Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black"))
-            }
-            .padding(.bottom, mScoreTitle)
-            .onAppear(){
-                propertiesModel.updateScores()
-            }
-            .animation(.default)
-            
-            //            //MARK: Score bar
-            //            GeometryReader{ geo in
-            //                ZStack(alignment: .leading){
-            //                    RoundedRectangle(cornerRadius: 5)
-            //                        .stroke(Color("text_black"),style:StrokeStyle(lineWidth: 1))
-            //                    if propertiesModel.totalScoreThisWeek != 0 {
-            //                        RoundedRectangle(cornerRadius: 5)
-            //                            .frame(width: geo.frame(in: .global)
-            //                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.gainedScoreThisWeek + propertiesModel.deductScoreThisWeek)
-            //                            )
-            //                            .foregroundColor(Color("text_green").opacity(0.6))
-            //                        RoundedRectangle(cornerRadius: 5)
-            //                            .frame(width: geo.frame(in: .global)
-            //                                    .width / CGFloat(propertiesModel.totalScoreThisWeek) * CGFloat(propertiesModel.deductScoreThisWeek)
-            //                            )
-            //                            .foregroundColor(Color("text_red"))
-            //                    }
-            //                }
-            //            }
-            //            .frame(height:8)
-            //            .padding(.leading,110)
-            //            .padding(.trailing,110)
-            //            .padding(.bottom,1)
+            ScoreBarView()
             
             //MARK: WeekTitle
             ZStack{
@@ -128,9 +88,9 @@ struct ScheduleView: View {
                     } label: {
                         Text(weekFromNow == 0 ? "This week" : "Week of " + startDay ).foregroundColor(Color("text_black")).font(.system(size: fsTitle)).fontWeight(.light)
                     }
-                
+                    
                     Spacer()
-
+                    
                     //MARK: Week plus
                     Button {
                         weekFromNow += 1
@@ -173,32 +133,30 @@ struct ScheduleView: View {
                         
                         //MARK: Seven days
                         ForEach(0...6, id:\.self){ r in
+                            let isToday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday()
                             ZStack(){
                                 VStack(alignment: .center, spacing: mDateWeekday){
                                     
                                     Text("\(dayNumbers[r])")
-                                        .font(.system(size: fsTitle)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
-                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
-                                        
-                                    Text("\(weekdayNumbers[r])")
-                                        .font(.system(size: fsSub)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
-                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                                        .font(.system(size: fsTitle)).fontWeight(isToday ? .semibold : .light)
+                                        .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                                     
-
+                                    Text("\(weekdayNumbers[r])")
+                                        .font(.system(size: fsSub)).fontWeight(isToday ? .semibold : .light)
+                                        .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                                 }
                                 .animation(.none)
                                 
+                                // For preview mode, add verticle line to form a calendar look
                                 if previewMode && (dayFromDay1 == -1 ){
-                                HStack{
-                                    Spacer()
-
-                                Divider()
-                                }
+                                    HStack{
+                                        Spacer()
+                                        Divider()
+                                    }
                                 }
                             }
                             .frame(width: geo.frame(in: .global).width / 8 + wDividerCompensate)
                             .padding(.top, pPickerTextVer)
-                            
                             .onTapGesture {
                                 dayFromDay1 = r
                                 updateDate()
@@ -211,7 +169,7 @@ struct ScheduleView: View {
             .frame(height: hPicker).padding(.horizontal, mPicker)
             if (!previewMode) || (dayFromDay1 != -1)
             {
-            Divider().background(Color("background_grey"))
+                Divider().background(Color("background_grey"))
             }
             
             //MARK: Main content view
@@ -219,30 +177,13 @@ struct ScheduleView: View {
                 // Week view need to filter out the schedules with BEGIN time within the week range
                 ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                          , predicate: NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate), animation: .default),previewMode:$previewMode)
-//                    .gesture(DragGesture(minimumDistance: minDragDist)
-//                                .onEnded({ value in
-//                                    if value.translation.width < 0{
-//                                        dayFromDay1 += 1
-//                                        updateDate()
-//                                    }
-//                                }))
 
+                
             } else {
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
                 withAnimation{
                     ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)]
                                                             , predicate: NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate), animation: .default))
-    //                    .gesture(DragGesture(minimumDistance: minDragDist)
-    //                                .onEnded({ value in
-    //                                    if value.translation.width < 0{
-    //                                        dayFromDay1 = min(dayFromDay1 + 1, 6)
-    //                                        updateDate()
-    //                                    }
-    //                                    if value.translation.width > 0{
-    //                                        dayFromDay1 -= 1
-    //                                        updateDate()
-    //                                    }
-    //                                }))
                 }
                 
             } // end main content
