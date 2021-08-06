@@ -156,11 +156,12 @@ struct ScheduleView: View {
                     HStack(spacing:0){
                         //MARK: List icon
                         VStack(alignment: .center, spacing: 2){
-                            Image(systemName: "list.dash").resizable().scaledToFit().padding(.top,8).frame(width: geo.frame(in: .global).width / 8 - 20, height:20 )
+                            Image(systemName: previewMode ? "calendar" : "list.dash").resizable().scaledToFit().padding(.top,8).frame(width: geo.frame(in: .global).width / 8 - 20, height: previewMode ? 24 : 20)
+                                .padding(.bottom, previewMode ? -2 : 0)
                             // hide text "list" when selected
                             if (dayFromDay1 != -1)
                             {
-                                Text("List").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
+                                Text("All").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
                             }
                         }
                         .frame(width: geo.frame(in: .global).width / 8 )
@@ -171,19 +172,30 @@ struct ScheduleView: View {
                         
                         //MARK: Seven days
                         ForEach(0...6, id:\.self){ r in
-                            
-                            VStack(alignment: .center, spacing: mDateWeekday){
-                                
-                                Text("\(dayNumbers[r])")
-                                    .font(.system(size: fsTitle)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
-                                    .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                            ZStack(){
+                                VStack(alignment: .center, spacing: mDateWeekday){
                                     
-                                Text("\(weekdayNumbers[r])")
-                                    .font(.system(size: fsSub)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
-                                    .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                                    Text("\(dayNumbers[r])")
+                                        .font(.system(size: fsTitle)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
+                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                                        
+                                    Text("\(weekdayNumbers[r])")
+                                        .font(.system(size: fsSub)).fontWeight(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ? .semibold : .light)
+                                        .foregroundColor(DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: r) == DateServer.startOfToday() ?  Color("text_red") : Color("text_black"))
+                                    
+
+                                }
+                                .animation(.none)
+                                
+                                if previewMode && (dayFromDay1 == -1 ){
+                                HStack{
+                                    Spacer()
+
+                                Divider()
+                                }
+                                }
                             }
-                            .animation(.none)
-                            .frame(width: geo.frame(in: .global).width / 8 )
+                            .frame(width: geo.frame(in: .global).width / 8 + 0.125)
                             .padding(.top, pPickerTextVer)
                             
                             .onTapGesture {
@@ -196,8 +208,10 @@ struct ScheduleView: View {
                 } //end GeoReader
             } // end day picker
             .frame(height: hPicker).padding(.horizontal, mPicker)
-            
+            if (!previewMode) || (dayFromDay1 != -1)
+            {
             Divider().background(Color("background_grey"))
+            }
             
             //MARK: Main content view
             if  dayFromDay1 == -1 {

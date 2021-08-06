@@ -27,6 +27,7 @@ struct ScheduleListView: View {
     let mButtons:CGFloat = 16
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 40
+    let mPicker:CGFloat = 40
 
 
 
@@ -80,37 +81,50 @@ struct ScheduleListView: View {
                 .padding(.top,mButtonUp)
                 // end top buttons
                 
-                // MARK: Preview button & Sliders
+                //MARK: Preview Button
+                //Zstack with picker frame
+                ZStack{
+                    GeometryReader{ geo in
+                        HStack{
+                            ZStack{
+                                Rectangle()
+                                    .foregroundColor(Color("background_white").opacity(0.7))
+                                Rectangle()
+                                    .stroke(Color("background_grey"),lineWidth: 2)
+                                Button {
+                                        previewMode.toggle()
+                                        UserDefaults.standard.set(previewMode,forKey: "previewMode")
+                                    } label: {
+                                        
+                                        Image(systemName: previewMode ? "list.dash" : "calendar")
+                                            .resizable().scaledToFit()
+                                            .frame(height: previewMode ? 11: 14)
+                                            .padding(.top,0)
+                                            .foregroundColor(Color("text_black"))
+                                    }
+                            }.frame(width: geo.frame(in: .global).width / 8 )//end button Zstack
+                            Spacer()
+                        }.frame(height:40)
+                    }// end georeader
+                }.padding(.horizontal,mPicker) // end zstack with picker frame
+                
+                
+                
+                // MARK: Sliders
                 VStack{
                     Spacer()
                     HStack(spacing: mButtons){
                         if previewMode {
-                            Button {
-                                previewMode.toggle()
-                                UserDefaults.standard.set(previewMode,forKey: "previewMode")
-                            } label: {
-                                Image(systemName: "list.dash")
-                                    .resizable().scaledToFit()
-                                    .frame(height:12)
-                                    .padding(.leading,80)
-                            }
                             
                             CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                                .padding(.leading,80)
                                 .padding(.trailing,70)
                                 .padding(.bottom,18)
                                 .frame(height:55)
                         } else {
-                            Button {
-                                previewMode.toggle()
-                                UserDefaults.standard.set(previewMode,forKey: "previewMode")
-                            } label: {
-                                Image(systemName: "eye")
-                                    .resizable().scaledToFit()
-                                    .frame(height:12)
-                                    .padding(.leading,80)
-                            }
-                            
+
                             CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                                .padding(.leading,80)
                                 .padding(.trailing,70)
                                 .padding(.bottom,18)
                                 .frame(height:55)

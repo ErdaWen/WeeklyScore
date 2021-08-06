@@ -58,7 +58,7 @@ struct ScheduleDayView: View {
                             VStack(spacing:0){
                                 Spacer()
                                     .frame(height:CGFloat(startCord))
-                                ScheduleTileView(schedule: schedule, showTime:false)
+                                ScheduleTileView(schedule: schedule, showTime:false, showTitle:true)
                                     .frame(height:CGFloat(heightCord))
                                     .padding(.leading, 50)
                                 Spacer()

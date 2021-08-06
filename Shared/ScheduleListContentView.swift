@@ -68,7 +68,7 @@ struct ScheduleListContentView: View {
                             
                             ForEach(schedulesFiltered){ schedule in
                                 if (schedule.beginTime >= dayLookingAt) && (schedule.beginTime < DateServer.addOneDay(date: dayLookingAt) ){
-                                    ScheduleTileView(schedule: schedule, showTime:true)
+                                    ScheduleTileView(schedule: schedule, showTime:true, showTitle:true)
                                         .frame(height: CordServer.calculateHeight(startTime: schedule.beginTime, endTime: schedule.endTime, factor: factor,minHeight:25,maxHeight:100) + 20)
                                 }
                             }

@@ -13,6 +13,7 @@ struct ScheduleTileView: View {
     
     var schedule:Schedule
     var showTime:Bool
+    var showTitle:Bool
     
     @State var completionViewPresented = false
     @State var changeViewPresented = false
@@ -24,7 +25,9 @@ struct ScheduleTileView: View {
     let mTime:CGFloat = 20
     let mTimeTile:CGFloat = 3
     let wHandle:CGFloat = 8
+    let wHandleTight: CGFloat = 6
     let mHandle:CGFloat = 6
+    let mHandleTight: CGFloat = 3
     let rTile:CGFloat = 8
     let opTile:Double = 0.15
     let pTextHor:CGFloat = 8
@@ -84,14 +87,16 @@ struct ScheduleTileView: View {
                 //MARK: Small handle
                 if schedule.items.durationBased{
                     RoundedRectangle(cornerRadius: wHandle/2)
-                        .frame(width: wHandle)
+                        .frame(width: showTitle ? wHandle : wHandleTight)
                         .foregroundColor(Color(schedule.items.tags.colorName))
-                        .padding(.horizontal, mHandle)
+                        .padding(.trailing, showTitle ? mHandle : mHandleTight)
+                        .padding(.leading, showTitle ? mHandle : 0)
                 } else {
                     Circle()
-                        .frame(width: wHandle+4)
+                        .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                         .foregroundColor(Color(schedule.items.tags.colorName))
-                        .padding(.horizontal, mHandle-2)
+                        .padding(.trailing, showTitle ? mHandle : mHandleTight - 1 )
+                        .padding(.leading, showTitle ? mHandle - 2 : 0)
 
                 }
                 
@@ -106,7 +111,7 @@ struct ScheduleTileView: View {
                         HStack{
                             //MARK: Title
                             VStack{
-                                Text(schedule.items.titleIcon + " " + schedule.items.title)
+                                Text(showTitle ? schedule.items.titleIcon + " " + schedule.items.title : schedule.items.titleIcon)
                                     .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
                                 .font(.system(size: fsTitle))
                                 .padding(.leading, pTextHor)
