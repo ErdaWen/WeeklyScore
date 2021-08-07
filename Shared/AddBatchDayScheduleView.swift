@@ -13,9 +13,28 @@ struct AddBatchDayScheduleView: View {
     
     var dayStart:Date
     var schedules: FetchedResults<Schedule>
-    @State var schedulesNextWeek:[Schedule] = []
+    
     @State var numConflict = 0
     @Binding var addBatchDayScheduleViewPresented:Bool
+    @State var showConflitAlert = false
+    
+    
+    func checkScheduleConflict(schedule:Schedule) -> Bool {
+        var conflict = false
+        let newBeginTime = DateServer.addOneWeek(date: schedule.beginTime)
+        let newEndTime = schedule.items.durationBased ? DateServer.addOneWeek(date: schedule.endTime) : DateServer.addOneWeek(date: schedule.beginTime)
+        let request = Schedule.schedulefetchRequest()
+        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", newBeginTime as NSDate, newEndTime as NSDate)
+        do {
+            let results = try viewContext.fetch(request)
+            if results.count > 0 {
+                conflict = true
+            }
+        } catch {
+            print(error)
+        }
+        return conflict
+    }
     
     func createNewSchedule(schedule:Schedule){
         let newSchedule = Schedule(context: viewContext)
@@ -50,32 +69,25 @@ struct AddBatchDayScheduleView: View {
     var body: some View {
         Button {
             for schedule in schedules {
-                let schedulesConflict = schedulesNextWeek.filter { fschedule in
-                    return (fschedule.beginTime == DateServer.addOneWeek(date: schedule.beginTime)) && (fschedule.endTime == DateServer.addOneWeek(date: schedule.endTime))
-                }
-                if schedulesConflict.count > 0 {
+                if checkScheduleConflict(schedule:schedule) {
                     numConflict += 1
                 } else {
                     createNewSchedule(schedule:schedule)
                 }
-                print(numConflict)
+            }
+            if numConflict > 0 {
+               showConflitAlert = true
+            } else {
                 addBatchDayScheduleViewPresented = false
             }
+            
         } label: {
-            Text("Copy")
-        }.onAppear(){
-//            let nextWeekToday = DateServer.addOneWeek(date: dayStart)
-//            let nextWeekTodayEnd = DateServer.addOneDay(date: nextWeekToday)
-//            let fetchRequest = Schedule.schedulefetchRequest()
-//            fetchRequest.predicate =
-//                NSPredicate(format: "(endTime >= %@) AND (begin <= %@)", nextWeekToday as NSDate, nextWeekTodayEnd as NSDate)
-//            do {
-//                schedulesNextWeek = try viewContext.fetch(fetchRequest)
-//            } catch {
-//                print(error)
-//            }
+            Text("Copy to next week")
+        }.alert(isPresented: $showConflitAlert) {
+            Alert(title: Text("Conflict"), message: Text("\(numConflict) " + (numConflict == 1 ? "schedule " : "schedules ") + " failed to be created due to conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                addBatchDayScheduleViewPresented = false
+            }))
         }
-
     }
 }
 
