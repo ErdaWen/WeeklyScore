@@ -48,13 +48,15 @@ struct AddScheduleView: View {
         newSchedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
         newSchedule.items = items[itemId]
         newSchedule.score = inputScore
+        newSchedule.reminder = inputReminder
+        newSchedule.reminderTime = inputReminderTime
+        
         newSchedule.hidden = false
         newSchedule.statusDefault = true
         newSchedule.checked = false
         newSchedule.scoreGained = 0
         newSchedule.minutesGained = 0
-        newSchedule.reminder = inputReminder
-        newSchedule.reminderTime = inputReminderTime
+        
         do{
             try viewContext.save()
             print("Saved")

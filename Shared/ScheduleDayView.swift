@@ -14,6 +14,7 @@ struct ScheduleDayView: View {
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var timeNow = Date()
     @State var addViewPresented = false
+    @State var batchAddViewPresented = false
     @State var interCord = 50.0
     
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
@@ -84,9 +85,6 @@ struct ScheduleDayView: View {
                                             RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
                                         )
                                     VStack{
-//                                        Divider()
-//                                            .background(Color("text_red"))
-//                                            .frame(height:5)
                                         Rectangle()
                                             .fill(Color("text_red"))
                                             .frame(height:1.5)
@@ -127,7 +125,7 @@ struct ScheduleDayView: View {
                     
                     
                     Button {
-                        
+                        batchAddViewPresented = true
                     } label: {
                         Image(systemName: "plus.square.on.square")
                             .resizable().scaledToFit()
@@ -137,6 +135,9 @@ struct ScheduleDayView: View {
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
+                    }
+                    .sheet(isPresented: $batchAddViewPresented) {
+                        AddBatchDayScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, addBatchDayScheduleViewPresented: $batchAddViewPresented)
                     }
                     Spacer()
                 } // end button HStack
