@@ -168,24 +168,24 @@ struct ScheduleDayView: View {
                 timeNow = Date()
             }
         } //end ScrollViewReader
-//        .gesture(
-//            MagnificationGesture()
-//                //                    .updating($pinchStarted, body: { value, out, _ in
-//                //                        out = true
-//                //                    })
-//                .onChanged({ value in
-//
-//                    print("value: \(value)")
-//                    interCord = min(max(lastInterCord + Double(value-1)*30,35),90)
-//
-//
-//                })
-//                .onEnded({ value in
-//                    lastInterCord = interCord
-//
-//
-//                })
-//        )
+        //        .gesture(
+        //            MagnificationGesture()
+        //                //                    .updating($pinchStarted, body: { value, out, _ in
+        //                //                        out = true
+        //                //                    })
+        //                .onChanged({ value in
+        //
+        //                    print("value: \(value)")
+        //                    interCord = min(max(lastInterCord + Double(value-1)*30,35),90)
+        //
+        //
+        //                })
+        //                .onEnded({ value in
+        //                    lastInterCord = interCord
+        //
+        //
+        //                })
+        //        )
         
         
     }

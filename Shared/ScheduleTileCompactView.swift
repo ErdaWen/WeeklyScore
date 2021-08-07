@@ -23,8 +23,8 @@ struct ScheduleTileCompactView: View {
     let wHandle:CGFloat = 6
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 3
-
-
+    
+    
     
     var body: some View {
         HStack(spacing:0){
@@ -38,25 +38,25 @@ struct ScheduleTileCompactView: View {
                     .frame(width: wHandle+2)
                     .foregroundColor(Color(schedule.items.tags.colorName))
                     .padding(.trailing, mHandle-2)
-
+                
             }
-        Button {
-            changeViewPresented = true
-        } label: {
-            //MARK: Center tile
-            ZStack(alignment:.top){
-                //MARK: Background tile
-                RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
+            Button {
+                changeViewPresented = true
+            } label: {
+                //MARK: Center tile
+                ZStack(alignment:.top){
+                    //MARK: Background tile
+                    RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
                     Text(schedule.items.titleIcon)
                         .font(.system(size: fsTitle))
                         .padding(.top,pTextVer)
-                
-            } // End center tile ZStack
-        }//end Button Label
-        .sheet(isPresented: $changeViewPresented) {
-            ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
-        }
-        
+                    
+                } // End center tile ZStack
+            }//end Button Label
+            .sheet(isPresented: $changeViewPresented) {
+                ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
+            }
+            
         }
     }
 }
