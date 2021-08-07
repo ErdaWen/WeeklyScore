@@ -7,18 +7,25 @@
 
 import SwiftUI
 
-struct AddBatchDayScheduleView: View {
+enum ActiveAlert {
+    case nothing, allFail, allDone, partDone
+}
+
+struct AddBatchScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     var dayStart:Date
     var schedules: FetchedResults<Schedule>
+    var singleDay: Bool
     
     @State var numConflict = 0
-    @Binding var addBatchDayScheduleViewPresented:Bool
+    @State var numDone = 0
+    @Binding var addBatchScheduleViewPresented:Bool
     @State var showConflitAlert = false
-    
-    
+    @State var activeAlert: ActiveAlert = .allDone
+
+
     func checkScheduleConflict(schedule:Schedule) -> Bool {
         var conflict = false
         let newBeginTime = DateServer.addOneWeek(date: schedule.beginTime)
@@ -72,22 +79,50 @@ struct AddBatchDayScheduleView: View {
                 if checkScheduleConflict(schedule:schedule) {
                     numConflict += 1
                 } else {
+                    numDone += 1
                     createNewSchedule(schedule:schedule)
                 }
             }
-            if numConflict > 0 {
-               showConflitAlert = true
+            
+            if schedules.count == 0 {
+                activeAlert = .nothing
+            } else if numConflict == 0 {
+                activeAlert = .allDone
+            } else if numDone == 0 {
+                activeAlert = .allFail
             } else {
-                addBatchDayScheduleViewPresented = false
+                activeAlert = .partDone
             }
+            
+            showConflitAlert = true
             
         } label: {
             Text("Copy to next week")
-        }.alert(isPresented: $showConflitAlert) {
-            Alert(title: Text("Conflict"), message: Text("\(numConflict) " + (numConflict == 1 ? "schedule " : "schedules ") + " failed to be created due to conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                addBatchDayScheduleViewPresented = false
-            }))
         }
+        .alert(isPresented: $showConflitAlert) {
+            
+            switch activeAlert{
+            case .nothing:
+                return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
+                    showConflitAlert = false
+                }))
+            case .allDone:
+                return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+            case .allFail:
+                return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+            case .partDone:
+                return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+
+            }// end switch
+            
+        }// end alert
+        
     }
 }
 

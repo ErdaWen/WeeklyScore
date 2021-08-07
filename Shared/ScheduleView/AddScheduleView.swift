@@ -26,14 +26,33 @@ struct AddScheduleView: View {
     @State var inputReminder = false
     @State var inputReminderTime:Int64 = 0
     @State var showEndTimeWarning = false
+    @State var showConflictAlert = false
     
     @Binding var addScheduleViewPresented:Bool
     
     
-    func updateDefaulte () {
+    
+    func updateDefault () {
         inputScore = items[itemId].defaultScore
         inputBeginTime = DateServer.combineDayTime(day: initDate, time: items[itemId].defaultBeginTime)
-        inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
+        inputEndTime = items[itemId].durationBased ? inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60)) : inputBeginTime
+        inputReminder = items[itemId].defaultReminder
+        inputReminderTime = items[itemId].defaultReminderTime
+    }
+    
+    func checkScheduleConflict() -> Bool {
+        var conflict = false
+        let request = Schedule.schedulefetchRequest()
+        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", inputBeginTime as NSDate, inputEndTime as NSDate)
+        do {
+            let results = try viewContext.fetch(request)
+            if results.count > 0 {
+                conflict = true
+            }
+        } catch {
+            print(error)
+        }
+        return conflict
     }
     
     func saveSchedule() {
@@ -41,6 +60,8 @@ struct AddScheduleView: View {
         items[itemId].defaultBeginTime = inputBeginTime
         items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
         items[itemId].defaultScore = inputScore
+        items[itemId].defaultReminder = inputReminder
+        items[itemId].defaultReminderTime = inputReminderTime
         
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
@@ -83,7 +104,7 @@ struct AddScheduleView: View {
                                     .tag(r)
                             }
                         }.onChange(of: itemId, perform: { value in
-                            updateDefaulte ()
+                            updateDefault ()
                         })
                     }
                     // MARK: score (Stepper)
@@ -108,6 +129,9 @@ struct AddScheduleView: View {
                         }
                     } else {
                         DatePicker("Time", selection: $inputBeginTime)
+                            .onChange(of: inputBeginTime) { _ in
+                                inputEndTime = inputBeginTime
+                            }
                     }
                     //MARK: Reminder
                     Toggle("Reminder", isOn:$inputReminder)
@@ -127,11 +151,22 @@ struct AddScheduleView: View {
                     leading: Button(action:{ addScheduleViewPresented = false}, label: {
                         Text("Cancel")
                     }), trailing: Button(action:{
-                        saveSchedule()
                         
+                        if checkScheduleConflict() {
+                            showConflictAlert = true
+                        } else {
+                            saveSchedule()
+                        }
                     }, label: {
                         Text("Add")
-                    }))
+                    })
+                    .alert(isPresented: $showConflictAlert) {
+                        Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                            showConflictAlert = false
+                        }))
+                    }
+                
+                )
             } else {
                 // Habit list is empty
                 VStack{
@@ -148,7 +183,7 @@ struct AddScheduleView: View {
         }.onAppear(){
             if items.count > 0{
                 itemId = 0
-                updateDefaulte ()
+                updateDefault ()
             }
         }
     }

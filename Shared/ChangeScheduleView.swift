@@ -10,7 +10,7 @@ import SwiftUI
 struct ChangeScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
-
+    
     
     @FetchRequest(
         sortDescriptors: [],
@@ -29,6 +29,8 @@ struct ChangeScheduleView: View {
     @State var showEndTimeWarning = false
     @State var inputReminder = false
     @State var inputReminderTime:Int64 = 0
+    @State var showConflictAlert = false
+    @State var showDeleteAlert = false
     
     func initValues(){
         itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
@@ -41,7 +43,7 @@ struct ChangeScheduleView: View {
     
     func updateDefault () {
         inputScore = items[itemId].defaultScore
-        inputEndTime = inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60))
+        inputEndTime = items[itemId].durationBased ? inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60)) : inputBeginTime
     }
     
     func deleteSchedule(){
@@ -60,29 +62,46 @@ struct ChangeScheduleView: View {
         }
     }
     
+    func checkScheduleConflict() -> Bool {
+        var conflict = false
+        let request = Schedule.schedulefetchRequest()
+        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", inputBeginTime as NSDate, inputEndTime as NSDate)
+        do {
+            let results = try viewContext.fetch(request)
+            if results.count > 0 {
+                conflict = true
+            }
+        } catch {
+            print(error)
+        }
+        return conflict
+    }
+    
     func saveSchedule(){
         
         items[itemId].lastUse = Date()
         items[itemId].defaultBeginTime = inputBeginTime
         items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
         items[itemId].defaultScore = inputScore
+        items[itemId].defaultReminder = inputReminder
+        items[itemId].defaultReminderTime = inputReminderTime
         
-            schedule.items = items[itemId]
-            schedule.beginTime = inputBeginTime
-            schedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
-            schedule.score = inputScore
-            schedule.reminder = inputReminder
-            schedule.reminderTime = inputReminderTime
-            do{
-                try viewContext.save()
-                print("saved")
-                propertiesModel.updateScores()
-                propertiesModel.dumUpdate.toggle()
-                changeScheduleViewPresented = false
-            } catch {
-                print("Cannot save item")
-                print(error)
-            }
+        schedule.items = items[itemId]
+        schedule.beginTime = inputBeginTime
+        schedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
+        schedule.score = inputScore
+        schedule.reminder = inputReminder
+        schedule.reminderTime = inputReminderTime
+        do{
+            try viewContext.save()
+            print("saved")
+            propertiesModel.updateScores()
+            propertiesModel.dumUpdate.toggle()
+            changeScheduleViewPresented = false
+        } catch {
+            print("Cannot save item")
+            print(error)
+        }
     }
     
     var body: some View {
@@ -125,6 +144,9 @@ struct ChangeScheduleView: View {
                             }
                         } else {
                             DatePicker("Time", selection: $inputBeginTime)
+                                .onChange(of: inputBeginTime) { _ in
+                                    inputEndTime = inputBeginTime
+                                }
                         }
                         Toggle("Reminder", isOn:$inputReminder)
                         if inputReminder {
@@ -143,20 +165,43 @@ struct ChangeScheduleView: View {
                     
                     Button(action:
                             {
-                                deleteSchedule()
+                                showDeleteAlert = true
                             }, label: {
                                 Text("Delete this event")
                             })
+                        .alert(isPresented: $showDeleteAlert) {
+                            Alert(title: Text("🤔 You Sure?"), message: Text("Delete this event?"), primaryButton: .default(Text("Keep"), action: {
+                                showDeleteAlert = false
+                            }), secondaryButton: .default(Text("Delete!"), action: {
+                                deleteSchedule()
+                            }))
+                        }
                     
                 }.navigationBarTitle("Edit Schedule",displayMode: .inline)
                 .navigationBarItems(
-                    leading: Button(action:{ changeScheduleViewPresented = false}, label: {
-                        Text("Cancel")
-                    }), trailing: Button(action:{
-                        saveSchedule()
-                    }, label: {
-                        Text("Save")
-                    }))
+                    leading:
+                        Button(action:{ changeScheduleViewPresented = false}, label: {
+                            Text("Cancel")
+                        })
+                    , trailing:
+                        Button(action:{
+                            if checkScheduleConflict() {
+                                showConflictAlert = true
+                            } else {
+                                saveSchedule()
+                            }
+
+                        }
+                        
+                        , label: {
+                            Text("Save")
+                        })
+                        .alert(isPresented: $showConflictAlert) {
+                            Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                                showConflictAlert = false
+                            }))
+                        }
+                )
             } else {
                 Text("Habit is archived")
             }

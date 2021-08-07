@@ -15,8 +15,10 @@
 		0026288426BDF11600A755D2 /* ScoreBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288226BDF11600A755D2 /* ScoreBarView.swift */; };
 		0026288626BDF6C200A755D2 /* ScheduleListPreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */; };
 		0026288726BDF6C200A755D2 /* ScheduleListPreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */; };
-		0026288D26BDFBC900A755D2 /* AddBatchDayScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* AddBatchDayScheduleView.swift */; };
-		0026288E26BDFBC900A755D2 /* AddBatchDayScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* AddBatchDayScheduleView.swift */; };
+		0026288D26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */; };
+		0026288E26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */; };
+		0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
+		0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
 		0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
@@ -33,8 +35,6 @@
 		0072757326B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
 		0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
 		0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
-		0072757826B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */; };
-		0072757926B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */; };
 		0072757B26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		0072757C26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
@@ -90,7 +90,8 @@
 		00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRecordServer.swift; sourceTree = "<group>"; };
 		0026288226BDF11600A755D2 /* ScoreBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBarView.swift; sourceTree = "<group>"; };
 		0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListPreviewContentView.swift; sourceTree = "<group>"; };
-		0026288C26BDFBC900A755D2 /* AddBatchDayScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBatchDayScheduleView.swift; sourceTree = "<group>"; };
+		0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBatchScheduleView.swift; sourceTree = "<group>"; };
+		0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0034916026A7E677001B8DBB /* WeeklyScore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeeklyScore.xcdatamodel; sourceTree = "<group>"; };
 		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0034918B26A7F06B001B8DBB /* DateServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServer.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		0072756526B32A7B00FAA32D /* ScheduleTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTileView.swift; sourceTree = "<group>"; };
 		0072757126B65D0E00FAA32D /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		0072757426B7190300FAA32D /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0072757A26B7280600FAA32D /* CordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CordServer.swift; sourceTree = "<group>"; };
 		0072757D26B873F400FAA32D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 				00C72FA526963CC00028EF5C /* AddScheduleView.swift */,
 				00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */,
 				00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */,
-				0026288C26BDFBC900A755D2 /* AddBatchDayScheduleView.swift */,
+				0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */,
 			);
 			name = Sheets;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				0072757426B7190300FAA32D /* Item+CoreDataClass.swift */,
-				0072757526B7190300FAA32D /* Item+CoreDataProperties.swift */,
+				0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */,
 				008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */,
 				008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */,
 				008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */,
@@ -450,7 +450,8 @@
 				0072757226B65D0E00FAA32D /* ScheduleDayView.swift in Sources */,
 				0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
-				0026288D26BDFBC900A755D2 /* AddBatchDayScheduleView.swift in Sources */,
+				0026288D26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */,
+				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FA26AE7129009AB91C /* SettingView.swift in Sources */,
@@ -475,7 +476,6 @@
 				00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				0092DD3126BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
 				00214CB726BB98D7001FE49D /* CustomSlider_list.swift in Sources */,
-				0072757826B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */,
 				009C422326AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
 				008DC8F726AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */,
 				C88EC1392692B378005A4DAB /* ItemView.swift in Sources */,
@@ -494,7 +494,8 @@
 				0072757326B65D0E00FAA32D /* ScheduleDayView.swift in Sources */,
 				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
-				0026288E26BDFBC900A755D2 /* AddBatchDayScheduleView.swift in Sources */,
+				0026288E26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */,
+				0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */,
@@ -519,7 +520,6 @@
 				00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				0092DD3226BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
 				00214CB826BB98D7001FE49D /* CustomSlider_list.swift in Sources */,
-				0072757926B7190300FAA32D /* Item+CoreDataProperties.swift in Sources */,
 				009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
 				008DC8F826AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */,
 				C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */,

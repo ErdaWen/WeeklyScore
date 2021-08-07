@@ -48,6 +48,8 @@ struct AddItemView: View {
                     newItem.defaultMinutes = inputDurationBased ? 60 : 0
                     newItem.defaultScore = 10
                     newItem.defaultBeginTime = DateServer.startOfToday() + 28800
+                    newItem.defaultReminder = false
+                    newItem.defaultReminderTime = 0
                     newItem.checkedTotal = 0
                     newItem.minutesTotal = 0
                     newItem.scoreTotal = 0

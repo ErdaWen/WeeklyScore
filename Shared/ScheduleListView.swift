@@ -13,6 +13,7 @@ struct ScheduleListView: View {
 
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
+    @State var batchAddViewPresented = false
     //@State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
     @Binding var previewMode:Bool
     
@@ -28,9 +29,6 @@ struct ScheduleListView: View {
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 40
     let mPicker:CGFloat = 40
-
-
-
     
     var body: some View {
         VStack{
@@ -63,7 +61,7 @@ struct ScheduleListView: View {
                     
                     
                     Button {
-                        
+                        batchAddViewPresented = true
                     } label: {
                         Image(systemName: "plus.square.on.square")
                             .resizable().scaledToFit()
@@ -72,6 +70,9 @@ struct ScheduleListView: View {
                             .background(
                                 RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
                             )
+                    }
+                    .sheet(isPresented: $batchAddViewPresented) {
+                        AddBatchScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
                     }
                     
                     Spacer()

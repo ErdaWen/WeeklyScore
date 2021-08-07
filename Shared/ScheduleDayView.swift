@@ -137,7 +137,7 @@ struct ScheduleDayView: View {
                             )
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
-                        AddBatchDayScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, addBatchDayScheduleViewPresented: $batchAddViewPresented)
+                        AddBatchScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
                     }
                     Spacer()
                 } // end button HStack
