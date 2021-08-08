@@ -20,7 +20,6 @@ struct ScheduleView: View {
     @State var dayFromDay1 = -1
     
     // String arrays for title and day picker dispaly
-    @State var startDay = ""
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
     @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
@@ -28,15 +27,12 @@ struct ScheduleView: View {
     // appearence related
     let fsTitle:CGFloat = 18.0
     let fsSub:CGFloat = 12.0
-    let sButton:CGFloat = 22
     let mTitle:CGFloat = 20
     let hTitle:CGFloat = 38
-    let rTitle:CGFloat = 12
     let mDateWeekday:CGFloat = 2
     let mPicker:CGFloat = 40
     let hPicker:CGFloat = 45
     let pPickerTextVer:CGFloat = 3
-    let mButton:CGFloat = 10
     let minDragDist:CGFloat = 40
     let wDividerCompensate:CGFloat = 0
     
@@ -44,7 +40,6 @@ struct ScheduleView: View {
     func updateDate() {
         dayNumbers = DateServer.generateDays(offset:weekFromNow)
         weekdayNumbers = DateServer.generateWeekdays(offset:weekFromNow)
-        startDay = DateServer.generateStartDay(offset:weekFromNow)
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
         propertiesModel.startWeek = DateServer.genrateDateStemp(offset: weekFromNow)
         propertiesModel.updateScores()
@@ -61,47 +56,10 @@ struct ScheduleView: View {
             //MARK: Scores
             ScoreBarView()
             
-            //MARK: WeekTitle
-            ZStack{
-                // Background tile
-                RoundedRectangle(cornerRadius: rTitle).foregroundColor(Color("background_grey"))
-                
-                HStack{
-                    
-                    //MARK: Week minus
-                    Button {
-                        weekFromNow -= 1
-                        dayFromDay1 = -1
-                        updateDate()
-                    } label: {
-                        Image(systemName: "arrowtriangle.backward.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
-                    }
-                    .frame(width: sButton, height: sButton).padding(.leading,mButton)
-                    
-                    Spacer()
-                    
-                    //MARK: Week restore
-                    Button {
-                        weekFromNow = 0
-                        dayFromDay1 = -1
-                        updateDate()
-                    } label: {
-                        Text(weekFromNow == 0 ? "This week" : "Week of " + startDay ).foregroundColor(Color("text_black")).font(.system(size: fsTitle)).fontWeight(.light)
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: Week plus
-                    Button {
-                        weekFromNow += 1
-                        dayFromDay1 = -1
-                        updateDate()
-                    } label: {
-                        Image(systemName: "arrowtriangle.right.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
-                    }
-                    .frame(width: sButton, height: sButton).padding(.trailing,mButton)
-                }
-            }// end week title
+            //MARK: Week title bar
+            WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1, updateFunc: {
+                updateDate()
+            })
             .frame(height:hTitle).padding(.horizontal, mTitle).animation(.default)
             
             //MARK: Day picker
@@ -167,6 +125,8 @@ struct ScheduleView: View {
                 } //end GeoReader
             } // end day picker
             .frame(height: hPicker).padding(.horizontal, mPicker)
+            
+            //MARK: Horizontal Divider, not shown in week calendar look
             if (!previewMode) || (dayFromDay1 != -1)
             {
                 Divider().background(Color("background_grey"))
