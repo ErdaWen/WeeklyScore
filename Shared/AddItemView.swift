@@ -23,15 +23,41 @@ struct AddItemView: View {
     
     @Binding var addItemViewPresented:Bool
     
+    func saveItem(){
+        let newItem = Item(context: viewContext)
+        newItem.id = UUID()
+        newItem.hidden = false
+        newItem.titleIcon = inputTitleIcon
+        newItem.title = inputTitle
+        newItem.durationBased = inputDurationBased
+        newItem.defaultMinutes = inputDurationBased ? 60 : 0
+        newItem.defaultScore = 10
+        newItem.defaultBeginTime = DateServer.startOfToday() + 28800
+        newItem.defaultReminder = false
+        newItem.defaultReminderTime = 0
+        newItem.checkedTotal = 0
+        newItem.minutesTotal = 0
+        newItem.scoreTotal = 0
+        newItem.lastUse = Date()
+        newItem.tags = tags[tagid]
+        tags[tagid].lastUse = Date()
+        do{
+            try viewContext.save()
+            print("saved")
+            addItemViewPresented = false
+        } catch {
+            print("Cannot save item")
+            print(error)
+        }
+    }
+    
     var body: some View {
         //MARK: Navigation Bar
         VStack{
             HStack{
                 Button(action:{ addItemViewPresented = false}
                        , label: {
-                        Text("Discard")
-                            .foregroundColor(Color("text_red"))
-                            .font(.system(size: 20))
+                        Text("Discard").foregroundColor(Color("text_red")).font(.system(size: 20))
                        })
                 Spacer()
                 Text("New Habit")
@@ -39,35 +65,9 @@ struct AddItemView: View {
 
                 Spacer()
                 Button(action:{
-                    let newItem = Item(context: viewContext)
-                    newItem.id = UUID()
-                    newItem.hidden = false
-                    newItem.titleIcon = inputTitleIcon
-                    newItem.title = inputTitle
-                    newItem.durationBased = inputDurationBased
-                    newItem.defaultMinutes = inputDurationBased ? 60 : 0
-                    newItem.defaultScore = 10
-                    newItem.defaultBeginTime = DateServer.startOfToday() + 28800
-                    newItem.defaultReminder = false
-                    newItem.defaultReminderTime = 0
-                    newItem.checkedTotal = 0
-                    newItem.minutesTotal = 0
-                    newItem.scoreTotal = 0
-                    newItem.lastUse = Date()
-                    newItem.tags = tags[tagid]
-                    tags[tagid].lastUse = Date()
-                    do{
-                        try viewContext.save()
-                        print("saved")
-                        addItemViewPresented = false
-                    } catch {
-                        print("Cannot save item")
-                        print(error)
-                    }
+                    saveItem()
                 }, label: {
-                    Text("   Add")
-                        .foregroundColor(Color("text_blue"))
-                        .font(.system(size: 20))
+                    Text("   Add").foregroundColor(Color("text_blue")).font(.system(size: 20))
 
                 })
             }.padding(25)
@@ -76,8 +76,10 @@ struct AddItemView: View {
                 VStack(spacing:22){
                     HStack(spacing:10){
                         
+
+                        
                         // MARK:TitleIcon
-                        VStack(alignment: .center, spacing: 8.0){
+                        VStack(alignment: .center, spacing: 7.0){
                             Text("Icon")
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("text_black"))
@@ -88,6 +90,8 @@ struct AddItemView: View {
                                 EmojiTextField(text: $inputTitleIcon, placeholder: "")
                                     .font(.system(size: 50))
                                     .foregroundColor(Color("text_black"))
+                                    .frame(width:20,height: 20)
+                                    .padding(12.5)
                                     .onChange(of: inputTitleIcon, perform: { value in
                                         if let lastChar = inputTitleIcon.last{
                                             inputTitleIcon = String(lastChar)
@@ -95,10 +99,9 @@ struct AddItemView: View {
                                         if inputTitleIcon.isEmpty{
                                             inputTitleIcon = "❓"
                                         }
-                                    }).padding(15)
-                                    .frame(width:50,height: 50)
+                                    })
                             }
-                            .frame(width:50,height: 50)
+                            .frame(width:45,height: 45)
                         }
                         
                         // MARK:Title
@@ -115,7 +118,7 @@ struct AddItemView: View {
                                     .foregroundColor(Color("text_black"))
                                     .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
                             }
-                            .frame(height: 50)
+                            .frame(height: 45)
                         }
                     }.animation(.default)
                     

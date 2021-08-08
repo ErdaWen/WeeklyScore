@@ -22,9 +22,8 @@ struct ItemView: View {
     
     let mHorizon:CGFloat = 30
     let topSpace:CGFloat = 50
-    let pButton:CGFloat = 30
+    let pButton:CGFloat = 5
     let mButton:CGFloat = 25
-    let mButtonTiles:CGFloat = 30
     let sButton:CGFloat = 22
     let mTiles:CGFloat = 15
     let hTiles:CGFloat = 45
@@ -85,26 +84,14 @@ struct ItemView: View {
             }
             
             ZStack{
-                //MARK:Background
-                Button {
-                    addViewPresented.toggle()
-                } label: {
-                    Image(systemName: "plus.square")
-                        .resizable().scaledToFit()
-                        .foregroundColor(Color("text_black"))
-                        .frame(width: sButton, height: sButton).padding(.vertical, pButton)
-                        .background(
-                            RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
-                        )
-                    
+                //MARK:Buttons
+                FloatButton(systemName: "plus.square", sButton: sButton) {
+                    addViewPresented = true
                 }
                 .sheet(isPresented: $addViewPresented, content: {
                     AddItemView(addItemViewPresented: $addViewPresented)
                 })
-
-            }
-            
-            
+            } .padding(.top,pButton)
 
         } // end whole view ZStack
         
