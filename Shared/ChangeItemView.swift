@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChangeItemView: View {
+    
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -22,20 +23,32 @@ struct ChangeItemView: View {
     @State var inputTitleIcon = ""
     @State var inputTitle = ""
 //    @State var inputDefaultScore:Int64 = 10
-//    @State var inputDefaultMinutes:Int64 = 0
-//    @State var inputDefaultMinutesString = "0"
+
     @State var inputDurationBased = false
     @State var tagid = 0
     
     
+    @State var activeAlert:ActiveAlert = .conflict
+    @State var showConflictAlert = false
+    @State var showBaseAlert = false
+    @State var showDeleteAlert = false
+    
+    let mNavBar:CGFloat = 25
+    let fsNavBar:CGFloat = 20
+    let mVer:CGFloat = 22
+    let mHor:CGFloat = 10
+    let hField:CGFloat = 45
+    
+    
+    enum ActiveAlert {
+        case noIcon, conflict
+    }
+        
     func saveItem(){
-        // Check item name
-        //......
         changeItemViewPresented = false
         item.titleIcon = inputTitleIcon
         item.title = inputTitle
-//                    item.defaultScore = inputDefaultScore
-//                    item.defaultMinutes = inputDefaultMinutes
+
         item.durationBased = inputDurationBased
         item.tags = tags[tagid]
         tags[tagid].lastUse = Date()
@@ -52,6 +65,40 @@ struct ChangeItemView: View {
         }
     }
     
+    func checkItemConflict() -> Bool {
+        var conflict = false
+        if inputTitleIcon == "" {
+            activeAlert = .noIcon
+            conflict = true
+        } else {
+            let request = Item.itemFetchRequest()
+            request.predicate = NSPredicate(format: "(title == %@)", inputTitle)
+            do {
+                let results = try viewContext.fetch(request)
+                if results.count > 0 {
+                    activeAlert = .conflict
+                    conflict = true
+                }
+            } catch {
+                print(error)
+            }
+        }
+        return conflict
+    }
+    
+    func deleteItem() {
+        changeItemViewPresented = false
+        viewContext.delete(item)
+        do{
+            try viewContext.save()
+            print("deleted")
+            changeItemViewPresented = false
+        } catch {
+            print("Cannot delete item")
+            print(error)
+        }
+    }
+    
     var body: some View {
         VStack{
             //MARK: Navigation Bar
@@ -60,71 +107,68 @@ struct ChangeItemView: View {
                 Button(action:{ changeItemViewPresented = false}
                        , label: {
                         Text("Cancel")
-                            .foregroundColor(Color("text_red"))
-                            .font(.system(size: 20))
+                            .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
                        })
                 
                 Spacer()
                 //MARK: Title
                 Text("Edit Habit")
-                    .font(.system(size: 20))
+                    .font(.system(size: fsNavBar))
                 Spacer()
                 
                 //MARK: Save button
                 Button(action:{
-                    saveItem()
+                    if checkItemConflict() {
+                        showConflictAlert = true
+                    } else {
+                        saveItem()
+                    }
                 }, label: {
                     Text("  Save")
-                        .foregroundColor(Color("text_blue"))
-                        .font(.system(size: 20))
+                        .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
 
                 })
-            }.padding(25)
+                .alert(isPresented: $showConflictAlert) {
+                    switch activeAlert{
+                    case .noIcon:
+                        return Alert(title: Text("❌ No Icon"), message: Text("Select an Icon...") , dismissButton:.default(Text("OK"), action: {
+                            showConflictAlert = false
+                        }))
+                    case .conflict:
+                        return Alert(title: Text("❌ Conflict"), message: Text("There is already a habit with a same title"), dismissButton:.default(Text("OK"), action: {
+                            showConflictAlert = false
+                        }))
+                    }// end switch
+                }// end alert
+            }.padding(mNavBar)
             
             ScrollView{
-                VStack(spacing:22){
-                    HStack(spacing:10){
-                        
-                        // MARK:TitleIcon
-                        VStack(alignment: .center, spacing: 8.0){
-                            Text("Icon")
-                                .font(.system(size: 15))
+                VStack(spacing:mVer){
+                    HStack(spacing:mHor){
+                        //MARK: Icon
+                        InputField(title: "Icon", alignment: .center, color: Color(tags[tagid].colorName), fieldHeight: hField, content: {
+                            EmojiTextField(text: $inputTitleIcon, placeholder: "")
+                                .font(.system(size: 50))
                                 .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                            ZStack(alignment: .center){
-                                RoundedRectangle(cornerRadius: 8.0)
-                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                                EmojiTextField(text: $inputTitleIcon, placeholder: "")
-                                    .font(.system(size: 50))
-                                    .foregroundColor(Color("text_black"))
-                                    .onChange(of: inputTitleIcon, perform: { value in
-                                        if let lastChar = inputTitleIcon.last{
-                                            inputTitleIcon = String(lastChar)
-                                        }
-                                        if inputTitleIcon.isEmpty{
-                                            inputTitleIcon = "❓"
-                                        }
-                                    }).padding(15)
-                                    .frame(width:50,height: 50)
-                            }
-                            .frame(width:50,height: 50)
-                        }
+                                .frame(width:20,height: 20)
+                                .padding(12.5)
+                                .onChange(of: inputTitleIcon, perform: { value in
+                                    if let lastChar = inputTitleIcon.last{
+                                        inputTitleIcon = String(lastChar)
+                                    }
+                                    if inputTitleIcon.isEmpty{
+                                        inputTitleIcon = "❓"
+                                    }
+                                })
+                        })
+                        .frame(width:hField)
                         
                         // MARK:Title
-                        VStack(alignment: .leading, spacing: 7.0){
-                            Text("Title")
-                                .font(.system(size: 15))
+                        InputField(title: "Title", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight: hField) {
+                            TextField("New Habit",text:$inputTitle)
+                                .font(.system(size: 20))
                                 .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                            ZStack(alignment: .center){
-                                RoundedRectangle(cornerRadius: 8.0)
-                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                                TextField("New Habit",text:$inputTitle)
-                                    .font(.system(size: 20))
-                                    .foregroundColor(Color("text_black"))
-                                    .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
-                            }
-                            .frame(height: 50)
+                                .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
                         }
                     }.animation(.default)
                     
@@ -146,7 +190,7 @@ struct ChangeItemView: View {
                             }.animation(.default)
                             HStack(){
                                 Button {
-                                    inputDurationBased = true
+                                    showBaseAlert = true
                                 } label: {
                                     Text("Duration")
                                         .font(.system(size:15))
@@ -155,7 +199,7 @@ struct ChangeItemView: View {
                                         .frame(width: 150, alignment: .center)
                                 }
                                 Button(action: {
-                                    inputDurationBased = false
+                                    showBaseAlert = true
                                 }, label: {
                                     Text("Hit")
                                         .font(.system(size:15))
@@ -165,86 +209,34 @@ struct ChangeItemView: View {
                                 })
                             }
                         }.frame(width: 300, height: 40,alignment: .center)
+                        .alert(isPresented: $showBaseAlert) {
+                            if inputDurationBased {
+                                return Alert(title: Text(" ⚠️ Change type"), message: Text("Changing to hit-based will change the static method from total time to total hit, total time will be no longer shown...") , primaryButton:.default(Text("Do not change"), action: {
+                                    showBaseAlert = false
+                                }),secondaryButton: .default(Text("Change"), action: {inputDurationBased.toggle()} ))
+                            } else {
+                                return Alert(title: Text(" ⚠️ Change type"), message: Text("Changing to duration-based will change the static method from total hit to total time, previous checked items count for no time...") , primaryButton:.default(Text("Do not change"), action: {
+                                    showBaseAlert = false
+                                }),secondaryButton: .default(Text("Change"), action: {inputDurationBased.toggle()} ))
+                            }// end if else swith
+                        }// end alert
                         
-                        
-//                        HStack(spacing:10){
-//                            // MARK: Default score
-//                            VStack(alignment: .leading, spacing: 8.0){
-//                                Text("Default score")
-//                                    .font(.system(size: 15))
-//                                    .foregroundColor(Color("text_black"))
-//                                    .fontWeight(.light)
-//                                ZStack(alignment: .center){
-//                                    RoundedRectangle(cornerRadius: 8.0)
-//                                        .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-//                                    HStack{
-//                                        Text("\(inputDefaultScore)")
-//                                            .font(.system(size: 20))
-//                                            .foregroundColor(Color("text_black"))
-//                                        Spacer()
-//                                        Stepper("", value: $inputDefaultScore, in: 0...20)
-//                                            .frame(width:100,height: 50)
-//                                    }
-//                                    .padding(.leading,10)
-//                                    .padding(.trailing,10)
-//                                }
-//                            }
-//
-//                            // MARK:Default minutes
-//                            if inputDurationBased{
-//                                VStack(alignment: .leading, spacing: 7.0){
-//                                    Text("Default minuite")
-//                                        .font(.system(size: 15))
-//                                        .foregroundColor(Color("text_black"))
-//                                        .fontWeight(.light)
-//                                    ZStack(alignment: .center){
-//                                        RoundedRectangle(cornerRadius: 8.0)
-//                                            .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-//                                        TextField("Minute", text: $inputDefaultMinutesString)
-//                                            // the input is a string
-//                                            .keyboardType(.numberPad)
-//                                            // update actual var here
-//                                            .onChange(of: inputDefaultMinutesString, perform: { value in
-//                                                if let inputnumber = Double(inputDefaultMinutesString) {
-//                                                    // protect the number being Int
-//                                                    inputDefaultMinutesString = String(Int(inputnumber))
-//                                                    inputDefaultMinutes = Int64(inputnumber)
-//                                                } else {
-//                                                    inputDefaultMinutesString = "0"
-//                                                    inputDefaultMinutes = 0
-//                                                }
-//                                            })
-//                                            .font(.system(size: 20))
-//                                            .foregroundColor(Color("text_black"))
-//                                            .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
-//                                    }
-//                                    .frame(height: 50)
-//                                }
-//                            }
-//                        }.animation(.default)
-                        
+ 
                         //MARK: Tags
-                        VStack(alignment:.leading, spacing:7.0){
-                            Text("Choose a tag")
-                                .font(.system(size: 15))
-                                .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 8.0)
-                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                                Picker("",selection:$tagid){
-                                    ForEach(0...tags.count-1, id:\.self) { r in
-                                        HStack(spacing:10.0){
-                                            Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
-                                            Text(tags[r].name)
-                                                .font(.system(size: 20))
-                                                .fontWeight(.light)
-                                                .foregroundColor(Color("text_black"))
-                                        }.tag(r)
-                                    }
+                        InputField(title: "Choose a tag", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
+                            Picker("",selection:$tagid){
+                                ForEach(0...tags.count-1, id:\.self) { r in
+                                    HStack(spacing:10.0){
+                                        Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
+                                        Text(tags[r].name)
+                                            .font(.system(size: 20))
+                                            .fontWeight(.light)
+                                            .foregroundColor(Color("text_black"))
+                                    }.tag(r)
                                 }
                             }
-                        }
+                        })
+                        
                     } // end if !hidden
                     
                     Button(item.hidden ? "Resume Habit" : "Archive Habit") {
@@ -262,18 +254,17 @@ struct ChangeItemView: View {
                     .foregroundColor(Color("text_blue"))
                     .font(.system(size: 20))
                     
-                    Button("Delete Habit") {
+                    Button("Delete Habit...") {
                         // MARK: warning to be added
-                        changeItemViewPresented = false
-                        viewContext.delete(item)
-                        do{
-                            try viewContext.save()
-                            print("deleted")
+                        showDeleteAlert = true
+                    }
+                    .alert(isPresented: $showDeleteAlert) {
+                        Alert(title: Text("🤔 You Sure?"), message: Text("All Schedules will also be deleted! If you are done with this habit, simply archive it and it won't show"), primaryButton: .default(Text("Keep"), action: {
+                            showDeleteAlert = false
+                        }), secondaryButton: .default(Text("Delete!"), action: {
+                            deleteItem()
                             changeItemViewPresented = false
-                        } catch {
-                            print("Cannot delete item")
-                            print(error)
-                        }
+                        }))
                     }
                     .foregroundColor(Color("text_red"))
                     .font(.system(size: 20))
@@ -286,9 +277,6 @@ struct ChangeItemView: View {
             tagid = tags.firstIndex(where: {$0.id == item.tags.id}) ?? 0
             inputTitleIcon = item.titleIcon
             inputTitle = item.title
-//            inputDefaultScore = item.defaultScore
-//            inputDefaultMinutes = item.defaultMinutes
-//            inputDefaultMinutesString = String(inputDefaultMinutes)
             inputDurationBased = item.durationBased
         }
     }

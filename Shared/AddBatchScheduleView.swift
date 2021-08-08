@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-enum ActiveAlert {
-    case nothing, allFail, allDone, partDone
-}
+
 
 struct AddBatchScheduleView: View {
+    enum ActiveAlert {
+        case nothing, allFail, allDone, partDone
+    }
+    
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
     

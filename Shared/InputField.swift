@@ -13,17 +13,16 @@ struct InputField <Content:View>: View {
     var title: String?
     var alignment: HorizontalAlignment
     var color:Color
-    var fieldHeight:CGFloat
+    var fieldHeight:CGFloat?
     
     
     let rBoarder:CGFloat = 8
     let wBoarder:CGFloat = 1.5
     let mTitleField:CGFloat = 7
     let fsTitle:CGFloat = 15
-    
-    
-        
-    init(_ title:String?, _ alignment: HorizontalAlignment, _ color:Color, _ fieldHeight:CGFloat, @ViewBuilder content:() -> Content) {
+
+
+    init( title:String?,  alignment: HorizontalAlignment,  color:Color,  fieldHeight:CGFloat?, @ViewBuilder content:() -> Content) {
         self.title = title
         self.alignment = alignment
         self.color = color
@@ -32,10 +31,10 @@ struct InputField <Content:View>: View {
     }
     
     var body: some View {
-        VStack(alignment: self.alignment, spacing: 7.0){
+        VStack(alignment: self.alignment, spacing: mTitleField){
             if let t = title {
                 Text(t)
-                    .font(.system(size: 15))
+                    .font(.system(size: fsTitle))
                     .foregroundColor(Color("text_black"))
                     .fontWeight(.light)
             }
