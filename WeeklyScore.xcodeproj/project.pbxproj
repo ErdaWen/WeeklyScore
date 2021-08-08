@@ -19,6 +19,8 @@
 		0026288E26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */; };
 		0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
 		0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
+		0026289626BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */; };
+		0026289726BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */; };
 		0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
@@ -92,6 +94,7 @@
 		0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListPreviewContentView.swift; sourceTree = "<group>"; };
 		0026288C26BDFBC900A755D2 /* AddBatchScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBatchScheduleView.swift; sourceTree = "<group>"; };
 		0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRecordNotificationBar.swift; sourceTree = "<group>"; };
 		0034916026A7E677001B8DBB /* WeeklyScore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeeklyScore.xcdatamodel; sourceTree = "<group>"; };
 		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0034918B26A7F06B001B8DBB /* DateServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServer.swift; sourceTree = "<group>"; };
@@ -182,16 +185,9 @@
 			children = (
 				0072757D26B873F400FAA32D /* CustomSlider.swift */,
 				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
-			);
-			name = SharedElement;
-			sourceTree = "<group>";
-		};
-		0026288B26BDFADD00A755D2 /* Elements */ = {
-			isa = PBXGroup;
-			children = (
 				009B248D26A239BE0087467A /* EmojiTextField.swift */,
 			);
-			name = Elements;
+			name = SharedElement;
 			sourceTree = "<group>";
 		};
 		0034918A26A7F036001B8DBB /* Servers */ = {
@@ -220,9 +216,10 @@
 			children = (
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
+				0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */,
 				009C422A26AF3D0D00A783F0 /* ScheduleView */,
 				009C422826AF3CBA00A783F0 /* ItemView */,
-				008DC8F926AE7129009AB91C /* SettingView.swift */,
+				0026288A26BDF9FB00A755D2 /* SharedElement */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -233,7 +230,6 @@
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
 				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
 				009C422926AF3CEA00A783F0 /* Sheets */,
-				0026288B26BDFADD00A755D2 /* Elements */,
 			);
 			name = ItemView;
 			sourceTree = "<group>";
@@ -254,7 +250,6 @@
 				0026288226BDF11600A755D2 /* ScoreBarView.swift */,
 				0092DD2F26BCC76B00750557 /* ListView */,
 				0026288126BDF07700A755D2 /* DayView */,
-				0026288A26BDF9FB00A755D2 /* SharedElement */,
 				009C422B26AF3D3800A783F0 /* Sheets */,
 			);
 			name = ScheduleView;
@@ -290,6 +285,7 @@
 			children = (
 				0034918726A7EE02001B8DBB /* Persistence.swift */,
 				009C422526AF3C4A00A783F0 /* Views */,
+				008DC8F926AE7129009AB91C /* SettingView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -455,6 +451,7 @@
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FA26AE7129009AB91C /* SettingView.swift in Sources */,
+				0026289626BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */,
 				0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
 				008DC8EF26AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */,
@@ -499,6 +496,7 @@
 				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */,
+				0026289726BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */,
 				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
 				008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */,

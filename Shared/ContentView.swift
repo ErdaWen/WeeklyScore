@@ -74,19 +74,7 @@ struct ContentView: View {
             
             //MARK: autorecord noification bar
             if autoRecordNotification{
-                VStack{
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color( mode == 0 ? "text_green" : "text_red"))
-                        Text("\(changedSchedules.count) " + (changedSchedules.count == 1 ? "schedule " : "schedules ") + "marked as " + (mode == 0 ? "complete automatically..." : "incomplete automatically..."))
-                            .font(.system(size: 12))
-                            .foregroundColor(Color("text_black"))
-                    }
-                    .frame(height:20)
-                    .padding(.horizontal,20)
-                    .transition(.opacity)
-                    Spacer()
-                }
+                AutoRecordNotificationBar (count: changedSchedules.count, mode:mode)
             }
             
         }
