@@ -22,18 +22,16 @@ struct ScheduleListView: View {
     //Use interCord for previewMode
     @State var interCord = 50.0
     
-    let mHorizon:CGFloat = 20
     let mButtonUp:CGFloat = 10
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 16
-    let mTitleButton:CGFloat = 3
-    let topSpacing:CGFloat = 40
     let mPicker:CGFloat = 40
     
     var body: some View {
         VStack{
             ZStack(alignment:.top){
                 
+                // MARK: Schedules list/preview main body
                 if previewMode{
                     ScheduleListPreviewView(schedules: self.schedules,interCord:self.interCord)
                 } else {
@@ -41,35 +39,18 @@ struct ScheduleListView: View {
                 }
                 
                 //MARK: Top Buttons
-                
-                HStack{
+                HStack(spacing:mButtons) {
                     Spacer()
-                    Button {
+                    FloatButton(systemName: "plus.square", sButton: sButton) {
                         addViewPresented = true
-                    } label: {
-                        Image(systemName: "plus.square")
-                            .resizable().scaledToFit()
-                            .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton).foregroundColor(Color("text_black"))
-                            .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
-                            )
                     }
                     .sheet(isPresented: $addViewPresented, content: {
                         AddScheduleView(initDate: Date(),addScheduleViewPresented: $addViewPresented)
                     })
                     
                     
-                    Button {
+                    FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
                         batchAddViewPresented = true
-                    } label: {
-                        Image(systemName: "plus.square.on.square")
-                            .resizable().scaledToFit()
-                            .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton).foregroundColor(Color("text_black"))
-                            .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
-                            )
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
                         AddBatchScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
@@ -106,30 +87,27 @@ struct ScheduleListView: View {
                         }.frame(height:40)
                     }// end georeader
                 }.padding(.horizontal,mPicker) // end zstack with picker frame
-                
-                
-                
+
                 // MARK: Sliders
                 VStack{
                     Spacer()
-                    HStack(spacing: mButtons){
+                    
                         if previewMode {
                             
                             CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                                .padding(.leading,80)
-                                .padding(.trailing,70)
-                                .padding(.bottom,18)
-                                .frame(height:55)
+                                
+                                .frame(height:38)
                         } else {
 
                             CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                                .padding(.leading,80)
-                                .padding(.trailing,70)
-                                .padding(.bottom,18)
-                                .frame(height:55)
+                                
+                                .frame(height:38)
                         }
-                    }
+                    
                 }
+                .padding(.leading,80)
+                .padding(.trailing,70)
+                .padding(.bottom,18)
 
                 // "No schedules" overlay
                 if schedules.count == 0 {
