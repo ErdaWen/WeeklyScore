@@ -66,37 +66,16 @@ struct ScheduleListPreviewView: View {
                             }// end timeline background
                             
                             
-                            // Zstack within the picker frame
+                            //MARK: Zstack within the picker frame
                             ZStack{
                                 ScheduleListPreviewContentView(schedules: schedules, interCord: interCord, timeNow:timeNow)
                             }.padding(.horizontal, mPicker) // end ZStack with picker frame
                             
                             //MARK:Now line
                             if propertiesModel.startDate == DateServer.startOfThisWeek() {
-                                let startMin = DateServer.getMinutes(date: timeNow)
-                                let startCord = interCord * Double(startMin) / 60.0
-                                VStack{
-                                    Spacer()
-                                        .frame(height:CGFloat(startCord))
-                                    HStack(alignment:.center, spacing:5){
-                                        Text("Now")
-                                            .foregroundColor(Color("text_red"))
-                                            .font(.system(size: 12))
-                                            .padding(.leading, 25)
-                                            .background(
-                                                RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
-                                            )
-                                        VStack{
-                                            Rectangle()
-                                                .fill(Color("text_red"))
-                                                .frame(height:1.5)
-                                        }
-                                    }
-                                    .frame(height:10)
-                                    Spacer()
-                                }
-                                .padding(.leading, 17)
-                                .padding(.trailing, mPicker)
+                                NowLine(timeNow: timeNow, interCord: interCord)
+                                    .padding(.leading, 17)
+                                    .padding(.trailing, mPicker)
                             }//end now line if
                             
                         }// end everything except verticle line (and spacer) Zstack

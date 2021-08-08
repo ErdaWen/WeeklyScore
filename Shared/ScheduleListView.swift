@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleListView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest var schedules: FetchedResults<Schedule>
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
@@ -22,9 +22,9 @@ struct ScheduleListView: View {
     //Use interCord for previewMode
     @State var interCord = 50.0
     
-    let mButtonUp:CGFloat = 10
+    let mButtonUp:CGFloat = 0
     let sButton:CGFloat = 22
-    let mButtons:CGFloat = 16
+    let mButtons:CGFloat = 10
     let mPicker:CGFloat = 40
     
     var body: some View {
@@ -67,58 +67,56 @@ struct ScheduleListView: View {
                     GeometryReader{ geo in
                         HStack{
                             ZStack{
+                                // Stroke
                                 Rectangle()
                                     .foregroundColor(Color("background_white").opacity(0.7))
+                                // Transparent white background
                                 Rectangle()
                                     .stroke(Color("background_grey"),lineWidth: 2)
+                                // button
                                 Button {
-                                        previewMode.toggle()
-                                        UserDefaults.standard.set(previewMode,forKey: "previewMode")
-                                    } label: {
-                                        
-                                        Image(systemName: previewMode ? "list.dash" : "calendar")
-                                            .resizable().scaledToFit()
-                                            .frame(height: previewMode ? 11: 14)
-                                            .padding(.top,0)
-                                            .foregroundColor(Color("text_black"))
-                                    }
+                                    previewMode.toggle()
+                                    UserDefaults.standard.set(previewMode,forKey: "previewMode")
+                                } label: {
+                                    
+                                    Image(systemName: previewMode ? "list.dash" : "calendar")
+                                        .resizable().scaledToFit()
+                                        .frame(height: previewMode ? 11: 14)
+                                        .padding(.top,0)
+                                        .foregroundColor(Color("text_black"))
+                                }
                             }.frame(width: geo.frame(in: .global).width / 8 )//end button Zstack
                             Spacer()
                         }.frame(height:40)
                     }// end georeader
                 }.padding(.horizontal,mPicker) // end zstack with picker frame
-
+                
                 // MARK: Sliders
                 VStack{
                     Spacer()
-                    
-                        if previewMode {
-                            
-                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                                
-                                .frame(height:38)
-                        } else {
-
-                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                                
-                                .frame(height:38)
-                        }
-                    
+                    if previewMode {
+                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                            .frame(height:38)
+                    } else {
+                        
+                        CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                            .frame(height:38)
+                    }
                 }
                 .padding(.leading,80)
                 .padding(.trailing,70)
                 .padding(.bottom,18)
-
+                
                 // "No schedules" overlay
                 if schedules.count == 0 {
-                        VStack(){
-                            Spacer()
-                            Text("No schedules for selected week")
-                                .foregroundColor(Color("text_black"))
-                                .font(.system(size: 18))
-                                .fontWeight(.light)
-                            Spacer()
-                        }
+                    VStack(){
+                        Spacer()
+                        Text("No schedules for selected week")
+                            .foregroundColor(Color("text_black"))
+                            .font(.system(size: 18))
+                            .fontWeight(.light)
+                        Spacer()
+                    }
                     
                 }// end display No schedule
                 

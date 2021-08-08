@@ -23,10 +23,9 @@ struct ScheduleDayView: View {
     //@State var pinchValue: CGFloat = 0
     //@State var lastInterCord = 50.0
     
-    let mButtonUp:CGFloat = 10
+    let mButtonUp:CGFloat = 0
     let sButton:CGFloat = 22
-    let mButtons:CGFloat = 16
-    let mTitleButton:CGFloat = 3
+    let mButtons:CGFloat = 10
     let topSpacing:CGFloat = 30
     
     var body: some View {
@@ -54,50 +53,14 @@ struct ScheduleDayView: View {
                         // end time line plot VStack
                         
                         //MARK: All schedules
-                        ForEach(schedules){ schedule in
-                            // Calcualte cordinate
-                            let (startCord,heightCord) = CordServer.calculateCord(startTime: schedule.beginTime, endTime: schedule.endTime, today: propertiesModel.startDate, unit: interCord, durationBased: schedule.items.durationBased)
-                            
-                            VStack(spacing:0){
-                                Spacer()
-                                    .frame(height:CGFloat(startCord))
-                                ScheduleTileView(schedule: schedule, showTime:false, showTitle:true)
-                                    .frame(height:CGFloat(heightCord))
-                                    .padding(.leading, 50)
-                                Spacer()
-                            }
-                            
-                        }
+                        ScheduleDayContentView(schedules: schedules, interCord: interCord)
                         
                         //MARK:Now line
                         if propertiesModel.startDate == DateServer.startOfToday() {
-                            let startMin = DateServer.getMinutes(date: timeNow)
-                            let startCord = interCord * Double(startMin) / 60.0
-                            VStack{
-                                Spacer()
-                                    .frame(height:CGFloat(startCord))
-                                HStack(alignment:.center, spacing:5){
-                                    Text("Now")
-                                        .foregroundColor(Color("text_red"))
-                                        .font(.system(size: 12))
-                                        .padding(.leading, 25)
-                                        .background(
-                                            RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
-                                        )
-                                    VStack{
-                                        Rectangle()
-                                            .fill(Color("text_red"))
-                                            .frame(height:1.5)
-                                    }
-                                }
-                                .frame(height:10)
-                                Spacer()
-                            }
-                            
-                        } // end now bar
+                            NowLine(timeNow: timeNow, interCord: interCord)
+                        }
                         
                     } // end ZStack
-                    .padding(.leading,0)
                     .padding(.trailing , 20)
                 } // end scrollView
                 .onAppear(){
@@ -105,36 +68,19 @@ struct ScheduleDayView: View {
                 }
                 
                 //MARK: Buttons
-                HStack{
+                HStack (spacing:mButtons) {
                     Spacer()
-                    Button {
+                    
+                    FloatButton(systemName: "plus.square", sButton: sButton) {
                         addViewPresented = true
-                    } label: {
-                        Image(systemName: "plus.square")
-                            .resizable().scaledToFit()
-                            .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton)
-                            .foregroundColor(Color("text_black"))
-                            .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
-                            )
                     }
                     .sheet(isPresented: $addViewPresented, content: {
                         AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
                     })
                     
                     
-                    Button {
+                    FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
                         batchAddViewPresented = true
-                    } label: {
-                        Image(systemName: "plus.square.on.square")
-                            .resizable().scaledToFit()
-                            .padding(.horizontal, mButtons).frame(height:sButton)
-                            .padding(.vertical, mTitleButton)
-                            .foregroundColor(Color("text_black"))
-                            .background(
-                                RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: 5, endRadius: 20)
-                            )
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
                         AddBatchScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
@@ -143,6 +89,7 @@ struct ScheduleDayView: View {
                 } // end button HStack
                 .padding(.top,mButtonUp)
                 
+                //MARK: "No schedules" overlay
                 if schedules.count == 0{
                     VStack(){
                         Spacer()
@@ -154,13 +101,14 @@ struct ScheduleDayView: View {
                     }
                 }
                 
+                //MARK: Slider
                 VStack{
                     Spacer()
                     CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                        .frame(height:38)
                         .padding(.leading,80)
                         .padding(.trailing,70)
                         .padding(.bottom,18)
-                        .frame(height:55)
                 }
                 
             }         // end button + scroll ZStack
