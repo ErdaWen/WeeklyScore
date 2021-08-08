@@ -1,5 +1,5 @@
 //
-//  ScoreBarView.swift
+//  ScoreBar.swift
 //  WeeklyScore
 //
 //  Created by Erda Wen on 8/6/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScoreBarView: View {
+struct ScoreBar: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
 
     let mScores:CGFloat = 10
@@ -54,6 +54,6 @@ struct ScoreBarView: View {
 
 struct ScoreBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreBarView()
+        ScoreBar()
     }
 }
