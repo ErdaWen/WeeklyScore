@@ -14,6 +14,7 @@ struct ChangeScheduleView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
+        predicate:NSPredicate(format: "hidden == %@", "false"),
         animation: .default)
     private var items: FetchedResults<Item>
     @Binding var changeScheduleViewPresented:Bool
@@ -22,7 +23,7 @@ struct ChangeScheduleView: View {
     
     let maxScore = max(UserDefaults.standard.integer(forKey: "maxScore"),10)
     
-    @State var itemId = 0
+    @State var itemId = -1
     @State var inputScore:Int64 = 0
     @State var inputBeginTime = Date()
     @State var inputEndTime = Date()
@@ -40,7 +41,11 @@ struct ChangeScheduleView: View {
     let hField:CGFloat = 45
     
     func initValues(){
-        itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
+        if items.count > 0{
+            itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
+        } else {
+            itemId = -1
+        }
         inputScore = schedule.score
         inputBeginTime = schedule.beginTime
         inputEndTime = schedule.endTime
@@ -119,11 +124,11 @@ struct ChangeScheduleView: View {
     var body: some View {
         VStack{
             if itemId < 0 {
-                VStack{
+                VStack(alignment:.center){
                     Spacer()
                     Text("❌ The habit is archieved. De-archive the habit to enable edit")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color("text_blue"))
+                        .font(.system(size: 16))
+                        .foregroundColor(Color("text_black"))
                         .padding(5)
                     Button {
                         changeScheduleViewPresented = false
@@ -134,7 +139,7 @@ struct ChangeScheduleView: View {
                             .padding(5)
                     }
                     Spacer()
-                }
+                }.padding(40)
             } else {
                 //Navigation Bar
                 HStack{

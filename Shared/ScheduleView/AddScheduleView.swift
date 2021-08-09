@@ -13,6 +13,7 @@ struct AddScheduleView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
+        predicate:NSPredicate(format: "hidden == %@", "false"),
         animation: .default)
     private var items: FetchedResults<Item>
     var initDate: Date
@@ -102,11 +103,11 @@ struct AddScheduleView: View {
         VStack{
             
             if items.count == 0 {
-                VStack{
+                VStack(alignment:.center){
                     Spacer()
-                    Text("❌ You have no active habits, add/de-archive habit first")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color("text_blue"))
+                    Text("❌ You have no active habits, add/de-archive habits first")
+                        .font(.system(size: 16))
+                        .foregroundColor(Color("text_black"))
                         .padding(5)
                     Button {
                         addScheduleViewPresented = false
@@ -117,7 +118,7 @@ struct AddScheduleView: View {
                             .padding(5)
                     }
                     Spacer()
-                }
+                }.padding(40)
             } else {
                 // MARK: Navigation Bar
                 HStack{
