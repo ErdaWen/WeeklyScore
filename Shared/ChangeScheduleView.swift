@@ -247,13 +247,29 @@ struct ChangeScheduleView: View {
                             .pickerStyle(MenuPickerStyle())
                             .animation(.default)
                         }
-                        Spacer().frame(height:20)
+                        Spacer().frame(height:8)
                         InputField(title: "Notes", alignment: .leading, color: Color(items[itemId].tags.colorName), fieldHeight: 180) {
                             TextEditor(text: $inputNote)
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("text_black"))
                                 .padding(5)
                         }.animation(.default)
+                        //MARK: Delete schedule
+                        
+                        Button("Delete Schedule...") {
+                            // MARK: warning to be added
+                            showDeleteAlert = true
+                        }
+                        .alert(isPresented: $showDeleteAlert) {
+                            Alert(title: Text("🤔 You Sure?"), message: Text("Delete this schedule?"), primaryButton: .default(Text("Keep"), action: {
+                                showDeleteAlert = false
+                            }), secondaryButton: .default(Text("Delete!"), action: {
+                                deleteSchedule()
+                                changeScheduleViewPresented = false
+                            }))
+                        }
+                        .foregroundColor(Color("text_red"))
+                        .font(.system(size: 20))
                         
                     } // end form VStack
                     .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))

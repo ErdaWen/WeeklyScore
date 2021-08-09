@@ -14,8 +14,8 @@ struct ScheduleTileDetailView: View {
     @State var completionViewPresented = false
     
     
-    let fsTitle:CGFloat = 15
-    let fsSub:CGFloat = 12.0
+    let fsTitle:CGFloat = 18
+    let fsSub:CGFloat = 14
     let opSub:Double = 0.5
     let mTime:CGFloat = 20
     let mTimeTile:CGFloat = 3
@@ -50,7 +50,7 @@ struct ScheduleTileDetailView: View {
         schedule.minutesGained = inputMinutesGained
         schedule.checked = inputChecked
         schedule.statusDefault = false
-                
+        
         do{
             try viewContext.save()
             print("saved")
@@ -64,13 +64,15 @@ struct ScheduleTileDetailView: View {
     
     var body: some View {
         
-        VStack{
+        VStack(alignment:.leading,spacing:mTimeTile){
             //MARK: Begin Time
             if schedule.id != nil{
-        
-                    Text(DateServer.printShortTime(inputTime: schedule.beginTime) + DateServer.describeDay(date: schedule.beginTime).0)
-                        .foregroundColor(Color("text_black").opacity(opSub)).font(.system(size: fsSub)).padding(.leading, mTime)
-
+                
+                Text(DateServer.printShortTime(inputTime: schedule.beginTime) + " " +  DateServer.describeDay(date: schedule.beginTime).0)
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.light).font(.system(size: fsSub))
+                    .padding(.leading, mTime)
+                
             }
             
             HStack(spacing:0){
@@ -87,42 +89,39 @@ struct ScheduleTileDetailView: View {
                         .foregroundColor(Color(schedule.items.tags.colorName))
                         .padding(.trailing, mHandle )
                         .padding(.leading, mHandle - 2)
-
+                    
                 }
                 //MARK: Center tile
-                ZStack(alignment:.bottomTrailing){
+                ZStack(alignment:.center){
                     //MARK: Background tile
                     RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
                     
                     //MARK: Title
                     VStack(alignment:.center){
-                        Spacer()
                         Text(schedule.items.titleIcon + " " + schedule.items.title)
                             .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
-                        .font(.system(size: fsTitle))
-                        .padding(.leading, pTextHor)
-                        .padding(.top,pTextVer)
-                        Spacer()
+                            .font(.system(size: fsTitle))
                     }
                     
-                    VStack(alignment:.trailing){
+                    VStack(alignment:.trailing,spacing:0){
                         Spacer()
-                        
-                        if schedule.items.durationBased{
-                            if schedule.statusDefault {
-                                Text("? / \(DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)) min")
-                                    .foregroundColor(Color("text_black"))
-                                    .font(.system(size: fsSub)).fontWeight(.light)
-                                    .padding(.trailing, pTextHorTight)
-                                    .padding(.bottom, pTextVer)
-                            } else {
-                                Text("\(schedule.minutesGained) / \(DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)) min")
-                                    .foregroundColor(Color("text_black"))
-                                    .font(.system(size: fsSub)).fontWeight(.light)
-                                    .padding(.trailing, pTextHorTight)
-                                    .padding(.bottom, pTextVer)
+                        HStack{
+                            Spacer()
+                            if schedule.items.durationBased{
+                                if schedule.statusDefault {
+                                    Text("? / \(DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)) min")
+                                        .foregroundColor(Color("text_black"))
+                                        .font(.system(size: fsSub)).fontWeight(.light)
+                                        .padding(.trailing, pTextHorTight)
+                                } else {
+                                    Text("\(schedule.minutesGained) / \(DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)) min")
+                                        .foregroundColor(Color("text_black"))
+                                        .font(.system(size: fsSub)).fontWeight(.light)
+                                        .padding(.trailing, pTextHorTight)
+                                }
                             }
                         }
+                        
                         
                         if schedule.statusDefault {
                             Text("? / \(schedule.score)")
@@ -137,6 +136,7 @@ struct ScheduleTileDetailView: View {
                                 .fontWeight(.light)
                                 .padding(.trailing, pTextHorTight)
                                 .padding(.bottom, pTextVer)
+                            
                         }
                     }//end tot min + score VStack
                 }// end center tile ZStack
@@ -153,11 +153,11 @@ struct ScheduleTileDetailView: View {
                                 let totMin = DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
                                 saveSchedule(inputChecked: true, inputScoreGained: schedule.score, inputMinutesGained: totMin)
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
+                                impactMed.impactOccurred()
                             }
                             .onLongPressGesture {
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
+                                impactMed.impactOccurred()
                                 completionViewPresented = true
                             }
                             .sheet(isPresented: $completionViewPresented) {
@@ -172,11 +172,11 @@ struct ScheduleTileDetailView: View {
                                 let totMin = DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
                                 saveSchedule(inputChecked: schedule.checked ? false : true, inputScoreGained: schedule.checked ? 0: schedule.score, inputMinutesGained: schedule.checked ? 0: totMin)
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
+                                impactMed.impactOccurred()
                             }
                             .onLongPressGesture {
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
+                                impactMed.impactOccurred()
                                 completionViewPresented = true
                             }
                             .sheet(isPresented: $completionViewPresented) {
@@ -185,15 +185,19 @@ struct ScheduleTileDetailView: View {
                     }
                 }//end status checkbox Vstack
                 
-            }// end whole H stack
+            }// end center part H stack
             
             // MARK: End time
-            Text(DateServer.printShortTime(inputTime: schedule.endTime) + DateServer.describeDay(date: schedule.endTime).0)
-                .foregroundColor(Color("text_black").opacity(opSub)).font(.system(size: fsSub)).padding(.leading, mTime)
+            if schedule.items.durationBased{
+                Text(DateServer.printShortTime(inputTime: schedule.endTime) + " " + DateServer.describeDay(date: schedule.endTime).0)
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.light).font(.system(size: fsSub))
+                    .padding(.leading, mTime)
+            }
             
-        }
+        }//end whole thing HStack
+        .animation(.default)
         
-       
     }
 }
 

@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var autoRecordNotification = false
     let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
     @State var changedSchedules:[Schedule] = []
-    let updateTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    let updateTimer = Timer.publish(every: 120, on: .main, in: .common).autoconnect()
     
     func autoRecord() {
         if mode != 3 {
