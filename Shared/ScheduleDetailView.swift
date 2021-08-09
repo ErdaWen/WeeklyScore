@@ -22,7 +22,7 @@ struct ScheduleDetailView: View {
     @State var showCheckedAlert = false
     @State var changeViewPresented = false
     
-    let mNavBar:CGFloat = 15
+    let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
     let mVer:CGFloat = 10
     let mHor:CGFloat = 15

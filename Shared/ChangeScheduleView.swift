@@ -14,7 +14,7 @@ struct ChangeScheduleView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
-        predicate:NSPredicate(format: "hidden == %@", "false"),
+        //predicate:NSPredicate(format: "hidden == %@", "false"),
         animation: .default)
     private var items: FetchedResults<Item>
     @Binding var changeScheduleViewPresented:Bool

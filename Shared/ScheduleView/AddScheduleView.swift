@@ -13,7 +13,7 @@ struct AddScheduleView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
-        predicate:NSPredicate(format: "hidden == %@", "false"),
+       // predicate:NSPredicate(format: "hidden == %@", "false"),
         animation: .default)
     private var items: FetchedResults<Item>
     var initDate: Date
