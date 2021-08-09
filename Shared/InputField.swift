@@ -42,7 +42,7 @@ struct InputField <Content:View>: View {
             ZStack(alignment: .center){
                 RoundedRectangle(cornerRadius: rBoarder)
                     .stroke(self.color,style:StrokeStyle(lineWidth: wBoarder))
-                
+                    .animation(.default)                
                 self.content
             }
             .frame(height: fieldHeight)

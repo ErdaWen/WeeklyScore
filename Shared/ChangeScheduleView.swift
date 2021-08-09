@@ -13,7 +13,7 @@ struct ChangeScheduleView: View {
     
     
     @FetchRequest(
-        sortDescriptors: [],
+        sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],
         animation: .default)
     private var items: FetchedResults<Item>
     @Binding var changeScheduleViewPresented:Bool
@@ -31,6 +31,13 @@ struct ChangeScheduleView: View {
     @State var inputReminderTime:Int64 = 0
     @State var showConflictAlert = false
     @State var showDeleteAlert = false
+    @State var inputNote = ""
+    
+    let mNavBar:CGFloat = 25
+    let fsNavBar:CGFloat = 20
+    let mVer:CGFloat = 10
+    let mHor:CGFloat = 15
+    let hField:CGFloat = 45
     
     func initValues(){
         itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
@@ -39,6 +46,9 @@ struct ChangeScheduleView: View {
         inputEndTime = schedule.endTime
         inputReminder = schedule.reminder
         inputReminderTime = schedule.reminderTime
+        if let n = schedule.notes{
+            inputNote = n
+        }
     }
     
     func updateDefault () {
@@ -92,6 +102,8 @@ struct ChangeScheduleView: View {
         schedule.score = inputScore
         schedule.reminder = inputReminder
         schedule.reminderTime = inputReminderTime
+        schedule.notes = (inputNote == "" ? nil : inputNote)
+        
         do{
             try viewContext.save()
             print("saved")
@@ -105,107 +117,145 @@ struct ChangeScheduleView: View {
     }
     
     var body: some View {
-        NavigationView(){
-            // Index may overflow when deleting the last element, need to check
-            if itemId >= 0 {
-                Form{
-                    // If the schedule is checked, only delete function is allowed
-                    if schedule.checked {
-                        Text("Uncheck the schedule first")
+        VStack{
+            if itemId < 0 {
+                VStack{
+                    Spacer()
+                    Text("❌ The habit is archieved. De-archive the habit to enable edit")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color("text_blue"))
+                        .padding(5)
+                    Button {
+                        changeScheduleViewPresented = false
+                    } label: {
+                        Text("OK")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color("text_blue"))
+                            .padding(5)
+                    }
+                    Spacer()
+                }
+            } else {
+                //Navigation Bar
+                HStack{
+                    Button(action:{ changeScheduleViewPresented = false}, label: {
+                        Text("Cancel")
+                            .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
+                    })
+                    Spacer()
+                    Text("Edit Schedule").font(.system(size: fsNavBar))
+                    Spacer()
+                    Button(action:{
+                        if checkScheduleConflict() {
+                            showConflictAlert = true
+                        } else {
+                            saveSchedule()
+                        }
+                    }
+                    , label: {
+                        Text("Save")
+                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                    })
+                    .alert(isPresented: $showConflictAlert) {
+                        Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                            showConflictAlert = false
+                        }))
+                    }
+                }.padding(mNavBar) // end Navigation bar
+                
+                ScrollView{
+                    VStack(spacing:mVer){
+                        // MARK: Habit picker
                         
-                    } else {
-                        // The schedule is unchecked
-                        // MARK: Habit list
-                        HStack(){
+                        InputField(title: nil, alignment: .center, color: Color(items[itemId].tags.colorName), fieldHeight: nil) {
                             Picker("Habbit",selection:$itemId){
                                 ForEach(0...items.count-1, id:\.self){ r in
-                                    Text(items[r].titleIcon+items[r].title)
+                                    Text(items[r].titleIcon + items[r].title)
+                                        .font(.system(size: 20))
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("text_black"))
                                         .tag(r)
                                 }
-                            }.onChange(of: itemId, perform: { value in
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .onChange(of: itemId, perform: { value in
                                 updateDefault ()
                             })
                         }
+                        
                         // MARK: score (Stepper)
-                        Stepper("Score: \(inputScore)", value: $inputScore, in: 0...Int64(maxScore))
+                        
+                        Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
+                            .foregroundColor(Color("text_black"))
+                            .accentColor(Color(items[itemId].tags.colorName))
+                        
                         // MARK: begin time and end time picker
                         if items[itemId].durationBased {
+                            
                             DatePicker("Starts", selection: $inputBeginTime)
-                            DatePicker("Ends", selection: $inputEndTime).onChange(of: inputEndTime, perform: { value in
-                                if inputEndTime<inputBeginTime{
-                                    inputEndTime = inputBeginTime
-                                    showEndTimeWarning = true
-                                } else {
-                                    showEndTimeWarning = false
-                                }
-                            })
+                                .foregroundColor(Color("text_black"))
+                                .accentColor(Color(items[itemId].tags.colorName))
+                                .onChange(of: inputBeginTime, perform: { _ in
+                                    inputEndTime = inputBeginTime + Double(60 * items[itemId].defaultMinutes)
+                                })
+                            
+                            DatePicker("Ends", selection: $inputEndTime)
+                                .foregroundColor(Color("text_black"))
+                                .accentColor(Color(items[itemId].tags.colorName))
+                                .onChange(of: inputEndTime, perform: { value in
+                                    if inputEndTime<inputBeginTime{
+                                        inputEndTime = inputBeginTime
+                                        showEndTimeWarning = true
+                                    } else {
+                                        showEndTimeWarning = false
+                                    }
+                                })
+                            
                             if showEndTimeWarning{
-                                Text("Ends before it begins")
+                                Text("must ends after event begins")
                             }
                         } else {
                             DatePicker("Time", selection: $inputBeginTime)
+                                .foregroundColor(Color("text_black"))
+                                .accentColor(Color(items[itemId].tags.colorName))
                                 .onChange(of: inputBeginTime) { _ in
                                     inputEndTime = inputBeginTime
                                 }
                         }
+                        //MARK: Reminder
                         Toggle("Reminder", isOn:$inputReminder)
-                        if inputReminder {
-                            Picker("Remind in ",selection:$inputReminderTime){
-                                Text("Happens").tag(0)
-                                Text("5 min").tag(5)
-                                Text("10 min").tag(10)
-                                Text("15 min").tag(15)
-                                Text("30 min").tag(30)
-                                Text("45 min").tag(45)
-                                Text("1 hour").tag(60)
-                            }
-                        }
-                    }
-                    
-                    
-                    Button(action:
-                            {
-                                showDeleteAlert = true
-                            }, label: {
-                                Text("Delete this event")
-                            })
-                        .alert(isPresented: $showDeleteAlert) {
-                            Alert(title: Text("🤔 You Sure?"), message: Text("Delete this event?"), primaryButton: .default(Text("Keep"), action: {
-                                showDeleteAlert = false
-                            }), secondaryButton: .default(Text("Delete!"), action: {
-                                deleteSchedule()
-                            }))
-                        }
-                    
-                }.navigationBarTitle("Edit Schedule",displayMode: .inline)
-                .navigationBarItems(
-                    leading:
-                        Button(action:{ changeScheduleViewPresented = false}, label: {
-                            Text("Cancel")
-                        })
-                    , trailing:
-                        Button(action:{
-                            if checkScheduleConflict() {
-                                showConflictAlert = true
-                            } else {
-                                saveSchedule()
-                            }
+                            .foregroundColor(Color("text_black"))
+                            .toggleStyle(SwitchToggleStyle(tint: Color(items[itemId].tags.colorName)))
+                            .animation(.default)
 
+                        if inputReminder {
+                            Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
+                                Text("when happens").tag(0)
+                                Text("in 5 min").tag(5)
+                                Text("in 10 min").tag(10)
+                                Text("in 15 min").tag(15)
+                                Text("in 30 min").tag(30)
+                                Text("in 45 min").tag(45)
+                                Text("in 1 hour").tag(60)
+                            }
+                            .foregroundColor(Color(items[itemId].tags.colorName))
+                            .pickerStyle(MenuPickerStyle())
+                            .animation(.default)
                         }
+                        Spacer().frame(height:20)
+                        InputField(title: "Notes", alignment: .leading, color: Color(items[itemId].tags.colorName), fieldHeight: 180) {
+                            TextEditor(text: $inputNote)
+                                .font(.system(size: 15))
+                                .foregroundColor(Color("text_black"))
+                                .padding(5)
+                        }.animation(.default)
                         
-                        , label: {
-                            Text("Save")
-                        })
-                        .alert(isPresented: $showConflictAlert) {
-                            Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
-                                showConflictAlert = false
-                            }))
-                        }
-                )
-            } else {
-                Text("Habit is archived")
-            }
-        }
+                    } // end form VStack
+                    .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
+                }// end scrollView
+                
+            }// end if no item
+        }// end total Vstack
         .onAppear(){
             initValues()
         }

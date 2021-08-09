@@ -34,8 +34,8 @@ struct ScheduleListPreviewView: View {
                                     HStack{
                                         Spacer()
                                         Divider()
-                                        
                                     }
+                                    .padding(.vertical, -200)
                                     .frame(width: geo.frame(in: .global).width / 8)
                                 }
                             }
