@@ -29,6 +29,7 @@ struct AddScheduleView: View {
     @State var showEndTimeWarning = false
     @State var showConflictAlert = false
     @State var inputNote = ""
+    @State var itemsFiltered:[Item] = []
     
     @Binding var addScheduleViewPresented:Bool
     
@@ -38,13 +39,23 @@ struct AddScheduleView: View {
     let mHor:CGFloat = 15
     let hField:CGFloat = 45
     
+    func initValues(){
+        itemsFiltered = items.filter { item in
+            return item.hidden == false
+        }
+        if itemsFiltered.count > 0{
+            itemId = 0
+            updateDefault ()
+        }
+    }
+    
     
     func updateDefault () {
-        inputScore = items[itemId].defaultScore
-        inputBeginTime = DateServer.combineDayTime(day: initDate, time: items[itemId].defaultBeginTime)
-        inputEndTime = items[itemId].durationBased ? inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60)) : inputBeginTime
-        inputReminder = items[itemId].defaultReminder
-        inputReminderTime = Int(items[itemId].defaultReminderTime)
+        inputScore = itemsFiltered[itemId].defaultScore
+        inputBeginTime = DateServer.combineDayTime(day: initDate, time: itemsFiltered[itemId].defaultBeginTime)
+        inputEndTime = itemsFiltered[itemId].durationBased ? inputBeginTime + Double(Int(itemsFiltered[itemId].defaultMinutes * 60)) : inputBeginTime
+        inputReminder = itemsFiltered[itemId].defaultReminder
+        inputReminderTime = Int(itemsFiltered[itemId].defaultReminderTime)
     }
     
     func checkScheduleConflict() -> Bool {
@@ -63,18 +74,18 @@ struct AddScheduleView: View {
     }
     
     func saveSchedule() {
-        items[itemId].lastUse = Date()
-        items[itemId].defaultBeginTime = inputBeginTime
-        items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
-        items[itemId].defaultScore = inputScore
-        items[itemId].defaultReminder = inputReminder
-        items[itemId].defaultReminderTime = Int64(inputReminderTime)
+        itemsFiltered[itemId].lastUse = Date()
+        itemsFiltered[itemId].defaultBeginTime = inputBeginTime
+        itemsFiltered[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
+        itemsFiltered[itemId].defaultScore = inputScore
+        itemsFiltered[itemId].defaultReminder = inputReminder
+        itemsFiltered[itemId].defaultReminderTime = Int64(inputReminderTime)
         
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
         newSchedule.beginTime = inputBeginTime
-        newSchedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
-        newSchedule.items = items[itemId]
+        newSchedule.endTime = itemsFiltered[itemId].durationBased ? inputEndTime : inputBeginTime
+        newSchedule.items = itemsFiltered[itemId]
         newSchedule.score = inputScore
         newSchedule.reminder = inputReminder
         newSchedule.reminderTime = Int64(inputReminderTime)
@@ -102,7 +113,7 @@ struct AddScheduleView: View {
         
         VStack{
             
-            if items.count == 0 {
+            if itemsFiltered.count == 0 {
                 VStack(alignment:.center){
                     Spacer()
                     Text("❌ You have no active habits, add/de-archive habits first")
@@ -149,19 +160,20 @@ struct AddScheduleView: View {
                 
                 ScrollView(){
                     // If habit list is not empty
-                    if items.count != 0 {
                         
                         VStack(spacing:mVer){
                             // MARK: Habit picker
                             
-                            InputField(title: nil, alignment: .center, color: Color(items[itemId].tags.colorName), fieldHeight: nil) {
+                            InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
                                 Picker("Habbit",selection:$itemId){
-                                    ForEach(0...items.count-1, id:\.self){ r in
-                                        Text(items[r].titleIcon + items[r].title)
+                                    ForEach(0...itemsFiltered.count-1, id:\.self){ r in
+                                        
+                                        Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
                                             .font(.system(size: 20))
                                             .fontWeight(.light)
                                             .foregroundColor(Color("text_black"))
                                             .tag(r)
+                                        
                                     }
                                 }
                                 .pickerStyle(WheelPickerStyle())
@@ -174,21 +186,21 @@ struct AddScheduleView: View {
                             
                             Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
                                 .foregroundColor(Color("text_black"))
-                                .accentColor(Color(items[itemId].tags.colorName))
+                                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                             
                             // MARK: begin time and end time picker
-                            if items[itemId].durationBased {
+                            if itemsFiltered[itemId].durationBased {
                                 
                                 DatePicker("Starts", selection: $inputBeginTime)
                                     .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(items[itemId].tags.colorName))
+                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                     .onChange(of: inputBeginTime, perform: { _ in
-                                        inputEndTime = inputBeginTime + Double(60 * items[itemId].defaultMinutes)
+                                        inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
                                     })
                                 
                                 DatePicker("Ends", selection: $inputEndTime)
                                     .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(items[itemId].tags.colorName))
+                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                     .onChange(of: inputEndTime, perform: { value in
                                         if inputEndTime<inputBeginTime{
                                             inputEndTime = inputBeginTime
@@ -204,7 +216,7 @@ struct AddScheduleView: View {
                             } else {
                                 DatePicker("Time", selection: $inputBeginTime)
                                     .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(items[itemId].tags.colorName))
+                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                     .onChange(of: inputBeginTime) { _ in
                                         inputEndTime = inputBeginTime
                                     }
@@ -212,7 +224,7 @@ struct AddScheduleView: View {
                             //MARK: Reminder
                             Toggle("Reminder", isOn:$inputReminder)
                                 .foregroundColor(Color("text_black"))
-                                .toggleStyle(SwitchToggleStyle(tint: Color(items[itemId].tags.colorName)))
+                                .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
                                 .animation(.default)
 
                             if inputReminder {
@@ -225,12 +237,12 @@ struct AddScheduleView: View {
                                     Text("in 45 min").tag(45)
                                     Text("in 1 hour").tag(60)
                                 }
-                                .foregroundColor(Color(items[itemId].tags.colorName))
+                                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .pickerStyle(MenuPickerStyle())
                                 .animation(.default)
                             }
                             Spacer().frame(height:20)
-                            InputField(title: "Notes", alignment: .leading, color: Color(items[itemId].tags.colorName), fieldHeight: 180) {
+                            InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
                                 TextEditor(text: $inputNote)
                                     .font(.system(size: 15))
                                     .foregroundColor(Color("text_black"))
@@ -240,19 +252,13 @@ struct AddScheduleView: View {
                         } // end form VStack
                         .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
                         
-                    } else {
-                        // Habit list is empty
-                        
-                    }
+                    
                     
                 } // end ScrollView
             } // end if no habit
         }// end total VStack
         .onAppear(){
-            if items.count > 0{
-                itemId = 0
-                updateDefault ()
-            }
+            initValues()
         }// end onAppear
     }
 }

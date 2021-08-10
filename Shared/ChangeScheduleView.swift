@@ -33,6 +33,7 @@ struct ChangeScheduleView: View {
     @State var showConflictAlert = false
     @State var showDeleteAlert = false
     @State var inputNote = ""
+    @State var itemsFiltered:[Item] = []
     
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
@@ -41,11 +42,10 @@ struct ChangeScheduleView: View {
     let hField:CGFloat = 45
     
     func initValues(){
-        if items.count > 0{
-            itemId = items.firstIndex(where: {$0.id == schedule.items.id}) ?? -1
-        } else {
-            itemId = -1
+        itemsFiltered = items.filter { item in
+            return (item.hidden == false) || (item.id == schedule.items.id)
         }
+        itemId = itemsFiltered.firstIndex(where: {$0.id == schedule.items.id}) ?? 0
         inputScore = schedule.score
         inputBeginTime = schedule.beginTime
         inputEndTime = schedule.endTime
@@ -57,14 +57,14 @@ struct ChangeScheduleView: View {
     }
     
     func updateDefault () {
-        inputScore = items[itemId].defaultScore
-        inputEndTime = items[itemId].durationBased ? inputBeginTime + Double(Int(items[itemId].defaultMinutes * 60)) : inputBeginTime
+        inputScore = itemsFiltered[itemId].defaultScore
+        inputEndTime = itemsFiltered[itemId].durationBased ? inputBeginTime + Double(Int(itemsFiltered[itemId].defaultMinutes * 60)) : inputBeginTime
     }
     
     func deleteSchedule(){
-        items[itemId].scoreTotal -= schedule.scoreGained
-        items[itemId].minutesTotal -= schedule.minutesGained
-        items[itemId].checkedTotal -= schedule.checked ? 1 : 0
+        itemsFiltered[itemId].scoreTotal -= schedule.scoreGained
+        itemsFiltered[itemId].minutesTotal -= schedule.minutesGained
+        itemsFiltered[itemId].checkedTotal -= schedule.checked ? 1 : 0
         viewContext.delete(schedule)
         do{
             changeScheduleViewPresented = false
@@ -94,16 +94,16 @@ struct ChangeScheduleView: View {
     
     func saveSchedule(){
         
-        items[itemId].lastUse = Date()
-        items[itemId].defaultBeginTime = inputBeginTime
-        items[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
-        items[itemId].defaultScore = inputScore
-        items[itemId].defaultReminder = inputReminder
-        items[itemId].defaultReminderTime = inputReminderTime
+        itemsFiltered[itemId].lastUse = Date()
+        itemsFiltered[itemId].defaultBeginTime = inputBeginTime
+        itemsFiltered[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
+        itemsFiltered[itemId].defaultScore = inputScore
+        itemsFiltered[itemId].defaultReminder = inputReminder
+        itemsFiltered[itemId].defaultReminderTime = inputReminderTime
         
-        schedule.items = items[itemId]
+        schedule.items = itemsFiltered[itemId]
         schedule.beginTime = inputBeginTime
-        schedule.endTime = items[itemId].durationBased ? inputEndTime : inputBeginTime
+        schedule.endTime = itemsFiltered[itemId].durationBased ? inputEndTime : inputBeginTime
         schedule.score = inputScore
         schedule.reminder = inputReminder
         schedule.reminderTime = inputReminderTime
@@ -172,10 +172,10 @@ struct ChangeScheduleView: View {
                     VStack(spacing:mVer){
                         // MARK: Habit picker
                         
-                        InputField(title: nil, alignment: .center, color: Color(items[itemId].tags.colorName), fieldHeight: nil) {
+                        InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
                             Picker("Habbit",selection:$itemId){
-                                ForEach(0...items.count-1, id:\.self){ r in
-                                    Text(items[r].titleIcon + items[r].title)
+                                ForEach(0...itemsFiltered.count-1, id:\.self){ r in
+                                    Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
                                         .font(.system(size: 20))
                                         .fontWeight(.light)
                                         .foregroundColor(Color("text_black"))
@@ -192,21 +192,21 @@ struct ChangeScheduleView: View {
                         
                         Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
                             .foregroundColor(Color("text_black"))
-                            .accentColor(Color(items[itemId].tags.colorName))
+                            .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                         
                         // MARK: begin time and end time picker
-                        if items[itemId].durationBased {
+                        if itemsFiltered[itemId].durationBased {
                             
                             DatePicker("Starts", selection: $inputBeginTime)
                                 .foregroundColor(Color("text_black"))
-                                .accentColor(Color(items[itemId].tags.colorName))
+                                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputBeginTime, perform: { _ in
-                                    inputEndTime = inputBeginTime + Double(60 * items[itemId].defaultMinutes)
+                                    inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
                                 })
                             
                             DatePicker("Ends", selection: $inputEndTime)
                                 .foregroundColor(Color("text_black"))
-                                .accentColor(Color(items[itemId].tags.colorName))
+                                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputEndTime, perform: { value in
                                     if inputEndTime<inputBeginTime{
                                         inputEndTime = inputBeginTime
@@ -222,7 +222,7 @@ struct ChangeScheduleView: View {
                         } else {
                             DatePicker("Time", selection: $inputBeginTime)
                                 .foregroundColor(Color("text_black"))
-                                .accentColor(Color(items[itemId].tags.colorName))
+                                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputBeginTime) { _ in
                                     inputEndTime = inputBeginTime
                                 }
@@ -230,7 +230,7 @@ struct ChangeScheduleView: View {
                         //MARK: Reminder
                         Toggle("Reminder", isOn:$inputReminder)
                             .foregroundColor(Color("text_black"))
-                            .toggleStyle(SwitchToggleStyle(tint: Color(items[itemId].tags.colorName)))
+                            .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
                             .animation(.default)
 
                         if inputReminder {
@@ -243,7 +243,7 @@ struct ChangeScheduleView: View {
                                 Text("in 45 min").tag(45)
                                 Text("in 1 hour").tag(60)
                             }
-                            .foregroundColor(Color(items[itemId].tags.colorName))
+                            .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
                             .pickerStyle(MenuPickerStyle())
                             .animation(.default)
                         }

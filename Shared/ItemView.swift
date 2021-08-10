@@ -21,8 +21,8 @@ struct ItemView: View {
     @State var showArchive = false
     
     let mHorizon:CGFloat = 30
-    let topSpace:CGFloat = 50
-    let pButton:CGFloat = 5
+    let topSpace:CGFloat = 65
+    let pButton:CGFloat = 20
     let mButton:CGFloat = 25
     let sButton:CGFloat = 22
     let mTiles:CGFloat = 15
@@ -80,8 +80,8 @@ struct ItemView: View {
                         }
                         Spacer()
                     }
-                }.padding(.horizontal, mHorizon) // end Scroll View
-            }
+                } // end Scroll View
+            }.padding(.horizontal, mHorizon)
             
             ZStack{
                 //MARK:Buttons

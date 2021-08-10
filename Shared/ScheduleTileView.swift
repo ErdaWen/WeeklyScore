@@ -16,7 +16,7 @@ struct ScheduleTileView: View {
     var showTitle:Bool
     
     @State var completionViewPresented = false
-    @State var detailViewPresented = false
+    @State var changeViewPresented = false
     
     // appearacne related
     let fsTitle:CGFloat = 15
@@ -101,7 +101,7 @@ struct ScheduleTileView: View {
                 }
                 
                 Button {
-                        detailViewPresented = true
+                        changeViewPresented = true
                 } label: {
                     //MARK: Center tile
                     ZStack(alignment:.top){
@@ -144,8 +144,8 @@ struct ScheduleTileView: View {
                     } // End center tile ZStack
 
                 }//end Button Label
-                .sheet(isPresented: $detailViewPresented) {
-                    ScheduleDetailView(schedule: schedule, scheduleDetailViewPresented: $detailViewPresented)
+                .sheet(isPresented: $changeViewPresented) {
+                    ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
                 }
                 
                 //MARK: Status CheckBox
