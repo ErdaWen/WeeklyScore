@@ -34,6 +34,8 @@ struct ChangeScheduleView: View {
     @State var showDeleteAlert = false
     @State var inputNote = ""
     @State var itemsFiltered:[Item] = []
+    @State var itemChanged = false
+    @State var scoreChanged = false
     
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
@@ -62,9 +64,9 @@ struct ChangeScheduleView: View {
     }
     
     func deleteSchedule(){
-        itemsFiltered[itemId].scoreTotal -= schedule.scoreGained
-        itemsFiltered[itemId].minutesTotal -= schedule.minutesGained
-        itemsFiltered[itemId].checkedTotal -= schedule.checked ? 1 : 0
+        schedule.items.scoreTotal -= schedule.scoreGained
+        schedule.items.minutesTotal -= schedule.minutesGained
+        schedule.items.checkedTotal -= schedule.checked ? 1 : 0
         viewContext.delete(schedule)
         do{
             changeScheduleViewPresented = false
@@ -86,14 +88,78 @@ struct ChangeScheduleView: View {
             if results.count > 0 {
                 conflict = true
             }
+            if (results.count == 1) && (results[0].id == schedule.id) {
+                // Cannot conflict with itself
+                conflict = false
+            }
         } catch {
             print(error)
         }
         return conflict
     }
     
-    func saveSchedule(){
+    
+    func changeItem() {
+        schedule.items.scoreTotal -= schedule.scoreGained
+        schedule.items.minutesTotal -= schedule.minutesGained
+        schedule.items.checkedTotal -= schedule.checked ? 1 : 0
         
+        if inputEndTime > Date() {
+            //set schedule to default, item statistic doesn't need to change
+            schedule.statusDefault = true
+            schedule.checked = false
+            schedule.scoreGained = 0
+            schedule.minutesGained = 0
+        } else {
+            // If this schedule is checked, new item is checked and send into statistic
+            if schedule.checked{
+                schedule.scoreGained = inputScore
+                schedule.minutesGained = DateServer.getTotMin(beginTime: inputBeginTime, endTime:inputEndTime)
+                itemsFiltered[itemId].scoreTotal += inputScore
+                itemsFiltered[itemId].minutesTotal += DateServer.getTotMin(beginTime: inputBeginTime, endTime:inputEndTime)
+                itemsFiltered[itemId].checkedTotal += 1
+            }
+        }
+        itemChanged = false
+        print("item changed")
+    }
+    
+    func changeScore(){
+        if inputEndTime > Date() {
+            //set schedule to default, item statistic doesn't need to change
+            schedule.items.scoreTotal -= schedule.scoreGained
+            schedule.items.minutesTotal -= schedule.minutesGained
+            schedule.items.checkedTotal -= schedule.checked ? 1 : 0
+            
+            schedule.statusDefault = true
+            schedule.checked = false
+            schedule.scoreGained = 0
+            schedule.minutesGained = 0
+        } else {
+            if schedule.checked{
+                schedule.items.scoreTotal += inputScore - schedule.scoreGained
+                schedule.items.minutesTotal += DateServer.getTotMin(beginTime: inputBeginTime, endTime:inputEndTime) - schedule.minutesGained
+                
+                schedule.scoreGained = inputScore
+                schedule.minutesGained = DateServer.getTotMin(beginTime: inputBeginTime, endTime:inputEndTime)
+            }
+        }
+        scoreChanged = false
+        print("score changed")
+    }
+    
+    
+    
+    func saveSchedule(){
+        // Deal with score statistic issue
+        if itemChanged{
+            changeItem()
+        } else if scoreChanged {
+            changeScore()
+        }
+        
+        
+        //set default values
         itemsFiltered[itemId].lastUse = Date()
         itemsFiltered[itemId].defaultBeginTime = inputBeginTime
         itemsFiltered[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
@@ -101,6 +167,7 @@ struct ChangeScheduleView: View {
         itemsFiltered[itemId].defaultReminder = inputReminder
         itemsFiltered[itemId].defaultReminderTime = inputReminderTime
         
+        // change schedule
         schedule.items = itemsFiltered[itemId]
         schedule.beginTime = inputBeginTime
         schedule.endTime = itemsFiltered[itemId].durationBased ? inputEndTime : inputBeginTime
@@ -185,6 +252,7 @@ struct ChangeScheduleView: View {
                             .pickerStyle(WheelPickerStyle())
                             .onChange(of: itemId, perform: { value in
                                 updateDefault ()
+                                itemChanged = true
                             })
                         }
                         
@@ -193,6 +261,9 @@ struct ChangeScheduleView: View {
                         Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
                             .foregroundColor(Color("text_black"))
                             .accentColor(Color(itemsFiltered[itemId].tags.colorName))
+                            .onChange(of: inputScore) { _ in
+                                scoreChanged = true
+                            }
                         
                         // MARK: begin time and end time picker
                         if itemsFiltered[itemId].durationBased {
@@ -202,6 +273,7 @@ struct ChangeScheduleView: View {
                                 .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputBeginTime, perform: { _ in
                                     inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
+                                    scoreChanged = true
                                 })
                             
                             DatePicker("Ends", selection: $inputEndTime)
@@ -214,6 +286,7 @@ struct ChangeScheduleView: View {
                                     } else {
                                         showEndTimeWarning = false
                                     }
+                                    scoreChanged = true
                                 })
                             
                             if showEndTimeWarning{
@@ -225,6 +298,7 @@ struct ChangeScheduleView: View {
                                 .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputBeginTime) { _ in
                                     inputEndTime = inputBeginTime
+                                    scoreChanged = true
                                 }
                         }
                         //MARK: Reminder
@@ -248,7 +322,7 @@ struct ChangeScheduleView: View {
                             .animation(.default)
                         }
                         Spacer().frame(height:8)
-                        InputField(title: "Notes", alignment: .leading, color: Color(items[itemId].tags.colorName), fieldHeight: 180) {
+                        InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
                             TextEditor(text: $inputNote)
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("text_black"))

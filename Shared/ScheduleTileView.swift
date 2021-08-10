@@ -153,7 +153,7 @@ struct ScheduleTileView: View {
                     Spacer()
                     if schedule.statusDefault{
                         Image(systemName: "flag")
-                            .foregroundColor(Color("text_black"))
+                            .foregroundColor(Color("text_black").opacity(0.3))
                             .padding(.leading, mTileFlag)
                             .padding(.bottom, pTextVer)
                             .onTapGesture {

@@ -116,7 +116,7 @@ struct AddScheduleView: View {
             if itemsFiltered.count == 0 {
                 VStack(alignment:.center){
                     Spacer()
-                    Text("❌ You have no active habits, add/de-archive habits first")
+                    Text("🌵 You have no active habits, add habtis or de-archive old habits first")
                         .font(.system(size: 16))
                         .foregroundColor(Color("text_black"))
                         .padding(5)

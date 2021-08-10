@@ -79,6 +79,10 @@ struct ChangeItemView: View {
                     activeAlert = .conflict
                     conflict = true
                 }
+                if (results.count == 1) && (results[0].id == item.id) {
+                    // Cannot conflict with itself
+                    conflict = false
+                }
             } catch {
                 print(error)
             }
