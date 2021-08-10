@@ -12,6 +12,7 @@ struct ScheduleDayView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest var schedules: FetchedResults<Schedule>
+    var today:Date
     @State var timeNow = Date()
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
@@ -53,7 +54,7 @@ struct ScheduleDayView: View {
                         // end time line plot VStack
                         
                         //MARK: All schedules
-                        ScheduleDayContentView(schedules: schedules, interCord: interCord)
+                        ScheduleDayContentView(schedules: schedules, interCord: interCord,today:today)
                         
                         //MARK:Now line
                         if propertiesModel.startDate == DateServer.startOfToday() {

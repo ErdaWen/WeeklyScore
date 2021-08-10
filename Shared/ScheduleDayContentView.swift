@@ -14,11 +14,12 @@ struct ScheduleDayContentView: View {
     
     var schedules: FetchedResults<Schedule>
     var interCord:Double
+    var today:Date
     
     var body: some View {
         ForEach(schedules){ schedule in
             // Calcualte cordinate
-            let (startCord,heightCord) = CordServer.calculateCord(startTime: schedule.beginTime, endTime: schedule.endTime, today: propertiesModel.startDate, unit: interCord, durationBased: schedule.items.durationBased)
+            let (startCord,heightCord) = CordServer.calculateCord(startTime: schedule.beginTime, endTime: schedule.endTime, today: today, unit: interCord, durationBased: schedule.items.durationBased)
             
             VStack(spacing:0){
                 Spacer()

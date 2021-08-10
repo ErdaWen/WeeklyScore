@@ -75,9 +75,9 @@ struct ScheduleView: View {
             } else {
                 let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                withAnimation{
-                    ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)], predicate: predicate, animation: .default))
-                }
+                
+                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)], predicate: predicate, animation: .default),today:propertiesModel.startDate)
+                
             } // end main content
             
             // Push things upward
