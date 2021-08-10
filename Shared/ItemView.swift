@@ -45,6 +45,7 @@ struct ItemView: View {
                         ForEach(itemFiltered) { item in
                             ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                                 .frame(height:hTiles)
+                                .padding(.horizontal, mHorizon)
                         }
                         
                         //MARK: Habits Archived
@@ -62,7 +63,8 @@ struct ItemView: View {
                                 } else {
                                     Text("Show \(itemFiltered.count) archived " + (itemFiltered.count == 1 ? "habit..." : "habits...")).font(.system(size: fsTitle)).foregroundColor(Color("text_black")).fontWeight(.light)
                                 }
-                            }.padding(.top,mButton)
+                            }
+                            .padding(.top,mButton)
                             
                             //MARK: Archived habits
                             if showArchive{
@@ -80,8 +82,9 @@ struct ItemView: View {
                         }
                         Spacer()
                     }
-                } // end Scroll View
-            }.padding(.horizontal, mHorizon)
+                }
+                // end Scroll View
+            }
             
             ZStack{
                 //MARK:Buttons
@@ -93,7 +96,8 @@ struct ItemView: View {
                 })
             } .padding(.top,pButton)
 
-        } // end whole view ZStack
+        }
+        // end whole view ZStack
         
         
     }
