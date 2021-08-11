@@ -29,7 +29,7 @@ struct ChangeScheduleView: View {
     @State var inputEndTime = Date()
     @State var showEndTimeWarning = false
     @State var inputReminder = false
-    @State var inputReminderTime:Int64 = 0
+    @State var inputReminderTime = 0
     @State var showConflictAlert = false
     @State var showDeleteAlert = false
     @State var inputNote = ""
@@ -57,7 +57,7 @@ struct ChangeScheduleView: View {
         inputBeginTime = schedule.beginTime
         inputEndTime = schedule.endTime
         inputReminder = schedule.reminder
-        inputReminderTime = schedule.reminderTime
+        inputReminderTime = Int (schedule.reminderTime)
         if let n = schedule.notes{
             inputNote = n
         }
@@ -170,7 +170,7 @@ struct ChangeScheduleView: View {
         itemsFiltered[itemId].defaultMinutes = Int64 ((inputEndTime.timeIntervalSince1970 - inputBeginTime.timeIntervalSince1970)/60)
         itemsFiltered[itemId].defaultScore = inputScore
         itemsFiltered[itemId].defaultReminder = inputReminder
-        itemsFiltered[itemId].defaultReminderTime = inputReminderTime
+        itemsFiltered[itemId].defaultReminderTime = Int64(inputReminderTime)
         
         // change schedule
         schedule.items = itemsFiltered[itemId]
@@ -178,8 +178,8 @@ struct ChangeScheduleView: View {
         schedule.endTime = itemsFiltered[itemId].durationBased ? inputEndTime : inputBeginTime
         schedule.score = inputScore
         schedule.reminder = inputReminder
-        schedule.reminderTime = inputReminderTime
-        schedule.notes = (inputNote == "" ? nil : inputNote)
+        schedule.reminderTime = Int64(inputReminderTime)
+        schedule.notes = (inputNote.isEmpty ? nil : inputNote)
         
         do{
             try viewContext.save()
@@ -215,6 +215,8 @@ struct ChangeScheduleView: View {
             } else {
                 //Navigation Bar
                 HStack{
+                    
+                    if somethingChanged{
                     Button(action:{ changeScheduleViewPresented = false}, label: {
                         Text("Cancel")
                             .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
@@ -238,7 +240,18 @@ struct ChangeScheduleView: View {
                             showConflictAlert = false
                         }))
                     }
-                }.padding(mNavBar) // end Navigation bar
+                    } else {
+                        Button {
+                            changeScheduleViewPresented = false
+                        } label: {
+                            Image(systemName: "xmark.circle")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_black"))
+                                .frame(height:22)
+                        }
+                        Spacer()
+                    }
+                }.frame(height:20).padding(mNavBar).animation(.default) // end Navigation bar
                 
                 ScrollView{
                     VStack(spacing:mVer){
@@ -261,6 +274,7 @@ struct ChangeScheduleView: View {
                                 .pickerStyle(WheelPickerStyle())
                                 .onChange(of: itemId, perform: { value in
                                     updateDefault ()
+                                    somethingChanged = true
                                 })
                                 .onChange(of: items.count) { _ in
                                     initValues()
@@ -295,6 +309,7 @@ struct ChangeScheduleView: View {
                                 .onChange(of: inputBeginTime, perform: { _ in
                                     inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
                                     scoreChanged = true
+                                    somethingChanged = true
                                 })
                             
                             DatePicker("Ends", selection: $inputEndTime)
@@ -308,6 +323,7 @@ struct ChangeScheduleView: View {
                                         showEndTimeWarning = false
                                     }
                                     scoreChanged = true
+                                    somethingChanged = true
                                 })
                             
                             if showEndTimeWarning{
@@ -320,6 +336,7 @@ struct ChangeScheduleView: View {
                                 .onChange(of: inputBeginTime) { _ in
                                     inputEndTime = inputBeginTime
                                     scoreChanged = true
+                                    somethingChanged = true
                                 }
                         }
                         //MARK: Reminder
@@ -327,6 +344,9 @@ struct ChangeScheduleView: View {
                             .foregroundColor(Color("text_black"))
                             .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
                             .animation(.default)
+                            .onChange(of: inputReminder) { _ in
+                                somethingChanged = true
+                            }
 
                         if inputReminder {
                             Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
@@ -341,14 +361,27 @@ struct ChangeScheduleView: View {
                             .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
                             .pickerStyle(MenuPickerStyle())
                             .animation(.default)
+                            .onChange(of:inputReminderTime){ _ in
+                                somethingChanged = true
+                            }
                         }
                         Spacer().frame(height:8)
                         InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
-                            TextEditor(text: $inputNote)
-                                .font(.system(size: 15))
-                                .foregroundColor(Color("text_black"))
-                                .padding(5)
+                            ZStack(alignment:.topLeading){
+                                TextEditor(text: $inputNote)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(Color("text_black"))
+                                if inputNote.isEmpty{
+                                    Text("Jog down goals, subtasks, journals...")
+                                        .font(.system(size: 15))
+                                        .foregroundColor(Color("text_black").opacity(0.5))
+                                        .padding(5)
+                                }
+                            }.padding(5)
                         }.animation(.default)
+                        .onChange(of: inputNote) { _ in
+                            somethingChanged = true
+                        }
                         //MARK: Delete schedule
                         
                         Button("Delete Schedule...") {

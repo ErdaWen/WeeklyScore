@@ -273,10 +273,17 @@ struct AddScheduleView: View {
                             }
                             Spacer().frame(height:20)
                             InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
-                                TextEditor(text: $inputNote)
-                                    .font(.system(size: 15))
-                                    .foregroundColor(Color("text_black"))
-                                    .padding(5)
+                                ZStack(alignment:.topLeading){
+                                    TextEditor(text: $inputNote)
+                                        .font(.system(size: 15))
+                                        .foregroundColor(Color("text_black"))
+                                    if inputNote.isEmpty{
+                                        Text("Jog down goals, subtasks, journals...")
+                                            .font(.system(size: 15))
+                                            .foregroundColor(Color("text_black").opacity(0.5))
+                                            .padding(5)
+                                    }
+                                }.padding(5)
                             }.animation(.default)
                             
                         } // end form VStack
