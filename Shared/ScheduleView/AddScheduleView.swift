@@ -162,7 +162,7 @@ struct AddScheduleView: View {
                         }
                     }, label: {
                         Text("   Add")
-                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
                     })
                     .alert(isPresented: $showConflictAlert) {
                         Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
@@ -273,7 +273,7 @@ struct AddScheduleView: View {
                             }
                             Spacer().frame(height:20)
                             InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
-                                ZStack(alignment:.topLeading){
+                                ZStack(alignment:.center){
                                     TextEditor(text: $inputNote)
                                         .font(.system(size: 15))
                                         .foregroundColor(Color("text_black"))
@@ -281,7 +281,6 @@ struct AddScheduleView: View {
                                         Text("Jog down goals, subtasks, journals...")
                                             .font(.system(size: 15))
                                             .foregroundColor(Color("text_black").opacity(0.5))
-                                            .padding(5)
                                     }
                                 }.padding(5)
                             }.animation(.default)

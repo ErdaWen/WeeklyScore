@@ -218,11 +218,11 @@ struct ChangeScheduleView: View {
                     
                     if somethingChanged{
                     Button(action:{ changeScheduleViewPresented = false}, label: {
-                        Text("Cancel")
+                        Text("Discard Change")
                             .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
                     })
-                    Spacer()
-                    Text("Edit Schedule").font(.system(size: fsNavBar))
+                    //Spacer()
+                    //Text("Edit Schedule").font(.system(size: fsNavBar))
                     Spacer()
                     Button(action:{
                         if checkScheduleConflict() {
@@ -233,7 +233,7 @@ struct ChangeScheduleView: View {
                     }
                     , label: {
                         Text("Save")
-                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
                     })
                     .alert(isPresented: $showConflictAlert) {
                         Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
@@ -247,7 +247,7 @@ struct ChangeScheduleView: View {
                             Image(systemName: "xmark.circle")
                                 .resizable().scaledToFit()
                                 .foregroundColor(Color("text_black"))
-                                .frame(height:22)
+                                .frame(height:25)
                         }
                         Spacer()
                     }
@@ -298,6 +298,7 @@ struct ChangeScheduleView: View {
                             .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                             .onChange(of: inputScore) { _ in
                                 scoreChanged = true
+                                somethingChanged = true
                             }
                         
                         // MARK: begin time and end time picker
@@ -367,7 +368,7 @@ struct ChangeScheduleView: View {
                         }
                         Spacer().frame(height:8)
                         InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
-                            ZStack(alignment:.topLeading){
+                            ZStack(alignment:.center){
                                 TextEditor(text: $inputNote)
                                     .font(.system(size: 15))
                                     .foregroundColor(Color("text_black"))
@@ -375,7 +376,7 @@ struct ChangeScheduleView: View {
                                     Text("Jog down goals, subtasks, journals...")
                                         .font(.system(size: 15))
                                         .foregroundColor(Color("text_black").opacity(0.5))
-                                        .padding(5)
+                                        .padding(7)
                                 }
                             }.padding(5)
                         }.animation(.default)

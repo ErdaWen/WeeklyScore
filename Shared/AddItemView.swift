@@ -109,7 +109,7 @@ struct AddItemView: View {
                         saveItem()
                     }
                 }, label: {
-                    Text("   Add").foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                    Text("   Add").foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
                     
                 })
                 .alert(isPresented: $showAlert) {

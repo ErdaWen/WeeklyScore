@@ -71,6 +71,7 @@ struct ItemView: View {
                                 ForEach(itemFiltered) { item in
                                     ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                                         .frame(height:hTiles)
+                                        .padding(.horizontal, mHorizon)
                                 }
                             }
                         } else {

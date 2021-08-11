@@ -29,7 +29,9 @@ struct WeekPicker: View {
                     dayFromDay1 = -1
                     updateFunc()
                 } label: {
-                    Image(systemName: "arrowtriangle.backward.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
+                    //Image(systemName: "arrowtriangle.backward.square")
+                    Image(systemName: "chevron.left")
+                        .resizable().scaledToFit().frame(height:16).foregroundColor(Color("text_black"))
                 }
                 .frame(width: sButton, height: sButton).padding(.leading,mButton)
                 
@@ -53,7 +55,9 @@ struct WeekPicker: View {
                     dayFromDay1 = -1
                     updateFunc()
                 } label: {
-                    Image(systemName: "arrowtriangle.right.square").resizable().scaledToFit().foregroundColor(Color("text_black"))
+                    //Image(systemName: "arrowtriangle.right.square")
+                    Image(systemName: "chevron.right")
+                        .resizable().scaledToFit().frame(height:16).foregroundColor(Color("text_black"))
                 }
                 .frame(width: sButton, height: sButton).padding(.trailing,mButton)
             }

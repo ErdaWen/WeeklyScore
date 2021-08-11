@@ -129,7 +129,7 @@ struct ChangeItemView: View {
                     }
                 }, label: {
                     Text("  Save")
-                        .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                        .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
 
                 })
                 .alert(isPresented: $showConflictAlert) {
