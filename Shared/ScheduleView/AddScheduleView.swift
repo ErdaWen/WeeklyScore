@@ -118,21 +118,31 @@ struct AddScheduleView: View {
             
             if itemsFiltered.count == 0 {
                 VStack(alignment:.center){
+                    HStack{
+                        Button(action:{ addScheduleViewPresented = false}, label: {
+                            Text("Cancel")
+                                .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
+                        })
+                        Spacer()
+                    }.padding(mNavBar)
                     Spacer()
-                    Text("🌵 You have no active habits, add habtis or de-archive old habits first")
+                    Text("🌵 You have no active habits. Start by adding one:")
                         .font(.system(size: 16))
                         .foregroundColor(Color("text_black"))
-                        .padding(5)
-                    Button {
-                        addScheduleViewPresented = false
-                    } label: {
-                        Text("OK")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color("text_blue"))
-                            .padding(5)
+                        .padding(.horizontal,40)
+                    FloatButton(systemName: "plus.square", sButton: sButton) {
+                        addViewPresented = true
+                    }
+                    .padding(.trailing, 10)
+                    .padding(.bottom, 10)
+                    .sheet(isPresented: $addViewPresented, content: {
+                        AddItemView(addItemViewPresented: $addViewPresented)
+                    }).padding(mNavBar)
+                    .onChange(of: items.count) { _ in
+                        initValues()
                     }
                     Spacer()
-                }.padding(40)
+                }
             } else {
                 // MARK: Navigation Bar
                 HStack{
