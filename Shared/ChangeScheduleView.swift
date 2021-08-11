@@ -36,12 +36,17 @@ struct ChangeScheduleView: View {
     @State var itemsFiltered:[Item] = []
     @State var itemChanged = false
     @State var scoreChanged = false
+    @State var somethingChanged = false
+    @State var addViewPresented = false
+
     
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
     let mVer:CGFloat = 10
     let mHor:CGFloat = 15
     let hField:CGFloat = 45
+    let sButton:CGFloat = 22
+
     
     func initValues(){
         itemsFiltered = items.filter { item in
@@ -240,21 +245,37 @@ struct ChangeScheduleView: View {
                         // MARK: Habit picker
                         
                         InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
-                            Picker("Habbit",selection:$itemId){
-                                ForEach(0...itemsFiltered.count-1, id:\.self){ r in
-                                    Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
-                                        .font(.system(size: 20))
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("text_black"))
-                                        .tag(r)
+                            ZStack(alignment: .bottomTrailing){
+                                
+                                Picker("Habbit",selection:$itemId){
+                                    ForEach(0...itemsFiltered.count-1, id:\.self){ r in
+                                        
+                                        Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
+                                            .font(.system(size: 20))
+                                            .fontWeight(.light)
+                                            .foregroundColor(Color("text_black"))
+                                            .tag(r)
+                                        
+                                    }
                                 }
+                                .pickerStyle(WheelPickerStyle())
+                                .onChange(of: itemId, perform: { value in
+                                    updateDefault ()
+                                })
+                                .onChange(of: items.count) { _ in
+                                    initValues()
+                                }
+                                
+                                FloatButton(systemName: "plus.square", sButton: sButton) {
+                                    addViewPresented = true
+                                }
+                                .padding(.trailing, 10)
+                                .padding(.bottom, 10)
+                                .sheet(isPresented: $addViewPresented, content: {
+                                    AddItemView(addItemViewPresented: $addViewPresented)
+                                })
                             }
-                            .pickerStyle(WheelPickerStyle())
-                            .onChange(of: itemId, perform: { value in
-                                updateDefault ()
-                                itemChanged = true
-                            })
-                        }
+                        }.padding(.top,3)
                         
                         // MARK: score (Stepper)
                         

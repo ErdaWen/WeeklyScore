@@ -12,6 +12,7 @@ import UIKit
 struct AddItemView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var propertiesModel:PropertiesModel
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(key: "lastUse", ascending: false)],

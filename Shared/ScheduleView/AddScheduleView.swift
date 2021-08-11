@@ -31,6 +31,8 @@ struct AddScheduleView: View {
     @State var inputNote = ""
     @State var itemsFiltered:[Item] = []
     
+    @State var addViewPresented = false
+    
     @Binding var addScheduleViewPresented:Bool
     
     let mNavBar:CGFloat = 25
@@ -38,6 +40,7 @@ struct AddScheduleView: View {
     let mVer:CGFloat = 10
     let mHor:CGFloat = 15
     let hField:CGFloat = 45
+    let sButton:CGFloat = 22
     
     func initValues(){
         itemsFiltered = items.filter { item in
@@ -165,22 +168,38 @@ struct AddScheduleView: View {
                             // MARK: Habit picker
                             
                             InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
-                                Picker("Habbit",selection:$itemId){
-                                    ForEach(0...itemsFiltered.count-1, id:\.self){ r in
-                                        
-                                        Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
-                                            .font(.system(size: 20))
-                                            .fontWeight(.light)
-                                            .foregroundColor(Color("text_black"))
-                                            .tag(r)
-                                        
+                                
+                                ZStack(alignment: .bottomTrailing){
+                                    
+                                    Picker("Habbit",selection:$itemId){
+                                        ForEach(0...itemsFiltered.count-1, id:\.self){ r in
+                                            
+                                            Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
+                                                .font(.system(size: 20))
+                                                .fontWeight(.light)
+                                                .foregroundColor(Color("text_black"))
+                                                .tag(r)
+                                            
+                                        }
                                     }
+                                    .pickerStyle(WheelPickerStyle())
+                                    .onChange(of: itemId, perform: { value in
+                                        updateDefault ()
+                                    })
+                                    .onChange(of: items.count) { _ in
+                                        initValues()
+                                    }
+                                    
+                                    FloatButton(systemName: "plus.square", sButton: sButton) {
+                                        addViewPresented = true
+                                    }
+                                    .padding(.trailing, 10)
+                                    .padding(.bottom, 10)
+                                    .sheet(isPresented: $addViewPresented, content: {
+                                        AddItemView(addItemViewPresented: $addViewPresented)
+                                    })
                                 }
-                                .pickerStyle(WheelPickerStyle())
-                                .onChange(of: itemId, perform: { value in
-                                    updateDefault ()
-                                })
-                            }
+                            }.padding(.top, 2)
                             
                             // MARK: score (Stepper)
                             
@@ -221,6 +240,7 @@ struct AddScheduleView: View {
                                         inputEndTime = inputBeginTime
                                     }
                             }
+
                             //MARK: Reminder
                             Toggle("Reminder", isOn:$inputReminder)
                                 .foregroundColor(Color("text_black"))
