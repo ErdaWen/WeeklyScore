@@ -164,7 +164,7 @@ class DateServer {
         return Calendar.current.date(byAdding: .day, value: -1, to: date)!
     }
     
-    //MARK: Describe day / week
+    //MARK: Describe day / week / min
     
     static func describeDay (date:Date) -> (String,Bool){
         let today = startOfToday()
@@ -185,6 +185,20 @@ class DateServer {
         var description = "Week of "+generateStartDay(offset: offset)
         if offset == 0{
             description = "This Week"
+        }
+        return description
+    }
+    
+    static func describeMin(min:Int) -> String {
+        var description = ""
+        let minutes = min % 60
+        let hours = Int ((Double(min)/60.0).rounded(.down))
+        if hours == 0 {
+            description = "\(minutes) min"
+        } else if hours < 100 {
+            description = "\(hours) h \(minutes) m"
+        } else {
+            description = "\(hours) h"
         }
         return description
     }

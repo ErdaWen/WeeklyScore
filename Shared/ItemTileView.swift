@@ -65,7 +65,7 @@ struct ItemTileView: View {
                         ZStack(){
                             
                                 RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                                Text(item.durationBased ? String(item.minutesTotal) : String(item.checkedTotal))
+                            Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
                                     .font(.system(size: fsSub))
                                     .fontWeight(.light)
                                     .foregroundColor(Color("text_black"))
