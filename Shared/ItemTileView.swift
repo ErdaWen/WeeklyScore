@@ -95,7 +95,7 @@ struct ItemTileView: View {
                                     .resizable().scaledToFit()
                                     .foregroundColor(Color("text_black"))
                                     .frame(height:sButton).padding(.leading,3)
-
+                                
                             }
                         }
                         Spacer()
@@ -111,7 +111,7 @@ struct ItemTileView: View {
                                     .padding(.trailing,mSmallTiles)
                                     .padding(.vertical,mSmallTileVer)
                             }
-
+                            
                         } else {
                             ZStack(){
                                 RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
@@ -124,31 +124,31 @@ struct ItemTileView: View {
                             .padding(.trailing,mSmallTiles)
                             .padding(.vertical,mSmallTileVer)
                         }//end if else
-
+                        
                     }//end first line Hstack
                     .frame(height:45)
-                    .onTapGesture {
-                        showDetail.toggle()
-                    }
+                    
                     //MARK: Statistics
-                    
-                    ZStack(){
-                        RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                        
-                    }.onChange(of: showDetail) { _ in
-                        (minTot, checkTot, ptsTot, rate, dates, value) = StatisticServer.goThroughItem(item: item)
-                        updateItem()
+                    if showDetail{
+                        ItemStatisticBars(dates: dates, values: value, durationBased: item.durationBased,color: Color(item.tags.colorName))
+                            .padding(.horizontal, 10)
+                            .animation(.default)
                     }
-                    
-                    
-                    
                     
                 }// end VStack
                 
             } // End center tile ZStack
+            .onTapGesture {
+                showDetail = true
+            }
+            .onChange(of: showDetail) { _ in
+                (minTot, checkTot, ptsTot, rate, dates, value) = StatisticServer.goThroughItem(item: item)
+                updateItem()
+            }
             .sheet(isPresented: $changeViewPresented) {
                 ChangeItemView(changeItemViewPresented: $changeViewPresented, item: item)
             }
+            
         }//end everything Hstack
         .frame(height: showDetail ? hTilesDetail : hTiles)
         .animation(.default)

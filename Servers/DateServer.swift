@@ -21,6 +21,12 @@ class DateServer {
         return (formatter.string(from: inputTime))
     }
     
+    static func printDate(inputTime:Date) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd"
+        return (formatter.string(from: inputTime))
+    }
+    
     static func printWeekday(inputTime:Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
@@ -169,6 +175,9 @@ class DateServer {
         return Calendar.current.date(byAdding: .weekOfYear,value: 1, to: date)!
     }
     
+    static func minusOneWeek (date:Date) -> Date {
+        return Calendar.current.date(byAdding: .weekOfYear,value: -1, to: date)!
+    }
     
     static func addOneDay (date:Date) -> Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: date)!
@@ -203,6 +212,14 @@ class DateServer {
         return description
     }
     
+    static func describeWeekLite (date:Date) -> String {
+        if date == startOfThisWeek(){
+            return ("T. W.")
+        }
+        let description = printDate(inputTime: date)
+        return description
+    }
+    
     static func describeMin(min:Int) -> String {
         var description = ""
         let minutes = min % 60
@@ -211,6 +228,20 @@ class DateServer {
             description = "\(minutes) min"
         } else if hours < 100 {
             description = "\(hours) h \(minutes) m"
+        } else {
+            description = "\(hours) h"
+        }
+        return description
+    }
+    
+    static func describeMinR(min:Int) -> String {
+        var description = ""
+        let minutes = min % 60
+        let hours = Int ((Double(min)/60.0).rounded(.down))
+        if hours == 0 {
+            description = "\(minutes) min"
+        } else if hours < 100 {
+            description = "\(hours) h\r\(minutes) m"
         } else {
             description = "\(hours) h"
         }

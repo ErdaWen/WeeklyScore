@@ -41,6 +41,8 @@
 		002628B426C73CDF00A755D2 /* ItemViewAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B226C73CDF00A755D2 /* ItemViewAll.swift */; };
 		002628B626C750AD00A755D2 /* StatisticServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B526C750AD00A755D2 /* StatisticServer.swift */; };
 		002628B726C750AD00A755D2 /* StatisticServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B526C750AD00A755D2 /* StatisticServer.swift */; };
+		002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B826C791FD00A755D2 /* ItemStatisticBars.swift */; };
+		002628BA26C791FD00A755D2 /* ItemStatisticBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B826C791FD00A755D2 /* ItemStatisticBars.swift */; };
 		0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
@@ -125,6 +127,7 @@
 		002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		002628B226C73CDF00A755D2 /* ItemViewAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewAll.swift; sourceTree = "<group>"; };
 		002628B526C750AD00A755D2 /* StatisticServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServer.swift; sourceTree = "<group>"; };
+		002628B826C791FD00A755D2 /* ItemStatisticBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStatisticBars.swift; sourceTree = "<group>"; };
 		0034916026A7E677001B8DBB /* WeeklyScore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeeklyScore.xcdatamodel; sourceTree = "<group>"; };
 		0034918726A7EE02001B8DBB /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		0034918B26A7F06B001B8DBB /* DateServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServer.swift; sourceTree = "<group>"; };
@@ -280,6 +283,7 @@
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
 				002628B226C73CDF00A755D2 /* ItemViewAll.swift */,
 				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
+				002628B826C791FD00A755D2 /* ItemStatisticBars.swift */,
 				002628A826BF98B200A755D2 /* Elements */,
 				009C422926AF3CEA00A783F0 /* Sheets */,
 			);
@@ -503,6 +507,7 @@
 				0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
 				0026288D26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */,
+				002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
 				002628A526BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
 				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
@@ -558,6 +563,7 @@
 				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
 				00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
 				0026288E26BDFBC900A755D2 /* AddBatchScheduleView.swift in Sources */,
+				002628BA26C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
 				002628A626BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
 				0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
