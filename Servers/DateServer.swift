@@ -43,6 +43,20 @@ class DateServer {
         return startOfWeek
     }
     
+    static func startOfThisWeek(date:Date) -> Date {
+        let startDay = UserDefaults.standard.integer(forKey: "weekStartDay")
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .weekOfYear]), from: date)
+        let thisMonday = calendar.date(from: components)!
+        var startOfWeek = Calendar.current.date(byAdding: .day, value: Int(startDay), to: thisMonday)!
+        if startOfWeek > date {
+            startOfWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1 , to: startOfWeek)!
+        }
+        return startOfWeek
+    }
+    
+    
     static func startOfToday() -> Date {
         let date = Date()
         let calendar = Calendar.current

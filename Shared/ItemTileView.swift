@@ -27,6 +27,8 @@ struct ItemTileView: View {
     let pText:CGFloat = 8
     let mTextVer:CGFloat = 0
     let pTextHorTight:CGFloat = 5
+    let hTiles:CGFloat = 45
+
     
     var body: some View {
         
@@ -81,10 +83,8 @@ struct ItemTileView: View {
             .sheet(isPresented: $changeViewPresented) {
                 ChangeItemView(changeItemViewPresented: $changeViewPresented, item: item)
             }
-        }
-        
-        
- 
+        }//end everything Hstack
+        .frame(height:hTiles)
     }
 }
 

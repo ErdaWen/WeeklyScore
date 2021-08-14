@@ -23,7 +23,8 @@ struct FloatButton: View {
         } label: {
             Image(systemName: systemName)
                 .resizable().scaledToFit()
-                .padding(.horizontal, mButtonHor).frame(height:sButton)
+                .frame(width:sButton,height:sButton)
+                .padding(.horizontal, mButtonHor)
                 .padding(.vertical, mButtonVer).foregroundColor(Color("text_black"))
                 .background(
                     RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: rBackgroundStart, endRadius: rBackgroundEnd)
