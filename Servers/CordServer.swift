@@ -27,14 +27,14 @@ class CordServer {
         
         let startCord = cordOffset + unit * Double(startMin) / 60.0
         let heightCord = max(unit * Double(endMin - startMin) / 60.0, minHeight)
-        print("------------")
-        print("start: \(startTime)")
-        print("end: \(endTime)")
-        print("today: \(today)")
-        print("unit: \(unit)")
-        print("durationBased: \(durationBased)")
-        print("startCord: \(startCord)")
-        print("heightCord: \(heightCord)")
+//        print("------------")
+//        print("start: \(startTime)")
+//        print("end: \(endTime)")
+//        print("today: \(today)")
+//        print("unit: \(unit)")
+//        print("durationBased: \(durationBased)")
+//        print("startCord: \(startCord)")
+//        print("heightCord: \(heightCord)")
         
         
         if durationBased {
