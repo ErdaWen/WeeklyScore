@@ -75,7 +75,7 @@ struct ItemTileView: View {
                 //MARK: Background tile
                 RoundedRectangle(cornerRadius: rTile).stroke(Color(item.tags.colorName), lineWidth: 0.5)
                 RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(item.tags.colorName).opacity(opTile))
-                VStack(alignment: .center, spacing: 5){
+                VStack(alignment: .center, spacing: 0){
                     //MARK: First line
                     HStack(alignment:.center){
                         //MARK: Title
@@ -130,10 +130,51 @@ struct ItemTileView: View {
                     
                     //MARK: Statistics
                     if showDetail{
+                        //MARK: Bars
                         ItemStatisticBars(dates: dates, values: value, durationBased: item.durationBased,color: Color(item.tags.colorName))
                             .padding(.horizontal, 10)
                             .animation(.default)
-                    }
+                        //MARK: Numbers
+                        HStack{
+                            ZStack(){
+                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                                Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
+                                    .font(.system(size: fsSub))
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color("text_black"))
+                            }
+                            
+                            ZStack(){
+                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                                Text("\(item.scoreTotal) pts")
+                                    .font(.system(size: fsSub))
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color("text_black"))
+                            }
+                            .frame(height:20)
+                            
+                            ZStack(){
+                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                                if let r = rate {
+                                    Text("\(Int(r*100)) % ")
+                                        .font(.system(size: fsSub))
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("text_black"))
+                                } else {
+                                    Text(" - % ")
+                                        .font(.system(size: fsSub))
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("text_black"))
+                                }
+                                
+                            }
+                            .frame(height:20)
+                            
+                        }// end numbers Hstack
+                        .frame(height: 20)
+                        .padding(.horizontal,10)
+                        .padding(.vertical, 10)
+                    } // end if show detail
                     
                 }// end VStack
                 

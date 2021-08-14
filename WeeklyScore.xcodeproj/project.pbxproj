@@ -241,6 +241,15 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
+		002628BB26C7A14900A755D2 /* Tile */ = {
+			isa = PBXGroup;
+			children = (
+				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
+				002628B826C791FD00A755D2 /* ItemStatisticBars.swift */,
+			);
+			name = Tile;
+			sourceTree = "<group>";
+		};
 		0034918A26A7F036001B8DBB /* Servers */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,8 +291,7 @@
 			children = (
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
 				002628B226C73CDF00A755D2 /* ItemViewAll.swift */,
-				008DC8FC26AE814F009AB91C /* ItemTileView.swift */,
-				002628B826C791FD00A755D2 /* ItemStatisticBars.swift */,
+				002628BB26C7A14900A755D2 /* Tile */,
 				002628A826BF98B200A755D2 /* Elements */,
 				009C422926AF3CEA00A783F0 /* Sheets */,
 			);

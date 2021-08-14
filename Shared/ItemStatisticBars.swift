@@ -31,12 +31,11 @@ struct ItemStatisticBars: View {
                     .fontWeight(.light)
             } else {
                 //MARK: Real deal contents
-                HStack{
+                HStack(alignment:.bottom){
                     if let maxvalue = values.max(){
                         Spacer()
                         ForEach (0...5, id: \.self) { r in
-                            VStack{
-                                Spacer()
+                            VStack(spacing:2){
                                 if durationBased {
                                     Text(DateServer.describeMinR(min: values[r]) )
                                         .font(.system(size:fsSub))
@@ -59,7 +58,7 @@ struct ItemStatisticBars: View {
                         }// end ForEach
                     }// end unwraper
                 }// end HStack
-                .padding(10)
+                .padding(8)
             }
         }
         
