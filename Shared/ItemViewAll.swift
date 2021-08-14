@@ -57,6 +57,8 @@ struct ItemViewAll: View {
                     
                 }
                 Spacer()
+                    .frame(height:topSpace)
+                Spacer()
             }
         }
     }

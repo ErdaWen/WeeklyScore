@@ -45,44 +45,53 @@ struct ItemView: View {
                 .sheet(isPresented: $addViewPresented, content: {
                     AddItemView(addItemViewPresented: $addViewPresented)
                 })
-            //MARK: Archive and tag button
             
+            //MARK: Archive and tag button
             VStack{
                 Spacer()
-                HStack(spacing:mButtons){
-                    Spacer()
-                    //MARK: Archive button
-                    HStack(alignment: .center, spacing: mButtonText){
-                        FloatButton(systemName: "archivebox", sButton: sButton) {
-                            showArchive.toggle()
-                            UserDefaults.standard.set(showArchive, forKey: "showArchivedItem")
-                        }
-                        Text( showArchive ? "Hide\nArchived" : "Show\nArchived")
-                            .font(.system(size: fsSub))
-                            .fontWeight(.light)
-                            .foregroundColor(Color("text_black"))
-                            .multilineTextAlignment(.leading)
-
-                    }
-                    //MARK: Tag Button
-                    HStack(alignment: .center, spacing: mButtonText){
-                        FloatButton(systemName: catagorized ? "tag.slash" : "tag", sButton: sButton) {
-                                catagorized.toggle()
-                                UserDefaults.standard.set(catagorized, forKey: "itemCatagorized")
+                ZStack(){
+                    //MARK: Background
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                    
+                    //MARK: Buttons on top
+                    HStack(spacing:0){
+                        Spacer()
+                        //MARK: Archive button
+                        HStack(alignment: .center, spacing: mButtonText){
+                            FloatButton(systemName: "archivebox", sButton: sButton) {
+                                showArchive.toggle()
+                                UserDefaults.standard.set(showArchive, forKey: "showArchivedItem")
                             }
-                        
+                            Text( showArchive ? "Hide\nArchived" : "Show\nArchived")
+                                .font(.system(size: fsSub))
+                                .fontWeight(.light)
+                                .foregroundColor(Color("text_black"))
+                                .multilineTextAlignment(.leading)
 
-                        Text( catagorized ? "By\nDate" : "By\nTag")
-                            .font(.system(size: fsSub))
-                            .fontWeight(.light)
-                            .foregroundColor(Color("text_black"))
-                            .multilineTextAlignment(.leading)
-                            .frame(width:30)
+                        }
+                        Spacer()
+                        //MARK: Tag Button
+                        HStack(alignment: .center, spacing: mButtonText){
+                            FloatButton(systemName: catagorized ? "tag.slash" : "tag", sButton: sButton) {
+                                    catagorized.toggle()
+                                    UserDefaults.standard.set(catagorized, forKey: "itemCatagorized")
+                                }
+                            
 
+                            Text( catagorized ? "By\nDate" : "By\nTag")
+                                .font(.system(size: fsSub))
+                                .fontWeight(.light)
+                                .foregroundColor(Color("text_black"))
+                                .multilineTextAlignment(.leading)
+                                .frame(width:30)
+
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                }
-            } .padding(.bottom,pButton2)
+                }.frame(height:45)//end bottom button Zstack
+        
+            } //end bottom button Vstack
             
             
         }

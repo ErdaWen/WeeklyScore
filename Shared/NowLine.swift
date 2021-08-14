@@ -21,7 +21,7 @@ struct NowLine: View {
                 Text("Now")
                     .foregroundColor(Color("text_red"))
                     .font(.system(size: 12))
-                    .padding(.leading, 25)
+                    .padding(.leading, 21)
                     .background(
                         RadialGradient(gradient: Gradient(colors: [Color("background_white").opacity(1),Color("background_white").opacity(0)]), center: .center, startRadius: 2, endRadius: 10)
                     )
