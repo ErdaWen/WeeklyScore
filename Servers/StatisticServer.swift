@@ -65,7 +65,7 @@ class StatisticServer {
             for schedule in schedules {
                 if (schedule.beginTime >= tempDate) && (schedule.beginTime < DateServer.addOneWeek(date: tempDate)){
                     if item.durationBased{
-                        tempValue += DateServer.getTotMin(beginTime: schedule.beginTime, endTime: schedule.endTime)
+                        tempValue += schedule.minutesGained
                     } else {
                         tempValue += schedule.checked ? 1 : 0
                     }
