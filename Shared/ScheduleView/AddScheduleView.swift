@@ -212,7 +212,7 @@ struct AddScheduleView: View {
                                         inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
                                     })
                                 
-                                DatePicker("Ends", selection: $inputEndTime)
+                                DatePicker("Ends", selection: $inputEndTime, in: inputBeginTime...)
                                     .foregroundColor(Color("text_black"))
                                     .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                     .onChange(of: inputEndTime, perform: { value in

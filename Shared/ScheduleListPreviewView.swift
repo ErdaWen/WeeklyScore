@@ -19,6 +19,7 @@ struct ScheduleListPreviewView: View {
     
     let mPicker:CGFloat = 40
     let topSpacing:CGFloat = 30
+    let bottomSpacing:CGFloat = 50
     
     var body: some View {
         
@@ -77,8 +78,9 @@ struct ScheduleListPreviewView: View {
                                     .padding(.leading, 17)
                                     .padding(.trailing, mPicker)
                             }//end now line if
-                            
                         }// end everything except verticle line (and spacer) Zstack
+                        Spacer()
+                            .frame(height:bottomSpacing)
                     }// end everything excepet vertical line Vstack
                 }// end whole ZStack
             }//end scrollView

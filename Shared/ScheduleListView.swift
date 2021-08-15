@@ -94,18 +94,24 @@ struct ScheduleListView: View {
                 // MARK: Sliders
                 VStack{
                     Spacer()
-                    if previewMode {
-                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                            .frame(height:38)
-                    } else {
-                        
-                        CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                            .frame(height:38)
-                    }
+                    ZStack{
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                        if previewMode {
+                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                                .frame(height:38)
+                                .padding(.leading,80)
+                                .padding(.trailing,70)
+                        } else {
+                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                                .frame(height:38)
+                                .padding(.leading,80)
+                                .padding(.trailing,70)
+                        }
+                    }.frame(height:75)
                 }
-                .padding(.leading,80)
-                .padding(.trailing,70)
-                .padding(.bottom,18)
+                
+
                 
                 // "No schedules" overlay
                 if schedules.count == 0 {
@@ -119,10 +125,7 @@ struct ScheduleListView: View {
                     }
                     
                 }// end display No schedule
-                
-                
             }
-            
         }
     }
 }

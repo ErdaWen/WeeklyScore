@@ -20,6 +20,8 @@ struct ScheduleListContentView: View {
     let mButtons:CGFloat = 16
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 40
+    let bottomSpacing:CGFloat = 50
+
 
     var body: some View {
         ScrollView{
@@ -55,6 +57,8 @@ struct ScheduleListContentView: View {
                 }
                 .padding(.horizontal, mHorizon)
             } //end if there is schedule
+            Spacer()
+                .frame(height:bottomSpacing)
         } //end ScoreView
         .animation(.default)
     }

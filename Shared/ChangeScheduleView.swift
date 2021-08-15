@@ -293,7 +293,7 @@ struct ChangeScheduleView: View {
                                     somethingChanged = true
                                 })
                             
-                            DatePicker("Ends", selection: $inputEndTime)
+                            DatePicker("Ends", selection: $inputEndTime, in:inputBeginTime...)
                                 .foregroundColor(Color("text_black"))
                                 .accentColor(Color(itemsFiltered[itemId].tags.colorName))
                                 .onChange(of: inputEndTime, perform: { value in

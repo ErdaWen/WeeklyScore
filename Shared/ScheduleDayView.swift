@@ -28,6 +28,7 @@ struct ScheduleDayView: View {
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 10
     let topSpacing:CGFloat = 30
+    let bottomSpacing:CGFloat = 50
     
     var body: some View {
         ScrollViewReader { scrollview in
@@ -63,6 +64,8 @@ struct ScheduleDayView: View {
                         
                     } // end ZStack
                     .padding(.trailing , 20)
+                    Spacer()
+                        .frame(height:bottomSpacing)
                 } // end scrollView
                 .onAppear(){
                     scrollview.scrollTo(17)
@@ -105,12 +108,17 @@ struct ScheduleDayView: View {
                 //MARK: Slider
                 VStack{
                     Spacer()
-                    CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                        .frame(height:38)
-                        .padding(.leading,80)
-                        .padding(.trailing,70)
-                        .padding(.bottom,18)
+                    ZStack{
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                            .frame(height:38)
+                            .padding(.leading,80)
+                            .padding(.trailing,70)
+                    }.frame(height:75)
                 }
+                
+                
                 
             }         // end button + scroll ZStack
             .onReceive(updateTimer) { _ in
