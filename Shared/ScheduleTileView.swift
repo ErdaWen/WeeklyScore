@@ -95,7 +95,7 @@ struct ScheduleTileView: View {
                     Circle()
                         .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                         .foregroundColor(Color(schedule.items.tags.colorName))
-                        .padding(.trailing, showTitle ? mHandle : mHandleTight - 1 )
+                        .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
                         .padding(.leading, showTitle ? mHandle - 2 : 0)
 
                 }

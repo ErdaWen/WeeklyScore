@@ -77,13 +77,18 @@ struct ScheduleView: View {
             if  dayFromDay1 == -1 {
                 // Week view need to filter out the schedules with BEGIN time within the week range
                 let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                       NSSortDescriptor(key: "endTime", ascending: true)]
                 
-                ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)], predicate: predicate, animation: .default),previewMode:$previewMode)
+                ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode)
             } else {
                 let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
                 // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
                 
-                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: [NSSortDescriptor(key: "beginTime", ascending: true)], predicate: predicate, animation: .default),today:propertiesModel.startDate)
+                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                       NSSortDescriptor(key: "endTime", ascending: true)]
+                
+                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),today:propertiesModel.startDate)
                 
             } // end main content
             

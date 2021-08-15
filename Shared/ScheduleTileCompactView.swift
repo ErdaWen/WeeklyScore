@@ -24,8 +24,6 @@ struct ScheduleTileCompactView: View {
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 3
     
-    
-    
     var body: some View {
         HStack(spacing:0){
             if schedule.items.durationBased{

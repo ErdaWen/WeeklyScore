@@ -39,7 +39,7 @@ struct DayPicker: View {
                             Text("All").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
                         }
                     }
-                    .padding(.bottom,5)
+                    .padding(.bottom,6)
                     .frame(width: geo.frame(in: .global).width / 8,height:42)
                     .padding(.top, pPickerTextVer)
                     .onTapGesture {
