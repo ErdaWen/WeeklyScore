@@ -238,7 +238,7 @@ struct ChangeItemView: View {
                                             .foregroundColor(Color("text_black"))
                                     }.tag(r)
                                 }
-                            }
+                            }.pickerStyle(WheelPickerStyle())
                         })
                         
                     } // end if !hidden

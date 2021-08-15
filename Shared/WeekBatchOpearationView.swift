@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-struct AddBatchScheduleView: View {
+struct WeekBatchOpearationView: View {
     enum ActiveAlert {
         case nothing, allFail, allDone, partDone
     }
@@ -28,23 +28,23 @@ struct AddBatchScheduleView: View {
     @State var activeAlert: ActiveAlert = .allDone
 
 
-    func checkScheduleConflict(schedule:Schedule) -> Bool {
-        var conflict = false
-        let newBeginTime = DateServer.addOneWeek(date: schedule.beginTime)
-        let newEndTime = schedule.items.durationBased ? DateServer.addOneWeek(date: schedule.endTime) : DateServer.addOneWeek(date: schedule.beginTime)
-        let request = Schedule.schedulefetchRequest()
-        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", newBeginTime as NSDate, newEndTime as NSDate)
-        do {
-            let results = try viewContext.fetch(request)
-            if results.count > 0 {
-                conflict = true
-            }
-        } catch {
-            print(error)
-        }
-        return conflict
-    }
-    
+//    func checkScheduleConflict(schedule:Schedule) -> Bool {
+//        var conflict = false
+//        let newBeginTime = DateServer.addOneWeek(date: schedule.beginTime)
+//        let newEndTime = schedule.items.durationBased ? DateServer.addOneWeek(date: schedule.endTime) : DateServer.addOneWeek(date: schedule.beginTime)
+//        let request = Schedule.schedulefetchRequest()
+//        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", newBeginTime as NSDate, newEndTime as NSDate)
+//        do {
+//            let results = try viewContext.fetch(request)
+//            if results.count > 0 {
+//                conflict = true
+//            }
+//        } catch {
+//            print(error)
+//        }
+//        return conflict
+//    }
+//    
     func createNewSchedule(schedule:Schedule){
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
@@ -78,7 +78,7 @@ struct AddBatchScheduleView: View {
     var body: some View {
         Button {
             for schedule in schedules {
-                if checkScheduleConflict(schedule:schedule) {
+                if ConflictServer.checkScheduleConflict(beginTime: DateServer.addOneWeek(date: schedule.beginTime), endTime: DateServer.addOneWeek(date: schedule.endTime), id: nil) {
                     numConflict += 1
                 } else {
                     numDone += 1
@@ -130,6 +130,6 @@ struct AddBatchScheduleView: View {
 
 //struct AddBatchScheduleView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        AddBatchScheduleView()
+//        WeekBatchOpearationView()
 //    }
 //}

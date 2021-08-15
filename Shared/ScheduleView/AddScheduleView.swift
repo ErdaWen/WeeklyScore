@@ -61,21 +61,6 @@ struct AddScheduleView: View {
         inputReminderTime = Int(itemsFiltered[itemId].defaultReminderTime)
     }
     
-    func checkScheduleConflict() -> Bool {
-        var conflict = false
-        let request = Schedule.schedulefetchRequest()
-        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", inputBeginTime as NSDate, inputEndTime as NSDate)
-        do {
-            let results = try viewContext.fetch(request)
-            if results.count > 0 {
-                conflict = true
-            }
-        } catch {
-            print(error)
-        }
-        return conflict
-    }
-    
     func saveSchedule() {
         itemsFiltered[itemId].lastUse = Date()
         itemsFiltered[itemId].defaultBeginTime = inputBeginTime
@@ -155,7 +140,7 @@ struct AddScheduleView: View {
                     Spacer()
                     
                     Button(action:{
-                        if checkScheduleConflict() {
+                        if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: nil) {
                             showConflictAlert = true
                         } else {
                             saveSchedule()

@@ -26,7 +26,7 @@ struct WeekPicker: View {
                 //MARK: Week minus
                 Button {
                     weekFromNow -= 1
-                    dayFromDay1 = -1
+                    //dayFromDay1 = -1
                     updateFunc()
                 } label: {
                     //Image(systemName: "arrowtriangle.backward.square")
@@ -40,7 +40,7 @@ struct WeekPicker: View {
                 //MARK: Week restore
                 Button {
                     weekFromNow = 0
-                    dayFromDay1 = -1
+                    //dayFromDay1 = -1
                     updateFunc()
                     
                 } label: {
@@ -52,7 +52,7 @@ struct WeekPicker: View {
                 //MARK: Week plus
                 Button {
                     weekFromNow += 1
-                    dayFromDay1 = -1
+                    //dayFromDay1 = -1
                     updateFunc()
                 } label: {
                     //Image(systemName: "arrowtriangle.right.square")

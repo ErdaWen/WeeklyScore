@@ -84,26 +84,6 @@ struct ChangeScheduleView: View {
         }
     }
     
-    func checkScheduleConflict() -> Bool {
-        var conflict = false
-        let request = Schedule.schedulefetchRequest()
-        request.predicate = NSPredicate(format: "(beginTime == %@) AND (endTime == %@)", inputBeginTime as NSDate, inputEndTime as NSDate)
-        do {
-            let results = try viewContext.fetch(request)
-            if results.count > 0 {
-                conflict = true
-            }
-            if (results.count == 1) && (results[0].id == schedule.id) {
-                // Cannot conflict with itself
-                conflict = false
-            }
-        } catch {
-            print(error)
-        }
-        return conflict
-    }
-    
-    
     func changeItem() {
         schedule.items.scoreTotal -= schedule.scoreGained
         schedule.items.minutesTotal -= schedule.minutesGained
@@ -225,7 +205,7 @@ struct ChangeScheduleView: View {
                     //Text("Edit Schedule").font(.system(size: fsNavBar))
                     Spacer()
                     Button(action:{
-                        if checkScheduleConflict() {
+                        if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: schedule.id) {
                             showConflictAlert = true
                         } else {
                             saveSchedule()

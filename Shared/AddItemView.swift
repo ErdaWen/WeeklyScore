@@ -262,7 +262,7 @@ struct AddItemView: View {
                                         .foregroundColor(Color("text_black"))
                                 }.tag(r)
                             }
-                        }
+                        }.pickerStyle(WheelPickerStyle())
                     })
                     
                     Spacer()

@@ -53,7 +53,7 @@ struct ScheduleListView: View {
                         batchAddViewPresented = true
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
-                        AddBatchScheduleView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
+                        WeekBatchOpearationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
                     }
                     
                     Spacer()
