@@ -39,7 +39,9 @@ struct DayPicker: View {
                             Text("All").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
                         }
                     }
-                    .frame(width: geo.frame(in: .global).width / 8 )
+                    .padding(.bottom,5)
+                    .frame(width: geo.frame(in: .global).width / 8,height:42)
+                    .padding(.top, pPickerTextVer)
                     .onTapGesture {
                         dayFromDay1 = -1
                         updateFunc()
@@ -62,6 +64,7 @@ struct DayPicker: View {
                                     .font(.system(size: fsSub)).fontWeight(isToday ? .semibold : .light)
                                     .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                             }
+                            .padding(.bottom,4)
                             .animation(.none)
                             
                             // For preview mode, add verticle line to form a calendar look
@@ -72,7 +75,7 @@ struct DayPicker: View {
                                 }
                             }
                         }
-                        .frame(width: geo.frame(in: .global).width / 8)
+                        .frame(width: geo.frame(in: .global).width / 8,height:42)
                         .padding(.top, pPickerTextVer)
                         .onTapGesture {
                             dayFromDay1 = r

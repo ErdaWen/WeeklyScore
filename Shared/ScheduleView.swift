@@ -54,17 +54,24 @@ struct ScheduleView: View {
             })
             .frame(height:hTitle).padding(.horizontal, mTitle).animation(.default)
             
-            //MARK: Day picker
-            DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode, updateFunc: {
-                updateDate()
-            })
-            .frame(height: hPicker).padding(.horizontal, mPicker)
+            ZStack(alignment:.top){
+                //MARK: Day picker
+                DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode, updateFunc: {
+                    updateDate()
+                })
+                .padding(.horizontal, mPicker)
+                
+                //MARK: Horizontal Divider, not shown in week calendar look
+                VStack{
+                    Spacer()
+                    if (!previewMode) || (dayFromDay1 != -1)
+                    {
+                        Divider().background(Color("background_grey"))
+                    }
+                }
+            }.frame(height: hPicker)
             
-            //MARK: Horizontal Divider, not shown in week calendar look
-            if (!previewMode) || (dayFromDay1 != -1)
-            {
-                Divider().background(Color("background_grey"))
-            }
+            
             
             //MARK: Main content view
             if  dayFromDay1 == -1 {
