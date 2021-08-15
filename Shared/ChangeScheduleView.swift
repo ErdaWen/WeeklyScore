@@ -38,7 +38,7 @@ struct ChangeScheduleView: View {
     @State var scoreChanged = false
     @State var somethingChanged = false
     @State var addViewPresented = false
-
+    
     
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
@@ -46,7 +46,7 @@ struct ChangeScheduleView: View {
     let mHor:CGFloat = 15
     let hField:CGFloat = 45
     let sButton:CGFloat = 22
-
+    
     
     func initValues(){
         itemsFiltered = items.filter { item in
@@ -197,29 +197,29 @@ struct ChangeScheduleView: View {
                 HStack{
                     
                     if somethingChanged{
-                    Button(action:{ changeScheduleViewPresented = false}, label: {
-                        Text("Discard Change")
-                            .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
-                    })
-                    //Spacer()
-                    //Text("Edit Schedule").font(.system(size: fsNavBar))
-                    Spacer()
-                    Button(action:{
-                        if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: schedule.id) {
-                            showConflictAlert = true
-                        } else {
-                            saveSchedule()
+                        Button(action:{ changeScheduleViewPresented = false}, label: {
+                            Text("Discard Change")
+                                .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
+                        })
+                        //Spacer()
+                        //Text("Edit Schedule").font(.system(size: fsNavBar))
+                        Spacer()
+                        Button(action:{
+                            if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: schedule.id) {
+                                showConflictAlert = true
+                            } else {
+                                saveSchedule()
+                            }
                         }
-                    }
-                    , label: {
-                        Text("Save")
-                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
-                    })
-                    .alert(isPresented: $showConflictAlert) {
-                        Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
-                            showConflictAlert = false
-                        }))
-                    }
+                        , label: {
+                            Text("Save")
+                                .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
+                        })
+                        .alert(isPresented: $showConflictAlert) {
+                            Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                                showConflictAlert = false
+                            }))
+                        }
                     } else {
                         Button {
                             changeScheduleViewPresented = false
@@ -328,7 +328,7 @@ struct ChangeScheduleView: View {
                             .onChange(of: inputReminder) { _ in
                                 somethingChanged = true
                             }
-
+                        
                         if inputReminder {
                             Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
                                 Text("when happens").tag(0)
@@ -366,7 +366,6 @@ struct ChangeScheduleView: View {
                         //MARK: Delete schedule
                         
                         Button("Delete Schedule...") {
-                            // MARK: warning to be added
                             showDeleteAlert = true
                         }
                         .alert(isPresented: $showDeleteAlert) {

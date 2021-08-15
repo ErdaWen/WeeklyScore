@@ -27,10 +27,14 @@ struct WeekBatchOpearationView: View {
     @Binding var addBatchScheduleViewPresented:Bool
     @State var showConflitAlert = false
     @State var activeAlert: ActiveAlert = .allDone
+    @State var weekCopyTo = Date()
     
     let mHorizon:CGFloat = 40
-
-
+    let mNavBar:CGFloat = 25
+    let fsNavBar:CGFloat = 20
+    let fsForm:CGFloat = 16
+    
+    
     func createNewSchedule(schedule:Schedule){
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
@@ -65,71 +69,127 @@ struct WeekBatchOpearationView: View {
         
         VStack{
             //MARK: Navigation bar
-            
+            HStack{
+                Button {
+                    addBatchScheduleViewPresented = false
+                } label: {
+                    Image(systemName: "xmark.circle")
+                        .resizable().scaledToFit()
+                        .foregroundColor(Color("text_black"))
+                        .frame(height:25)
+                }
+                Spacer()
+                Text("Batch Operation")
+                    .font(.system(size: fsNavBar))
+                Spacer()
+                Spacer().frame(width: 25)
+                
+            }.frame(height:20).padding(mNavBar)
             //Content:
             ScrollView{
-                VStack{
-                    InputField(title: nil, alignment: .leading, color: Color("text_black"), fieldHeight: 220) {
+                VStack(alignment: .center, spacing: 15 ){
+                    //MARK: All habits view
+                    InputField(title: nil, alignment: .leading, color: Color("background_grey2"), fieldHeight: 220) {
                         WeekBatchList(schedules: schedules)
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, 10)
                     }
-                    //MARK: Copy button
-                    Button {
-                        for schedule in schedules {
-                            if ConflictServer.checkScheduleConflict(beginTime: DateServer.addOneWeek(date: schedule.beginTime), endTime: DateServer.addOneWeek(date: schedule.endTime), id: nil) {
-                                numConflict += 1
-                            } else {
-                                numDone += 1
-                                createNewSchedule(schedule:schedule)
-                            }
+                    .padding(.top,2)
+                    //MARK: Select week
+                    
+                    
+                    
+                    
+                    DatePicker("Copy to week of:", selection: $weekCopyTo,displayedComponents: .date)
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsForm))
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .onChange(of: weekCopyTo) { _ in
+                            weekCopyTo = DateServer.startOfThisWeek(date: weekCopyTo)
                         }
+                    
+                    
+                    if weekCopyTo == DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date())){
                         
-                        if schedules.count == 0 {
-                            activeAlert = .nothing
-                        } else if numConflict == 0 {
-                            activeAlert = .allDone
-                        } else if numDone == 0 {
-                            activeAlert = .allFail
-                        } else {
-                            activeAlert = .partDone
-                        }
-                        
-                        showConflitAlert = true
-                        
-                    } label: {
-                        Text("Copy to next week")
-                    }//end button
-                    .alert(isPresented: $showConflitAlert) {
-                        switch activeAlert{
-                        case .nothing:
-                            return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
-                                showConflitAlert = false
-                            }))
-                        case .allDone:
-                            return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
-                        case .allFail:
-                            return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
-                        case .partDone:
-                            return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
+                        HStack{
+                            Spacer()
 
-                        }// end switch
-                    }// end alert
-                    Spacer()
+                            Text("(Next week)")
+                                .foregroundColor(Color("text_black"))
+                                .font(.system(size: fsForm))
+                        }
+                        
+                    }//end if
+                    
+                    
+                    
+                    //MARK: Copy button
+                    HStack{
+                        Spacer()
+                        Button {
+                            for schedule in schedules {
+                                if ConflictServer.checkScheduleConflict(beginTime: DateServer.addOneWeek(date: schedule.beginTime), endTime: DateServer.addOneWeek(date: schedule.endTime), id: nil) {
+                                    numConflict += 1
+                                } else {
+                                    numDone += 1
+                                    createNewSchedule(schedule:schedule)
+                                }
+                            }
+                            
+                            
+                            if schedules.count == 0 {
+                                activeAlert = .nothing
+                            } else if numConflict == 0 {
+                                activeAlert = .allDone
+                            } else if numDone == 0 {
+                                activeAlert = .allFail
+                            } else {
+                                activeAlert = .partDone
+                            }
+                            
+                            showConflitAlert = true
+                            
+                        } label: {
+                            Text("Copy")
+                                .foregroundColor(Color("text_blue"))
+                                .font(.system(size: 20))
+                        }//end button
+                        .alert(isPresented: $showConflitAlert) {
+                            switch activeAlert{
+                            case .nothing:
+                                return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
+                                    showConflitAlert = false
+                                }))
+                            case .allDone:
+                                return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
+                                    addBatchScheduleViewPresented = false
+                                }))
+                            case .allFail:
+                                return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                                    addBatchScheduleViewPresented = false
+                                }))
+                            case .partDone:
+                                return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                                    addBatchScheduleViewPresented = false
+                                }))
+                                
+                            }// end switch
+                        }// end alert
+                        Spacer()
+                    }
+                    
                 }// end content VStack
-                .padding(.horizontal,mHorizon)
+                .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
             }// end content scrollview
             
             
         }// end everything ZStack
+        .onAppear(){
+            weekCopyTo = DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date()))
+            
+        }
         
-
-
+        
+        
         
     }
 }
