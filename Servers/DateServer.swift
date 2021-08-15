@@ -67,7 +67,7 @@ class DateServer {
         let date = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents(
-            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: date)
+            Set<Calendar.Component>([.year, .month,.day]), from: date)
         let today = calendar.date(from: components)!
         return today
     }
@@ -75,7 +75,7 @@ class DateServer {
     static func startOfToday(date:Date) -> Date {
         let calendar = Calendar.current
         let components = calendar.dateComponents(
-            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: date)
+            Set<Calendar.Component>([.year, .month,.day]), from: date)
         let today = calendar.date(from: components)!
         return today
     }
@@ -83,7 +83,7 @@ class DateServer {
     static func combineDayTime(day:Date,time:Date) -> Date {
         let calendar = Calendar.current
         var dayComponents = calendar.dateComponents(
-            Set<Calendar.Component>([.yearForWeekOfYear, .month,.day]), from: day)
+            Set<Calendar.Component>([.year, .month,.day]), from: day)
         let timeComponents = calendar.dateComponents(
             Set<Calendar.Component>([.hour, .minute]), from: time)
        
@@ -92,8 +92,23 @@ class DateServer {
         
         let combinedDate = calendar.date(from: dayComponents)!
         return combinedDate
-        
     }
+    
+    static func combineWeekDay(week:Date,time:Date) -> Date {
+        let calendar = Calendar.current
+        var weekComponents = calendar.dateComponents(
+            Set<Calendar.Component>([.yearForWeekOfYear, .weekOfYear]), from: week)
+        let timeComponents = calendar.dateComponents(
+            Set<Calendar.Component>([.weekday, .hour, .minute]), from: time)
+       
+        weekComponents.weekday = timeComponents.weekday
+        weekComponents.hour = timeComponents.hour
+        weekComponents.minute = timeComponents.minute
+        
+        let combinedDate = calendar.date(from: weekComponents)!
+        return combinedDate
+    }
+    
     
     //MARK: Functions that generate string arrays for date picker
     
