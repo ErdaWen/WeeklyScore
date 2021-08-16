@@ -35,12 +35,12 @@ struct WeekBatchOpearationView: View {
     let fsForm:CGFloat = 16
     
     
-    func createNewSchedule(schedule:Schedule){
+    func createNewSchedule(schedule:Schedule,beginTime:Date,endTime:Date){
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
-        newSchedule.beginTime = DateServer.addOneWeek(date: schedule.beginTime)
+        newSchedule.beginTime = beginTime
         // Some legacy hit-based items should ditch the endtime
-        newSchedule.endTime = schedule.items.durationBased ? DateServer.addOneWeek(date: schedule.endTime) : DateServer.addOneWeek(date: schedule.beginTime)
+        newSchedule.endTime = schedule.items.durationBased ? endTime : beginTime
         newSchedule.score = schedule.score
         newSchedule.location = schedule.location
         newSchedule.reminder = schedule.reminder
@@ -119,19 +119,21 @@ struct WeekBatchOpearationView: View {
                         }
                         
                     }//end if
-                    
-                    
+                     
                     
                     //MARK: Copy button
                     HStack{
                         Spacer()
                         Button {
                             for schedule in schedules {
-                                if ConflictServer.checkScheduleConflict(beginTime: DateServer.addOneWeek(date: schedule.beginTime), endTime: DateServer.addOneWeek(date: schedule.endTime), id: nil) {
+                                let combinedBeginTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.beginTime)
+                                let combinedEndTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.endTime)
+                                
+                                if ConflictServer.checkScheduleConflict(beginTime: combinedBeginTime, endTime: combinedEndTime, id: nil) {
                                     numConflict += 1
                                 } else {
                                     numDone += 1
-                                    createNewSchedule(schedule:schedule)
+                                    createNewSchedule(schedule:schedule,beginTime:combinedBeginTime,endTime:combinedEndTime)
                                 }
                             }
                             

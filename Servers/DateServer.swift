@@ -105,7 +105,12 @@ class DateServer {
         weekComponents.hour = timeComponents.hour
         weekComponents.minute = timeComponents.minute
         
-        let combinedDate = calendar.date(from: weekComponents)!
+        var combinedDate = calendar.date(from: weekComponents)!
+        let weekStartDay = UserDefaults.standard.integer(forKey: "weekStartDay")
+        // add one week if weekday number before weekStartDay (should be in fact the week after that week)
+        if weekComponents.weekday ?? 1 <= weekStartDay{
+            combinedDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: combinedDate)!
+        }
         return combinedDate
     }
     

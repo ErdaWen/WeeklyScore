@@ -32,14 +32,15 @@ struct WeekBatchList: View {
                             .foregroundColor(Color("text_black"))
                             .frame(width: 30)
                             .multilineTextAlignment(.trailing)
-                        if schedulesFiltered.count == 0{
-                            Text("No Schedules")
-                                .font(.system(size: fsSub))
-                                .fontWeight(.light)
-                                .foregroundColor(Color("text_black"))
-                                .frame(width: 30)
-                        } else {
-                            ScrollView(.horizontal){
+                        
+                        ScrollView(.horizontal){
+                            if schedulesFiltered.count == 0{
+                                Text("No Schedules")
+                                    .font(.system(size: fsSub))
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color("text_black"))
+                                    .frame(height:25)
+                            } else {
                                 HStack{
                                     ForEach(schedulesFiltered) { scheduleEach in
                                         
@@ -48,8 +49,9 @@ struct WeekBatchList: View {
                                         
                                     }
                                 }
-                            }// end scroll
-                        }//end if no schedule
+                            }//end if no schedule
+                        }// end scroll
+                        
                         
                     }// end each day bar
                     
