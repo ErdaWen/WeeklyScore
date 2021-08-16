@@ -77,9 +77,9 @@ struct ChangeScheduleView: View {
             changeScheduleViewPresented = false
             try viewContext.save()
             propertiesModel.updateScores()
-            print("saved")
+            print("deleted")
         } catch {
-            print("Cannot generate new item")
+            print("Cannot delete item")
             print(error)
         }
     }
@@ -216,7 +216,7 @@ struct ChangeScheduleView: View {
                                 .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
                         })
                         .alert(isPresented: $showConflictAlert) {
-                            Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                            Alert(title: Text("😐 Time Duplication"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
                                 showConflictAlert = false
                             }))
                         }
@@ -364,9 +364,17 @@ struct ChangeScheduleView: View {
                             somethingChanged = true
                         }
                         //MARK: Delete schedule
-                        
-                        Button("Delete Schedule...") {
+                        Button {
                             showDeleteAlert = true
+                        } label: {
+                            HStack{
+                                Image(systemName: "trash")
+                                    .resizable().scaledToFit()
+                                    .foregroundColor(Color("text_red")).frame(height:20)
+                                Text("Delete Schedule...")
+                                    .foregroundColor(Color("text_red"))
+                                    .font(.system(size: 20))
+                            }
                         }
                         .alert(isPresented: $showDeleteAlert) {
                             Alert(title: Text("🤔 You Sure?"), message: Text("Delete this schedule?"), primaryButton: .default(Text("Keep"), action: {

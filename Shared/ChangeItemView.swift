@@ -243,8 +243,7 @@ struct ChangeItemView: View {
                         
                     } // end if !hidden
                     
-                    Button(item.hidden ? "Resume Habit" : "Archive Habit") {
-                        // MARK: warning to be added
+                    Button {
                         item.hidden.toggle()
                         do{
                             try viewContext.save()
@@ -254,18 +253,34 @@ struct ChangeItemView: View {
                             print("Cannot save item")
                             print(error)
                         }
+                    } label: {
+                        HStack{
+                            Image(systemName: "archivebox")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_blue")).frame(height:20)
+                            Text("Delete Habit...")
+                                .foregroundColor(Color("text_blue"))
+                                .font(.system(size: 20))
+                        }
+
                     }
-                    .foregroundColor(Color("text_blue"))
-                    .font(.system(size: 20))
                     
-                    Button("Delete Habit...") {
-                        // MARK: warning to be added
+                    Button {
                         showDeleteAlert = true
+                    } label: {
+                        HStack{
+                            Image(systemName: "trash")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_red")).frame(height:20)
+                            Text("Delete Habit...")
+                                .foregroundColor(Color("text_red"))
+                                .font(.system(size: 20))
+                        }
                     }
                     .alert(isPresented: $showDeleteAlert) {
                         Alert(title: Text("🤔 You Sure?"), message: Text("All Schedules will also be deleted! If you are done with this habit, simply archive it and it won't show"), primaryButton: .default(Text("Keep"), action: {
                             showDeleteAlert = false
-                        }), secondaryButton: .default(Text("Delete!"), action: {
+                        }), secondaryButton: .default(Text("Delete").foregroundColor(Color("text_red")), action: {
                             deleteItem()
                             changeItemViewPresented = false
                         }))

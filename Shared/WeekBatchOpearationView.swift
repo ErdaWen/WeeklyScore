@@ -26,6 +26,7 @@ struct WeekBatchOpearationView: View {
     @State var numDone = 0
     @Binding var addBatchScheduleViewPresented:Bool
     @State var showConflitAlert = false
+    @State var showDeleteAlert = false
     @State var activeAlert: ActiveAlert = .allDone
     @State var weekCopyTo = Date()
     
@@ -33,6 +34,33 @@ struct WeekBatchOpearationView: View {
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
     let fsForm:CGFloat = 16
+    
+    func copyAll(){
+        for schedule in schedules {
+            let combinedBeginTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.beginTime)
+            let combinedEndTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.endTime)
+            
+            if ConflictServer.checkScheduleConflict(beginTime: combinedBeginTime, endTime: combinedEndTime, id: nil) {
+                numConflict += 1
+            } else {
+                numDone += 1
+                createNewSchedule(schedule:schedule,beginTime:combinedBeginTime,endTime:combinedEndTime)
+            }
+        }
+    }
+    
+    func alarmConditioning() {
+        if schedules.count == 0 {
+            activeAlert = .nothing
+        } else if numConflict == 0 {
+            activeAlert = .allDone
+        } else if numDone == 0 {
+            activeAlert = .allFail
+        } else {
+            activeAlert = .partDone
+        }
+
+    }
     
     
     func createNewSchedule(schedule:Schedule,beginTime:Date,endTime:Date){
@@ -64,6 +92,28 @@ struct WeekBatchOpearationView: View {
         }
         
     }
+    
+    func deleteAll(){
+        for schedule in schedules {
+            deleteSchedule(schedule:schedule)
+        }
+    }
+    
+    func deleteSchedule(schedule:Schedule){
+        schedule.items.scoreTotal -= schedule.scoreGained
+        schedule.items.minutesTotal -= schedule.minutesGained
+        schedule.items.checkedTotal -= schedule.checked ? 1 : 0
+        viewContext.delete(schedule)
+        do{
+            try viewContext.save()
+            propertiesModel.updateScores()
+            print("all deleted")
+        } catch {
+            print("Cannot delete all")
+            print(error)
+        }
+    }
+    
     
     var body: some View {
         
@@ -97,8 +147,6 @@ struct WeekBatchOpearationView: View {
                     //MARK: Select week
                     
                     
-                    
-                    
                     DatePicker("Copy to week of:", selection: $weekCopyTo,displayedComponents: .date)
                         .foregroundColor(Color("text_black"))
                         .font(.system(size: fsForm))
@@ -108,76 +156,87 @@ struct WeekBatchOpearationView: View {
                         }
                     
                     
-                    if weekCopyTo == DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date())){
-                        
-                        HStack{
-                            Spacer()
-
-                            Text("(Next week)")
-                                .foregroundColor(Color("text_black"))
-                                .font(.system(size: fsForm))
-                        }
-                        
-                    }//end if
-                     
+//                    if weekCopyTo == DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date())){
+//
+//                        HStack{
+//                            Spacer()
+//
+//                            Text("(Next week)")
+//                                .foregroundColor(Color("text_black"))
+//                                .font(.system(size: fsForm))
+//                        }
+//
+//                    }//end if
+                    
                     
                     //MARK: Copy button
-                    HStack{
-                        Spacer()
-                        Button {
-                            for schedule in schedules {
-                                let combinedBeginTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.beginTime)
-                                let combinedEndTime = DateServer.combineWeekDay(week: weekCopyTo, time: schedule.endTime)
-                                
-                                if ConflictServer.checkScheduleConflict(beginTime: combinedBeginTime, endTime: combinedEndTime, id: nil) {
-                                    numConflict += 1
-                                } else {
-                                    numDone += 1
-                                    createNewSchedule(schedule:schedule,beginTime:combinedBeginTime,endTime:combinedEndTime)
-                                }
-                            }
-                            
-                            
-                            if schedules.count == 0 {
-                                activeAlert = .nothing
-                            } else if numConflict == 0 {
-                                activeAlert = .allDone
-                            } else if numDone == 0 {
-                                activeAlert = .allFail
-                            } else {
-                                activeAlert = .partDone
-                            }
-                            
-                            showConflitAlert = true
-                            
-                        } label: {
+                    
+                    Button {
+                        copyAll()
+                        alarmConditioning()
+                        showConflitAlert = true
+                        
+                    } label: {
+                        HStack{
+                            Image(systemName: "doc.on.doc")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_blue")).frame(height:20)
                             Text("Copy")
                                 .foregroundColor(Color("text_blue"))
                                 .font(.system(size: 20))
-                        }//end button
-                        .alert(isPresented: $showConflitAlert) {
-                            switch activeAlert{
-                            case .nothing:
-                                return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
-                                    showConflitAlert = false
-                                }))
-                            case .allDone:
-                                return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
-                                    addBatchScheduleViewPresented = false
-                                }))
-                            case .allFail:
-                                return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                    addBatchScheduleViewPresented = false
-                                }))
-                            case .partDone:
-                                return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to time conflict with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                    addBatchScheduleViewPresented = false
-                                }))
-                                
-                            }// end switch
-                        }// end alert
-                        Spacer()
+                        }
+                    }//end button
+                    .alert(isPresented: $showConflitAlert) {
+                        switch activeAlert{
+                        case .nothing:
+                            return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
+                                showConflitAlert = false
+                            }))
+                        case .allDone:
+                            return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
+                                addBatchScheduleViewPresented = false
+                            }))
+                        case .allFail:
+                            return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                                addBatchScheduleViewPresented = false
+                            }))
+                        case .partDone:
+                            return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                                addBatchScheduleViewPresented = false
+                            }))
+                            
+                        }// end switch
+                    }// end alert
+                    
+                    Button {
+                        showDeleteAlert = true
+                    } label: {
+                        HStack{
+                            Image(systemName: "trash")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_red")).frame(height:20)
+                            Text("Delete All...")
+                                .foregroundColor(Color("text_red"))
+                                .font(.system(size: 20))
+                        }
                     }
+                    .alert(isPresented: $showDeleteAlert) {
+                        if schedules.count == 0{
+                            return Alert(title: Text("😶 Nothing"), message: Text("Nothing to deleted") , dismissButton:.default(Text("OK"), action: {
+                                showConflitAlert = false
+                            }))
+                        } else {
+                            return Alert(title: Text("🤔 You Sure?"), message: Text("Delete all Schedules"), primaryButton: .default(Text("Keep"), action: {
+                                showDeleteAlert = false
+                            }), secondaryButton: .default(Text("Delete").foregroundColor(Color("text_red")), action: {
+                                deleteAll()
+                                showDeleteAlert = false
+                                addBatchScheduleViewPresented = false
+                            }))
+                        }
+                        
+                    }
+          
                     
                 }// end content VStack
                 .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
@@ -189,9 +248,6 @@ struct WeekBatchOpearationView: View {
             weekCopyTo = DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date()))
             
         }
-        
-        
-        
         
     }
 }
