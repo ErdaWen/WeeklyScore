@@ -87,7 +87,7 @@ struct ScheduleDayView: View {
                         batchAddViewPresented = true
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
-                        WeekBatchOpearationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                        DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
                     }
                     Spacer()
                 } // end button HStack

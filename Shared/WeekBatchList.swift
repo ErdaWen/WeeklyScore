@@ -15,6 +15,10 @@ struct WeekBatchList: View {
     var body: some View {
         if schedules.count == 0 {
             Text("No schedules")
+                .font(.system(size: fsSub))
+                .fontWeight(.light)
+                .foregroundColor(Color("text_black"))
+                .frame(height:25)
         } else {
             let startOfWeek = DateServer.startOfThisWeek(date: schedules[0].beginTime)
             let weekdayNumbers = DateServer.generateWeekdays(offset:0)
@@ -44,7 +48,7 @@ struct WeekBatchList: View {
                                 HStack{
                                     ForEach(schedulesFiltered) { scheduleEach in
                                         
-                                        ScheduleTileSSView(schedule: scheduleEach)
+                                        ScheduleTileSSView(schedule: scheduleEach,showTitle: false)
                                             .frame(width: 30, height: 25)
                                         
                                     }

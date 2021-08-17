@@ -12,6 +12,7 @@ struct ScheduleTileSSView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     var schedule:Schedule
+    var showTitle:Bool
     
     let wHandle:CGFloat = 6
     let mHandle:CGFloat = 3
@@ -35,9 +36,11 @@ struct ScheduleTileSSView: View {
                         .foregroundColor(Color(schedule.items.tags.colorName))
                 }
                 //Title
-                Text(schedule.items.titleIcon)
+                Text(showTitle ? schedule.items.titleIcon + schedule.items.title : schedule.items.titleIcon)
+                    .foregroundColor(Color("text_black"))
                     .font(.system(size: fsTitle))
-                
+                    .fontWeight(.light)
+                    
             }
             
         }

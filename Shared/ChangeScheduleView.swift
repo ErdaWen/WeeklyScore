@@ -384,8 +384,6 @@ struct ChangeScheduleView: View {
                                 changeScheduleViewPresented = false
                             }))
                         }
-                        .foregroundColor(Color("text_red"))
-                        .font(.system(size: 20))
                         
                     } // end form VStack
                     .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
