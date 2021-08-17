@@ -63,6 +63,10 @@
 		005D077926CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
 		005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
 		005D077C26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
+		005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
+		005D077F26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
+		005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */; };
+		005D078226CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */; };
 		0072756626B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
 		0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
 		0072757226B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
@@ -148,6 +152,8 @@
 		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		005D077726CC762700664008 /* DayBatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchList.swift; sourceTree = "<group>"; };
 		005D077A26CC783600664008 /* DayBatchOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchOperationView.swift; sourceTree = "<group>"; };
+		005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCatagorized.swift; sourceTree = "<group>"; };
+		005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCatagorizedSection.swift; sourceTree = "<group>"; };
 		0072756526B32A7B00FAA32D /* ScheduleTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTileView.swift; sourceTree = "<group>"; };
 		0072757126B65D0E00FAA32D /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		0072757426B7190300FAA32D /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -308,6 +314,8 @@
 			children = (
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
 				002628B226C73CDF00A755D2 /* ItemViewAll.swift */,
+				005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */,
+				005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */,
 				002628BB26C7A14900A755D2 /* Tile */,
 				002628A826BF98B200A755D2 /* Elements */,
 				009C422926AF3CEA00A783F0 /* Sheets */,
@@ -537,6 +545,7 @@
 				0026288D26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */,
 				002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
 				002628A526BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
+				005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
 				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
@@ -567,6 +576,7 @@
 				002628B326C73CDF00A755D2 /* ItemViewAll.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */,
+				005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */,
 				008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
 				00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				0092DD3126BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
@@ -598,6 +608,7 @@
 				0026288E26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */,
 				002628BA26C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
 				002628A626BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
+				005D078226CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
 				0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
@@ -628,6 +639,7 @@
 				002628B426C73CDF00A755D2 /* ItemViewAll.swift in Sources */,
 				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
 				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
+				005D077F26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */,
 				008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
 				00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
 				0092DD3226BCC7A300750557 /* ScheduleListContentView.swift in Sources */,

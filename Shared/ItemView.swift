@@ -34,7 +34,7 @@ struct ItemView: View {
             if !catagorized {
                 ItemViewAll(items: items, showArchive: showArchive)
             } else {
-                
+                ItemViewAll(items: items, showArchive: showArchive)
             }
             //MARK: Add habit button
                 //MARK:Buttons
