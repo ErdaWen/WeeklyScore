@@ -33,9 +33,9 @@ struct ItemViewCatagorized: View {
                     let itemFiltered = items.filter { item in
                         return item.tags == tag
                     }
-                    
-                    ItemViewCatagorizedSection(tag:tag,items:itemFiltered,showArchive:showArchive)
-                    
+                    if itemFiltered.count > 0{
+                        ItemViewCatagorizedSection(tag:tag,items:itemFiltered,showArchive:showArchive)
+                    }
                 }
                 
                 Spacer()

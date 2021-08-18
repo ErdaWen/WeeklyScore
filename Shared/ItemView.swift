@@ -17,6 +17,8 @@ struct ItemView: View {
     private var items: FetchedResults<Item>
     
     @State var addViewPresented = false
+    @State var tagViewPresented = false
+    
     @State var changeId = 0
     @State var showArchive = UserDefaults.standard.bool(forKey: "showArchivedItem")
     @State var catagorized = UserDefaults.standard.bool(forKey: "itemCatagorized")
@@ -34,10 +36,11 @@ struct ItemView: View {
             if !catagorized {
                 ItemViewAll(items: items, showArchive: showArchive)
             } else {
-                ItemViewAll(items: items, showArchive: showArchive)
+                ItemViewCatagorized(items: items, showArchive: showArchive)
             }
             //MARK: Add habit button
                 //MARK:Buttons
+            HStack(spacing: 20){
                 FloatButton(systemName: "plus.square", sButton: sButton) {
                     addViewPresented = true
                 }
@@ -45,6 +48,17 @@ struct ItemView: View {
                 .sheet(isPresented: $addViewPresented, content: {
                     AddItemView(addItemViewPresented: $addViewPresented)
                 })
+                
+                if catagorized{
+                    FloatButton(systemName: "rectangle.and.pencil.and.ellipsis", sButton: 30) {
+                        tagViewPresented = true
+                    }
+                    .padding(.top,pButton)
+                    .sheet(isPresented: $tagViewPresented) {
+                        EditTagView(editTagViewPresented: $tagViewPresented)
+                    }
+                }
+            }.frame(height:80)
             
             //MARK: Archive and tag button
             VStack{
@@ -94,7 +108,7 @@ struct ItemView: View {
             } //end bottom button Vstack
             
             
-        }
+        }.animation(.default)
         // end whole view ZStack
         
         
