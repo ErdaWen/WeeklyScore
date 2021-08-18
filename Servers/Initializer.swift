@@ -47,13 +47,15 @@ class Initializer: ObservableObject{
         // 0: mark as complete
         // 1: mark as incomplete
         // 3: mark as not recorded
-        UserDefaults.standard.set(0,forKey: "autoCompleteMode")
+        UserDefaults.standard.set(0, forKey: "autoCompleteMode")
         UserDefaults.standard.set(false,forKey: "showLocation")
-        UserDefaults.standard.set(30,forKey: "maxScore")
+        UserDefaults.standard.set(30, forKey: "maxScore")
         // Record whether shows calendar view by default
-        UserDefaults.standard.set(true,forKey: "onDayView")
+        UserDefaults.standard.set(true, forKey: "onDayView")
         UserDefaults.standard.set(12.5, forKey: "listScaleFactor")
-        UserDefaults.standard.set(false,forKey: "previewMode")
+        UserDefaults.standard.set(false, forKey: "previewMode")
+        UserDefaults.standard.set(true, forKey: "showArchivedItem")
+        UserDefaults.standard.set(false, forKey: "itemCatagorized")
 
     }
     

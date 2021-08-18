@@ -26,6 +26,8 @@ struct ChangeItemView: View {
 
     @State var inputDurationBased = false
     @State var tagid = 0
+    @State var tagViewPresented = false
+
     
     
     @State var activeAlert:ActiveAlert = .conflict
@@ -230,17 +232,28 @@ struct ChangeItemView: View {
  
                         //MARK: Tags
                         InputField(title: "Choose a tag", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
-                            Picker("",selection:$tagid){
-                                ForEach(0...tags.count-1, id:\.self) { r in
-                                    HStack(spacing:10.0){
-                                        Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
-                                        Text(tags[r].name)
-                                            .font(.system(size: 20))
-                                            .fontWeight(.light)
-                                            .foregroundColor(Color("text_black"))
-                                    }.tag(r)
+                            ZStack(alignment:.bottomTrailing){
+                                Picker("",selection:$tagid){
+                                    ForEach(0...tags.count-1, id:\.self) { r in
+                                        HStack(spacing:10.0){
+                                            Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
+                                            Text(tags[r].name)
+                                                .font(.system(size: 20))
+                                                .fontWeight(.light)
+                                                .foregroundColor(Color("text_black"))
+                                        }.tag(r)
+                                    }
+                                }.pickerStyle(WheelPickerStyle())
+                                
+                                FloatButton(systemName: "rectangle.and.pencil.and.ellipsis", sButton: 30) {
+                                    tagViewPresented = true
                                 }
-                            }.pickerStyle(WheelPickerStyle())
+                                .padding(.trailing, 10)
+                                .padding(.bottom, 10)
+                                .sheet(isPresented: $tagViewPresented) {
+                                    EditTagView(editTagViewPresented: $tagViewPresented)
+                                }
+                            }// end choose tag Zstack
                         })
                         
                     } // end if !hidden

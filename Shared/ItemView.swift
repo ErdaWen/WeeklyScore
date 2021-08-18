@@ -93,12 +93,12 @@ struct ItemView: View {
                                 }
                             
 
-                            Text( catagorized ? "By\nDate" : "By\nTag")
+                            Text( catagorized ? "Hide\nTag" : "Show\nTag")
                                 .font(.system(size: fsSub))
                                 .fontWeight(.light)
                                 .foregroundColor(Color("text_black"))
                                 .multilineTextAlignment(.leading)
-                                .frame(width:30)
+                                .frame(width:45)
 
                         }
                         Spacer()
