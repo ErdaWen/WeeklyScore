@@ -34,7 +34,7 @@ struct ItemViewCatagorized: View {
                         return item.tags == tag
                     }
                     if itemFiltered.count > 0{
-                        ItemViewCatagorizedSection(tag:tag,items:itemFiltered,showArchive:showArchive)
+                        ItemViewCatagorizedSection(tag:tag,items:itemFiltered,showArchive:showArchive,dumUpdate:propertiesModel.dumUpdate)
                     }
                 }
                 

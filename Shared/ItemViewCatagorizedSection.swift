@@ -14,10 +14,12 @@ struct ItemViewCatagorizedSection: View {
     var tag:Tag
     var items:[Item]
     var showArchive: Bool
+    var dumUpdate:Bool
+    
     @State var showItems = true
     
     let mTiles:CGFloat = 15
-    let fsTitle:CGFloat = 15
+    let fsTitle:CGFloat = 18
     
     var body: some View {
         VStack(alignment: .leading,spacing:mTiles){

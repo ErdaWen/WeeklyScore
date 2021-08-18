@@ -109,9 +109,11 @@ struct AddItemView: View {
                         saveItem()
                     }
                 }, label: {
-                    Text("   Add").foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
+                    Text("   Add").foregroundColor((inputTitle.isEmpty || inputTitleIcon.isEmpty) ? Color("text_black").opacity(0.5) : Color("text_blue"))
+                        .font(.system(size: fsNavBar)).fontWeight(.semibold)
                     
                 })
+                .disabled(inputTitle.isEmpty || inputTitleIcon.isEmpty)
                 .alert(isPresented: $showAlert) {
                     switch activeAlert{
                     case .noIcon:

@@ -129,9 +129,11 @@ struct ChangeItemView: View {
                     }
                 }, label: {
                     Text("  Save")
-                        .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
+                        .foregroundColor((inputTitle.isEmpty || inputTitleIcon.isEmpty) ? Color("text_black").opacity(0.5) : Color("text_blue"))
+                        .font(.system(size: fsNavBar)).fontWeight(.semibold)
 
                 })
+                .disabled(inputTitle.isEmpty || inputTitleIcon.isEmpty)
                 .alert(isPresented: $showConflictAlert) {
                     switch activeAlert{
                     case .noIcon:
