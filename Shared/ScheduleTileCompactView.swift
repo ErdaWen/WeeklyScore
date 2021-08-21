@@ -27,15 +27,72 @@ struct ScheduleTileCompactView: View {
     var body: some View {
         HStack(spacing:0){
             if schedule.items.durationBased{
-                RoundedRectangle(cornerRadius: wHandle/2)
-                    .frame(width: wHandle)
-                    .foregroundColor(Color(schedule.items.tags.colorName))
-                    .padding(.trailing, mHandle)
+                if schedule.statusDefault{
+                    ZStack{
+                        RoundedRectangle(cornerRadius: wHandle/2)
+                            .frame(width: wHandle)
+                            .foregroundColor(Color("background_white"))
+                            .padding(.trailing, mHandle)
+                        RoundedRectangle(cornerRadius: wHandle/2)
+                            .frame(width: wHandle)
+                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
+                            .padding(.trailing, mHandle)
+                        RoundedRectangle(cornerRadius: wHandle/2)
+                            .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
+                            .frame(width: wHandle)
+                            .padding(.trailing, mHandle)
+                    }
+                } else if schedule.checked{
+                    RoundedRectangle(cornerRadius: wHandle/2)
+                        .frame(width: wHandle)
+                        .foregroundColor(Color(schedule.items.tags.colorName))
+                        .padding(.trailing, mHandle)
+                } else {
+                    ZStack{
+                        RoundedRectangle(cornerRadius: wHandle/2)
+                            .frame(width: wHandle)
+                            .foregroundColor(Color("background_white"))
+                            .padding(.trailing, mHandle)
+                        RoundedRectangle(cornerRadius: wHandle/2)
+                            .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
+                            .frame(width: wHandle)
+                            .padding(.trailing, mHandle)
+                    }
+                }
+                // end duration-based
             } else {
-                Circle()
-                    .frame(width: wHandle+2)
-                    .foregroundColor(Color(schedule.items.tags.colorName))
-                    .padding(.trailing, mHandle-2)
+                if schedule.statusDefault{
+                    ZStack{
+                        Circle()
+                            .frame(width: wHandle+2)
+                            .foregroundColor(Color("white"))
+                            .padding(.trailing, mHandle-2)
+                        Circle()
+                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
+                            .frame(width: wHandle+2)
+                            .padding(.trailing, mHandle-2)
+                        Circle()
+                            .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
+                            .frame(width: wHandle+2)
+                            .padding(.trailing, mHandle-2)
+                    }
+                } else if schedule.checked{
+                    Circle()
+                        .frame(width: wHandle+2)
+                        .foregroundColor(Color(schedule.items.tags.colorName))
+                        .padding(.trailing, mHandle-2)
+                } else {
+                    ZStack{
+                        Circle()
+                            .frame(width: wHandle+2)
+                            .foregroundColor(Color("white"))
+                            .padding(.trailing, mHandle-2)
+                        Circle()
+                            .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
+                            .frame(width: wHandle+2)
+                            .padding(.trailing, mHandle-2)
+                    }
+                }
                 
             }
             Button {

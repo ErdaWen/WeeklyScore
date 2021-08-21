@@ -21,7 +21,7 @@ struct AutoRecordNotificationBar: View {
             ZStack{
                 RoundedRectangle(cornerRadius: rBar)
                     .foregroundColor(Color( mode == 0 ? "text_green" : "text_red"))
-                Text("\(count) " + (count == 1 ? "schedule " : "schedules ") + "marked as " + (mode == 0 ? "complete automatically..." : "incomplete automatically..."))
+                Text("\(count) " + (count == 1 ? "schedule " : "schedules ") + "marked as " + (mode == 0 ? "complete automatically" : "incomplete automatically"))
                     .font(.system(size: fsText))
                     .foregroundColor(Color("text_black"))
             }

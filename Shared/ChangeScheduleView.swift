@@ -379,7 +379,7 @@ struct ChangeScheduleView: View {
                         .alert(isPresented: $showDeleteAlert) {
                             Alert(title: Text("🤔 You Sure?"), message: Text("Delete this schedule?"), primaryButton: .default(Text("Keep"), action: {
                                 showDeleteAlert = false
-                            }), secondaryButton: .default(Text("Delete!"), action: {
+                            }), secondaryButton: .default(Text("Delete"), action: {
                                 deleteSchedule()
                                 changeScheduleViewPresented = false
                             }))

@@ -111,6 +111,8 @@
 		00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
 		00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
 		00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
+		00F645BD26D0CF1900C30E98 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F645BC26D0CF1900C30E98 /* DashboardView.swift */; };
+		00F645BE26D0CF1900C30E98 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F645BC26D0CF1900C30E98 /* DashboardView.swift */; };
 		C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1392692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
@@ -178,6 +180,7 @@
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
+		00F645BC26D0CF1900C30E98 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1382692B378005A4DAB /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		C88EC13B2692BB27005A4DAB /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
@@ -362,6 +365,7 @@
 				005D077A26CC783600664008 /* DayBatchOperationView.swift */,
 				005D077726CC762700664008 /* DayBatchList.swift */,
 				002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */,
+				00F645BC26D0CF1900C30E98 /* DashboardView.swift */,
 			);
 			name = Sheets;
 			sourceTree = "<group>";
@@ -568,6 +572,7 @@
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				0026289926BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
+				00F645BD26D0CF1900C30E98 /* DashboardView.swift in Sources */,
 				0072757B26B7280600FAA32D /* CordServer.swift in Sources */,
 				002628AA26BF9F2D00A755D2 /* InputField.swift in Sources */,
 				0026289C26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
@@ -632,6 +637,7 @@
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				0026289A26BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
 				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
+				00F645BE26D0CF1900C30E98 /* DashboardView.swift in Sources */,
 				0072757C26B7280600FAA32D /* CordServer.swift in Sources */,
 				002628AB26BF9F2D00A755D2 /* InputField.swift in Sources */,
 				0026289D26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
