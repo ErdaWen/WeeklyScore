@@ -65,7 +65,7 @@ struct ScheduleTileCompactView: View {
                     ZStack{
                         Circle()
                             .frame(width: wHandle+2)
-                            .foregroundColor(Color("white"))
+                            .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle-2)
                         Circle()
                             .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
