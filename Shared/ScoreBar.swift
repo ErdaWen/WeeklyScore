@@ -9,24 +9,57 @@ import SwiftUI
 
 struct ScoreBar: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
-
+    @State var showDetial = false
+    
+    let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
     let mScores:CGFloat = 10
     let mScoreTitle:CGFloat = 5
     let fsScore:CGFloat = 18.0
+    let fsSub:CGFloat = 16
 
     var body: some View {
         HStack(spacing:mScores){
-            if propertiesModel.deductScoreThisWeek != 0 {
-                Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red"))
-                Text(",").font(.system(size: fsScore)).foregroundColor(Color("text_black")).fontWeight(.light)
-            }
-            Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green"))
-            Image(systemName: "line.diagonal").foregroundColor(Color("text_black"))
-            Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black"))
+            if showDetial{
+                Text("Complete: \(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_green"))
+                Text("Fail: \(propertiesModel.deductScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_red"))
+                if mode == 3{
+                    Text("Unrecorded: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light)
+                } else {
+                    Text("Upcoming: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light)
+                }
+                //end if showdetail
+            } else {
+                if propertiesModel.deductScoreThisWeek != 0 {
+                    Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red"))
+                    Text(",").font(.system(size: fsScore)).foregroundColor(Color("text_black")).fontWeight(.light)
+                }
+                Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green"))
+                Image(systemName: "line.diagonal").foregroundColor(Color("text_black"))
+                Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black"))
+            }// end else showdetail
+            
         }
+        .frame(height: 20)
         .padding(.bottom, mScoreTitle)
         .onAppear(){
             propertiesModel.updateScores()
+        }
+        .onTapGesture {
+            if showDetial{
+                withAnimation(.easeInOut){
+                    showDetial = false
+
+                }
+            } else{
+                withAnimation(.easeInOut){
+                    showDetial = true
+                }
+                Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { timer in
+                    withAnimation(.easeInOut){
+                        showDetial = false
+                    }
+                }
+            }
         }
         .animation(.default)
         
