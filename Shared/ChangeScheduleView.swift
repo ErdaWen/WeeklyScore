@@ -269,6 +269,7 @@ struct ChangeScheduleView: View {
                                 .padding(.bottom, 10)
                                 .sheet(isPresented: $addViewPresented, content: {
                                     AddItemView(addItemViewPresented: $addViewPresented)
+                                        .environment(\.managedObjectContext,self.viewContext)
                                 })
                             }
                         }.padding(.top,3)

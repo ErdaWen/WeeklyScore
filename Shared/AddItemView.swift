@@ -277,6 +277,7 @@ struct AddItemView: View {
                             .padding(.bottom, 10)
                             .sheet(isPresented: $tagViewPresented) {
                                 EditTagView(editTagViewPresented: $tagViewPresented)
+                                    .environment(\.managedObjectContext,self.viewContext)
                             }
                         }// end choose tag Zstack
                     })

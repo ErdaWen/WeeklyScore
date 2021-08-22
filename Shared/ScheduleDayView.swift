@@ -80,6 +80,7 @@ struct ScheduleDayView: View {
                     }
                     .sheet(isPresented: $addViewPresented, content: {
                         AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     })
                     
                     
@@ -88,6 +89,7 @@ struct ScheduleDayView: View {
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
                         DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     }
                     Spacer()
                 } // end button HStack

@@ -110,6 +110,7 @@ struct ScheduleTileCompactView: View {
             }//end Button Label
             .sheet(isPresented: $changeViewPresented) {
                 ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
+                    .environment(\.managedObjectContext,self.viewContext)
             }
             
         }

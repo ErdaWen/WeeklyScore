@@ -192,6 +192,7 @@ struct ItemTileView: View {
             }
             .sheet(isPresented: $changeViewPresented) {
                 ChangeItemView(changeItemViewPresented: $changeViewPresented, item: item)
+                    .environment(\.managedObjectContext,self.viewContext)
             }
             
         }//end everything Hstack

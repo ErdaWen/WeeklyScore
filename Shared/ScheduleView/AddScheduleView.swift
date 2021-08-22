@@ -124,6 +124,7 @@ struct AddScheduleView: View {
                     .padding(.bottom, 10)
                     .sheet(isPresented: $addViewPresented, content: {
                         AddItemView(addItemViewPresented: $addViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     }).padding(mNavBar)
                     .onChange(of: items.count) { _ in
                         initValues()
@@ -194,6 +195,7 @@ struct AddScheduleView: View {
                                     .padding(.bottom, 10)
                                     .sheet(isPresented: $addViewPresented, content: {
                                         AddItemView(addItemViewPresented: $addViewPresented)
+                                            .environment(\.managedObjectContext,self.viewContext)
                                     })
                                 }
                             }.padding(.top, 2)

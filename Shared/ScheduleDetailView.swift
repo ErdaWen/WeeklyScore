@@ -103,6 +103,7 @@ struct ScheduleDetailView: View {
                     }))
                 }.sheet(isPresented: $changeViewPresented) {
                     ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
+                        .environment(\.managedObjectContext,self.viewContext)
                 }
             }.padding(mNavBar)
             //MARK: Content Scroll

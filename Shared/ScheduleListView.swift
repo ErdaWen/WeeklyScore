@@ -46,6 +46,7 @@ struct ScheduleListView: View {
                     }
                     .sheet(isPresented: $addViewPresented, content: {
                         AddScheduleView(initDate: Date(), addScheduleViewPresented: $addViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     })
                     
                     
@@ -54,6 +55,7 @@ struct ScheduleListView: View {
                     }
                     .sheet(isPresented: $batchAddViewPresented) {
                         WeekBatchOpearationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     }
                     
                     Spacer()

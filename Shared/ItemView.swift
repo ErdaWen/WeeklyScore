@@ -47,6 +47,7 @@ struct ItemView: View {
                 .padding(.top,pButton)
                 .sheet(isPresented: $addViewPresented, content: {
                     AddItemView(addItemViewPresented: $addViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
                 })
                 
                 if catagorized{
@@ -56,6 +57,7 @@ struct ItemView: View {
                     .padding(.top,pButton)
                     .sheet(isPresented: $tagViewPresented) {
                         EditTagView(editTagViewPresented: $tagViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
                     }
                 }
             }.frame(height:80)
