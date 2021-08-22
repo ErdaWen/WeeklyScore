@@ -79,6 +79,16 @@
 		0072757C26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
 		0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
+		0080F13C26D1F3DD00B10859 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13B26D1F3DD00B10859 /* Theme.swift */; };
+		0080F13D26D1F3DD00B10859 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13B26D1F3DD00B10859 /* Theme.swift */; };
+		0080F13F26D1F40E00B10859 /* SettingViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13E26D1F40E00B10859 /* SettingViewContent.swift */; };
+		0080F14026D1F40E00B10859 /* SettingViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13E26D1F40E00B10859 /* SettingViewContent.swift */; };
+		0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14126D21E2700B10859 /* weekStartDayPicker.swift */; };
+		0080F14326D21E2700B10859 /* weekStartDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14126D21E2700B10859 /* weekStartDayPicker.swift */; };
+		0080F14526D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */; };
+		0080F14626D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */; };
+		0080F14826D2206B00B10859 /* nightModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14726D2206B00B10859 /* nightModePicker.swift */; };
+		0080F14926D2206B00B10859 /* nightModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14726D2206B00B10859 /* nightModePicker.swift */; };
 		008DC8EF26AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
 		008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
 		008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
@@ -111,8 +121,6 @@
 		00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
 		00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
 		00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
-		00F645BD26D0CF1900C30E98 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F645BC26D0CF1900C30E98 /* DashboardView.swift */; };
-		00F645BE26D0CF1900C30E98 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F645BC26D0CF1900C30E98 /* DashboardView.swift */; };
 		C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1392692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
@@ -164,6 +172,11 @@
 		0072757426B7190300FAA32D /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0072757A26B7280600FAA32D /* CordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CordServer.swift; sourceTree = "<group>"; };
 		0072757D26B873F400FAA32D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		0080F13B26D1F3DD00B10859 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0080F13E26D1F40E00B10859 /* SettingViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewContent.swift; sourceTree = "<group>"; };
+		0080F14126D21E2700B10859 /* weekStartDayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekStartDayPicker.swift; sourceTree = "<group>"; };
+		0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = autoCompleteModePicker.swift; sourceTree = "<group>"; };
+		0080F14726D2206B00B10859 /* nightModePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nightModePicker.swift; sourceTree = "<group>"; };
 		008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
 		008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -180,7 +193,6 @@
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
-		00F645BC26D0CF1900C30E98 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		C88EC1352692B358005A4DAB /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		C88EC1382692B378005A4DAB /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		C88EC13B2692BB27005A4DAB /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
@@ -292,6 +304,19 @@
 			path = Servers;
 			sourceTree = "<group>";
 		};
+		0080F13A26D1F34F00B10859 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				008DC8F926AE7129009AB91C /* SettingView.swift */,
+				0080F13E26D1F40E00B10859 /* SettingViewContent.swift */,
+				0080F14126D21E2700B10859 /* weekStartDayPicker.swift */,
+				0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */,
+				0080F13B26D1F3DD00B10859 /* Theme.swift */,
+				0080F14726D2206B00B10859 /* nightModePicker.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		0092DD2F26BCC76B00750557 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +333,7 @@
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */,
+				0080F13A26D1F34F00B10859 /* Settings */,
 				009C422A26AF3D0D00A783F0 /* ScheduleView */,
 				009C422826AF3CBA00A783F0 /* ItemView */,
 				0026288A26BDF9FB00A755D2 /* SharedElement */,
@@ -365,7 +391,6 @@
 				005D077A26CC783600664008 /* DayBatchOperationView.swift */,
 				005D077726CC762700664008 /* DayBatchList.swift */,
 				002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */,
-				00F645BC26D0CF1900C30E98 /* DashboardView.swift */,
 			);
 			name = Sheets;
 			sourceTree = "<group>";
@@ -389,7 +414,6 @@
 			children = (
 				0034918726A7EE02001B8DBB /* Persistence.swift */,
 				009C422526AF3C4A00A783F0 /* Views */,
-				008DC8F926AE7129009AB91C /* SettingView.swift */,
 				C8BCDFFE26918079006E7D7E /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -558,6 +582,7 @@
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FA26AE7129009AB91C /* SettingView.swift in Sources */,
+				0080F14826D2206B00B10859 /* nightModePicker.swift in Sources */,
 				0026289626BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */,
 				0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
@@ -565,14 +590,15 @@
 				00AE2E3226A949A000F77898 /* Constants.swift in Sources */,
 				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				002628B626C750AD00A755D2 /* StatisticServer.swift in Sources */,
+				0080F14526D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */,
 				0072756626B32A7B00FAA32D /* ScheduleTileView.swift in Sources */,
+				0080F13F26D1F40E00B10859 /* SettingViewContent.swift in Sources */,
 				0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918826A7EE02001B8DBB /* Persistence.swift in Sources */,
 				008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */,
 				0026289926BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
-				00F645BD26D0CF1900C30E98 /* DashboardView.swift in Sources */,
 				0072757B26B7280600FAA32D /* CordServer.swift in Sources */,
 				002628AA26BF9F2D00A755D2 /* InputField.swift in Sources */,
 				0026289C26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
@@ -588,6 +614,7 @@
 				005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */,
 				008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
 				00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
+				0080F13C26D1F3DD00B10859 /* Theme.swift in Sources */,
 				0092DD3126BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
 				002628C026C8C52F00A755D2 /* ScheduleTileSSView.swift in Sources */,
 				005D077826CC762700664008 /* DayBatchList.swift in Sources */,
@@ -599,6 +626,7 @@
 				0092DD3726BCD11C00750557 /* ScheduleListPreviewView.swift in Sources */,
 				005D078426CCBFE200664008 /* EditTagView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
+				0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */,
 				002628A226BF911F00A755D2 /* NowLine.swift in Sources */,
 				002628B026C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */,
 				0092DD3426BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */,
@@ -623,6 +651,7 @@
 				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
 				008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */,
+				0080F14926D2206B00B10859 /* nightModePicker.swift in Sources */,
 				0026289726BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */,
 				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
 				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
@@ -630,14 +659,15 @@
 				00AE2E3326A949A000F77898 /* Constants.swift in Sources */,
 				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				002628B726C750AD00A755D2 /* StatisticServer.swift in Sources */,
+				0080F14626D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */,
 				0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */,
+				0080F14026D1F40E00B10859 /* SettingViewContent.swift in Sources */,
 				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
 				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
 				008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */,
 				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
 				0026289A26BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
 				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
-				00F645BE26D0CF1900C30E98 /* DashboardView.swift in Sources */,
 				0072757C26B7280600FAA32D /* CordServer.swift in Sources */,
 				002628AB26BF9F2D00A755D2 /* InputField.swift in Sources */,
 				0026289D26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
@@ -653,6 +683,7 @@
 				005D077F26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */,
 				008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
 				00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
+				0080F13D26D1F3DD00B10859 /* Theme.swift in Sources */,
 				0092DD3226BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
 				002628C126C8C52F00A755D2 /* ScheduleTileSSView.swift in Sources */,
 				005D077926CC762700664008 /* DayBatchList.swift in Sources */,
@@ -664,6 +695,7 @@
 				0092DD3826BCD11C00750557 /* ScheduleListPreviewView.swift in Sources */,
 				005D078526CCBFE200664008 /* EditTagView.swift in Sources */,
 				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
+				0080F14326D21E2700B10859 /* weekStartDayPicker.swift in Sources */,
 				002628A326BF911F00A755D2 /* NowLine.swift in Sources */,
 				002628B126C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */,
 				0092DD3526BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */,

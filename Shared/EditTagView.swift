@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EditTagView: View {
+    @AppStorage("nightMode") private var nightMode = true
+
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Binding var editTagViewPresented:Bool
     
@@ -22,11 +24,11 @@ struct EditTagView: View {
     let rColor:CGFloat = 8
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
-    let fsField:CGFloat = 18
+    let fsField:CGFloat = 15
     let mVer:CGFloat = 22
     let mHor:CGFloat = 10
-    let hField:CGFloat = 35
-    let sColor:CGFloat = 25
+    let hField:CGFloat = 30
+    let sColor:CGFloat = 20
     
     func saveTags(){
         for r in 0...6{
@@ -105,6 +107,8 @@ struct EditTagView: View {
                     inputNames[r]=tags[r].name
                 }
             }
+            .preferredColorScheme(nightMode ? nil : .light)
+
         }
     }
 }

@@ -12,6 +12,8 @@ struct DayBatchOperationView: View {
         case nothing, allFail, allDone, partDone
     }
     
+    @AppStorage("nightMode") private var nightMode = true
+
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
     
@@ -228,6 +230,7 @@ struct DayBatchOperationView: View {
         .onAppear(){
             dayCopyTo = DateServer.addOneDay(date:DateServer.startOfToday())
         }
+        .preferredColorScheme(nightMode ? nil : .light)
     }
 }
 

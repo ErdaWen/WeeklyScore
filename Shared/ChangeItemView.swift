@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ChangeItemView: View {
-    
+    @AppStorage("nightMode") private var nightMode = true
+
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -314,6 +315,8 @@ struct ChangeItemView: View {
             inputTitle = item.title
             inputDurationBased = item.durationBased
         }
+        .preferredColorScheme(nightMode ? nil : .light)
+
     }
 }
 

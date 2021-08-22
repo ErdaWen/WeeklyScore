@@ -10,6 +10,8 @@ import SwiftUI
 struct ChangeScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
+    @AppStorage("nightMode") private var nightMode = true
+
     
     
     @FetchRequest(
@@ -394,6 +396,7 @@ struct ChangeScheduleView: View {
         .onAppear(){
             initValues()
         }
+        .preferredColorScheme(nightMode ? nil : .light)
         
     }
 }

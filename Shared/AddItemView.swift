@@ -10,6 +10,7 @@ import UIKit
 
 
 struct AddItemView: View {
+    @AppStorage("nightMode") private var nightMode = true
 
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var propertiesModel:PropertiesModel
@@ -283,7 +284,8 @@ struct AddItemView: View {
                     Spacer()
                 }.padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
             }
-        }
+        } .preferredColorScheme(nightMode ? nil : .light)
+
         //}
     }
 }
