@@ -74,7 +74,9 @@ struct ItemView: View {
                         //MARK: Archive button
                         HStack(alignment: .center, spacing: mButtonText){
                             FloatButton(systemName: "archivebox", sButton: sButton) {
+                                withAnimation(.default){
                                 showArchive.toggle()
+                                }
                                 UserDefaults.standard.set(showArchive, forKey: "showArchivedItem")
                             }
                             Text( showArchive ? "Hide\nArchived" : "Show\nArchived")
@@ -88,7 +90,9 @@ struct ItemView: View {
                         //MARK: Tag Button
                         HStack(alignment: .center, spacing: mButtonText){
                             FloatButton(systemName: catagorized ? "tag.slash" : "tag", sButton: sButton) {
+                                withAnimation(.default){
                                     catagorized.toggle()
+                                }
                                     UserDefaults.standard.set(catagorized, forKey: "itemCatagorized")
                                 }
                             
@@ -108,7 +112,7 @@ struct ItemView: View {
             } //end bottom button Vstack
             
             
-        }.animation(.default)
+        }
         // end whole view ZStack
         
         

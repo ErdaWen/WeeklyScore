@@ -52,7 +52,6 @@ struct ItemViewAll: View {
                             .font(.system(size: fsTitle))
                             .foregroundColor(Color("text_black"))
                             .fontWeight(.light)
-                            .animation(.default)
                     }
                     
                 }

@@ -39,11 +39,10 @@ struct ItemViewCatagorizedSection: View {
             }
             .padding(.leading, 5)
             .onTapGesture {
+                withAnimation(.default){
                 showItems.toggle()
+                }
             }
-            
-            
-            .animation(.default)
             
             if showItems {
                 let itemFiltered = items.filter { item in

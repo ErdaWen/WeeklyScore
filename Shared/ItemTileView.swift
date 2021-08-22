@@ -102,7 +102,9 @@ struct ItemTileView: View {
                         //MARK: Show detail/rough statisitc
                         if showDetail{
                             Button {
+                                withAnimation(.default){
                                 showDetail = false
+                                }
                             } label: {
                                 Image(systemName: "chevron.up")
                                     .resizable().scaledToFit()
@@ -180,7 +182,9 @@ struct ItemTileView: View {
                 
             } // End center tile ZStack
             .onTapGesture {
-                showDetail = true
+                withAnimation(.default) {
+                    showDetail = true
+                }
             }
             .onChange(of: showDetail) { _ in
                 (minTot, checkTot, ptsTot, rate, dates, value) = StatisticServer.goThroughItem(item: item)
@@ -192,7 +196,6 @@ struct ItemTileView: View {
             
         }//end everything Hstack
         .frame(height: showDetail ? hTilesDetail : hTiles)
-        .animation(.default)
     }
 }
 
