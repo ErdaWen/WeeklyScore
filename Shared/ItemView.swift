@@ -66,7 +66,7 @@ struct ItemView: View {
                 ZStack(){
                     //MARK: Background
                     Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.8),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
                     
                     //MARK: Buttons on top
                     HStack(spacing:0){

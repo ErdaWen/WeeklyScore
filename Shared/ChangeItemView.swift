@@ -262,6 +262,7 @@ struct ChangeItemView: View {
                         item.hidden.toggle()
                         do{
                             try viewContext.save()
+                            propertiesModel.dumUpdate.toggle()
                             print("saved")
                             changeItemViewPresented = false
                         } catch {
@@ -273,7 +274,7 @@ struct ChangeItemView: View {
                             Image(systemName: "archivebox")
                                 .resizable().scaledToFit()
                                 .foregroundColor(Color("text_blue")).frame(height:20)
-                            Text("Delete Habit...")
+                            Text(item.hidden ? "Resume Habit" : "Archive Habit")
                                 .foregroundColor(Color("text_blue"))
                                 .font(.system(size: 20))
                         }

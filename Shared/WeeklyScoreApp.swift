@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct WeeklyScoreApp: App {
+    @AppStorage("nightMode") private var nightMode = true
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -17,6 +18,7 @@ struct WeeklyScoreApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(Initializer())
                 .environmentObject(PropertiesModel())
+                .preferredColorScheme(nightMode ? nil : .light)
         }
     }
 }
