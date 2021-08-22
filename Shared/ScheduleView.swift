@@ -17,7 +17,7 @@ struct ScheduleView: View {
     // week offset
     @State var weekFromNow = 0
     // day offset
-    @State var dayFromDay1 = -1
+    @State var dayFromDay1:Int
     
     // String arrays for title and day picker dispaly
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
@@ -30,6 +30,20 @@ struct ScheduleView: View {
     let mPicker:CGFloat = 40
     let hPicker:CGFloat = 45
     let minDragDist:CGFloat = 40
+    
+    init(){
+        self.dayFromDay1 = -1
+        if UserDefaults.standard.bool(forKey: "onDayView") {
+            for r in 0...6 {
+                if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
+                    self._dayFromDay1 = State(initialValue: r)
+                }
+            }
+        }
+        
+    }
+    
+    
     
     func updateDate() {
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
@@ -96,13 +110,15 @@ struct ScheduleView: View {
             Spacer()
         } // end all VStack
         .onAppear(){
-            if UserDefaults.standard.bool(forKey: "onDayView") {
-                for r in 0...6 {
-                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
-                        dayFromDay1 = r
-                    }
-                }
-            }
+//            if UserDefaults.standard.bool(forKey: "onDayView") {
+//                for r in 0...6 {
+//                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
+//                        withAnimation(.none){
+//                            dayFromDay1 = r
+//                        }
+//                    }
+//                }
+//            }
             updateDate()
         }
         .animation(.default)

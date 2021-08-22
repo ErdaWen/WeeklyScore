@@ -18,11 +18,11 @@ struct SettingViewContent: View {
     var body: some View {
         ScrollView{
             VStack(alignment:.leading,spacing:10){
-                Spacer().frame(height:10)
+                Spacer().frame(height:15)
                 weekStartDayPicker()// end picker
-                Spacer().frame(height:10)
+                Spacer().frame(height:15)
                 autoCompleteModePicker()
-                Spacer().frame(height:10)
+                Spacer().frame(height:15)
                 nightModePicker()
                 
             }//end all Zstack
