@@ -122,6 +122,7 @@
 		00C59BE026D605B8008A47D3 /* WeeklyScoreWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */; };
 		00C59BE126D605B8008A47D3 /* WeeklyScoreWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */; };
 		00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BEA26D9A223008A47D3 /* CloudKit.framework */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
@@ -228,6 +229,8 @@
 		00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WeeklyScoreWidget.intentdefinition; sourceTree = "<group>"; };
 		00C59BDD26D605B8008A47D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00C59BDF26D605B8008A47D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00C59BE926D9A211008A47D3 /* WeeklyScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeeklyScore.entitlements; sourceTree = "<group>"; };
+		00C59BEA26D9A223008A47D3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.5.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
@@ -258,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +449,7 @@
 		00C59BD426D605B5008A47D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00C59BEA26D9A223008A47D3 /* CloudKit.framework */,
 				00C59BD526D605B5008A47D3 /* WidgetKit.framework */,
 				00C59BD726D605B5008A47D3 /* SwiftUI.framework */,
 			);
@@ -465,6 +470,7 @@
 		C8BCDFF626918075006E7D7E = {
 			isa = PBXGroup;
 			children = (
+				00C59BE926D9A211008A47D3 /* WeeklyScore.entitlements */,
 				0034918A26A7F036001B8DBB /* Servers */,
 				C8BCE027269269BF006E7D7E /* Data */,
 				C8BCE01F269181B4006E7D7E /* ViewModels */,
@@ -991,6 +997,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeeklyScore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AXW9A82X4P;
 				ENABLE_PREVIEWS = YES;
@@ -1014,6 +1021,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeeklyScore.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AXW9A82X4P;
 				ENABLE_PREVIEWS = YES;

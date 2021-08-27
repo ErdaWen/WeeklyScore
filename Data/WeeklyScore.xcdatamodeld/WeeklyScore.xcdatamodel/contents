@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="checkedTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="defaultBeginTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="defaultBeginTime" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
         <attribute name="defaultMinutes" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="defaultReminder" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="defaultReminderTime" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -10,7 +10,7 @@
         <attribute name="durationBased" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="hidden" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="lastUse" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastUse" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
         <attribute name="minutesTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scoreTotal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String" defaultValueString=""/>
@@ -19,9 +19,9 @@
         <relationship name="tags" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="items" inverseEntity="Tag"/>
     </entity>
     <entity name="Schedule" representedClassName="Schedule" syncable="YES">
-        <attribute name="beginTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="beginTime" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
         <attribute name="checked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="endTime" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
         <attribute name="hidden" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="journal" optional="YES" attributeType="String"/>
@@ -36,10 +36,10 @@
         <relationship name="items" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="schedules" inverseEntity="Item"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
-        <attribute name="colorName" attributeType="String"/>
+        <attribute name="colorName" attributeType="String" defaultValueString="tag_color_red"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="lastUse" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="lastUse" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="New Group"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="tags" inverseEntity="Item"/>
     </entity>
     <elements>
