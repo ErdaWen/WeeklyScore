@@ -106,10 +106,14 @@ struct AddScheduleView: View {
             if itemsFiltered.count == 0 {
                 VStack(alignment:.center){
                     HStack{
-                        Button(action:{ addScheduleViewPresented = false}, label: {
-                            Text("Cancel")
-                                .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar))
-                        })
+                        Button {
+                            addScheduleViewPresented = false
+                        } label: {
+                            Image(systemName: "xmark.circle")
+                                .resizable().scaledToFit()
+                                .foregroundColor(Color("text_black"))
+                                .frame(height:25)
+                        }
                         Spacer()
                     }.padding(mNavBar)
                     Spacer()

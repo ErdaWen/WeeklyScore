@@ -51,7 +51,7 @@ struct ItemView: View {
                 })
                 
                 if catagorized{
-                    FloatButton(systemName: "tag", sButton: sButton) {
+                    FloatButton(systemName: "folder", sButton: sButton) {
                         tagViewPresented = true
                     }
                     .padding(.top,pButton)
@@ -75,7 +75,7 @@ struct ItemView: View {
                         Spacer()
                         //MARK: Archive button
                         HStack(alignment: .center, spacing: mButtonText){
-                            FloatButton(systemName: "archivebox", sButton: sButton) {
+                            FloatButton(systemName: showArchive ? "archivebox.fill" : "archivebox", sButton: sButton) {
                                 withAnimation(.default){
                                 showArchive.toggle()
                                 }
@@ -91,7 +91,7 @@ struct ItemView: View {
                         Spacer()
                         //MARK: Tag Button
                         HStack(alignment: .center, spacing: mButtonText){
-                            FloatButton(systemName: catagorized ? "tag.slash" : "tag", sButton: sButton) {
+                            FloatButton(systemName: catagorized ? "folder.fill" : "folder", sButton: sButton) {
                                 withAnimation(.default){
                                     catagorized.toggle()
                                 }
@@ -99,12 +99,12 @@ struct ItemView: View {
                                 }
                             
 
-                            Text( catagorized ? "Hide\nTag" : "Show\nTag")
+                            Text( catagorized ? "Hide\nCatagory" : "Show\nCatagory")
                                 .font(.system(size: fsSub))
                                 .fontWeight(.light)
                                 .foregroundColor(Color("text_black"))
                                 .multilineTextAlignment(.leading)
-                                .frame(width:45)
+                                .frame(width:70)
 
                         }
                         Spacer()

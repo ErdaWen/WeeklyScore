@@ -91,201 +91,167 @@ struct AddItemView: View {
         return conflict
     }
     
+    func genNewTag(){
+        let newTag = Tag(context: viewContext)
+        newTag.id = UUID()
+        newTag.name = "Unamed Catagory"
+        newTag.colorName = "tag_color_red"
+        do{
+            try viewContext.save()
+            print("New tag generated")
+        } catch {
+            print("Cannot generate new tag")
+            print(error)
+        }
+    }
+    
     var body: some View {
         VStack{
-            //MARK: Navigation Bar
-            HStack{
-                Button(action:{ addItemViewPresented = false}
-                       , label: {
-                        Text("Discard").foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
-                       })
-                Spacer()
-                Text("New Habit")
-                    .font(.system(size: fsNavBar))
-                
-                Spacer()
-                Button(action:{
-                    if checkItemConflict() {
-                        showAlert = true
-                    } else {
-                        saveItem()
-                    }
-                }, label: {
-                    Text("   Add").foregroundColor((inputTitle.isEmpty || inputTitleIcon.isEmpty) ? Color("text_black").opacity(0.5) : Color("text_blue"))
-                        .font(.system(size: fsNavBar)).fontWeight(.semibold)
-                    
-                })
-                .disabled(inputTitle.isEmpty || inputTitleIcon.isEmpty)
-                .alert(isPresented: $showAlert) {
-                    switch activeAlert{
-                    case .noIcon:
-                        return Alert(title: Text("❌ No Icon"), message: Text("Select an Icon...") , dismissButton:.default(Text("OK"), action: {
-                            showAlert = false
-                        }))
-                    case .conflict:
-                        return Alert(title: Text("❌ Conflict"), message: Text("There is already a habit with a same title"), dismissButton:.default(Text("OK"), action: {
-                            showAlert = false
-                        }))
-                    }// end switch
-                }// end alert
-            }.padding(mNavBar)
-            
-            ScrollView{
-                VStack(spacing:mVer){
-                    HStack(spacing:mHor){
-                        //MARK: Icon
-                        InputField(title: "Icon", alignment: .center, color: Color(tags[tagid].colorName), fieldHeight: hField, content: {
-                            EmojiTextField(text: $inputTitleIcon, placeholder: "")
-                                .font(.system(size: 50))
-                                .foregroundColor(Color("text_black"))
-                                .frame(width:20,height: 20)
-                                .padding(12.5)
-                                .onChange(of: inputTitleIcon, perform: { value in
-                                    if let lastChar = inputTitleIcon.last{
-                                        inputTitleIcon = String(lastChar)
-                                    }
-                                    if inputTitleIcon.isEmpty{
-                                        inputTitleIcon = "❓"
-                                    }
-                                })
-                        })
-                        .frame(width:hField)
-                        
-                        // MARK:Title
-                        InputField(title: "Title", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight: hField) {
-                            TextField("New Habit",text:$inputTitle)
-                                .font(.system(size: 20))
-                                .foregroundColor(Color("text_black"))
-                                .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
-                        }
-                    }.animation(.default)
-                    
-                    
-                    // MARK:Habit Type: Duration/time-based picker
-                    ZStack(){
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color("background_grey"))
-                        HStack{
-                            if !inputDurationBased {Spacer()}
-                            RoundedRectangle(cornerRadius: 8)
-                                .foregroundColor(Color(tags[tagid].colorName)).opacity(0.3)
-                                .frame(width: 150, height: 30)
-                                .padding(.leading, 5)
-                                .padding(.trailing, 5)
-                            if inputDurationBased {Spacer()}
-                        }.animation(.default)
-                        HStack(){
-                            Button {
-                                inputDurationBased = true
-                            } label: {
-                                Text("Duration")
-                                    .font(.system(size:15))
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("text_black"))
-                                    .frame(width: 150, alignment: .center)
-                            }
-                            Button(action: {
-                                inputDurationBased = false
-                            }, label: {
-                                Text("Hit")
-                                    .font(.system(size:15))
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("text_black"))
-                                    .frame(width: 150, alignment: .center)
-                            })
-                        }
-                    }.frame(width: 300, height: 40,alignment: .center)
-                    
-                    
-                    //                    HStack(spacing:10){
-                    //                        // MARK: Default score
-                    //                        VStack(alignment: .leading, spacing: 8.0){
-                    //                            Text("Default score")
-                    //                                .font(.system(size: 15))
-                    //                                .foregroundColor(Color("text_black"))
-                    //                                .fontWeight(.light)
-                    //                            ZStack(alignment: .center){
-                    //                                RoundedRectangle(cornerRadius: 8.0)
-                    //                                    .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                    //                                HStack{
-                    //                                    Text("\(inputDefaultScore)")
-                    //                                        .font(.system(size: 20))
-                    //                                        .foregroundColor(Color("text_black"))
-                    //                                    Spacer()
-                    //                                    Stepper("", value: $inputDefaultScore, in: 0...20)
-                    //                                        .frame(width:100,height: 50)
-                    //                                }
-                    //                                .padding(.leading,10)
-                    //                                .padding(.trailing,10)
-                    //                            }
-                    //                        }
-                    //
-                    //                        // MARK:Default minutes
-                    //                        if inputDurationBased{
-                    //                            VStack(alignment: .leading, spacing: 7.0){
-                    //                                Text("Default minuite")
-                    //                                    .font(.system(size: 15))
-                    //                                    .foregroundColor(Color("text_black"))
-                    //                                    .fontWeight(.light)
-                    //                                ZStack(alignment: .center){
-                    //                                    RoundedRectangle(cornerRadius: 8.0)
-                    //                                        .stroke(Color(tags[tagid].colorName),style:StrokeStyle(lineWidth: 1.5))
-                    //                                    TextField("Minute", text: $inputDefaultMinutesString)
-                    //                                        // the input is a string
-                    //                                        .keyboardType(.numberPad)
-                    //                                        // update actual var here
-                    //                                        .onChange(of: inputDefaultMinutesString, perform: { value in
-                    //                                            if let inputnumber = Double(inputDefaultMinutesString) {
-                    //                                                // protect the number being Int
-                    //                                                inputDefaultMinutesString = String(Int(inputnumber))
-                    //                                                inputDefaultMinutes = Int64(inputnumber)
-                    //                                            } else {
-                    //                                                inputDefaultMinutesString = "0"
-                    //                                                inputDefaultMinutes = 0
-                    //                                            }
-                    //                                        })
-                    //                                        .font(.system(size: 20))
-                    //                                        .foregroundColor(Color("text_black"))
-                    //                                        .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
-                    //                                }
-                    //                                .frame(height: 50)
-                    //                            }
-                    //                        }
-                    //                    }//End Default settings
-                    //                    .animation(.default)
-                    
-                    //MARK: Tags
-                    InputField(title: "Choose a tag", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
-                        
-                        ZStack(alignment:.bottomTrailing){
-                            Picker("",selection:$tagid){
-                                ForEach(0...tags.count-1, id:\.self) { r in
-                                    HStack(spacing:10.0){
-                                        Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
-                                        Text(tags[r].name)
-                                            .font(.system(size: 20))
-                                            .fontWeight(.light)
-                                            .foregroundColor(Color("text_black"))
-                                    }.tag(r)
-                                }
-                            }.pickerStyle(WheelPickerStyle())
-                            
-                            FloatButton(systemName: "rectangle.and.pencil.and.ellipsis", sButton: 30) {
-                                tagViewPresented = true
-                            }
-                            .padding(.trailing, 10)
-                            .padding(.bottom, 10)
-                            .sheet(isPresented: $tagViewPresented) {
-                                EditTagView(editTagViewPresented: $tagViewPresented)
-                                    .environment(\.managedObjectContext,self.viewContext)
-                            }
-                        }// end choose tag Zstack
-                    })
+            if tags.count>0{
+                //MARK: Navigation Bar
+                HStack{
+                    Button(action:{ addItemViewPresented = false}
+                           , label: {
+                            Text("Discard").foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
+                           })
+                    Spacer()
+                    Text("New Habit")
+                        .font(.system(size: fsNavBar))
                     
                     Spacer()
-                }.padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
+                    Button(action:{
+                        if checkItemConflict() {
+                            showAlert = true
+                        } else {
+                            saveItem()
+                        }
+                    }, label: {
+                        Text("   Add").foregroundColor((inputTitle.isEmpty || inputTitleIcon.isEmpty) ? Color("text_black").opacity(0.5) : Color("text_blue"))
+                            .font(.system(size: fsNavBar)).fontWeight(.semibold)
+                        
+                    })
+                    .disabled(inputTitle.isEmpty || inputTitleIcon.isEmpty)
+                    .alert(isPresented: $showAlert) {
+                        switch activeAlert{
+                        case .noIcon:
+                            return Alert(title: Text("❌ No Icon"), message: Text("Select an Icon...") , dismissButton:.default(Text("OK"), action: {
+                                showAlert = false
+                            }))
+                        case .conflict:
+                            return Alert(title: Text("❌ Conflict"), message: Text("There is already a habit with a same title"), dismissButton:.default(Text("OK"), action: {
+                                showAlert = false
+                            }))
+                        }// end switch
+                    }// end alert
+                }.padding(mNavBar)
+                
+                ScrollView{
+                    VStack(spacing:mVer){
+                        HStack(spacing:mHor){
+                            //MARK: Icon
+                            InputField(title: "Icon", alignment: .center, color: Color(tags[tagid].colorName), fieldHeight: hField, content: {
+                                EmojiTextField(text: $inputTitleIcon, placeholder: "")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(Color("text_black"))
+                                    .frame(width:20,height: 20)
+                                    .padding(12.5)
+                                    .onChange(of: inputTitleIcon, perform: { value in
+                                        if let lastChar = inputTitleIcon.last{
+                                            inputTitleIcon = String(lastChar)
+                                        }
+                                        if inputTitleIcon.isEmpty{
+                                            inputTitleIcon = "❓"
+                                        }
+                                    })
+                            })
+                            .frame(width:hField)
+                            
+                            // MARK:Title
+                            InputField(title: "Title", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight: hField) {
+                                TextField("New Habit",text:$inputTitle)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(Color("text_black"))
+                                    .padding(.init(top: 3, leading: 5, bottom: 3, trailing: 5))
+                            }
+                        }.animation(.default)
+                        
+                        
+                        // MARK:Habit Type: Duration/time-based picker
+                        ZStack(){
+                            RoundedRectangle(cornerRadius: 8)
+                                .foregroundColor(Color("background_grey"))
+                            HStack{
+                                if !inputDurationBased {Spacer()}
+                                RoundedRectangle(cornerRadius: 8)
+                                    .foregroundColor(Color(tags[tagid].colorName)).opacity(0.3)
+                                    .frame(width: 150, height: 30)
+                                    .padding(.leading, 5)
+                                    .padding(.trailing, 5)
+                                if inputDurationBased {Spacer()}
+                            }.animation(.default)
+                            HStack(){
+                                Button {
+                                    inputDurationBased = true
+                                } label: {
+                                    Text("Duration")
+                                        .font(.system(size:15))
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("text_black"))
+                                        .frame(width: 150, alignment: .center)
+                                }
+                                Button(action: {
+                                    inputDurationBased = false
+                                }, label: {
+                                    Text("Hit")
+                                        .font(.system(size:15))
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("text_black"))
+                                        .frame(width: 150, alignment: .center)
+                                })
+                            }
+                        }.frame(width: 300, height: 40,alignment: .center)
+                        
+                        //MARK: Tags
+                        InputField(title: "Choose a catogory", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
+                            
+                            ZStack(alignment:.bottomTrailing){
+                                Picker("",selection:$tagid){
+                                    ForEach(0...tags.count-1, id:\.self) { r in
+                                        HStack(spacing:10.0){
+                                            Rectangle().frame(width: 20, height: 20).foregroundColor(Color(tags[r].colorName)).cornerRadius(8.0)
+                                            Text(tags[r].name)
+                                                .font(.system(size: 20))
+                                                .fontWeight(.light)
+                                                .foregroundColor(Color("text_black"))
+                                        }.tag(r)
+                                    }
+                                }.pickerStyle(WheelPickerStyle())
+                                
+                                FloatButton(systemName: "rectangle.and.pencil.and.ellipsis", sButton: 30) {
+                                    tagViewPresented = true
+                                }
+                                .padding(.trailing, 10)
+                                .padding(.bottom, 10)
+                                .sheet(isPresented: $tagViewPresented) {
+                                    EditTagView(editTagViewPresented: $tagViewPresented)
+                                        .environment(\.managedObjectContext,self.viewContext)
+                                }
+                            }// end choose tag Zstack
+                        })
+                        
+                        Spacer()
+                    }.padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
+                }
+            }// end if
+            
+            
+        } // end everything VStack
+        .onAppear(){
+            if tags.count == 0{
+                genNewTag()
             }
-        } .preferredColorScheme(nightMode ? nil : .light)
+        }
+        .preferredColorScheme(nightMode ? nil : .light)
 
         //}
     }

@@ -29,7 +29,7 @@ struct EditTagView: View {
     func genNewTag(){
         let newTag = Tag(context: viewContext)
         newTag.id = UUID()
-        newTag.name = "Unamed"
+        newTag.name = "Unamed Catagory"
         newTag.colorName = "tag_color_red"
         do{
             try viewContext.save()
@@ -54,7 +54,7 @@ struct EditTagView: View {
                         .frame(height:25)
                 }
                 Spacer()
-                Text("Manage Color Tags")
+                Text("Manage Catagories")
                     .font(.system(size: fsNavBar))
                 Spacer()
                 Spacer().frame(width:30)

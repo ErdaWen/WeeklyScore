@@ -19,9 +19,9 @@ struct ColorTagTileView: View {
     @State var showDeleteAlert = false
     @State var inputColorName = ""
     let mHor:CGFloat = 10
-    let sColor:CGFloat = 20
+    let sColor:CGFloat = 25
     let rColor:CGFloat = 8
-    let hField:CGFloat = 30
+    let hField:CGFloat = 35
     let fsField:CGFloat = 15
     let colorNames = ["Red","Orange","Yellow","Green","Cyan","Blue","Magenta"]
     let colorSystemNames = ["tag_color_red","tag_color_orange","tag_color_yellow","tag_color_green","tag_color_cyan","tag_color_blue","tag_color_magenta"]
@@ -55,9 +55,15 @@ struct ColorTagTileView: View {
         HStack(spacing:mHor){
             Picker(selection: $inputColorName,
                    label:
-                    RoundedRectangle(cornerRadius: rColor)
-                        .foregroundColor(Color(tag.colorName))
-                        .frame(width:sColor, height:sColor)
+                    ZStack{
+                        RoundedRectangle(cornerRadius: rColor)
+                            .foregroundColor(Color(tag.colorName))
+                        Image(systemName: "chevron.down")
+                            .resizable().scaledToFit()
+                            .foregroundColor(Color("background_white"))
+                            .padding(6)
+                            .padding(.top,3)
+                    }.frame(width:sColor, height:sColor)
                    ) {
                 ForEach (0..<colorNames.count,id: \.self){ r in
                     Text(colorNames[r])

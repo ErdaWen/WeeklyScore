@@ -232,7 +232,7 @@ struct ChangeItemView: View {
                         
  
                         //MARK: Tags
-                        InputField(title: "Choose a tag", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
+                        InputField(title: "Choose a catagory", alignment: .leading, color: Color(tags[tagid].colorName), fieldHeight:nil, content: {
                             ZStack(alignment:.bottomTrailing){
                                 Picker("",selection:$tagid){
                                     ForEach(0...tags.count-1, id:\.self) { r in
