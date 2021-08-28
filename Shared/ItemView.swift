@@ -51,7 +51,7 @@ struct ItemView: View {
                 })
                 
                 if catagorized{
-                    FloatButton(systemName: "rectangle.and.pencil.and.ellipsis", sButton: 30) {
+                    FloatButton(systemName: "tag", sButton: sButton) {
                         tagViewPresented = true
                     }
                     .padding(.top,pButton)

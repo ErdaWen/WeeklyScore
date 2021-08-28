@@ -40,7 +40,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastUse" attributeType="Date" defaultDateTimeInterval="651794400" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="New Group"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="tags" inverseEntity="Item"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="tags" inverseEntity="Item"/>
     </entity>
     <elements>
         <element name="Item" positionX="-18" positionY="27" width="128" height="269"/>
