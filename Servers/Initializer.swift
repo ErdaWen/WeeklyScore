@@ -15,7 +15,6 @@ class Initializer: ObservableObject{
         checkLoadedData()
     }
     
-    
     func checkLoadedData() {
         let status = UserDefaults.standard.bool(forKey: Constants.isDataPreloaded)
         if status == false {
@@ -55,7 +54,7 @@ class Initializer: ObservableObject{
         UserDefaults.standard.set(12.5, forKey: "listScaleFactor")
         UserDefaults.standard.set(false, forKey: "previewMode")
         UserDefaults.standard.set(true, forKey: "showArchivedItem")
-        UserDefaults.standard.set(false, forKey: "itemCatagorized")
+        UserDefaults.standard.set(true, forKey: "itemCatagorized")
 
     }
     
@@ -80,17 +79,17 @@ class Initializer: ObservableObject{
                 let item_study = Item(context: managedObjectContext)
                 item_study.id = UUID()
                 item_study.hidden = false
-                item_study.titleIcon = "🎲"
-                item_study.title = "Learn Quantum Mechanics!"
+                item_study.titleIcon = "🗞"
+                item_study.title = "Read Papers!"
                 item_study.durationBased = true
                 item_study.defaultScore = 20
                 item_study.defaultMinutes = 180
                 item_study.defaultBeginTime = DateServer.startOfToday() + 32400
                 item_study.defaultReminder = false
                 item_study.defaultReminderTime = 0
-                item_study.checkedTotal = 0
-                item_study.minutesTotal = 0
-                item_study.scoreTotal = 0
+                item_study.checkedTotal = 1
+                item_study.minutesTotal = 60
+                item_study.scoreTotal = 10
                 item_study.lastUse = Date()
                 item_study.tags = tag_red
                 
@@ -122,9 +121,9 @@ class Initializer: ObservableObject{
                 item_getup.defaultBeginTime = DateServer.startOfToday() + 28800
                 item_getup.defaultReminder = false
                 item_getup.defaultReminderTime = 0
-                item_getup.checkedTotal = 0
+                item_getup.checkedTotal = 1
                 item_getup.minutesTotal = 0
-                item_getup.scoreTotal = 0
+                item_getup.scoreTotal = 5
                 item_getup.lastUse = Date()
                 item_getup.tags = tag_blue
                 
@@ -133,12 +132,12 @@ class Initializer: ObservableObject{
                 schedule_study.items = item_study
                 schedule_study.hidden = false
                 schedule_study.beginTime = DateServer.startOfToday() + 32400
-                schedule_study.endTime = DateServer.startOfToday() + 43200
-                schedule_study.score = 20
-                schedule_study.checked = false
-                schedule_study.statusDefault = true
-                schedule_study.minutesGained = 0
-                schedule_study.scoreGained = 0
+                schedule_study.endTime = DateServer.startOfToday() + 36000
+                schedule_study.score = 10
+                schedule_study.checked = true
+                schedule_study.statusDefault = false
+                schedule_study.minutesGained = 60
+                schedule_study.scoreGained = 10
                 schedule_study.reminder = false
                 schedule_study.reminderTime = 0
                 
@@ -149,15 +148,14 @@ class Initializer: ObservableObject{
                 schedule_getup.beginTime = DateServer.startOfToday() + 28800
                 schedule_getup.endTime = DateServer.startOfToday() + 28800
                 schedule_getup.score = 5
-                schedule_getup.checked = false
-                schedule_getup.statusDefault = true
+                schedule_getup.checked = true
+                schedule_getup.statusDefault = false
                 schedule_getup.minutesGained = 0
-                schedule_getup.scoreGained = 0
+                schedule_getup.scoreGained = 5
                 schedule_getup.reminder = false
                 schedule_getup.reminderTime = 0
                     
             }
-            
             
         } catch {
             print(error)

@@ -31,6 +31,13 @@ struct ItemViewAll: View {
                 let itemFiltered = items.filter { item in
                     return item.hidden == false
                 }
+                if itemFiltered.count == 0 && !showArchive{
+                    Spacer().frame(height:10)
+                    Text("📦 No active habit. Show archived to view all habits.")
+                        .font(.system(size: fsTitle))
+                        .foregroundColor(Color("text_black"))
+                        .fontWeight(.light)
+                }
                 ForEach(itemFiltered) { item in
                     ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                         .padding(.horizontal, mHorizon)
@@ -48,7 +55,7 @@ struct ItemViewAll: View {
                             .padding(.horizontal, mHorizon)
                     }
                     } else {
-                        Text("No archived habits")
+                        Text("📦 No archived habits.")
                             .font(.system(size: fsTitle))
                             .foregroundColor(Color("text_black"))
                             .fontWeight(.light)

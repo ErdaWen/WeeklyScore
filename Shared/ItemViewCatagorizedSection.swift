@@ -45,25 +45,49 @@ struct ItemViewCatagorizedSection: View {
             }
             
             if showItems {
-                let itemFiltered = items.filter { item in
-                    return item.hidden == false
-                }
-                ForEach(itemFiltered) { item in
-                    ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
-                }
                 
-                //MARK: Habits Archived
-                
-                if showArchive{
+                if items.count == 0{
+                    HStack{
+                        Spacer().frame(width:20)
+                        Text("🌵 No habit in this catagory.")
+                            .font(.system(size: 15))
+                            .foregroundColor(Color("text_black"))
+                            .fontWeight(.light)
+                    }
+                    
+                } else {
                     let itemFiltered = items.filter { item in
-                        return item.hidden == true
+                        return item.hidden == false
+                    }
+                    
+                    if itemFiltered.count == 0 && !showArchive{
+                        HStack{
+                            Spacer().frame(width:20)
+                            Text("📦 No active habit.")
+                            .font(.system(size: 15))
+                            .foregroundColor(Color("text_black"))
+                            .fontWeight(.light)
+                        }
                     }
                     
                     ForEach(itemFiltered) { item in
                         ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
                     }
-    
-                }//end show archive
+                    
+                    //MARK: Habits Archived
+                    
+                    if showArchive{
+                        let itemFiltered = items.filter { item in
+                            return item.hidden == true
+                        }
+                        
+                        ForEach(itemFiltered) { item in
+                            ItemTileView(item: item,dumUpdate: propertiesModel.dumUpdate)
+                        }
+        
+                    }//end show archive
+                }// end if no iten
+   
             }//end show items
             
         }

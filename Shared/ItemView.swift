@@ -34,9 +34,17 @@ struct ItemView: View {
         ZStack(alignment: .top){
             //MARK: Add Habit Button
             if !catagorized {
-                ItemViewAll(items: items, showArchive: showArchive)
+                if items.count == 0{
+                    NoItemView(catagorized:catagorized)
+                } else {
+                    ItemViewAll(items: items, showArchive: showArchive)
+                }
             } else {
-                ItemViewCatagorized(items: items, showArchive: showArchive)
+                if items.count == 0{
+                    NoItemView(catagorized:catagorized)
+                } else {
+                    ItemViewCatagorized(items: items, showArchive: showArchive)
+                }
             }
             //MARK: Add habit button
                 //MARK:Buttons

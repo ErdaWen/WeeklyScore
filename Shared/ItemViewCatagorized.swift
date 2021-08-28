@@ -21,7 +21,7 @@ struct ItemViewCatagorized: View {
     
     let topSpace:CGFloat = 65
     let mHorizon:CGFloat = 30
-    let mSections:CGFloat = 10
+    let mSections:CGFloat = 20
     
     var body: some View {
         ScrollView{
@@ -33,9 +33,9 @@ struct ItemViewCatagorized: View {
                     let itemFiltered = items.filter { item in
                         return item.tags == tag
                     }
-                    if itemFiltered.count > 0{
+                    
                         ItemViewCatagorizedSection(tag:tag,items:itemFiltered,showArchive:showArchive,dumUpdate:propertiesModel.dumUpdate)
-                    }
+                    
                 }
                 
                 Spacer()

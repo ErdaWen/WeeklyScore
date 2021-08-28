@@ -29,6 +29,7 @@ struct EditTagView: View {
     func genNewTag(){
         let newTag = Tag(context: viewContext)
         newTag.id = UUID()
+        newTag.lastUse = Date()
         newTag.name = "Unamed Catagory"
         newTag.colorName = "tag_color_red"
         do{

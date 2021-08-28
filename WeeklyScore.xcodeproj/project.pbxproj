@@ -125,6 +125,8 @@
 		00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BEA26D9A223008A47D3 /* CloudKit.framework */; };
 		00C59BED26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
 		00C59BEE26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
+		00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
+		00C59BF126DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
@@ -234,6 +236,7 @@
 		00C59BE926D9A211008A47D3 /* WeeklyScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeeklyScore.entitlements; sourceTree = "<group>"; };
 		00C59BEA26D9A223008A47D3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.5.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTagTileView.swift; sourceTree = "<group>"; };
+		00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemView.swift; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
@@ -399,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				C88EC1382692B378005A4DAB /* ItemView.swift */,
+				00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */,
 				002628B226C73CDF00A755D2 /* ItemViewAll.swift */,
 				005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */,
 				005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */,
@@ -699,6 +703,7 @@
 				002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
 				002628A526BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
 				005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
+				00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */,
 				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
@@ -780,6 +785,7 @@
 				008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */,
 				00AE2E3326A949A000F77898 /* Constants.swift in Sources */,
 				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
+				00C59BF126DAC5F1008A47D3 /* NoItemView.swift in Sources */,
 				002628B726C750AD00A755D2 /* StatisticServer.swift in Sources */,
 				0080F14626D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */,
 				0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */,
