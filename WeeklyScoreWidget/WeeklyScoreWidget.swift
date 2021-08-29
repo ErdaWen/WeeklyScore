@@ -108,6 +108,11 @@ struct WeeklyScoreWidget: Widget {
     
     var persistentContainer:NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "WeeklyScore")
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.weeklySore.core.data")!
+        let storeURL = containerURL.appendingPathComponent("DataModel.sqlite")
+        let description = NSPersistentStoreDescription(url: storeURL)
+        
+        container.persistentStoreDescriptions = [description]
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

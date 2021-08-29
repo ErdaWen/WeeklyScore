@@ -33,6 +33,14 @@ struct PersistenceController {
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "WeeklyScore")
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.weeklySore.core.data")!
+        let storeURL = containerURL.appendingPathComponent("DataModel.sqlite")
+        let description = NSPersistentStoreDescription(url: storeURL)
+        description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.erdawen.weeklyScore")
+        
+        container.persistentStoreDescriptions = [description]
+        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
