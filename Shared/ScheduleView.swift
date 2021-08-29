@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UIKit
+import WidgetKit
+
 
 struct ScheduleView: View {
     
@@ -110,6 +112,7 @@ struct ScheduleView: View {
             Spacer()
         } // end all VStack
         .onAppear(){
+            WidgetCenter.shared.reloadAllTimelines()
 //            if UserDefaults.standard.bool(forKey: "onDayView") {
 //                for r in 0...6 {
 //                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
