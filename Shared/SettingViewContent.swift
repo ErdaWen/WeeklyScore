@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SettingViewContent: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
@@ -24,6 +25,11 @@ struct SettingViewContent: View {
                 autoCompleteModePicker()
                 Spacer().frame(height:15)
                 nightModePicker()
+                Button("Update Widget") {
+                    WidgetCenter.shared.reloadAllTimelines()
+                    print("Widget Update Requested")
+                    //"WeeklyScoreWidget"
+                }
                 
             }//end all Zstack
             .padding(.horizontal, 40)

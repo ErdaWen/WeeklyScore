@@ -127,17 +127,16 @@
 		00C59BEE26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
 		00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
 		00C59BF126DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
-		00C59BF326DB1706008A47D3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
-		00C59BF426DB1712008A47D3 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */; };
-		00C59BF526DB1712008A47D3 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
-		00C59BF626DB1712008A47D3 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
-		00C59BF726DB1712008A47D3 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
-		00C59BF826DB1712008A47D3 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
-		00C59BF926DB1712008A47D3 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */; };
-		00C59BFA26DB1717008A47D3 /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		00C59BFB26DB1987008A47D3 /* DateServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918B26A7F06B001B8DBB /* DateServer.swift */; };
 		00C59BFD26DB1C35008A47D3 /* WidgetScheduleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BFC26DB1C35008A47D3 /* WidgetScheduleContentView.swift */; };
 		00C59BFF26DB1C70008A47D3 /* ScheduleProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BFE26DB1C70008A47D3 /* ScheduleProperties.swift */; };
+		00C59C0326DB4CD7008A47D3 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
+		00C59C0426DB4CD7008A47D3 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */; };
+		00C59C0526DB4CD7008A47D3 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
+		00C59C0626DB4CD7008A47D3 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
+		00C59C0726DB4CD7008A47D3 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
+		00C59C0826DB4CD7008A47D3 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */; };
+		00C59C0926DB4CDC008A47D3 /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
@@ -250,6 +249,7 @@
 		00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemView.swift; sourceTree = "<group>"; };
 		00C59BFC26DB1C35008A47D3 /* WidgetScheduleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetScheduleContentView.swift; sourceTree = "<group>"; };
 		00C59BFE26DB1C70008A47D3 /* ScheduleProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleProperties.swift; sourceTree = "<group>"; };
+		00C59C0126DB4418008A47D3 /* WeeklyScoreWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeeklyScoreWidgetExtension.entitlements; sourceTree = "<group>"; };
 		00C72FA526963CC00028EF5C /* AddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddScheduleView.swift; path = ScheduleView/AddScheduleView.swift; sourceTree = "<group>"; };
 		00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeCompletionView.swift; path = ScheduleView/ChangeCompletionView.swift; sourceTree = "<group>"; };
 		00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeScheduleView.swift; sourceTree = "<group>"; };
@@ -493,6 +493,7 @@
 		C8BCDFF626918075006E7D7E = {
 			isa = PBXGroup;
 			children = (
+				00C59C0126DB4418008A47D3 /* WeeklyScoreWidgetExtension.entitlements */,
 				00C59BE926D9A211008A47D3 /* WeeklyScore.entitlements */,
 				0034918A26A7F036001B8DBB /* Servers */,
 				C8BCE027269269BF006E7D7E /* Data */,
@@ -701,18 +702,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00C59BF726DB1712008A47D3 /* Schedule+CoreDataClass.swift in Sources */,
-				00C59BF626DB1712008A47D3 /* Item+CoreDataProperties.swift in Sources */,
-				00C59BF526DB1712008A47D3 /* Item+CoreDataClass.swift in Sources */,
-				00C59BF326DB1706008A47D3 /* Persistence.swift in Sources */,
-				00C59BF926DB1712008A47D3 /* Tag+CoreDataClass.swift in Sources */,
-				00C59BF826DB1712008A47D3 /* Schedule+CoreDataProperties.swift in Sources */,
+				00C59C0326DB4CD7008A47D3 /* Item+CoreDataProperties.swift in Sources */,
+				00C59C0626DB4CD7008A47D3 /* Schedule+CoreDataClass.swift in Sources */,
+				00C59C0726DB4CD7008A47D3 /* Schedule+CoreDataProperties.swift in Sources */,
 				00C59BFB26DB1987008A47D3 /* DateServer.swift in Sources */,
 				00C59BE026D605B8008A47D3 /* WeeklyScoreWidget.intentdefinition in Sources */,
-				00C59BFA26DB1717008A47D3 /* WeeklyScore.xcdatamodeld in Sources */,
+				00C59C0926DB4CDC008A47D3 /* WeeklyScore.xcdatamodeld in Sources */,
 				00C59BFD26DB1C35008A47D3 /* WidgetScheduleContentView.swift in Sources */,
+				00C59C0426DB4CD7008A47D3 /* Tag+CoreDataProperties.swift in Sources */,
 				00C59BFF26DB1C70008A47D3 /* ScheduleProperties.swift in Sources */,
-				00C59BF426DB1712008A47D3 /* Tag+CoreDataProperties.swift in Sources */,
+				00C59C0826DB4CD7008A47D3 /* Tag+CoreDataClass.swift in Sources */,
+				00C59C0526DB4CD7008A47D3 /* Item+CoreDataClass.swift in Sources */,
 				00C59BDB26D605B5008A47D3 /* WeeklyScoreWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +876,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WeeklyScoreWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AXW9A82X4P;
 				INFOPLIST_FILE = WeeklyScoreWidget/Info.plist;
@@ -899,6 +900,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WeeklyScoreWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AXW9A82X4P;
 				INFOPLIST_FILE = WeeklyScoreWidget/Info.plist;

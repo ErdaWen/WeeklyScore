@@ -12,7 +12,6 @@ struct WidgetScheduleContentView: View {
     var body: some View {
         if schedules.count > 0{
             VStack{
-                
                     ForEach(0..<schedules.count,id:\.self) { r in
                         HStack{
                             Text(schedules[r].beginTimeString)
@@ -22,7 +21,11 @@ struct WidgetScheduleContentView: View {
                     }
             }//endVStack
         } else {
-            Text("No schedules")
+            VStack{
+                Text("No schedules")
+                Text(Date(),style: .time)
+            }
+            
         }
         
     }

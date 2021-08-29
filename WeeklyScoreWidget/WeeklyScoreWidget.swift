@@ -29,6 +29,7 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         var wholeScheduleProperties:[ScheduleProperties] = []
+        print("getTimeline")
 
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -36,7 +37,7 @@ struct Provider: IntentTimelineProvider {
         
         let fetchRequest = Schedule.schedulefetchRequest()
         fetchRequest.predicate =
-            NSPredicate(format: "(endTime > %@) AND (beginTime <= %@)", currentDate as NSDate, DateServer.addOneWeek(date: DateServer.startOfThisWeek()) as NSDate)
+            NSPredicate(format: "(endTime > %@) AND (beginTime <= %@)", currentDate as NSDate, DateServer.addOneWeek(date: currentDate) as NSDate)
         do{
             let schedules = try managedObjectContext.fetch(fetchRequest)
             // build up whole schedule list
@@ -69,7 +70,7 @@ struct Provider: IntentTimelineProvider {
         }
         
         if entries.count == 0{
-            let newEntryDate = currentDate + 600
+            let newEntryDate = Calendar.current.date(byAdding: .minute, value: 10, to: currentDate)!
             let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: [])
             entries.append(newEntry)
         }
@@ -98,13 +99,22 @@ struct WeeklyScoreWidget: Widget {
     let kind: String = "WeeklyScoreWidget"
 
     public var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(context: PersistenceController.shared.container.viewContext)) { entry in
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(context: persistentContainer.viewContext)) { entry in
             WeeklyScoreWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Schedule Widget")
         .description("List the schedules.")
     }
     
+    var persistentContainer:NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "WeeklyScore")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 }
 
 //struct WeeklyScoreWidget_Previews: PreviewProvider {
