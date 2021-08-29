@@ -68,6 +68,12 @@ struct Provider: IntentTimelineProvider {
             print(error)
         }
         
+        if entries.count == 0{
+            let newEntryDate = currentDate + 600
+            let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: [])
+            entries.append(newEntry)
+        }
+        
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
