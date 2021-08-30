@@ -113,6 +113,7 @@
 		009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleListView.swift */; };
 		00A3F21126DCA49A0056979A /* WidgetScheduleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3F21026DCA49A0056979A /* WidgetScheduleTile.swift */; };
 		00A3F21226DCA6B60056979A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
+		00A3F21526DCBB440056979A /* FackScheduleProperitesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3F21426DCBB440056979A /* FackScheduleProperitesData.swift */; };
 		00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
 		00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
 		00AE2E3226A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
@@ -237,6 +238,7 @@
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		009C422226AF3C2D00A783F0 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
 		00A3F21026DCA49A0056979A /* WidgetScheduleTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetScheduleTile.swift; sourceTree = "<group>"; };
+		00A3F21426DCBB440056979A /* FackScheduleProperitesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FackScheduleProperitesData.swift; sourceTree = "<group>"; };
 		00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesModel.swift; sourceTree = "<group>"; };
 		00AE2E3126A949A000F77898 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WeeklyScoreWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,6 +481,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		00A3F21326DCB9F70056979A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				00C59BFE26DB1C70008A47D3 /* ScheduleProperties.swift */,
+				00A3F21426DCBB440056979A /* FackScheduleProperitesData.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		00C59BD426D605B5008A47D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,8 +503,8 @@
 		00C59BD926D605B5008A47D3 /* WeeklyScoreWidget */ = {
 			isa = PBXGroup;
 			children = (
+				00A3F21326DCB9F70056979A /* Data */,
 				00A3F20F26DCA46C0056979A /* Views */,
-				00C59BFE26DB1C70008A47D3 /* ScheduleProperties.swift */,
 				00C59BDA26D605B5008A47D3 /* WeeklyScoreWidget.swift */,
 				00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */,
 				00C59BDD26D605B8008A47D3 /* Assets.xcassets */,
@@ -725,6 +736,7 @@
 				00C59C0426DB4CD7008A47D3 /* Tag+CoreDataProperties.swift in Sources */,
 				00C59BFF26DB1C70008A47D3 /* ScheduleProperties.swift in Sources */,
 				00C59C0826DB4CD7008A47D3 /* Tag+CoreDataClass.swift in Sources */,
+				00A3F21526DCBB440056979A /* FackScheduleProperitesData.swift in Sources */,
 				00C59C0526DB4CD7008A47D3 /* Item+CoreDataClass.swift in Sources */,
 				00C59BDB26D605B5008A47D3 /* WeeklyScoreWidget.swift in Sources */,
 				00A3F21126DCA49A0056979A /* WidgetScheduleTile.swift in Sources */,

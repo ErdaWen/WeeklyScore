@@ -22,7 +22,9 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration,schedules: [])
+        let fackScheduleData = FackScheduleProperitesData()
+        print(fackScheduleData)
+        let entry = SimpleEntry(date: Date(), configuration: configuration,schedules: fackScheduleData.fackData)
         completion(entry)
     }
 
@@ -115,8 +117,8 @@ struct WeeklyScoreWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(context: persistentContainer.viewContext)) { entry in
             WeeklyScoreWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Upcoming Schedules")
-        .description("Show upcoming schedules.")
+        .configurationDisplayName("Upcoming")
+        .description("Show upcoming schedules for today and tommorrow.")
         .supportedFamilies([.systemSmall])
     }
     

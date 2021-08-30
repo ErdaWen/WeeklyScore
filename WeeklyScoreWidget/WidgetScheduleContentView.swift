@@ -25,8 +25,10 @@ struct WidgetScheduleContentView: View {
 
         } else {
             VStack{
-                Text("No schedules")
-                Text(Date(),style: .time)
+                Text("🌵 No schedules")
+                    .foregroundColor(Color("text_black"))
+                    .font(.system(size: 16))
+                    .fontWeight(.light)
             }
             
         }
