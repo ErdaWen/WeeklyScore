@@ -45,17 +45,8 @@ struct Provider: IntentTimelineProvider {
             // build up whole schedule list
             for schedule in schedules{
                 var newScheduleProperty = ScheduleProperties()
-                newScheduleProperty.beginTimeString = DateServer.printShortTime(inputTime: schedule.beginTime)
-                newScheduleProperty.endTimeString = DateServer.printShortTime(inputTime: schedule.endTime)
-                if schedule.items.durationBased{
-                    if schedule.endTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
-                        newScheduleProperty.endTimeString += " (tommorrow)"
-                    }
-                } else {
-                    if schedule.beginTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
-                        newScheduleProperty.beginTimeString += " (tommorrow)"
-                    }
-                }
+                newScheduleProperty.beginTime =  schedule.beginTime
+                newScheduleProperty.endTime = schedule.endTime
                 newScheduleProperty.durationBased = schedule.items.durationBased
                 newScheduleProperty.title = schedule.items.titleIcon + " " +  schedule.items.title
                 newScheduleProperty.score = Int(schedule.score)
@@ -71,6 +62,7 @@ struct Provider: IntentTimelineProvider {
             if wholeScheduleProperties.count > 0{
                 let count = wholeScheduleProperties.count
                 for _ in 1...count {
+                    if schedules[0].endTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {break}
                     let newEntryDate = schedules[0].endTime
                     wholeScheduleProperties.removeFirst()
                     let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: wholeScheduleProperties)
@@ -82,12 +74,10 @@ struct Provider: IntentTimelineProvider {
             print(error)
         }
         
-        if entries.count == 0{
-            // check tomorrow
+            // check when new day starts
             let newEntryDate = DateServer.addOneDay(date: DateServer.startOfToday())
-            let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: [])
+            let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: wholeScheduleProperties)
             entries.append(newEntry)
-        }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)

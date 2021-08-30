@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 class ScheduleProperties {
-    var beginTimeString:String = "8:00"
-    var endTimeString:String  = "9:00"
+    var beginTime:Date = DateServer.startOfToday() + 32400
+    var endTime:Date = DateServer.startOfToday() + 36000
     var durationBased:Bool = true
     var title:String = "📚Study!"
     var score:Int = 5

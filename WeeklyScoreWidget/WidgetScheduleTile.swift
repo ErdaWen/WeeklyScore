@@ -19,18 +19,52 @@ struct WidgetScheduleTile: View {
     var schedule:ScheduleProperties
     var body: some View {
         VStack(alignment:.leading,spacing:0){
+//
+//            if schedule.items.durationBased{
+//                if schedule.endTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
+//                    newScheduleProperty.endTimeString += " (tommorrow)"
+//                }
+//            } else {
+//                if schedule.beginTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
+//                    newScheduleProperty.beginTimeString += " (tommorrow)"
+//                }
+//            }
+            
+            
+            
             if schedule.durationBased {
-                Text(schedule.beginTimeString + " - " + schedule.endTimeString)
-                    .foregroundColor(Color("text_black"))
-                    .font(.system(size: fsSub))
-                    //.fontWeight(.light)
-                    .padding(.leading,10)
+                if schedule.endTime >= DateServer.addOneDay(date: DateServer.startOfToday()){
+                    let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime) + " (tomorrow)"
+                    Text(timeString)
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsSub))
+                        //.fontWeight(.light)
+                        .padding(.leading,10)
+                } else {
+                    let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime)
+                    Text(timeString)
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsSub))
+                        //.fontWeight(.light)
+                        .padding(.leading,10)
+                }
+                
             } else {
-                Text(schedule.beginTimeString)
-                    .foregroundColor(Color("text_black"))
-                    .font(.system(size: fsSub))
-                    //.fontWeight(.light)
-                    .padding(.leading,10)
+                if schedule.beginTime >= DateServer.addOneDay(date: DateServer.startOfToday()){
+                    let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " (tomorrow)"
+                    Text(timeString)
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsSub))
+                        //.fontWeight(.light)
+                        .padding(.leading,10)
+                } else {
+                    let timeString = DateServer.printShortTime(inputTime: schedule.beginTime)
+                    Text(timeString)
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsSub))
+                        //.fontWeight(.light)
+                        .padding(.leading,10)
+                }
             }
             HStack(spacing:0){
                 //MARK: Handler
