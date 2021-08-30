@@ -21,6 +21,8 @@ struct WidgetScheduleTile: View {
     let wHandle:CGFloat = 6
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 5
+    let pTextVerCompact:CGFloat = 3
+
     
 
 
@@ -44,14 +46,14 @@ struct WidgetScheduleTile: View {
                     let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime) + " (tomorrow)"
                     Text(timeString)
                         .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsSub))
+                        .font(.system(size: compact ? fsSubCompact : fsSub))
                         //.fontWeight(.light)
                         .padding(.leading,10)
                 } else {
                     let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " - " + DateServer.printShortTime(inputTime: schedule.endTime)
                     Text(timeString)
                         .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsSub))
+                        .font(.system(size: compact ? fsSubCompact : fsSub))
                         //.fontWeight(.light)
                         .padding(.leading,10)
                 }
@@ -61,14 +63,14 @@ struct WidgetScheduleTile: View {
                     let timeString = DateServer.printShortTime(inputTime: schedule.beginTime) + " (tomorrow)"
                     Text(timeString)
                         .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsSub))
+                        .font(.system(size: compact ? fsSubCompact : fsSub))
                         //.fontWeight(.light)
                         .padding(.leading,10)
                 } else {
                     let timeString = DateServer.printShortTime(inputTime: schedule.beginTime)
                     Text(timeString)
                         .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsSub))
+                        .font(.system(size: compact ? fsSubCompact : fsSub))
                         //.fontWeight(.light)
                         .padding(.leading,10)
                 }
@@ -92,16 +94,16 @@ struct WidgetScheduleTile: View {
                     RoundedRectangle(cornerRadius: rTile).foregroundColor(schedule.color.opacity(opTile))
                     HStack{
                         Text(schedule.title)
-                            .font(.system(size: fsTitle))
+                            .font(.system(size: compact ? fsTitleCompact : fsTitle))
                             .foregroundColor(schedule.colortext)
-                            .padding(.top,pTextVer)
+                            .padding(.top,compact ? pTextVerCompact : pTextVer)
                             .padding(.leading,5)
                         Spacer()
                         Text("\(schedule.score)")
-                            .font(.system(size: fsTitle))
+                            .font(.system(size: compact ? fsTitleCompact : fsTitle))
                             .foregroundColor(Color("text_black"))
                             .fontWeight(.light)
-                            .padding(.top,pTextVer)
+                            .padding(.top,compact ? pTextVerCompact : pTextVer)
                             .padding(.trailing,5)
                     }
                 } // End center tile ZStack
