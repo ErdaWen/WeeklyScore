@@ -94,7 +94,11 @@ struct WeeklyScoreWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        WidgetScheduleContentView(schedules: entry.schedules)
+        if entry.configuration.styles == .compact{
+            WidgetScheduleContentView(schedules: entry.schedules,compact: true)
+        } else {
+            WidgetScheduleContentView(schedules: entry.schedules,compact: false)
+        }
     }
 }
 

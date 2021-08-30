@@ -9,11 +9,12 @@ import SwiftUI
 
 struct WidgetScheduleContentView: View {
     var schedules:[ScheduleProperties]
+    var compact:Bool
     var body: some View {
         if schedules.count > 0{
             VStack(spacing:8){
                     ForEach(0..<min(schedules.count,3),id:\.self) { r in
-                        WidgetScheduleTile(schedule: schedules[r])
+                        WidgetScheduleTile(schedule: schedules[r],compact: compact)
                             .frame(height:35)
                     }
             }//endVStack

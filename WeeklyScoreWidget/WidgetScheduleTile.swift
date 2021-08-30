@@ -8,15 +8,22 @@
 import SwiftUI
 
 struct WidgetScheduleTile: View {
+    
+    var schedule:ScheduleProperties
+    var compact:Bool
+    
     let fsSub:CGFloat = 10
+    let fsSubCompact:CGFloat = 8
     let fsTitle:CGFloat = 12
+    let fsTitleCompact:CGFloat = 10.5
     let rTile:CGFloat = 8
     let opTile:Double = 0.2
     let wHandle:CGFloat = 6
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 5
     
-    var schedule:ScheduleProperties
+
+
     var body: some View {
         VStack(alignment:.leading,spacing:0){
 //
