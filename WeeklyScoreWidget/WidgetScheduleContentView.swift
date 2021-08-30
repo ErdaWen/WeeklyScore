@@ -11,10 +11,10 @@ struct WidgetScheduleContentView: View {
     var schedules:[ScheduleProperties]
     var body: some View {
         if schedules.count > 0{
-            VStack(spacing:5){
-                    ForEach(0..<min(schedules.count,4),id:\.self) { r in
+            VStack(spacing:8){
+                    ForEach(0..<min(schedules.count,3),id:\.self) { r in
                         WidgetScheduleTile(schedule: schedules[r])
-                            .frame(height:28)
+                            .frame(height:35)
                     }
             }//endVStack
             .frame(height:139)

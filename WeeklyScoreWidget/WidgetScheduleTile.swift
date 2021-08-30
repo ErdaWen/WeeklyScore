@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct WidgetScheduleTile: View {
-    let fsSub:CGFloat = 8
-    let fsTitle:CGFloat = 10.5
+    let fsSub:CGFloat = 10
+    let fsTitle:CGFloat = 12
     let rTile:CGFloat = 8
     let opTile:Double = 0.2
     let wHandle:CGFloat = 6
     let mHandle:CGFloat = 3
-    let pTextVer:CGFloat = 3
+    let pTextVer:CGFloat = 5
     
     var schedule:ScheduleProperties
     var body: some View {
@@ -93,7 +93,7 @@ struct WidgetScheduleTile: View {
                         Text("\(schedule.score)")
                             .font(.system(size: fsTitle))
                             .foregroundColor(Color("text_black"))
-                            //.fontWeight(.light)
+                            .fontWeight(.light)
                             .padding(.top,pTextVer)
                             .padding(.trailing,5)
                     }
