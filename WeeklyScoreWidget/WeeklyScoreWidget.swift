@@ -37,7 +37,8 @@ struct Provider: IntentTimelineProvider {
         
         let fetchRequest = Schedule.schedulefetchRequest()
         fetchRequest.predicate =
-            NSPredicate(format: "(endTime > %@) AND (beginTime <= %@)", currentDate as NSDate, DateServer.addOneWeek(date: currentDate) as NSDate)
+            NSPredicate(format: "(endTime > %@) AND (endTime <= %@)", currentDate as NSDate, DateServer.addOneDay(date: DateServer.addOneDay(date: DateServer.startOfToday())) as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:"endTime",ascending: true)]
         do{
             let schedules = try managedObjectContext.fetch(fetchRequest)
             // build up whole schedule list
@@ -45,9 +46,20 @@ struct Provider: IntentTimelineProvider {
                 var newScheduleProperty = ScheduleProperties()
                 newScheduleProperty.beginTimeString = DateServer.printShortTime(inputTime: schedule.beginTime)
                 newScheduleProperty.endTimeString = DateServer.printShortTime(inputTime: schedule.endTime)
+                if schedule.items.durationBased{
+                    if schedule.endTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
+                        newScheduleProperty.endTimeString += " (tommorrow)"
+                    }
+                } else {
+                    if schedule.beginTime >= DateServer.addOneDay(date: DateServer.startOfToday()) {
+                        newScheduleProperty.beginTimeString += " (tommorrow)"
+                    }
+                }
                 newScheduleProperty.durationBased = schedule.items.durationBased
                 newScheduleProperty.title = schedule.items.titleIcon + " " +  schedule.items.title
-                newScheduleProperty.score  = Int(schedule.score)
+                newScheduleProperty.score = Int(schedule.score)
+                newScheduleProperty.color = Color(schedule.items.tags.colorName)
+                newScheduleProperty.colortext = Color(schedule.items.tags.colorName + "_text")
                 wholeScheduleProperties.append(newScheduleProperty)
             }
             // fill in entries
@@ -70,7 +82,8 @@ struct Provider: IntentTimelineProvider {
         }
         
         if entries.count == 0{
-            let newEntryDate = Calendar.current.date(byAdding: .minute, value: 10, to: currentDate)!
+            // check tomorrow
+            let newEntryDate = DateServer.addOneDay(date: DateServer.startOfToday())
             let newEntry = SimpleEntry(date: newEntryDate, configuration: configuration, schedules: [])
             entries.append(newEntry)
         }
@@ -102,8 +115,9 @@ struct WeeklyScoreWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(context: persistentContainer.viewContext)) { entry in
             WeeklyScoreWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Schedule Widget")
-        .description("List the schedules.")
+        .configurationDisplayName("Upcoming Schedules")
+        .description("Show upcoming schedules.")
+        .supportedFamilies([.systemSmall])
     }
     
     var persistentContainer:NSPersistentCloudKitContainer = {

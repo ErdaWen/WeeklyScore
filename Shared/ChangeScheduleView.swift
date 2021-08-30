@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct ChangeScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -77,6 +78,7 @@ struct ChangeScheduleView: View {
             changeScheduleViewPresented = false
             try viewContext.save()
             propertiesModel.updateScores()
+            WidgetCenter.shared.reloadAllTimelines()
             print("deleted")
         } catch {
             print("Cannot delete item")
@@ -164,6 +166,7 @@ struct ChangeScheduleView: View {
         do{
             try viewContext.save()
             print("saved")
+            WidgetCenter.shared.reloadAllTimelines()
             propertiesModel.updateScores()
             propertiesModel.dumUpdate.toggle()
             changeScheduleViewPresented = false

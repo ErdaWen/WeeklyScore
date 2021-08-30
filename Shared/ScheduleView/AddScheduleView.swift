@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct AddScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -90,6 +91,7 @@ struct AddScheduleView: View {
         do{
             try viewContext.save()
             print("Saved")
+            WidgetCenter.shared.reloadAllTimelines()
             propertiesModel.updateScores()
             propertiesModel.dumUpdate.toggle()
             addScheduleViewPresented = false

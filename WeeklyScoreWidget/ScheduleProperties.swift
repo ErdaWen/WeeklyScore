@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ScheduleProperties {
     var beginTimeString:String = "8:00"
@@ -13,4 +14,6 @@ class ScheduleProperties {
     var durationBased:Bool = true
     var title:String = "📚Study!"
     var score:Int = 5
+    var color:Color = Color("tag_color_red")
+    var colortext:Color = Color("tag_color_red_text")
 }

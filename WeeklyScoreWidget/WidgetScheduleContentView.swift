@@ -11,15 +11,18 @@ struct WidgetScheduleContentView: View {
     var schedules:[ScheduleProperties]
     var body: some View {
         if schedules.count > 0{
-            VStack{
-                    ForEach(0..<schedules.count,id:\.self) { r in
-                        HStack{
-                            Text(schedules[r].beginTimeString)
-                            Text(schedules[r].title)
-                        }
-                        
+            VStack(spacing:5){
+                    ForEach(0..<min(schedules.count,4),id:\.self) { r in
+                        WidgetScheduleTile(schedule: schedules[r])
+                            .frame(height:28)
                     }
             }//endVStack
+            .frame(height:139)
+            .padding(.top,12)
+            .padding(.bottom,18)
+            .padding(.horizontal,10)
+            
+
         } else {
             VStack{
                 Text("No schedules")
