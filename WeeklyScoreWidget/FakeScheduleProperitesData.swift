@@ -1,5 +1,5 @@
 //
-//  FackScheduleProperitesData.swift
+//  FakeScheduleProperitesData.swift
 //  WeeklyScoreWidgetExtension
 //
 //  Created by Erda Wen on 8/30/21.
@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-class FackScheduleProperitesData {
-    let fackData:[ScheduleProperties]
+class FakeScheduleProperitesData {
+    let fakeData:[ScheduleProperties]
     init(){
         var fackDataTemp:[ScheduleProperties] = []
         let newSchedule = ScheduleProperties()
@@ -52,6 +52,6 @@ class FackScheduleProperitesData {
         newSchedule4.colortext = Color("tag_color_green_text")
         fackDataTemp.append(newSchedule4)
         
-        fackData = fackDataTemp
+        fakeData = fackDataTemp
     }
 }

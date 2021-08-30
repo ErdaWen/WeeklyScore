@@ -22,9 +22,8 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let fackScheduleData = FackScheduleProperitesData()
-        print(fackScheduleData)
-        let entry = SimpleEntry(date: Date(), configuration: configuration,schedules: fackScheduleData.fackData)
+        let fakeScheduleData = FakeScheduleProperitesData()
+        let entry = SimpleEntry(date: Date(), configuration: configuration,schedules: fakeScheduleData.fakeData)
         completion(entry)
     }
 
