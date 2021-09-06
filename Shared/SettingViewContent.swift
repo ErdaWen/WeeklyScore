@@ -17,24 +17,39 @@ struct SettingViewContent: View {
     let fsOptions:CGFloat = 14
     
     var body: some View {
-        ScrollView{
-            VStack(alignment:.leading,spacing:10){
-                Spacer().frame(height:15)
-                weekStartDayPicker()// end picker
-                Spacer().frame(height:15)
-                autoCompleteModePicker()
-                Spacer().frame(height:15)
-                nightModePicker()
-                Button("Update Widget") {
-                    WidgetCenter.shared.reloadAllTimelines()
-                    print("Widget Update Requested")
-                    //"WeeklyScoreWidget"
-                }
+        VStack(alignment:.leading,spacing:10) {
+            ZStack(alignment:.bottomLeading) {
+                Rectangle()
+                    .foregroundColor(Color("tag_color_green").opacity(0.3))
+                    .ignoresSafeArea()
+                Text("⚙️ Settings")
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.light)
+                    .font(.system(size: 22))
+                    .padding(.horizontal,30)
+                    .padding(.vertical,20)
                 
-            }//end all Zstack
-            .padding(.horizontal, 40)
-            .padding(.vertical,20)
-        }//end scrollview
+            }.frame(height:100)
+            
+            ScrollView{
+                VStack(alignment:.leading,spacing:10){
+                    Spacer().frame(height:15)
+                    weekStartDayPicker()// end picker
+                    Spacer().frame(height:15)
+                    autoCompleteModePicker()
+                    Spacer().frame(height:15)
+                    nightModePicker()
+                    Button("Update Widget") {
+                        WidgetCenter.shared.reloadAllTimelines()
+                        print("Widget Update Requested")
+                        //"WeeklyScoreWidget"
+                    }
+                    
+                }//end all Zstack
+                .padding(.horizontal, 40)
+                .padding(.vertical,20)
+            }//end scrollview
+        }
         
     }
 }

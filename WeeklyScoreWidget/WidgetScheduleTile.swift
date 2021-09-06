@@ -102,7 +102,7 @@ struct WidgetScheduleTile: View {
                         Text("\(schedule.score)")
                             .font(.system(size: compact ? fsTitleCompact : fsTitle))
                             .foregroundColor(Color("text_black"))
-                            .fontWeight(.light)
+                            .fontWeight(compact ? .regular : .light)
                             .padding(.top,compact ? pTextVerCompact : pTextVer)
                             .padding(.trailing,5)
                     }

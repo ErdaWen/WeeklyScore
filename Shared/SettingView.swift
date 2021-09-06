@@ -15,10 +15,10 @@ struct SettingView: View {
         }
     
     var body: some View {
-        NavigationView{
+        //NavigationView{
             SettingViewContent()
-                .navigationTitle("⚙️ Settings")
-        }//End navigation View
+        //        .navigationTitle("⚙️ Settings")
+        //}//End navigation View
     
         
     }

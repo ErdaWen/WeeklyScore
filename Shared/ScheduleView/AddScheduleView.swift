@@ -247,26 +247,28 @@ struct AddScheduleView: View {
                             }
 
                             //MARK: Reminder
-                            Toggle("Reminder", isOn:$inputReminder)
-                                .foregroundColor(Color("text_black"))
-                                .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
-                                .animation(.default)
-
-                            if inputReminder {
-                                Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
-                                    Text("when happens").tag(0)
-                                    Text("in 5 min").tag(5)
-                                    Text("in 10 min").tag(10)
-                                    Text("in 15 min").tag(15)
-                                    Text("in 30 min").tag(30)
-                                    Text("in 45 min").tag(45)
-                                    Text("in 1 hour").tag(60)
-                                }
-                                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
-                                .pickerStyle(MenuPickerStyle())
-                                .animation(.default)
-                            }
+//                            Toggle("Reminder", isOn:$inputReminder)
+//                                .foregroundColor(Color("text_black"))
+//                                .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
+//                                .animation(.default)
+//
+//                            if inputReminder {
+//                                Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
+//                                    Text("when happens").tag(0)
+//                                    Text("in 5 min").tag(5)
+//                                    Text("in 10 min").tag(10)
+//                                    Text("in 15 min").tag(15)
+//                                    Text("in 30 min").tag(30)
+//                                    Text("in 45 min").tag(45)
+//                                    Text("in 1 hour").tag(60)
+//                                }
+//                                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+//                                .pickerStyle(MenuPickerStyle())
+//                                .animation(.default)
+//                            }
                             Spacer().frame(height:20)
+                            
+                            
                             InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
                                 ZStack(alignment:.center){
                                     TextEditor(text: $inputNote)
