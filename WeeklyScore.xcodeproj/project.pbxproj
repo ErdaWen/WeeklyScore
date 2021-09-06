@@ -8,116 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		00214CB726BB98D7001FE49D /* CustomSlider_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CB626BB98D7001FE49D /* CustomSlider_list.swift */; };
-		00214CB826BB98D7001FE49D /* CustomSlider_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CB626BB98D7001FE49D /* CustomSlider_list.swift */; };
 		00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */; };
-		00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */; };
 		0026288326BDF11600A755D2 /* ScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288226BDF11600A755D2 /* ScoreBar.swift */; };
-		0026288426BDF11600A755D2 /* ScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288226BDF11600A755D2 /* ScoreBar.swift */; };
 		0026288626BDF6C200A755D2 /* ScheduleListPreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */; };
-		0026288726BDF6C200A755D2 /* ScheduleListPreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleListPreviewContentView.swift */; };
 		0026288D26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* WeekBatchOpearationView.swift */; };
-		0026288E26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* WeekBatchOpearationView.swift */; };
 		0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
-		0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
 		0026289626BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */; };
-		0026289726BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */; };
 		0026289926BF5ABF00A755D2 /* WeekPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289826BF5ABF00A755D2 /* WeekPicker.swift */; };
-		0026289A26BF5ABF00A755D2 /* WeekPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289826BF5ABF00A755D2 /* WeekPicker.swift */; };
 		0026289C26BF5EAC00A755D2 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289B26BF5EAC00A755D2 /* DayPicker.swift */; };
-		0026289D26BF5EAC00A755D2 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289B26BF5EAC00A755D2 /* DayPicker.swift */; };
 		0026289F26BF630400A755D2 /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289E26BF630400A755D2 /* FloatButton.swift */; };
-		002628A026BF630400A755D2 /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289E26BF630400A755D2 /* FloatButton.swift */; };
 		002628A226BF911F00A755D2 /* NowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A126BF911F00A755D2 /* NowLine.swift */; };
-		002628A326BF911F00A755D2 /* NowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A126BF911F00A755D2 /* NowLine.swift */; };
 		002628A526BF956700A755D2 /* ScheduleDayContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A426BF956700A755D2 /* ScheduleDayContentView.swift */; };
-		002628A626BF956700A755D2 /* ScheduleDayContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A426BF956700A755D2 /* ScheduleDayContentView.swift */; };
 		002628AA26BF9F2D00A755D2 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A926BF9F2D00A755D2 /* InputField.swift */; };
-		002628AB26BF9F2D00A755D2 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A926BF9F2D00A755D2 /* InputField.swift */; };
 		002628AD26C0F25A00A755D2 /* ScheduleTileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */; };
-		002628AE26C0F25A00A755D2 /* ScheduleTileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */; };
 		002628B026C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */; };
-		002628B126C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */; };
 		002628B326C73CDF00A755D2 /* ItemViewAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B226C73CDF00A755D2 /* ItemViewAll.swift */; };
-		002628B426C73CDF00A755D2 /* ItemViewAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B226C73CDF00A755D2 /* ItemViewAll.swift */; };
 		002628B626C750AD00A755D2 /* StatisticServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B526C750AD00A755D2 /* StatisticServer.swift */; };
-		002628B726C750AD00A755D2 /* StatisticServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B526C750AD00A755D2 /* StatisticServer.swift */; };
 		002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B826C791FD00A755D2 /* ItemStatisticBars.swift */; };
-		002628BA26C791FD00A755D2 /* ItemStatisticBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628B826C791FD00A755D2 /* ItemStatisticBars.swift */; };
 		002628BD26C8971300A755D2 /* ConflictServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628BC26C8971300A755D2 /* ConflictServer.swift */; };
-		002628BE26C8971300A755D2 /* ConflictServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628BC26C8971300A755D2 /* ConflictServer.swift */; };
 		002628C026C8C52F00A755D2 /* ScheduleTileSSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628BF26C8C52F00A755D2 /* ScheduleTileSSView.swift */; };
-		002628C126C8C52F00A755D2 /* ScheduleTileSSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628BF26C8C52F00A755D2 /* ScheduleTileSSView.swift */; };
 		002628C326C8C82300A755D2 /* WeekBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628C226C8C82300A755D2 /* WeekBatchList.swift */; };
-		002628C426C8C82300A755D2 /* WeekBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628C226C8C82300A755D2 /* WeekBatchList.swift */; };
 		0034916126A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
-		0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		0034918826A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
-		0034918926A7EE02001B8DBB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918726A7EE02001B8DBB /* Persistence.swift */; };
 		0034918C26A7F06B001B8DBB /* DateServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918B26A7F06B001B8DBB /* DateServer.swift */; };
-		0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918B26A7F06B001B8DBB /* DateServer.swift */; };
 		0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918E26A7F48F001B8DBB /* Initializer.swift */; };
-		0034919026A7F48F001B8DBB /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918E26A7F48F001B8DBB /* Initializer.swift */; };
 		003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
-		003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		005D077826CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
-		005D077926CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
 		005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
-		005D077C26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
 		005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
-		005D077F26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
 		005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */; };
-		005D078226CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078026CC7FFE00664008 /* ItemViewCatagorizedSection.swift */; };
 		005D078426CCBFE200664008 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078326CCBFE200664008 /* EditTagView.swift */; };
-		005D078526CCBFE200664008 /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D078326CCBFE200664008 /* EditTagView.swift */; };
 		0072756626B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
-		0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072756526B32A7B00FAA32D /* ScheduleTileView.swift */; };
 		0072757226B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
-		0072757326B65D0E00FAA32D /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757126B65D0E00FAA32D /* ScheduleDayView.swift */; };
 		0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
-		0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757426B7190300FAA32D /* Item+CoreDataClass.swift */; };
 		0072757B26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
-		0072757C26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
-		0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
 		0080F13C26D1F3DD00B10859 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13B26D1F3DD00B10859 /* Theme.swift */; };
-		0080F13D26D1F3DD00B10859 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13B26D1F3DD00B10859 /* Theme.swift */; };
 		0080F13F26D1F40E00B10859 /* SettingViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13E26D1F40E00B10859 /* SettingViewContent.swift */; };
-		0080F14026D1F40E00B10859 /* SettingViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13E26D1F40E00B10859 /* SettingViewContent.swift */; };
 		0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14126D21E2700B10859 /* weekStartDayPicker.swift */; };
-		0080F14326D21E2700B10859 /* weekStartDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14126D21E2700B10859 /* weekStartDayPicker.swift */; };
 		0080F14526D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */; };
-		0080F14626D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14426D21FCC00B10859 /* autoCompleteModePicker.swift */; };
 		0080F14826D2206B00B10859 /* nightModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14726D2206B00B10859 /* nightModePicker.swift */; };
-		0080F14926D2206B00B10859 /* nightModePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14726D2206B00B10859 /* nightModePicker.swift */; };
 		008DC8EF26AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
-		008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8ED26AD1322009AB91C /* Schedule+CoreDataClass.swift */; };
 		008DC8F126AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
-		008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8EE26AD1322009AB91C /* Schedule+CoreDataProperties.swift */; };
 		008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */; };
-		008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */; };
 		008DC8F726AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */; };
-		008DC8F826AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F426AE478B009AB91C /* Tag+CoreDataProperties.swift */; };
 		008DC8FA26AE7129009AB91C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F926AE7129009AB91C /* SettingView.swift */; };
-		008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F926AE7129009AB91C /* SettingView.swift */; };
 		008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
-		008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
 		0092DD3126BCC7A300750557 /* ScheduleListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3026BCC7A300750557 /* ScheduleListContentView.swift */; };
-		0092DD3226BCC7A300750557 /* ScheduleListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3026BCC7A300750557 /* ScheduleListContentView.swift */; };
 		0092DD3426BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3326BCC98E00750557 /* ScheduleTileCompactView.swift */; };
-		0092DD3526BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3326BCC98E00750557 /* ScheduleTileCompactView.swift */; };
 		0092DD3726BCD11C00750557 /* ScheduleListPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3626BCD11C00750557 /* ScheduleListPreviewView.swift */; };
-		0092DD3826BCD11C00750557 /* ScheduleListPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3626BCD11C00750557 /* ScheduleListPreviewView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
-		009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009C422326AF3C2D00A783F0 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleListView.swift */; };
-		009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleListView.swift */; };
 		00A3F21126DCA49A0056979A /* WidgetScheduleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3F21026DCA49A0056979A /* WidgetScheduleTile.swift */; };
 		00A3F21226DCA6B60056979A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
 		00A3F21526DCBB440056979A /* FakeScheduleProperitesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3F21426DCBB440056979A /* FakeScheduleProperitesData.swift */; };
 		00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
-		00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */; };
 		00AE2E3226A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
-		00AE2E3326A949A000F77898 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE2E3126A949A000F77898 /* Constants.swift */; };
 		00C59BD626D605B5008A47D3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BD526D605B5008A47D3 /* WidgetKit.framework */; };
 		00C59BD826D605B5008A47D3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BD726D605B5008A47D3 /* SwiftUI.framework */; };
 		00C59BDB26D605B5008A47D3 /* WeeklyScoreWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BDA26D605B5008A47D3 /* WeeklyScoreWidget.swift */; };
@@ -127,9 +73,7 @@
 		00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BEA26D9A223008A47D3 /* CloudKit.framework */; };
 		00C59BED26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
-		00C59BEE26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
 		00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
-		00C59BF126DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
 		00C59BFB26DB1987008A47D3 /* DateServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918B26A7F06B001B8DBB /* DateServer.swift */; };
 		00C59BFD26DB1C35008A47D3 /* WidgetScheduleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BFC26DB1C35008A47D3 /* WidgetScheduleContentView.swift */; };
 		00C59BFF26DB1C70008A47D3 /* ScheduleProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BFE26DB1C70008A47D3 /* ScheduleProperties.swift */; };
@@ -141,23 +85,14 @@
 		00C59C0826DB4CD7008A47D3 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8F326AE478B009AB91C /* Tag+CoreDataClass.swift */; };
 		00C59C0926DB4CDC008A47D3 /* WeeklyScore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0034915F26A7E677001B8DBB /* WeeklyScore.xcdatamodeld */; };
 		00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
-		00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA526963CC00028EF5C /* AddScheduleView.swift */; };
 		00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
-		00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FA82697F6080028EF5C /* ChangeCompletionView.swift */; };
 		00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
-		00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C72FAB2698F2930028EF5C /* ChangeScheduleView.swift */; };
 		C88EC1362692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
-		C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1352692B358005A4DAB /* ScheduleView.swift */; };
 		C88EC1392692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
-		C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC1382692B378005A4DAB /* ItemView.swift */; };
 		C88EC13C2692BB27005A4DAB /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddItemView.swift */; };
-		C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EC13B2692BB27005A4DAB /* AddItemView.swift */; };
 		C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
-		C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */; };
 		C8BCE01126918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
-		C8BCE01226918079006E7D7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCDFFD26918075006E7D7E /* ContentView.swift */; };
 		C8BCE01326918079006E7D7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
-		C8BCE01426918079006E7D7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8BCDFFE26918079006E7D7E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,7 +201,6 @@
 		C8BCDFFE26918079006E7D7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8BCE00326918079006E7D7E /* WeeklyScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8BCE00626918079006E7D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8BCE00B26918079006E7D7E /* WeeklyScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8BCE00D26918079006E7D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8BCE00E26918079006E7D7E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,13 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C8BCE00826918079006E7D7E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				C8BCE00326918079006E7D7E /* WeeklyScore.app */,
-				C8BCE00B26918079006E7D7E /* WeeklyScore.app */,
 				00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */,
 			);
 			name = Products;
@@ -636,23 +562,6 @@
 			productReference = C8BCE00326918079006E7D7E /* WeeklyScore.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C8BCE00A26918079006E7D7E /* WeeklyScore (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C8BCE01A26918079006E7D7E /* Build configuration list for PBXNativeTarget "WeeklyScore (macOS)" */;
-			buildPhases = (
-				C8BCE00726918079006E7D7E /* Sources */,
-				C8BCE00826918079006E7D7E /* Frameworks */,
-				C8BCE00926918079006E7D7E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "WeeklyScore (macOS)";
-			productName = "WeeklyScore (macOS)";
-			productReference = C8BCE00B26918079006E7D7E /* WeeklyScore.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -666,9 +575,6 @@
 						CreatedOnToolsVersion = 12.5.1;
 					};
 					C8BCE00226918079006E7D7E = {
-						CreatedOnToolsVersion = 12.5.1;
-					};
-					C8BCE00A26918079006E7D7E = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
@@ -687,7 +593,6 @@
 			projectRoot = "";
 			targets = (
 				C8BCE00226918079006E7D7E /* WeeklyScore (iOS) */,
-				C8BCE00A26918079006E7D7E /* WeeklyScore (macOS) */,
 				00C59BD226D605B5008A47D3 /* WeeklyScoreWidgetExtension */,
 			);
 		};
@@ -708,14 +613,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8BCE01326918079006E7D7E /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C8BCE00926918079006E7D7E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C8BCE01426918079006E7D7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,77 +709,6 @@
 				0026288326BDF11600A755D2 /* ScoreBar.swift in Sources */,
 				005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */,
 				C8BCE00F26918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C8BCE00726918079006E7D7E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0072757326B65D0E00FAA32D /* ScheduleDayView.swift in Sources */,
-				0034919026A7F48F001B8DBB /* Initializer.swift in Sources */,
-				00A5FE6126ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
-				0026288E26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */,
-				002628BA26C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
-				002628A626BF956700A755D2 /* ScheduleDayContentView.swift in Sources */,
-				005D078226CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
-				0026289426BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
-				0072757F26B873F400FAA32D /* CustomSlider.swift in Sources */,
-				00C72FAD2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,
-				008DC8FB26AE7129009AB91C /* SettingView.swift in Sources */,
-				0080F14926D2206B00B10859 /* nightModePicker.swift in Sources */,
-				0026289726BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */,
-				0034916226A7E677001B8DBB /* WeeklyScore.xcdatamodeld in Sources */,
-				00C72FA726963CC00028EF5C /* AddScheduleView.swift in Sources */,
-				008DC8F026AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */,
-				00AE2E3326A949A000F77898 /* Constants.swift in Sources */,
-				003A248C269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
-				00C59BF126DAC5F1008A47D3 /* NoItemView.swift in Sources */,
-				002628B726C750AD00A755D2 /* StatisticServer.swift in Sources */,
-				0080F14626D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */,
-				0072756726B32A7B00FAA32D /* ScheduleTileView.swift in Sources */,
-				0080F14026D1F40E00B10859 /* SettingViewContent.swift in Sources */,
-				0034918D26A7F06B001B8DBB /* DateServer.swift in Sources */,
-				0034918926A7EE02001B8DBB /* Persistence.swift in Sources */,
-				008DC8FE26AE814F009AB91C /* ItemTileView.swift in Sources */,
-				C88EC1372692B358005A4DAB /* ScheduleView.swift in Sources */,
-				0026289A26BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
-				008DC8F626AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
-				0072757C26B7280600FAA32D /* CordServer.swift in Sources */,
-				002628AB26BF9F2D00A755D2 /* InputField.swift in Sources */,
-				0026289D26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
-				0072757726B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
-				002628A026BF630400A755D2 /* FloatButton.swift in Sources */,
-				00C72FAA2697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
-				002628AE26C0F25A00A755D2 /* ScheduleTileDetailView.swift in Sources */,
-				0026288726BDF6C200A755D2 /* ScheduleListPreviewContentView.swift in Sources */,
-				002628C426C8C82300A755D2 /* WeekBatchList.swift in Sources */,
-				002628B426C73CDF00A755D2 /* ItemViewAll.swift in Sources */,
-				009B248F26A239BE0087467A /* EmojiTextField.swift in Sources */,
-				C88EC13D2692BB27005A4DAB /* AddItemView.swift in Sources */,
-				005D077F26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */,
-				008DC8F226AD1322009AB91C /* Schedule+CoreDataProperties.swift in Sources */,
-				00214CBE26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */,
-				0080F13D26D1F3DD00B10859 /* Theme.swift in Sources */,
-				00C59BEE26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */,
-				0092DD3226BCC7A300750557 /* ScheduleListContentView.swift in Sources */,
-				002628C126C8C52F00A755D2 /* ScheduleTileSSView.swift in Sources */,
-				005D077926CC762700664008 /* DayBatchList.swift in Sources */,
-				00214CB826BB98D7001FE49D /* CustomSlider_list.swift in Sources */,
-				009C422426AF3C2D00A783F0 /* ScheduleListView.swift in Sources */,
-				008DC8F826AE478B009AB91C /* Tag+CoreDataProperties.swift in Sources */,
-				C88EC13A2692B378005A4DAB /* ItemView.swift in Sources */,
-				002628BE26C8971300A755D2 /* ConflictServer.swift in Sources */,
-				0092DD3826BCD11C00750557 /* ScheduleListPreviewView.swift in Sources */,
-				005D078526CCBFE200664008 /* EditTagView.swift in Sources */,
-				C8BCE01226918079006E7D7E /* ContentView.swift in Sources */,
-				0080F14326D21E2700B10859 /* weekStartDayPicker.swift in Sources */,
-				002628A326BF911F00A755D2 /* NowLine.swift in Sources */,
-				002628B126C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */,
-				0092DD3526BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */,
-				0026288426BDF11600A755D2 /* ScoreBar.swift in Sources */,
-				005D077C26CC783600664008 /* DayBatchOperationView.swift in Sources */,
-				C8BCE01026918079006E7D7E /* WeeklyScoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,54 +932,6 @@
 			};
 			name = Release;
 		};
-		C8BCE01B26918079006E7D7E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AXW9A82X4P;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.erdawen.WeeklyScore;
-				PRODUCT_NAME = WeeklyScore;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		C8BCE01C26918079006E7D7E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AXW9A82X4P;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.erdawen.WeeklyScore;
-				PRODUCT_NAME = WeeklyScore;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1180,15 +958,6 @@
 			buildConfigurations = (
 				C8BCE01826918079006E7D7E /* Debug */,
 				C8BCE01926918079006E7D7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C8BCE01A26918079006E7D7E /* Build configuration list for PBXNativeTarget "WeeklyScore (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C8BCE01B26918079006E7D7E /* Debug */,
-				C8BCE01C26918079006E7D7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
