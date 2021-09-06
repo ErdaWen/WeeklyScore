@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-
+import WidgetKit
 
 struct WeekBatchOpearationView: View {
     enum ActiveAlert {
@@ -49,6 +48,7 @@ struct WeekBatchOpearationView: View {
                 createNewSchedule(schedule:schedule,beginTime:combinedBeginTime,endTime:combinedEndTime)
             }
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func alarmConditioning() {
@@ -63,8 +63,7 @@ struct WeekBatchOpearationView: View {
         }
 
     }
-    
-    
+        
     func createNewSchedule(schedule:Schedule,beginTime:Date,endTime:Date){
         let newSchedule = Schedule(context: viewContext)
         newSchedule.id = UUID()
@@ -99,6 +98,7 @@ struct WeekBatchOpearationView: View {
         for schedule in schedules {
             deleteSchedule(schedule:schedule)
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func deleteSchedule(schedule:Schedule){

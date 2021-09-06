@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import WidgetKit
+
 
 struct DayBatchOperationView: View {
     enum ActiveAlert {
@@ -47,6 +49,7 @@ struct DayBatchOperationView: View {
                 createNewSchedule(schedule:schedule,beginTime:combinedBeginTime,endTime:combinedEndTime)
             }
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func alarmConditioning() {
@@ -96,6 +99,7 @@ struct DayBatchOperationView: View {
         for schedule in schedules {
             deleteSchedule(schedule:schedule)
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func deleteSchedule(schedule:Schedule){
