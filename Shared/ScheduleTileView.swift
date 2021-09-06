@@ -241,11 +241,11 @@ struct ScheduleTileView: View {
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                                     impactMed.impactOccurred()
                             }
-                            .onLongPressGesture {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
-                                completionViewPresented = true
-                            }
+//                            .onLongPressGesture {
+//                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+//                                    impactMed.impactOccurred()
+//                                completionViewPresented = true
+//                            }
                             .sheet(isPresented: $completionViewPresented) {
                                 ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented, schedule: schedule)
                             }
@@ -260,11 +260,11 @@ struct ScheduleTileView: View {
                                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                                     impactMed.impactOccurred()
                             }
-                            .onLongPressGesture {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                    impactMed.impactOccurred()
-                                completionViewPresented = true
-                            }
+//                            .onLongPressGesture {
+//                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+//                                    impactMed.impactOccurred()
+//                                completionViewPresented = true
+//                            }
                             .sheet(isPresented: $completionViewPresented) {
                                 ChangeCompletionView(changeCompletionViewPresented: $completionViewPresented, schedule: schedule)
                             }

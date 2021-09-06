@@ -15,6 +15,7 @@ struct ContentView: View {
     @State var autoRecordNotification = false
     let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
     @State var changedSchedules:[Schedule] = []
+    @State var changedSchedulesNumber:Int = 0
     let updateTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     func autoRecord() {
@@ -22,6 +23,8 @@ struct ContentView: View {
             changedSchedules = AutoRecordServer.autoRecord(mode: mode, weekStart: DateServer.startOfThisWeek())
             print("\(changedSchedules.count) schedule completion auto changed.")
             if changedSchedules.count > 0 {
+                
+                changedSchedulesNumber = changedSchedules.count
                 
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
                     withAnimation(.easeInOut){
@@ -73,7 +76,7 @@ struct ContentView: View {
             
             //MARK: autorecord noification bar
             if autoRecordNotification{
-                AutoRecordNotificationBar (count: changedSchedules.count, mode:mode)
+                AutoRecordNotificationBar (count: changedSchedulesNumber, mode:mode)
             }
             
         }
