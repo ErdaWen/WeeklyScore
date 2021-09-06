@@ -33,30 +33,39 @@ struct ScheduleTileCompactView: View {
                             .frame(width: wHandle)
                             .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle)
+                            .padding(.leading, 1)
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .frame(width: wHandle)
                             .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                             .padding(.trailing, mHandle)
+                            .padding(.leading, 1)
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle)
                             .padding(.trailing, mHandle)
+                            .padding(.leading, 1)
                     }
                 } else if schedule.checked{
                     RoundedRectangle(cornerRadius: wHandle/2)
                         .frame(width: wHandle)
                         .foregroundColor(Color(schedule.items.tags.colorName))
                         .padding(.trailing, mHandle)
+                        .padding(.leading, 1)
+
                 } else {
                     ZStack{
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .frame(width: wHandle)
                             .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle)
+                            .padding(.leading, 1)
+
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle)
                             .padding(.trailing, mHandle)
+                            .padding(.leading, 1)
+
                     }
                 }
                 // end duration-based
@@ -66,31 +75,31 @@ struct ScheduleTileCompactView: View {
                         Circle()
                             .frame(width: wHandle+2)
                             .foregroundColor(Color("background_white"))
-                            .padding(.trailing, mHandle-2)
+                            .padding(.trailing, mHandle-1)
                         Circle()
                             .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                             .frame(width: wHandle+2)
-                            .padding(.trailing, mHandle-2)
+                            .padding(.trailing, mHandle-1)
                         Circle()
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle+2)
-                            .padding(.trailing, mHandle-2)
+                            .padding(.trailing, mHandle-1)
                     }
                 } else if schedule.checked{
                     Circle()
                         .frame(width: wHandle+2)
                         .foregroundColor(Color(schedule.items.tags.colorName))
-                        .padding(.trailing, mHandle-2)
+                        .padding(.trailing, mHandle-1)
                 } else {
                     ZStack{
                         Circle()
                             .frame(width: wHandle+2)
                             .foregroundColor(Color("background_white"))
-                            .padding(.trailing, mHandle-2)
+                            .padding(.trailing, mHandle-1)
                         Circle()
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle+2)
-                            .padding(.trailing, mHandle-2)
+                            .padding(.trailing, mHandle-1)
                     }
                 }
                 

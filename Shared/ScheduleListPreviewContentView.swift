@@ -55,7 +55,7 @@ struct ScheduleListPreviewContentView: View {
                                 VStack(spacing:0){
                                     Spacer()
                                         .frame(height:CGFloat(startCord)+1)
-                                    Circle().frame(height:8).foregroundColor(Color("text_red"))
+                                    Circle().frame(height:8).foregroundColor(Color("text_red")).padding(.trailing, geo.frame(in: .global).width / 8 - 10)
                                     Spacer()
                                 }
                                 
