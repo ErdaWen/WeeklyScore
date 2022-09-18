@@ -18,9 +18,9 @@ struct ScheduleListView: View {
     @Binding var previewMode:Bool
     
     //Use factor for ordinary list view
-    @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
+    var factor:CGFloat
     //Use interCord for previewMode
-    @State var interCord = 50.0
+    var interCord:CGFloat
     
     let mButtonUp:CGFloat = 0
     let sButton:CGFloat = 22
@@ -94,24 +94,24 @@ struct ScheduleListView: View {
                 }.padding(.horizontal,mPicker) // end zstack with picker frame
                 
                 // MARK: Sliders
-                VStack{
-                    Spacer()
-                    ZStack{
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
-                        if previewMode {
-                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                                .frame(height:38)
-                                .padding(.leading,80)
-                                .padding(.trailing,70)
-                        } else {
-                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                                .frame(height:38)
-                                .padding(.leading,80)
-                                .padding(.trailing,70)
-                        }
-                    }.frame(height:75)
-                }
+//                VStack{
+//                    Spacer()
+//                    ZStack{
+//                        Rectangle()
+//                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+//                        if previewMode {
+//                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+//                                .frame(height:38)
+//                                .padding(.leading,80)
+//                                .padding(.trailing,70)
+//                        } else {
+//                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+//                                .frame(height:38)
+//                                .padding(.leading,80)
+//                                .padding(.trailing,70)
+//                        }
+//                    }.frame(height:75)
+//                }
                 
 
                 

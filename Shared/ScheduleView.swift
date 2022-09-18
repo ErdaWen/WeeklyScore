@@ -26,6 +26,11 @@ struct ScheduleView: View {
     @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
     
+    //Use factor for list style view
+    @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
+    //Use interCord for calender style view
+    @State var interCord = 50.0
+    
     // appearence related
     let mTitle:CGFloat = 20
     let hTitle:CGFloat = 38
@@ -87,41 +92,67 @@ struct ScheduleView: View {
                 }
             }.frame(height: hPicker)
             
+            ZStack{
+                VStack{
+                    //MARK: Main content view
+                    if  dayFromDay1 == -1 {
+                        // Week view need to filter out the schedules with BEGIN time within the week range
+                        let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+                        let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                               NSSortDescriptor(key: "endTime", ascending: true)]
+                        
+                        ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode,
+                                         factor: factor, interCord: interCord)
+                    } else {
+                        let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
+                        // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
+                        
+                        let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                               NSSortDescriptor(key: "endTime", ascending: true)]
+                        
+                        ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),today:propertiesModel.startDate,
+                                        factor: factor,interCord: interCord)
+                        
+                    } // end main content
+                    
+                    // Push things upward
+                    Spacer()
+                }
+                
+                
+                VStack{
+                    Spacer()
+                    ZStack{
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                        if previewMode {
+                            CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                                .frame(height:38)
+                                .padding(.leading,80)
+                                .padding(.trailing,70)
+                        } else {
+                            CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                                .frame(height:38)
+                                .padding(.leading,80)
+                                .padding(.trailing,70)
+                        }
+                    }.frame(height:75)
+                }
+            }
             
             
-            //MARK: Main content view
-            if  dayFromDay1 == -1 {
-                // Week view need to filter out the schedules with BEGIN time within the week range
-                let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
-                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                       NSSortDescriptor(key: "endTime", ascending: true)]
-                
-                ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode)
-            } else {
-                let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
-                // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                
-                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                       NSSortDescriptor(key: "endTime", ascending: true)]
-                
-                ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),today:propertiesModel.startDate)
-                
-            } // end main content
-            
-            // Push things upward
-            Spacer()
         } // end all VStack
         .onAppear(){
             WidgetCenter.shared.reloadAllTimelines()
-//            if UserDefaults.standard.bool(forKey: "onDayView") {
-//                for r in 0...6 {
-//                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
-//                        withAnimation(.none){
-//                            dayFromDay1 = r
-//                        }
-//                    }
-//                }
-//            }
+            //            if UserDefaults.standard.bool(forKey: "onDayView") {
+            //                for r in 0...6 {
+            //                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
+            //                        withAnimation(.none){
+            //                            dayFromDay1 = r
+            //                        }
+            //                    }
+            //                }
+            //            }
             updateDate()
         }
         .animation(.default)

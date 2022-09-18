@@ -16,7 +16,11 @@ struct ScheduleDayView: View {
     @State var timeNow = Date()
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
-    @State var interCord = 50.0
+
+    //Use factor for list style view
+    var factor:CGFloat
+    //Use interCord for calender style view
+    var interCord:CGFloat
     
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     
@@ -108,17 +112,17 @@ struct ScheduleDayView: View {
                 }
                 
                 //MARK: Slider
-                VStack{
-                    Spacer()
-                    ZStack{
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
-                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                            .frame(height:38)
-                            .padding(.leading,80)
-                            .padding(.trailing,70)
-                    }.frame(height:75)
-                }
+//                VStack{
+//                    Spacer()
+//                    ZStack{
+//                        Rectangle()
+//                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+//                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+//                            .frame(height:38)
+//                            .padding(.leading,80)
+//                            .padding(.trailing,70)
+//                    }.frame(height:75)
+//                }
                 
                 
                 
