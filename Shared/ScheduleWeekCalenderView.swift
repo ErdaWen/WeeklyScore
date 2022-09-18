@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScheduleListPreviewView: View {
+struct ScheduleWeekCalenderView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -69,7 +69,7 @@ struct ScheduleListPreviewView: View {
                             
                             //MARK: Zstack within the picker frame
                             ZStack{
-                                ScheduleListPreviewContentView(schedules: schedules, interCord: interCord, timeNow:timeNow)
+                                ScheduleWeekCalenderContentView(schedules: schedules, interCord: interCord, timeNow:timeNow)
                             }.padding(.horizontal, mPicker) // end ZStack with picker frame
                             
                             //MARK:Now line

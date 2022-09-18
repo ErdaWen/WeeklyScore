@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScheduleListPreviewContentView: View {
+struct ScheduleWeekCalenderContentView: View {
     
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext

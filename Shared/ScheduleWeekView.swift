@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScheduleListView: View {
+struct ScheduleWeekView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -33,9 +33,9 @@ struct ScheduleListView: View {
                 
                 // MARK: Schedules list/preview main body
                 if previewMode{
-                    ScheduleListPreviewView(schedules: self.schedules,interCord:self.interCord)
+                    ScheduleWeekCalenderView(schedules: self.schedules,interCord:self.interCord)
                 } else {
-                    ScheduleListContentView(schedules: self.schedules,factor:self.factor)
+                    ScheduleWeekListView(schedules: self.schedules,factor:self.factor)
                 }
                 
                 //MARK: Top Buttons

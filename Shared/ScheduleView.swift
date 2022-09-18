@@ -103,7 +103,7 @@ struct ScheduleView: View {
                         let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
                                                NSSortDescriptor(key: "endTime", ascending: true)]
                         
-                        ScheduleListView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode,
+                        ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode,
                                          factor: factor, interCord: interCord)
                     } else {
                         let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
