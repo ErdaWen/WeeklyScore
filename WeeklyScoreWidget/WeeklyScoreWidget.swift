@@ -44,7 +44,7 @@ struct Provider: IntentTimelineProvider {
             let schedules = try managedObjectContext.fetch(fetchRequest)
             // build up whole schedule list
             for schedule in schedules{
-                var newScheduleProperty = ScheduleProperties()
+                let newScheduleProperty = ScheduleProperties()
                 newScheduleProperty.beginTime =  schedule.beginTime
                 newScheduleProperty.endTime = schedule.endTime
                 newScheduleProperty.durationBased = schedule.items.durationBased

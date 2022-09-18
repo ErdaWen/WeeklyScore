@@ -18,6 +18,7 @@ struct SettingViewContent: View {
     
     var body: some View {
         VStack(alignment:.leading,spacing:10) {
+            // MARK: Giant block headings
             ZStack(alignment:.bottomLeading) {
                 Rectangle()
                     .foregroundColor(Color("tag_color_green").opacity(0.3))
