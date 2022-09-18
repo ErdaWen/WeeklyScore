@@ -33,7 +33,7 @@ struct ScheduleWeekView: View {
                 
                 // MARK: Schedules list/preview main body
                 if previewMode{
-                    ScheduleWeekCalenderView(schedules: self.schedules,interCord:self.interCord)
+                    ScheduleWeekCalendarView(schedules: self.schedules,interCord:self.interCord)
                 } else {
                     ScheduleWeekListView(schedules: self.schedules,factor:self.factor)
                 }

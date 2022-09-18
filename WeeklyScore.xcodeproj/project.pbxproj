@@ -10,7 +10,7 @@
 		00214CB726BB98D7001FE49D /* CustomSlider_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CB626BB98D7001FE49D /* CustomSlider_list.swift */; };
 		00214CBD26BBAF2D001FE49D /* AutoRecordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */; };
 		0026288326BDF11600A755D2 /* ScoreBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288226BDF11600A755D2 /* ScoreBar.swift */; };
-		0026288626BDF6C200A755D2 /* ScheduleWeekCalenderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleWeekCalenderContentView.swift */; };
+		0026288626BDF6C200A755D2 /* ScheduleWeekCalendarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288526BDF6C200A755D2 /* ScheduleWeekCalendarContentView.swift */; };
 		0026288D26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026288C26BDFBC900A755D2 /* WeekBatchOpearationView.swift */; };
 		0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */; };
 		0026289626BF57BA00A755D2 /* AutoRecordNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */; };
@@ -18,7 +18,7 @@
 		0026289C26BF5EAC00A755D2 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289B26BF5EAC00A755D2 /* DayPicker.swift */; };
 		0026289F26BF630400A755D2 /* FloatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0026289E26BF630400A755D2 /* FloatButton.swift */; };
 		002628A226BF911F00A755D2 /* NowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A126BF911F00A755D2 /* NowLine.swift */; };
-		002628A526BF956700A755D2 /* ScheduleDayCalenderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A426BF956700A755D2 /* ScheduleDayCalenderContentView.swift */; };
+		002628A526BF956700A755D2 /* ScheduleDayCalendarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A426BF956700A755D2 /* ScheduleDayCalendarContentView.swift */; };
 		002628AA26BF9F2D00A755D2 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628A926BF9F2D00A755D2 /* InputField.swift */; };
 		002628AD26C0F25A00A755D2 /* ScheduleTileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */; };
 		002628B026C0F8C700A755D2 /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */; };
@@ -56,7 +56,7 @@
 		008DC8FD26AE814F009AB91C /* ItemTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DC8FC26AE814F009AB91C /* ItemTileView.swift */; };
 		0092DD3126BCC7A300750557 /* ScheduleWeekListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3026BCC7A300750557 /* ScheduleWeekListView.swift */; };
 		0092DD3426BCC98E00750557 /* ScheduleTileCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3326BCC98E00750557 /* ScheduleTileCompactView.swift */; };
-		0092DD3726BCD11C00750557 /* ScheduleWeekCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3626BCD11C00750557 /* ScheduleWeekCalenderView.swift */; };
+		0092DD3726BCD11C00750557 /* ScheduleWeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092DD3626BCD11C00750557 /* ScheduleWeekCalendarView.swift */; };
 		009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B248D26A239BE0087467A /* EmojiTextField.swift */; };
 		009C422326AF3C2D00A783F0 /* ScheduleWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C422226AF3C2D00A783F0 /* ScheduleWeekView.swift */; };
 		00A3F21126DCA49A0056979A /* WidgetScheduleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A3F21026DCA49A0056979A /* WidgetScheduleTile.swift */; };
@@ -123,7 +123,7 @@
 		00214CB626BB98D7001FE49D /* CustomSlider_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider_list.swift; sourceTree = "<group>"; };
 		00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRecordServer.swift; sourceTree = "<group>"; };
 		0026288226BDF11600A755D2 /* ScoreBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBar.swift; sourceTree = "<group>"; };
-		0026288526BDF6C200A755D2 /* ScheduleWeekCalenderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekCalenderContentView.swift; sourceTree = "<group>"; };
+		0026288526BDF6C200A755D2 /* ScheduleWeekCalendarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekCalendarContentView.swift; sourceTree = "<group>"; };
 		0026288C26BDFBC900A755D2 /* WeekBatchOpearationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekBatchOpearationView.swift; sourceTree = "<group>"; };
 		0026289026BE557400A755D2 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRecordNotificationBar.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		0026289B26BF5EAC00A755D2 /* DayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPicker.swift; sourceTree = "<group>"; };
 		0026289E26BF630400A755D2 /* FloatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButton.swift; sourceTree = "<group>"; };
 		002628A126BF911F00A755D2 /* NowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowLine.swift; sourceTree = "<group>"; };
-		002628A426BF956700A755D2 /* ScheduleDayCalenderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayCalenderContentView.swift; sourceTree = "<group>"; };
+		002628A426BF956700A755D2 /* ScheduleDayCalendarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayCalendarContentView.swift; sourceTree = "<group>"; };
 		002628A926BF9F2D00A755D2 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTileDetailView.swift; sourceTree = "<group>"; };
 		002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		008DC8FC26AE814F009AB91C /* ItemTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTileView.swift; sourceTree = "<group>"; };
 		0092DD3026BCC7A300750557 /* ScheduleWeekListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekListView.swift; sourceTree = "<group>"; };
 		0092DD3326BCC98E00750557 /* ScheduleTileCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTileCompactView.swift; sourceTree = "<group>"; };
-		0092DD3626BCD11C00750557 /* ScheduleWeekCalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekCalenderView.swift; sourceTree = "<group>"; };
+		0092DD3626BCD11C00750557 /* ScheduleWeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekCalendarView.swift; sourceTree = "<group>"; };
 		009B248D26A239BE0087467A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		009C422226AF3C2D00A783F0 /* ScheduleWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekView.swift; sourceTree = "<group>"; };
 		00A3F21026DCA49A0056979A /* WidgetScheduleTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetScheduleTile.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				0072757126B65D0E00FAA32D /* ScheduleDayView.swift */,
-				002628A426BF956700A755D2 /* ScheduleDayCalenderContentView.swift */,
+				002628A426BF956700A755D2 /* ScheduleDayCalendarContentView.swift */,
 			);
 			name = DayView;
 			sourceTree = "<group>";
@@ -246,8 +246,8 @@
 		0026288926BDF81F00A755D2 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				0092DD3626BCD11C00750557 /* ScheduleWeekCalenderView.swift */,
-				0026288526BDF6C200A755D2 /* ScheduleWeekCalenderContentView.swift */,
+				0092DD3626BCD11C00750557 /* ScheduleWeekCalendarView.swift */,
+				0026288526BDF6C200A755D2 /* ScheduleWeekCalendarContentView.swift */,
 			);
 			name = Preview;
 			sourceTree = "<group>";
@@ -650,7 +650,7 @@
 				00A5FE6026ACC5A7002F38B1 /* PropertiesModel.swift in Sources */,
 				0026288D26BDFBC900A755D2 /* WeekBatchOpearationView.swift in Sources */,
 				002628B926C791FD00A755D2 /* ItemStatisticBars.swift in Sources */,
-				002628A526BF956700A755D2 /* ScheduleDayCalenderContentView.swift in Sources */,
+				002628A526BF956700A755D2 /* ScheduleDayCalendarContentView.swift in Sources */,
 				005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
 				00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */,
 				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
@@ -681,7 +681,7 @@
 				0026289F26BF630400A755D2 /* FloatButton.swift in Sources */,
 				00C72FA92697F6080028EF5C /* ChangeCompletionView.swift in Sources */,
 				002628AD26C0F25A00A755D2 /* ScheduleTileDetailView.swift in Sources */,
-				0026288626BDF6C200A755D2 /* ScheduleWeekCalenderContentView.swift in Sources */,
+				0026288626BDF6C200A755D2 /* ScheduleWeekCalendarContentView.swift in Sources */,
 				002628C326C8C82300A755D2 /* WeekBatchList.swift in Sources */,
 				002628B326C73CDF00A755D2 /* ItemViewAll.swift in Sources */,
 				009B248E26A239BE0087467A /* EmojiTextField.swift in Sources */,
@@ -699,7 +699,7 @@
 				C88EC1392692B378005A4DAB /* ItemView.swift in Sources */,
 				002628BD26C8971300A755D2 /* ConflictServer.swift in Sources */,
 				00C59BED26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */,
-				0092DD3726BCD11C00750557 /* ScheduleWeekCalenderView.swift in Sources */,
+				0092DD3726BCD11C00750557 /* ScheduleWeekCalendarView.swift in Sources */,
 				005D078426CCBFE200664008 /* EditTagView.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */,
