@@ -62,8 +62,8 @@ class Initializer: ObservableObject{
         let fetchRequest = Tag.tagFetchRequest()
         do{
             let existingTags = try managedObjectContext.fetch(fetchRequest)
-            if existingTags.count == 0 {
-                
+            //if existingTags.count == 0 {
+            if false{
                 let tag_blue = Tag(context: managedObjectContext)
                 tag_blue.id = UUID()
                 tag_blue.name = "Health"
