@@ -17,6 +17,12 @@ struct WidgetScheduleContentView: View {
                         WidgetScheduleTile(schedule: schedules[r],compact: compact)
                             .frame(height:compact ? 28 : 35)
                     }
+                if schedules.count==1{
+                    Spacer().frame(maxHeight: 70)
+                }
+                if schedules.count==2{
+                    Spacer().frame(maxHeight: 40)
+                }
             }//endVStack
             .frame(height:139)
             .padding(.top,12)
