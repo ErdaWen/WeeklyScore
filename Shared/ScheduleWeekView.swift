@@ -63,37 +63,6 @@ struct ScheduleWeekView: View {
                 .padding(.top,mButtonUp)
                 // end top buttons
                 
-                //MARK: Preview Button
-                //Zstack with picker frame
-                ZStack{
-                    GeometryReader{ geo in
-                        HStack{
-                            ZStack{
-                                // Stroke
-                                Rectangle()
-                                    .foregroundColor(Color("background_white").opacity(0.7))
-                                // Transparent white background
-                                Rectangle()
-                                    .stroke(Color("background_grey"),lineWidth: 2)
-                                // button
-                                Button {
-                                    previewMode.toggle()
-                                    UserDefaults.standard.set(previewMode,forKey: "previewMode")
-                                } label: {
-                                    
-                                    Image(systemName: previewMode ? "list.dash" : "calendar")
-                                        .resizable().scaledToFit()
-                                        .frame(height: previewMode ? 11: 14)
-                                        .padding(.top,0)
-                                        .foregroundColor(Color("text_black"))
-                                }
-                            }.frame(width: geo.frame(in: .global).width / 8 )//end button Zstack
-                            Spacer()
-                        }.frame(height:40)
-                    }// end georeader
-                }.padding(.horizontal,mPicker) // end zstack with picker frame
-                
-                
                 //MARK: "No schedules" overlay
                 if schedules.count == 0 {
                     VStack(){
