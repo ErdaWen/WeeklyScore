@@ -65,22 +65,7 @@ struct ScheduleDayCalendarView: View {
                 .onAppear(){
                     scrollview.scrollTo(17)
                 }
-                
-                
-                
-                //MARK: "No schedules" overlay
-                if schedules.count == 0{
-                    VStack(){
-                        Spacer()
-                        Text("No schedules for selected day")
-                            .foregroundColor(Color("text_black"))
-                            .font(.system(size: 18))
-                            .fontWeight(.light)
-                        Spacer()
-                    }
-                }
-                
-                
+    
             }         // end button + scroll ZStack
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
