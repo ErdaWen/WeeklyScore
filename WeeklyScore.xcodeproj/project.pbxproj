@@ -44,6 +44,7 @@
 		0072757B26B7280600FAA32D /* CordServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757A26B7280600FAA32D /* CordServer.swift */; };
 		0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072757D26B873F400FAA32D /* CustomSlider.swift */; };
 		007A99EC28D8E3EE00773FFB /* ScheduleDayCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007A99EB28D8E3EE00773FFB /* ScheduleDayCalendarView.swift */; };
+		007A99EF28D8E7D600773FFB /* ScheduleDayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007A99EE28D8E7D600773FFB /* ScheduleDayListView.swift */; };
 		0080F13C26D1F3DD00B10859 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13B26D1F3DD00B10859 /* Theme.swift */; };
 		0080F13F26D1F40E00B10859 /* SettingViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F13E26D1F40E00B10859 /* SettingViewContent.swift */; };
 		0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080F14126D21E2700B10859 /* weekStartDayPicker.swift */; };
@@ -158,6 +159,7 @@
 		0072757A26B7280600FAA32D /* CordServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CordServer.swift; sourceTree = "<group>"; };
 		0072757D26B873F400FAA32D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		007A99EB28D8E3EE00773FFB /* ScheduleDayCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayCalendarView.swift; sourceTree = "<group>"; };
+		007A99EE28D8E7D600773FFB /* ScheduleDayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayListView.swift; sourceTree = "<group>"; };
 		0080F13B26D1F3DD00B10859 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0080F13E26D1F40E00B10859 /* SettingViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewContent.swift; sourceTree = "<group>"; };
 		0080F14126D21E2700B10859 /* weekStartDayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekStartDayPicker.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				0072757126B65D0E00FAA32D /* ScheduleDayView.swift */,
 				007A99ED28D8E60C00773FFB /* Calendar */,
+				007A99F028D8E7E100773FFB /* List */,
 			);
 			name = DayView;
 			sourceTree = "<group>";
@@ -315,6 +318,14 @@
 				002628A426BF956700A755D2 /* ScheduleDayCalendarContentView.swift */,
 			);
 			name = Calendar;
+			sourceTree = "<group>";
+		};
+		007A99F028D8E7E100773FFB /* List */ = {
+			isa = PBXGroup;
+			children = (
+				007A99EE28D8E7D600773FFB /* ScheduleDayListView.swift */,
+			);
+			name = List;
 			sourceTree = "<group>";
 		};
 		0080F13A26D1F34F00B10859 /* Settings */ = {
@@ -664,6 +675,7 @@
 				002628A526BF956700A755D2 /* ScheduleDayCalendarContentView.swift in Sources */,
 				005D078126CC7FFE00664008 /* ItemViewCatagorizedSection.swift in Sources */,
 				00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */,
+				007A99EF28D8E7D600773FFB /* ScheduleDayListView.swift in Sources */,
 				0026289326BE557400A755D2 /* Item+CoreDataProperties.swift in Sources */,
 				0072757E26B873F400FAA32D /* CustomSlider.swift in Sources */,
 				00C72FAC2698F2930028EF5C /* ChangeScheduleView.swift in Sources */,

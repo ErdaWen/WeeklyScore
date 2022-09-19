@@ -36,7 +36,7 @@ struct ScheduleDayView: View {
             if previewMode{
                 ScheduleDayCalendarView(schedules: self.schedules,interCord:self.interCord, today: self.today)
             } else {
-                //ScheduleDayListView(schedules: self.schedules,factor:self.factor)
+                ScheduleDayListView(schedules: self.schedules,factor:self.factor)
             }
             
             //MARK: Buttons
