@@ -112,20 +112,6 @@ struct ScheduleDayView: View {
                     }
                 }
                 
-                //MARK: Slider
-//                VStack{
-//                    Spacer()
-//                    ZStack{
-//                        Rectangle()
-//                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
-//                        CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-//                            .frame(height:38)
-//                            .padding(.leading,80)
-//                            .padding(.trailing,70)
-//                    }.frame(height:75)
-//                }
-                
-                
                 
             }         // end button + scroll ZStack
             .onReceive(updateTimer) { _ in
