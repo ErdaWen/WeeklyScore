@@ -13,7 +13,6 @@ struct ScheduleDayView: View {
     
     @FetchRequest var schedules: FetchedResults<Schedule>
     var today:Date
-    @State var timeNow = Date()
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
 
@@ -21,8 +20,7 @@ struct ScheduleDayView: View {
     var factor:CGFloat
     //Use interCord for calender style view
     var interCord:CGFloat
-    
-    let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    var previewMode:Bool
     
     @GestureState var pinchStarted = false
     //@State var pinchValue: CGFloat = 0
@@ -31,93 +29,42 @@ struct ScheduleDayView: View {
     let mButtonUp:CGFloat = 0
     let sButton:CGFloat = 22
     let mButtons:CGFloat = 10
-    let topSpacing:CGFloat = 30
-    let bottomSpacing:CGFloat = 50
     
     // Commit push test
     var body: some View {
-        ScrollViewReader { scrollview in
-            ZStack(alignment: .top){
-                ScrollView{
-                    Spacer()
-                        .frame(height:topSpacing)
-                    ZStack(alignment: .topLeading){
-                        //MARK: Timeline background
-                        ForEach (0...24, id:\.self){ r in
-                            HStack(alignment:.center, spacing:5){
-                                Text("\(r):00")
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.leading, 20)
-                                VStack{
-                                    Divider()
-                                }
-                                .id(r)
-                            }
-                            .frame(height:10)
-                            .padding(.top, CGFloat( Double(r) * interCord) )
-                        }
-                        // end time line plot VStack
-                        
-                        //MARK: All schedules
-                        ScheduleDayCalendarContentView(schedules: schedules, interCord: interCord,today:today)
-                        
-                        //MARK:Now line
-                        if propertiesModel.startDate == DateServer.startOfToday() {
-                            NowLine(timeNow: timeNow, interCord: interCord)
-                        }
-                        
-                    } // end ZStack
-                    .padding(.trailing , 20)
-                    Spacer()
-                        .frame(height:bottomSpacing)
-                } // end scrollView
-                .onAppear(){
-                    scrollview.scrollTo(17)
-                }
-                
-                //MARK: Buttons
-                HStack (spacing:mButtons) {
-                    Spacer()
-                    
-                    FloatButton(systemName: "plus.square", sButton: sButton) {
-                        addViewPresented = true
-                    }
-                    .sheet(isPresented: $addViewPresented, content: {
-                        AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    })
-                    
-                    
-                    FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
-                        batchAddViewPresented = true
-                    }
-                    .sheet(isPresented: $batchAddViewPresented) {
-                        DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    }
-                    Spacer()
-                } // end button HStack
-                .padding(.top,mButtonUp)
-                
-                //MARK: "No schedules" overlay
-                if schedules.count == 0{
-                    VStack(){
-                        Spacer()
-                        Text("No schedules for selected day")
-                            .foregroundColor(Color("text_black"))
-                            .font(.system(size: 18))
-                            .fontWeight(.light)
-                        Spacer()
-                    }
-                }
-                
-                
-            }         // end button + scroll ZStack
-            .onReceive(updateTimer) { _ in
-                timeNow = Date()
+        ZStack(alignment:.top){
+            if previewMode{
+                ScheduleDayCalendarView(schedules: self.schedules,interCord:self.interCord, today: self.today)
+            } else {
+                //ScheduleDayListView(schedules: self.schedules,factor:self.factor)
             }
-        } //end ScrollViewReader
+            
+            //MARK: Buttons
+            HStack (spacing:mButtons) {
+                Spacer()
+                
+                FloatButton(systemName: "plus.square", sButton: sButton) {
+                    addViewPresented = true
+                }
+                .sheet(isPresented: $addViewPresented, content: {
+                    AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
+                })
+                
+                
+                FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
+                    batchAddViewPresented = true
+                }
+                .sheet(isPresented: $batchAddViewPresented) {
+                    DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
+                }
+                Spacer()
+            } // end button HStack
+            .padding(.top,mButtonUp)
+        }//end Zstack
+
+        //end ScrollViewReader
         //        .gesture(
         //            MagnificationGesture()
         //                //                    .updating($pinchStarted, body: { value, out, _ in
@@ -138,8 +85,8 @@ struct ScheduleDayView: View {
         //        )
         
         
-    }
-}
+    }// end view
+}// end struct
 
 //struct ScheduleDayView_Previews: PreviewProvider {
 //    static var previews: some View {

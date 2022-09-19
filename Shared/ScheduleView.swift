@@ -113,7 +113,7 @@ struct ScheduleView: View {
                                                NSSortDescriptor(key: "endTime", ascending: true)]
                         
                         ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),today:propertiesModel.startDate,
-                                        factor: factor,interCord: interCord)
+                                        factor: factor,interCord: interCord,previewMode: self.previewMode)
                         
                     } // end main content
                     
