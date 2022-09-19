@@ -59,7 +59,7 @@ struct ScheduleDayView: View {
                         // end time line plot VStack
                         
                         //MARK: All schedules
-                        ScheduleDayCalenderContentView(schedules: schedules, interCord: interCord,today:today)
+                        ScheduleDayCalendarContentView(schedules: schedules, interCord: interCord,today:today)
                         
                         //MARK:Now line
                         if propertiesModel.startDate == DateServer.startOfToday() {
