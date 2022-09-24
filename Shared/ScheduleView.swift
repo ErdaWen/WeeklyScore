@@ -64,6 +64,19 @@ struct ScheduleView: View {
         }
     }
     
+    func fetchSchedules(from startTime:Date, to endTime:Date, cutend:Bool) -> FetchRequest<Schedule>{
+        var predicate = NSPredicate()
+        if cutend{
+            predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startTime as NSDate, endTime as NSDate)
+        } else{
+            predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", startTime as NSDate, endTime as NSDate)
+        }
+        let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                               NSSortDescriptor(key: "endTime", ascending: true)]
+        var fetchRes = FetchRequest<Schedule>(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
+        return fetchRes
+    }
+    
     var body: some View {
         VStack(spacing:0){
             ScoreBar()
@@ -115,29 +128,23 @@ struct ScheduleView: View {
     
     var mainContentTabs: some View{
         TabView(selection: $dayFromDay1) {
-            ForEach(-1...6,id:\.self){ daystart in
+            ForEach(-1...6,id:\.self){ dayoffset in
                 //MARK: Main content view
-                if  daystart == -1 {
-                    // Week view need to filter out the schedules with BEGIN time within the week range
-                    let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
-                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                if  dayoffset == -1 {
+                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate, to: DateServer.addOneWeek(date: propertiesModel.startDate), cutend: true)
                     
-                    ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                    ScheduleWeekView(schedules: fetchScheduleRes,
                                      previewMode:$previewMode,
-                                     factor: factor, interCord: interCord).tag(daystart)
+                                     factor: factor, interCord: interCord).tag(dayoffset)
                 } else {
-                    let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: daystart)
+                    let dayOnThisPage = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayoffset)
+                    // Filter the schedule that ENDS after the day starts and BEGINS before the day ends, thus set the cutend to false
+                    let fetchScheduleRes = fetchSchedules(from: dayOnThisPage, to: DateServer.addOneDay(date: dayOnThisPage), cutend: false)
                     
-                    let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
-                    // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                    
-                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                           NSSortDescriptor(key: "endTime", ascending: true)]
-                    
-                    ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
-                                    today:theday,
-                                    factor: factor,interCord: interCord,previewMode: self.previewMode).tag(daystart)
+                    ScheduleDayView(schedules: fetchScheduleRes,
+                                    today:dayOnThisPage,
+                                    factor: factor,interCord: interCord,
+                                    previewMode: self.previewMode).tag(dayoffset)
                     
                 } // end main content
             }
@@ -161,27 +168,19 @@ struct ScheduleView: View {
             }
             .sheet(isPresented: $batchAddViewPresented) {
                 if dayFromDay1 == -1 {
-                    let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
-                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate, to: DateServer.addOneWeek(date: propertiesModel.startDate), cutend: true)
                     
                     WeekBatchOpearationView(dayStart: propertiesModel.startDate,
-                                            schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                            schedules: fetchScheduleRes,
                                             singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
                     .environment(\.managedObjectContext,self.viewContext)
                 }
                 else{
-                    let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1)
-                    
-                    let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
-                    // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                    
-                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                           NSSortDescriptor(key: "endTime", ascending: true)]
-                    
+
+                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate, to: DateServer.addOneDay(date: propertiesModel.startDate), cutend: true)
+
                     DayBatchOperationView(dayStart: propertiesModel.startDate,
-                                          schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
-                                          , singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                                          schedules: fetchScheduleRes, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
                     .environment(\.managedObjectContext,self.viewContext)
                 }
                 
