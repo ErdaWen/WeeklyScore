@@ -121,42 +121,42 @@ struct ScheduleView: View {
                         } // end main content
                     }
                 }.tabViewStyle(.page)
-
+                
                 // MARK: Preview button and slider
-                //                VStack{
-                //                    Spacer()
-                //                    ZStack{
-                //                        Rectangle()
-                //                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
-                //
-                //                        HStack (spacing:mButtons) {
-                //
-                //                            Button {
-                //                                previewMode = !previewMode
-                //                            } label: {
-                //                                Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
-                //                                    .resizable().scaledToFit()
-                //                                    .foregroundColor(Color("text_black"))
-                //                                    .frame(height:sButton)
-                //                                    .padding(.leading,70)
-                //                                    .padding(.top,19)
-                //                            }
-                //
-                //
-                //                            if previewMode {
-                //                                CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                //                                    .frame(height:38)
-                //                                //.padding(.leading,80)
-                //                                    .padding(.trailing,60)
-                //                            } else {
-                //                                CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                //                                    .frame(height:38)
-                //                                //.padding(.leading,80)
-                //                                    .padding(.trailing,60)
-                //                            }
-                //                        } // HStack
-                //                    }.frame(height:75)
-                //                }// end preview button and slider
+                VStack{
+                    Spacer()
+                    ZStack{
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                        
+                        HStack (spacing:mButtons) {
+                            
+                            Button {
+                                previewMode = !previewMode
+                            } label: {
+                                Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
+                                    .resizable().scaledToFit()
+                                    .foregroundColor(Color("text_black"))
+                                    .frame(height:sButton)
+                                    .padding(.leading,70)
+                                    .padding(.top,19)
+                            }
+                            
+                            
+                            if previewMode {
+                                CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                                    .frame(height:38)
+                                //.padding(.leading,80)
+                                    .padding(.trailing,60)
+                            } else {
+                                CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                                    .frame(height:38)
+                                //.padding(.leading,80)
+                                    .padding(.trailing,60)
+                            }
+                        } // HStack
+                    }.frame(height:75)
+                }// end preview button and slider
                 
             }
             
