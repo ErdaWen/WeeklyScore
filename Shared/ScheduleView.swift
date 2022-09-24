@@ -45,7 +45,7 @@ struct ScheduleView: View {
     let mButtons: CGFloat = 20
     let sButton: CGFloat = 18
     let mButtonUp:CGFloat = 0
-
+    
     
     init(){
         self.dayFromDay1 = -1
@@ -58,8 +58,6 @@ struct ScheduleView: View {
         }
         
     }
-    
-    
     
     func updateDate() {
         propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
@@ -75,148 +73,32 @@ struct ScheduleView: View {
     var body: some View {
         VStack(spacing:0){
             
-            //MARK: Scores
             ScoreBar()
             
-            //MARK: Week title bar
             WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1, updateFunc: {
                 updateDate()
             })
-            .frame(height:hTitle).padding(.horizontal, mTitle).animation(.default)
+            .frame(height:hTitle)
+            .padding(.horizontal, mTitle)
+            .animation(.default)
             
             ZStack(alignment:.top){
-                //MARK: Day picker
                 DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode, updateFunc: {
                     updateDate()
                 })
                 .padding(.horizontal, mPicker)
-                
-                //MARK: Horizontal Divider, not shown in week calendar look
-                VStack{
-                    Spacer()
-                    if (!previewMode) || (dayFromDay1 != -1)
-                    {
-                        Divider().background(Color("background_grey"))
-                    }
-                }
+                conditionalDividor
             }.frame(height: hPicker)
             
             ZStack{
-
-                TabView(selection: $dayFromDay1) {
-                    ForEach(-1...6,id:\.self){ daystart in
-                        //MARK: Main content view
-                        if  daystart == -1 {
-                            // Week view need to filter out the schedules with BEGIN time within the week range
-                            let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
-                            let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                                   NSSortDescriptor(key: "endTime", ascending: true)]
-                            
-                            ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
-                                             previewMode:$previewMode,
-                                             factor: factor, interCord: interCord).tag(daystart)
-                        } else {
-                            let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: daystart)
-                            
-                            let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
-                            // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                            
-                            let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                                   NSSortDescriptor(key: "endTime", ascending: true)]
-                            
-                            ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
-                                            today:theday,
-                                            factor: factor,interCord: interCord,previewMode: self.previewMode).tag(daystart)
-                            
-                        } // end main content
-                    }
-                }.tabViewStyle(.page)
-                
+                mainContentTabs
                 // MARK: Preview button and slider
                 VStack{
-                    //MARK: Top Buttons
-                    HStack(spacing:mButtons) {
-                        Spacer()
-                        FloatButton(systemName: "plus.square", sButton: sButton) {
-                            addViewPresented = true
-                        }
-                        .sheet(isPresented: $addViewPresented, content: {
-                            AddScheduleView(initDate: (dayFromDay1 == -1 ? Date() :propertiesModel.startDate), addScheduleViewPresented: $addViewPresented)
-                                .environment(\.managedObjectContext,self.viewContext)
-                        })
-                        
-                        
-                        FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
-                            batchAddViewPresented = true
-                        }
-                        .sheet(isPresented: $batchAddViewPresented) {
-                            if dayFromDay1 == -1 {
-                                let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
-                                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                                       NSSortDescriptor(key: "endTime", ascending: true)]
-                                                 
-                                WeekBatchOpearationView(dayStart: propertiesModel.startDate,
-                                                        schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
-                                                        singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
-                                    .environment(\.managedObjectContext,self.viewContext)
-                            }
-                            else{
-                                let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1)
-                                
-                                let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
-                                // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
-                                
-                                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
-                                                       NSSortDescriptor(key: "endTime", ascending: true)]
-                                
-                                DayBatchOperationView(dayStart: propertiesModel.startDate,
-                                                      schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
-                                                      , singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
-                                    .environment(\.managedObjectContext,self.viewContext)
-                            }
-
-                        }
-                        
-                        Spacer()
-                    } //end top Buttons HStack
-                    .padding(.top,mButtonUp)
-                    // end top buttons
+                    scheduleOperationButtons
                     Spacer()
-                    ZStack{
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
-                        
-                        HStack (spacing:mButtons) {
-                            
-                            Button {
-                                previewMode = !previewMode
-                            } label: {
-                                Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
-                                    .resizable().scaledToFit()
-                                    .foregroundColor(Color("text_black"))
-                                    .frame(height:sButton)
-                                    .padding(.leading,70)
-                                    .padding(.top,19)
-                            }
-                            
-                            
-                            if previewMode {
-                                CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
-                                    .frame(height:38)
-                                //.padding(.leading,80)
-                                    .padding(.trailing,60)
-                            } else {
-                                CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
-                                    .frame(height:38)
-                                //.padding(.leading,80)
-                                    .padding(.trailing,60)
-                            }
-                        } // HStack
-                    }.frame(height:75)
-                }// end preview button and slider
-                
+                    previewButtonSlider
+                }
             }
-            
             
         } // end all VStack
         .onAppear(){
@@ -233,6 +115,131 @@ struct ScheduleView: View {
             updateDate()
         }
         .animation(.default)
+    }
+    
+    var conditionalDividor: some View {
+        //MARK: Horizontal Divider, not shown in week calendar look
+        VStack{
+            // Push the divider to bottom
+            Spacer()
+            if (!previewMode) || (dayFromDay1 != -1)
+            {
+                Divider().background(Color("background_grey"))
+            }
+        }
+    }
+    
+    var mainContentTabs: some View{
+        TabView(selection: $dayFromDay1) {
+            ForEach(-1...6,id:\.self){ daystart in
+                //MARK: Main content view
+                if  daystart == -1 {
+                    // Week view need to filter out the schedules with BEGIN time within the week range
+                    let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                    
+                    ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                     previewMode:$previewMode,
+                                     factor: factor, interCord: interCord).tag(daystart)
+                } else {
+                    let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: daystart)
+                    
+                    let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
+                    // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
+                    
+                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                    
+                    ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                    today:theday,
+                                    factor: factor,interCord: interCord,previewMode: self.previewMode).tag(daystart)
+                    
+                } // end main content
+            }
+        }.tabViewStyle(.page)
+    }
+    
+    var scheduleOperationButtons: some View{
+        HStack(spacing:mButtons) {
+            Spacer()
+            FloatButton(systemName: "plus.square", sButton: sButton) {
+                addViewPresented = true
+            }
+            .sheet(isPresented: $addViewPresented, content: {
+                AddScheduleView(initDate: (dayFromDay1 == -1 ? Date() :propertiesModel.startDate), addScheduleViewPresented: $addViewPresented)
+                    .environment(\.managedObjectContext,self.viewContext)
+            })
+            
+            
+            FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
+                batchAddViewPresented = true
+            }
+            .sheet(isPresented: $batchAddViewPresented) {
+                if dayFromDay1 == -1 {
+                    let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                    
+                    WeekBatchOpearationView(dayStart: propertiesModel.startDate,
+                                            schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                            singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
+                    .environment(\.managedObjectContext,self.viewContext)
+                }
+                else{
+                    let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1)
+                    
+                    let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
+                    // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
+                    
+                    let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                           NSSortDescriptor(key: "endTime", ascending: true)]
+                    
+                    DayBatchOperationView(dayStart: propertiesModel.startDate,
+                                          schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
+                                          , singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                    .environment(\.managedObjectContext,self.viewContext)
+                }
+                
+            }
+            
+            Spacer()
+        } //end top Buttons HStack
+        .padding(.top,mButtonUp)
+    }
+    
+    var previewButtonSlider: some View{
+        ZStack{
+            Rectangle()
+                .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+            
+            HStack (spacing:mButtons) {
+                
+                Button {
+                    previewMode = !previewMode
+                } label: {
+                    Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
+                        .resizable().scaledToFit()
+                        .foregroundColor(Color("text_black"))
+                        .frame(height:sButton)
+                        .padding(.leading,70)
+                        .padding(.top,19)
+                }
+                
+                
+                if previewMode {
+                    CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
+                        .frame(height:38)
+                    //.padding(.leading,80)
+                        .padding(.trailing,60)
+                } else {
+                    CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
+                        .frame(height:38)
+                    //.padding(.leading,80)
+                        .padding(.trailing,60)
+                }
+            } // HStack
+        }.frame(height:75)
     }
 }
 
