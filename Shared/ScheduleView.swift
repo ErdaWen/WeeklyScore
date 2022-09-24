@@ -120,12 +120,8 @@ struct ScheduleView: View {
                             
                         } // end main content
                     }
-                    .tabViewStyle(.page)
-                }
-                
-                
-                
-                
+                }.tabViewStyle(.page)
+
                 // MARK: Preview button and slider
                 //                VStack{
                 //                    Spacer()
