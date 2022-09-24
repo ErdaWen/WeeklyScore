@@ -13,8 +13,6 @@ struct ScheduleDayView: View {
     
     @FetchRequest var schedules: FetchedResults<Schedule>
     var today:Date
-    @State var addViewPresented = false
-    @State var batchAddViewPresented = false
 
     //Use factor for list style view
     var factor:CGFloat
@@ -40,29 +38,29 @@ struct ScheduleDayView: View {
             }
             
             //MARK: Buttons
-            HStack (spacing:mButtons) {
-                Spacer()
-                
-                FloatButton(systemName: "plus.square", sButton: sButton) {
-                    addViewPresented = true
-                }
-                .sheet(isPresented: $addViewPresented, content: {
-                    AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
-                        .environment(\.managedObjectContext,self.viewContext)
-                })
-                
-                
-                FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
-                    batchAddViewPresented = true
-                }
-                .sheet(isPresented: $batchAddViewPresented) {
-                    DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
-                        .environment(\.managedObjectContext,self.viewContext)
-                }
-                Spacer()
-            } // end button HStack
-            .padding(.top,mButtonUp)
-            
+//            HStack (spacing:mButtons) {
+//                Spacer()
+//
+//                FloatButton(systemName: "plus.square", sButton: sButton) {
+//                    addViewPresented = true
+//                }
+//                .sheet(isPresented: $addViewPresented, content: {
+//                    AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
+//                        .environment(\.managedObjectContext,self.viewContext)
+//                })
+//
+//
+//                FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
+//                    batchAddViewPresented = true
+//                }
+//                .sheet(isPresented: $batchAddViewPresented) {
+//                    DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+//                        .environment(\.managedObjectContext,self.viewContext)
+//                }
+//                Spacer()
+//            } // end button HStack
+//            .padding(.top,mButtonUp)
+
             //MARK: "No schedules" overlay
             if schedules.count == 0{
                 VStack(){

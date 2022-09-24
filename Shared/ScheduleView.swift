@@ -24,7 +24,12 @@ struct ScheduleView: View {
     // String arrays for title and day picker dispaly
     @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
     @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+    
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
+    @State var addViewPresented = false
+    @State var batchAddViewPresented = false
+    
+    
     
     //Use factor for list style view
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
@@ -39,6 +44,8 @@ struct ScheduleView: View {
     let minDragDist:CGFloat = 40
     let mButtons: CGFloat = 20
     let sButton: CGFloat = 18
+    let mButtonUp:CGFloat = 0
+
     
     init(){
         self.dayFromDay1 = -1
@@ -95,6 +102,7 @@ struct ScheduleView: View {
             }.frame(height: hPicker)
             
             ZStack{
+
                 TabView(selection: $dayFromDay1) {
                     ForEach(-1...6,id:\.self){ daystart in
                         //MARK: Main content view
@@ -104,7 +112,8 @@ struct ScheduleView: View {
                             let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
                                                    NSSortDescriptor(key: "endTime", ascending: true)]
                             
-                            ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),previewMode:$previewMode,
+                            ScheduleWeekView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                             previewMode:$previewMode,
                                              factor: factor, interCord: interCord).tag(daystart)
                         } else {
                             let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: daystart)
@@ -115,7 +124,8 @@ struct ScheduleView: View {
                             let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
                                                    NSSortDescriptor(key: "endTime", ascending: true)]
                             
-                            ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),today:propertiesModel.startDate,
+                            ScheduleDayView(schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                            today:theday,
                                             factor: factor,interCord: interCord,previewMode: self.previewMode).tag(daystart)
                             
                         } // end main content
@@ -124,6 +134,53 @@ struct ScheduleView: View {
                 
                 // MARK: Preview button and slider
                 VStack{
+                    //MARK: Top Buttons
+                    HStack(spacing:mButtons) {
+                        Spacer()
+                        FloatButton(systemName: "plus.square", sButton: sButton) {
+                            addViewPresented = true
+                        }
+                        .sheet(isPresented: $addViewPresented, content: {
+                            AddScheduleView(initDate: (dayFromDay1 == -1 ? Date() :propertiesModel.startDate), addScheduleViewPresented: $addViewPresented)
+                                .environment(\.managedObjectContext,self.viewContext)
+                        })
+                        
+                        
+                        FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
+                            batchAddViewPresented = true
+                        }
+                        .sheet(isPresented: $batchAddViewPresented) {
+                            if dayFromDay1 == -1 {
+                                let predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", propertiesModel.startDate as NSDate, DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+                                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                                       NSSortDescriptor(key: "endTime", ascending: true)]
+                                                 
+                                WeekBatchOpearationView(dayStart: propertiesModel.startDate,
+                                                        schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default),
+                                                        singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
+                                    .environment(\.managedObjectContext,self.viewContext)
+                            }
+                            else{
+                                let theday = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayFromDay1)
+                                
+                                let predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", theday as NSDate, DateServer.addOneDay(date: theday) as NSDate)
+                                // Calendar view need to filter out the scheduels with END time or BEGIN time within the day range
+                                
+                                let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+                                                       NSSortDescriptor(key: "endTime", ascending: true)]
+                                
+                                DayBatchOperationView(dayStart: propertiesModel.startDate,
+                                                      schedules: FetchRequest(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
+                                                      , singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
+                                    .environment(\.managedObjectContext,self.viewContext)
+                            }
+
+                        }
+                        
+                        Spacer()
+                    } //end top Buttons HStack
+                    .padding(.top,mButtonUp)
+                    // end top buttons
                     Spacer()
                     ZStack{
                         Rectangle()

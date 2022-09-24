@@ -12,8 +12,6 @@ struct ScheduleWeekView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest var schedules: FetchedResults<Schedule>
-    @State var addViewPresented = false
-    @State var batchAddViewPresented = false
     //@State var zoomin = UserDefaults.standard.bool(forKey: "zoomedIn")
     @Binding var previewMode:Bool
     
@@ -38,31 +36,7 @@ struct ScheduleWeekView: View {
                     ScheduleWeekListView(schedules: self.schedules,factor:self.factor)
                 }
                 
-                //MARK: Top Buttons
-                HStack(spacing:mButtons) {
-                    Spacer()
-                    FloatButton(systemName: "plus.square", sButton: sButton) {
-                        addViewPresented = true
-                    }
-                    .sheet(isPresented: $addViewPresented, content: {
-                        AddScheduleView(initDate: Date(), addScheduleViewPresented: $addViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    })
-                    
-                    
-                    FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
-                        batchAddViewPresented = true
-                    }
-                    .sheet(isPresented: $batchAddViewPresented) {
-                        WeekBatchOpearationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    }
-                    
-                    Spacer()
-                } //end top Buttons HStack
-                .padding(.top,mButtonUp)
-                // end top buttons
-                
+//                
                 //MARK: "No schedules" overlay
                 if schedules.count == 0 {
                     VStack(){

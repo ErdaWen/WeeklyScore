@@ -20,7 +20,7 @@ struct DayBatchOperationView: View {
     @EnvironmentObject var propertiesModel:PropertiesModel
     
     var dayStart:Date
-    var schedules: FetchedResults<Schedule>
+    @FetchRequest var schedules: FetchedResults<Schedule>
     var singleDay: Bool
     
     
