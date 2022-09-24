@@ -22,15 +22,10 @@ struct ScheduleView: View {
     @State var dayFromDay1:Int
     
     // String arrays for title and day picker dispaly
-    @State var dayNumbers:[Int] = [1, 2, 3, 4, 5, 6, 7]
-    @State var weekdayNumbers:[String] = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-    
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
-    
-    
-    
+
     //Use factor for list style view
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
     //Use interCord for calender style view
@@ -60,7 +55,8 @@ struct ScheduleView: View {
     }
     
     func updateDate() {
-        propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: max(dayFromDay1,0))
+        propertiesModel.startDate = DateServer.genrateDateStemp(offset: weekFromNow,
+                                                                daysOfWeek: max(dayFromDay1,0))
         propertiesModel.startWeek = DateServer.genrateDateStemp(offset: weekFromNow)
         propertiesModel.updateScores()
         if dayFromDay1 == -1 {
@@ -72,20 +68,14 @@ struct ScheduleView: View {
     
     var body: some View {
         VStack(spacing:0){
-            
             ScoreBar()
-            
-            WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1, updateFunc: {
-                updateDate()
-            })
+            WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1)
             .frame(height:hTitle)
             .padding(.horizontal, mTitle)
             .animation(.default)
             
             ZStack(alignment:.top){
-                DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode, updateFunc: {
-                    updateDate()
-                })
+                DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode)
                 .padding(.horizontal, mPicker)
                 conditionalDividor
             }.frame(height: hPicker)
@@ -99,26 +89,22 @@ struct ScheduleView: View {
                     previewButtonSlider
                 }
             }
-            
         } // end all VStack
         .onAppear(){
             WidgetCenter.shared.reloadAllTimelines()
-            //            if UserDefaults.standard.bool(forKey: "onDayView") {
-            //                for r in 0...6 {
-            //                    if DateServer.genrateDateStemp(offset: 0, daysOfWeek: r) == DateServer.startOfToday() {
-            //                        withAnimation(.none){
-            //                            dayFromDay1 = r
-            //                        }
-            //                    }
-            //                }
-            //            }
             updateDate()
         }
+        .onChange(of: dayFromDay1, perform: { _ in
+            updateDate()
+        })
+        .onChange(of: weekFromNow, perform: { _ in
+            updateDate()
+        })
         .animation(.default)
     }
     
     var conditionalDividor: some View {
-        //MARK: Horizontal Divider, not shown in week calendar look
+        //Horizontal Divider, not shown in week calendar look
         VStack{
             // Push the divider to bottom
             Spacer()

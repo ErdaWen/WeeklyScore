@@ -36,30 +36,6 @@ struct ScheduleDayView: View {
             } else {
                 ScheduleDayListView(schedules: self.schedules,factor:self.factor)
             }
-            
-            //MARK: Buttons
-//            HStack (spacing:mButtons) {
-//                Spacer()
-//
-//                FloatButton(systemName: "plus.square", sButton: sButton) {
-//                    addViewPresented = true
-//                }
-//                .sheet(isPresented: $addViewPresented, content: {
-//                    AddScheduleView(initDate: propertiesModel.startDate, addScheduleViewPresented: $addViewPresented)
-//                        .environment(\.managedObjectContext,self.viewContext)
-//                })
-//
-//
-//                FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
-//                    batchAddViewPresented = true
-//                }
-//                .sheet(isPresented: $batchAddViewPresented) {
-//                    DayBatchOperationView(dayStart: propertiesModel.startDate, schedules: schedules, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
-//                        .environment(\.managedObjectContext,self.viewContext)
-//                }
-//                Spacer()
-//            } // end button HStack
-//            .padding(.top,mButtonUp)
 
             //MARK: "No schedules" overlay
             if schedules.count == 0{

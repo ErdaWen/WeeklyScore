@@ -11,7 +11,6 @@ struct DayPicker: View {
     var weekFromNow:Int
     @Binding var dayFromDay1:Int
     var previewMode: Bool
-    var updateFunc: () -> Void
     
     let fsTitle:CGFloat = 18.0
     let fsSub:CGFloat = 12.0
@@ -44,7 +43,6 @@ struct DayPicker: View {
                     .padding(.top, pPickerTextVer)
                     .onTapGesture {
                         dayFromDay1 = -1
-                        updateFunc()
                     }
                     
                     //MARK: Seven days
@@ -79,7 +77,6 @@ struct DayPicker: View {
                         .padding(.top, pPickerTextVer)
                         .onTapGesture {
                             dayFromDay1 = r
-                            updateFunc()
                         }
                     }// end seven days
                 } // end 8 icons
