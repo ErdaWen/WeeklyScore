@@ -41,7 +41,6 @@ struct ScheduleView: View {
     let sButton: CGFloat = 18
     let mButtonUp:CGFloat = 0
     
-    
     init(){
         self.dayFromDay1 = -1
         if UserDefaults.standard.bool(forKey: "onDayView") {
@@ -51,7 +50,6 @@ struct ScheduleView: View {
                 }
             }
         }
-        
     }
     
     func updateDate() {

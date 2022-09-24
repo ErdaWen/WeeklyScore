@@ -25,6 +25,7 @@ struct WeekPicker: View {
                 //MARK: Week minus
                 Button {
                     weekFromNow -= 1
+                    dayFromDay1 = -1
                 } label: {
                     //Image(systemName: "arrowtriangle.backward.square")
                     Image(systemName: "chevron.left")
@@ -37,8 +38,7 @@ struct WeekPicker: View {
                 //MARK: Week restore
                 Button {
                     weekFromNow = 0
-
-                    
+                    dayFromDay1 = -1
                 } label: {
                     Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) ).foregroundColor(Color("text_black")).font(.system(size: fsTitle)).fontWeight(.light)
                 }
@@ -48,7 +48,7 @@ struct WeekPicker: View {
                 //MARK: Week plus
                 Button {
                     weekFromNow += 1
-
+                    dayFromDay1 = -1
                 } label: {
                     //Image(systemName: "arrowtriangle.right.square")
                     Image(systemName: "chevron.right")
