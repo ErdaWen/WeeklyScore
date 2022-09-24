@@ -173,7 +173,7 @@ struct ScheduleView: View {
                     WeekBatchOpearationView(dayStart: propertiesModel.startDate,
                                             schedules: fetchScheduleRes,
                                             singleDay: false, addBatchScheduleViewPresented: $batchAddViewPresented)
-                    .environment(\.managedObjectContext,self.viewContext)
+                    .environment(\.managedObjectContext,self.viewContext) // Inherite night mode
                 }
                 else{
 
@@ -181,11 +181,10 @@ struct ScheduleView: View {
 
                     DayBatchOperationView(dayStart: propertiesModel.startDate,
                                           schedules: fetchScheduleRes, singleDay: true, addBatchScheduleViewPresented: $batchAddViewPresented)
-                    .environment(\.managedObjectContext,self.viewContext)
+                    .environment(\.managedObjectContext,self.viewContext) // Inherite night mode
                 }
                 
             }
-            
             Spacer()
         } //end top Buttons HStack
         .padding(.top,mButtonUp)
