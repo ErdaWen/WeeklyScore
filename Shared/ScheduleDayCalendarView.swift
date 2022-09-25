@@ -52,6 +52,7 @@ struct ScheduleDayCalendarView: View {
                 .padding(.trailing , 20)
                 Spacer().frame(height:bottomSpacing)
             } // end scrollView
+            .coordinateSpace(name: "scroll")
             .onAppear(){
                 scrollview.scrollTo(10020,anchor: .top)
             }
