@@ -31,6 +31,17 @@ struct ScheduleWeekCalendarView: View {
                     VStack(alignment: .leading, spacing: 0){
                         Spacer().frame(height:topSpacing)
                         ZStack(alignment: .topLeading){
+                            VStack{
+                                Spacer()
+                                GeometryReader {proxy in
+                                    Text("\(-proxy.frame(in: .named("scroll")).minY)")
+                                    Color.clear.preference(key: ScrollPreferenceKey.self,
+                                                           value: -proxy.frame(in: .named("scroll")).minY)
+                                }
+                                Text("\(propertiesModel.scrollPositon)")
+                                Spacer()
+                            }
+
                             scrollLocator
                             
                             timeLine
@@ -49,6 +60,10 @@ struct ScheduleWeekCalendarView: View {
                     }// end everything excepet vertical line Vstack
                 }// end whole ZStack
             }//end scrollView
+            .coordinateSpace(name: "scroll")
+            .onPreferenceChange(ScrollPreferenceKey.self, perform: { value in
+                propertiesModel.scrollPositon = value
+            })
             .onAppear(){
                 scrollview.scrollTo(10032,anchor: .top)
             }

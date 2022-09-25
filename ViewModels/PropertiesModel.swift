@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class PropertiesModel: ObservableObject {
     
@@ -19,6 +20,9 @@ class PropertiesModel: ObservableObject {
     @Published var startDate = DateServer.startOfThisWeek()
     @Published var startWeek = DateServer.startOfThisWeek()
     @Published var dumUpdate = true
+    
+    // ScrollViews shared data
+    @Published var scrollPositon:CGFloat = 200
     
     init(){
         updateScores()

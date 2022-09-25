@@ -30,6 +30,12 @@ struct ScheduleDayCalendarView: View {
             ScrollView{
                 Spacer().frame(height:topSpacing)
                 ZStack(alignment: .topLeading){
+                    VStack{
+                        Spacer()
+                        Text("\(propertiesModel.scrollPositon)")
+                        Spacer()
+                    }
+                    
                     scrollLocator
                     
                     timeLine

@@ -34,6 +34,7 @@
 		0034918F26A7F48F001B8DBB /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034918E26A7F48F001B8DBB /* Initializer.swift */; };
 		003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		0056D38228E004A10042AABC /* SelectWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38128E004A10042AABC /* SelectWeekView.swift */; };
+		0056D38428E105910042AABC /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38328E105910042AABC /* PreferenceKeys.swift */; };
 		005D077826CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
 		005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
 		005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
@@ -150,6 +151,7 @@
 		0034918E26A7F48F001B8DBB /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		0056D38128E004A10042AABC /* SelectWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWeekView.swift; sourceTree = "<group>"; };
+		0056D38328E105910042AABC /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		005D077726CC762700664008 /* DayBatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchList.swift; sourceTree = "<group>"; };
 		005D077A26CC783600664008 /* DayBatchOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchOperationView.swift; sourceTree = "<group>"; };
 		005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCatagorized.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				00A5FE5F26ACC5A7002F38B1 /* PropertiesModel.swift */,
+				0056D38328E105910042AABC /* PreferenceKeys.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				0026289926BF5ABF00A755D2 /* WeekPicker.swift in Sources */,
 				008DC8F526AE478B009AB91C /* Tag+CoreDataClass.swift in Sources */,
 				0072757B26B7280600FAA32D /* CordServer.swift in Sources */,
+				0056D38428E105910042AABC /* PreferenceKeys.swift in Sources */,
 				002628AA26BF9F2D00A755D2 /* InputField.swift in Sources */,
 				0026289C26BF5EAC00A755D2 /* DayPicker.swift in Sources */,
 				0072757626B7190300FAA32D /* Item+CoreDataClass.swift in Sources */,
