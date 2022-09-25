@@ -67,13 +67,18 @@ struct ScheduleView: View {
     func fetchSchedules(from startTime:Date, to endTime:Date, cutend:Bool) -> FetchRequest<Schedule>{
         var predicate = NSPredicate()
         if cutend{
-            predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)", startTime as NSDate, endTime as NSDate)
+            predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)",
+                                    startTime as NSDate, endTime as NSDate)
         } else{
-            predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)", startTime as NSDate, endTime as NSDate)
+            predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)",
+                                    startTime as NSDate, endTime as NSDate)
         }
         let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
                                NSSortDescriptor(key: "endTime", ascending: true)]
-        var fetchRes = FetchRequest<Schedule>(entity: Schedule.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .default)
+        let fetchRes = FetchRequest<Schedule>(entity: Schedule.entity(),
+                                              sortDescriptors: sortDescriptors,
+                                              predicate: predicate,
+                                              animation: .default)
         return fetchRes
     }
     
@@ -81,13 +86,13 @@ struct ScheduleView: View {
         VStack(spacing:0){
             ScoreBar()
             WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1)
-            .frame(height:hTitle)
-            .padding(.horizontal, mTitle)
-            .animation(.default)
+                .frame(height:hTitle)
+                .padding(.horizontal, mTitle)
+                .animation(.default)
             
             ZStack(alignment:.top){
                 DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode)
-                .padding(.horizontal, mPicker)
+                    .padding(.horizontal, mPicker)
                 conditionalDividor
             }.frame(height: hPicker)
             
@@ -121,7 +126,8 @@ struct ScheduleView: View {
             Spacer()
             if (!previewMode) || (dayFromDay1 != -1)
             {
-                Divider().background(Color("background_grey"))
+                Divider()
+                    .background(Color("background_grey"))
             }
         }
     }
@@ -131,7 +137,9 @@ struct ScheduleView: View {
             ForEach(-1...6,id:\.self){ dayoffset in
                 //MARK: Main content view
                 if  dayoffset == -1 {
-                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate, to: DateServer.addOneWeek(date: propertiesModel.startDate), cutend: true)
+                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate,
+                                                          to: DateServer.addOneWeek(date: propertiesModel.startDate),
+                                                          cutend: true)
                     
                     ScheduleWeekView(schedules: fetchScheduleRes,
                                      previewMode:$previewMode,
@@ -139,15 +147,17 @@ struct ScheduleView: View {
                 } else {
                     let dayOnThisPage = DateServer.genrateDateStemp(offset: weekFromNow, daysOfWeek: dayoffset)
                     // Filter the schedule that ENDS after the day starts and BEGINS before the day ends, thus set the cutend to false
-                    let fetchScheduleRes = fetchSchedules(from: dayOnThisPage, to: DateServer.addOneDay(date: dayOnThisPage), cutend: false)
+                    let fetchScheduleRes = fetchSchedules(from: dayOnThisPage,
+                                                          to: DateServer.addOneDay(date: dayOnThisPage),
+                                                          cutend: false)
                     
                     ScheduleDayView(schedules: fetchScheduleRes,
                                     today:dayOnThisPage,
                                     factor: factor,interCord: interCord,
                                     previewMode: self.previewMode).tag(dayoffset)
                     
-                } // end main content
-            }
+                }
+            } // end ForEach
         }.tabViewStyle(.page)
     }
     
@@ -157,18 +167,20 @@ struct ScheduleView: View {
             FloatButton(systemName: "plus.square", sButton: sButton) {
                 addViewPresented = true
             }
-            .sheet(isPresented: $addViewPresented, content: {
-                AddScheduleView(initDate: (dayFromDay1 == -1 ? Date() :propertiesModel.startDate), addScheduleViewPresented: $addViewPresented)
+            .sheet(isPresented: $addViewPresented){
+                AddScheduleView(initDate: (dayFromDay1 == -1 ? Date() :propertiesModel.startDate),
+                                addScheduleViewPresented: $addViewPresented)
                     .environment(\.managedObjectContext,self.viewContext)
-            })
-            
+            }
             
             FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
                 batchAddViewPresented = true
             }
             .sheet(isPresented: $batchAddViewPresented) {
                 if dayFromDay1 == -1 {
-                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate, to: DateServer.addOneWeek(date: propertiesModel.startDate), cutend: true)
+                    let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate,
+                                                          to: DateServer.addOneWeek(date: propertiesModel.startDate),
+                                                          cutend: true)
                     
                     WeekBatchOpearationView(dayStart: propertiesModel.startDate,
                                             schedules: fetchScheduleRes,
@@ -193,10 +205,12 @@ struct ScheduleView: View {
     var previewButtonSlider: some View{
         ZStack{
             Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.6),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
+                                                                 Color("background_white").opacity(0.6),
+                                                                 Color("background_white").opacity(0)]),
+                                     startPoint: .bottom, endPoint: .top))
             
             HStack (spacing:mButtons) {
-                
                 Button {
                     previewMode = !previewMode
                 } label: {
@@ -208,16 +222,13 @@ struct ScheduleView: View {
                         .padding(.top,19)
                 }
                 
-                
                 if previewMode {
                     CustomSlider(interCord: $interCord, minValue: 35, maxValue: 90)
                         .frame(height:38)
-                    //.padding(.leading,80)
                         .padding(.trailing,60)
                 } else {
                     CustomSlider_list(factor: $factor, minValue: 0, maxValue: 30)
                         .frame(height:38)
-                    //.padding(.leading,80)
                         .padding(.trailing,60)
                 }
             } // HStack

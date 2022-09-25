@@ -19,7 +19,8 @@ struct WeekPicker: View {
     var body: some View {
         ZStack{
             // Background tile
-            RoundedRectangle(cornerRadius: rTile).foregroundColor(Color("background_grey"))
+            RoundedRectangle(cornerRadius: rTile)
+                .foregroundColor(Color("background_grey"))
             
             HStack{
                 //MARK: Week minus
@@ -29,9 +30,14 @@ struct WeekPicker: View {
                 } label: {
                     //Image(systemName: "arrowtriangle.backward.square")
                     Image(systemName: "chevron.left")
-                        .resizable().scaledToFit().frame(height:16).foregroundColor(Color("text_black"))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height:16)
+                        .foregroundColor(Color("text_black"))
                 }
-                .frame(width: sButton, height: sButton).padding(.leading,mButton)
+                .frame(width: sButton,
+                       height: sButton)
+                .padding(.leading,mButton)
                 
                 Spacer()
                 
@@ -40,7 +46,10 @@ struct WeekPicker: View {
                     weekFromNow = 0
                     dayFromDay1 = -1
                 } label: {
-                    Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) ).foregroundColor(Color("text_black")).font(.system(size: fsTitle)).fontWeight(.light)
+                    Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) )
+                        .foregroundColor(Color("text_black"))
+                        .font(.system(size: fsTitle))
+                        .fontWeight(.light)
                 }
                 
                 Spacer()
@@ -52,9 +61,13 @@ struct WeekPicker: View {
                 } label: {
                     //Image(systemName: "arrowtriangle.right.square")
                     Image(systemName: "chevron.right")
-                        .resizable().scaledToFit().frame(height:16).foregroundColor(Color("text_black"))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height:16)
+                        .foregroundColor(Color("text_black"))
                 }
-                .frame(width: sButton, height: sButton).padding(.trailing,mButton)
+                .frame(width: sButton, height: sButton)
+                .padding(.trailing,mButton)
             }
         } // end ZStack
         
