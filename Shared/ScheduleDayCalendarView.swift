@@ -30,6 +30,8 @@ struct ScheduleDayCalendarView: View {
             ScrollView{
                 Spacer().frame(height:topSpacing)
                 ZStack(alignment: .topLeading){
+                    scrollLocator
+                    
                     timeLine
                     
                     ScheduleDayCalendarContentView(schedules: schedules, interCord: interCord,today:today)
@@ -43,13 +45,22 @@ struct ScheduleDayCalendarView: View {
                 Spacer().frame(height:bottomSpacing)
             } // end scrollView
             .onAppear(){
-                scrollview.scrollTo(17)
+                scrollview.scrollTo(10020,anchor: .top)
             }
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
             }
         }
     }
+    
+    var scrollLocator: some View{
+        VStack{
+            ForEach(10000..<10101,id:\.self){r in
+                Spacer().id(r)
+            }
+        }
+    }
+    
     var timeLine:some View{
         ForEach (0...24, id:\.self){ r in
             HStack(alignment:.center, spacing:5){
@@ -60,7 +71,6 @@ struct ScheduleDayCalendarView: View {
                 VStack{
                     Divider()
                 }
-                .id(r)
             }
             .frame(height:10)
             .padding(.top, CGFloat( Double(r) * interCord) )

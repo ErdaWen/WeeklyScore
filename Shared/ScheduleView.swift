@@ -158,7 +158,7 @@ struct ScheduleView: View {
                     
                 }
             } // end ForEach
-        }.tabViewStyle(.page)
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var scheduleOperationButtons: some View{

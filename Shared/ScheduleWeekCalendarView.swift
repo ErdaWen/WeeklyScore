@@ -31,6 +31,8 @@ struct ScheduleWeekCalendarView: View {
                     VStack(alignment: .leading, spacing: 0){
                         Spacer().frame(height:topSpacing)
                         ZStack(alignment: .topLeading){
+                            scrollLocator
+                            
                             timeLine
 
                             ScheduleWeekCalendarContentView(schedules: schedules,
@@ -48,7 +50,7 @@ struct ScheduleWeekCalendarView: View {
                 }// end whole ZStack
             }//end scrollView
             .onAppear(){
-                scrollview.scrollTo(17)
+                scrollview.scrollTo(10032,anchor: .top)
             }
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
@@ -73,6 +75,14 @@ struct ScheduleWeekCalendarView: View {
         }.padding(.horizontal, mPicker) //end vertical lines
     }
     
+    var scrollLocator: some View{
+        VStack{
+            ForEach(10000..<10101,id:\.self){r in
+                Spacer().id(r)
+            }
+        }
+    }
+    
     var timeLine: some View{
         ForEach (0...24, id:\.self){ r in
             HStack(alignment:.center, spacing:5){
@@ -83,7 +93,6 @@ struct ScheduleWeekCalendarView: View {
                 VStack{
                     Divider().padding(.trailing, mPicker)
                 }
-                .id(r)
             }
             .frame(height:10)
             .padding(.top, CGFloat( Double(r) * interCord) )
