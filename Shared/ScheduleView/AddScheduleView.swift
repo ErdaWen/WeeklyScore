@@ -102,191 +102,25 @@ struct AddScheduleView: View {
     }
     
     var body: some View {
-        
         VStack{
-            
             if itemsFiltered.count == 0 {
-                VStack(alignment:.center){
-                    HStack{
-                        Button {
-                            addScheduleViewPresented = false
-                        } label: {
-                            Image(systemName: "xmark.circle")
-                                .resizable().scaledToFit()
-                                .foregroundColor(Color("text_black"))
-                                .frame(height:25)
-                        }
-                        Spacer()
-                    }.padding(mNavBar)
-                    Spacer()
-                    Text("🌵 You have no active habits. Start by adding one:")
-                        .font(.system(size: 16))
-                        .foregroundColor(Color("text_black"))
-                        .padding(.horizontal,40)
-                    FloatButton(systemName: "plus.square", sButton: sButton) {
-                        addViewPresented = true
-                    }
-                    .padding(.trailing, 10)
-                    .padding(.bottom, 10)
-                    .sheet(isPresented: $addViewPresented, content: {
-                        AddItemView(addItemViewPresented: $addViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    }).padding(mNavBar)
-                    .onChange(of: items.count) { _ in
-                        initValues()
-                    }
-                    Spacer()
-                }
+                noHabit
             } else {
                 // MARK: Navigation Bar
-                HStack{
-                    Button(action:{ addScheduleViewPresented = false}, label: {
-                        Text("Discard")
-                            .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
-                    })
-                    Spacer()
-                    Text("New Schedule").font(.system(size: fsNavBar))
-                    Spacer()
-                    
-                    Button(action:{
-                        if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: nil) {
-                            showConflictAlert = true
-                        } else {
-                            saveSchedule()
-                        }
-                    }, label: {
-                        Text("   Add")
-                            .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
-                    })
-                    .alert(isPresented: $showConflictAlert) {
-                        Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
-                            showConflictAlert = false
-                        }))
-                    }
-                }.padding(mNavBar)
-                
+                navBar
                 ScrollView(){
-                    // If habit list is not empty
-                        
                         VStack(spacing:mVer){
-                            // MARK: Habit picker
-                            
-                            InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
-                                
-                                ZStack(alignment: .bottomTrailing){
-                                    
-                                    Picker("Habbit",selection:$itemId){
-                                        ForEach(0...itemsFiltered.count-1, id:\.self){ r in
-                                            
-                                            Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
-                                                .font(.system(size: 20))
-                                                .fontWeight(.light)
-                                                .foregroundColor(Color("text_black"))
-                                                .tag(r)
-                                            
-                                        }
-                                    }
-                                    .pickerStyle(WheelPickerStyle())
-                                    .onChange(of: itemId, perform: { value in
-                                        updateDefault ()
-                                    })
-                                    .onChange(of: items.count) { _ in
-                                        initValues()
-                                    }
-                                    
-                                    FloatButton(systemName: "plus.square", sButton: sButton) {
-                                        addViewPresented = true
-                                    }
-                                    .padding(.trailing, 10)
-                                    .padding(.bottom, 10)
-                                    .sheet(isPresented: $addViewPresented, content: {
-                                        AddItemView(addItemViewPresented: $addViewPresented)
-                                            .environment(\.managedObjectContext,self.viewContext)
-                                    })
-                                }
-                            }.padding(.top, 2)
-                            
-                            // MARK: score (Stepper)
-                            
-                            Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
-                                .foregroundColor(Color("text_black"))
-                                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
-                            
-                            // MARK: begin time and end time picker
+                            habitPicker
+                            scoreStepper
                             if itemsFiltered[itemId].durationBased {
-                                
-                                DatePicker("Starts", selection: $inputBeginTime)
-                                    .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
-                                    .onChange(of: inputBeginTime, perform: { _ in
-                                        inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
-                                    })
-                                
-                                DatePicker("Ends", selection: $inputEndTime, in: inputBeginTime...)
-                                    .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
-                                    .onChange(of: inputEndTime, perform: { value in
-                                        if inputEndTime<inputBeginTime{
-                                            inputEndTime = inputBeginTime
-                                            showEndTimeWarning = true
-                                        } else {
-                                            showEndTimeWarning = false
-                                        }
-                                    })
-                                
-                                if showEndTimeWarning{
-                                    Text("must ends after event begins")
-                                }
+                                timePickerDur
                             } else {
-                                DatePicker("Time", selection: $inputBeginTime)
-                                    .foregroundColor(Color("text_black"))
-                                    .accentColor(Color(itemsFiltered[itemId].tags.colorName))
-                                    .onChange(of: inputBeginTime) { _ in
-                                        inputEndTime = inputBeginTime
-                                    }
+                                timePickerPnt
                             }
-
-                            //MARK: Reminder
-//                            Toggle("Reminder", isOn:$inputReminder)
-//                                .foregroundColor(Color("text_black"))
-//                                .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
-//                                .animation(.default)
-//
-//                            if inputReminder {
-//                                Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
-//                                    Text("when happens").tag(0)
-//                                    Text("in 5 min").tag(5)
-//                                    Text("in 10 min").tag(10)
-//                                    Text("in 15 min").tag(15)
-//                                    Text("in 30 min").tag(30)
-//                                    Text("in 45 min").tag(45)
-//                                    Text("in 1 hour").tag(60)
-//                                }
-//                                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
-//                                .pickerStyle(MenuPickerStyle())
-//                                .animation(.default)
-//                            }
                             Spacer().frame(height:20)
-                            
-                            
-                            InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
-                                ZStack(alignment:.center){
-                                    TextEditor(text: $inputNote)
-                                        .font(.system(size: 15))
-                                        .foregroundColor(Color("text_black"))
-                                    if inputNote.isEmpty{
-                                        Text("Jog down goals, subtasks, journals...")
-                                            .font(.system(size: 15))
-                                            .foregroundColor(Color("text_black").opacity(0.5))
-                                    }
-                                }.padding(5)
-                            }.animation(.default)
-                            
+                            notesField
                         } // end form VStack
                         .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
-                        
-                    
-                    
                 } // end ScrollView
             } // end if no habit
         }// end total VStack
@@ -294,6 +128,187 @@ struct AddScheduleView: View {
             initValues()
         }// end onAppear
         .preferredColorScheme(nightMode ? nil : .light)
+    }
+    
+    var noHabit: some View{
+        VStack(alignment:.center){
+            HStack{
+                Button {
+                    addScheduleViewPresented = false
+                } label: {
+                    Image(systemName: "xmark.circle")
+                        .resizable().scaledToFit()
+                        .foregroundColor(Color("text_black"))
+                        .frame(height:25)
+                }
+                Spacer()
+            }
+            .padding(mNavBar)
+            Spacer()
+            Text("🌵 You have no active habits. Start by adding one:")
+                .font(.system(size: 16))
+                .foregroundColor(Color("text_black"))
+                .padding(.horizontal,40)
+            FloatButton(systemName: "plus.square", sButton: sButton) {
+                addViewPresented = true
+            }
+            .padding(.trailing, 10)
+            .padding(.bottom, 10)
+            .sheet(isPresented: $addViewPresented, content: {
+                AddItemView(addItemViewPresented: $addViewPresented)
+                    .environment(\.managedObjectContext,self.viewContext)
+            })
+            .padding(mNavBar)
+            .onChange(of: items.count) { _ in
+                initValues()
+            }
+            Spacer()
+        }
+    }
+    
+    var navBar:some View{
+        HStack{
+            Button(action:{ addScheduleViewPresented = false}, label: {
+                Text("Discard")
+                    .foregroundColor(Color("text_red")).font(.system(size: fsNavBar))
+            })
+            Spacer()
+            Text("New Schedule").font(.system(size: fsNavBar))
+            Spacer()
+            
+            Button(action:{
+                if ConflictServer.checkScheduleConflict(beginTime: inputBeginTime, endTime: inputEndTime, id: nil) {
+                    showConflictAlert = true
+                } else {
+                    saveSchedule()
+                }
+            }, label: {
+                Text("   Add")
+                    .foregroundColor(Color("text_blue")).font(.system(size: fsNavBar)).fontWeight(.semibold)
+            })
+            .alert(isPresented: $showConflictAlert) {
+                Alert(title: Text("😐 Time Conflict"), message: Text("Select another time"), dismissButton:.default(Text("OK"), action: {
+                    showConflictAlert = false
+                }))
+            }
+        }.padding(mNavBar)
+    }
+    
+    
+    var habitPicker: some View{
+        InputField(title: nil, alignment: .center, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: nil) {
+            
+            ZStack(alignment: .bottomTrailing){
+                
+                Picker("Habbit",selection:$itemId){
+                    ForEach(0...itemsFiltered.count-1, id:\.self){ r in
+                        
+                        Text(itemsFiltered[r].titleIcon + itemsFiltered[r].title)
+                            .font(.system(size: 20))
+                            .fontWeight(.light)
+                            .foregroundColor(Color("text_black"))
+                            .tag(r)
+                        
+                    }
+                }
+                .pickerStyle(WheelPickerStyle())
+                .onChange(of: itemId, perform: { value in
+                    updateDefault ()
+                })
+                .onChange(of: items.count) { _ in
+                    initValues()
+                }
+                
+                FloatButton(systemName: "plus.square", sButton: sButton) {
+                    addViewPresented = true
+                }
+                .padding(.trailing, 10)
+                .padding(.bottom, 10)
+                .sheet(isPresented: $addViewPresented, content: {
+                    AddItemView(addItemViewPresented: $addViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
+                })
+            }
+        }.padding(.top, 2)
+    }
+    
+    var scoreStepper:some View{
+        Stepper("Score: \(inputScore) pts", value: $inputScore, in: 0...Int64(maxScore))
+            .foregroundColor(Color("text_black"))
+            .accentColor(Color(itemsFiltered[itemId].tags.colorName))
+    }
+    var timePickerDur:some View{
+        VStack(spacing:mVer){
+            DatePicker("Starts", selection: $inputBeginTime)
+                .foregroundColor(Color("text_black"))
+                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
+                .onChange(of: inputBeginTime, perform: { _ in
+                    inputEndTime = inputBeginTime + Double(60 * itemsFiltered[itemId].defaultMinutes)
+                })
+            
+            DatePicker("Ends", selection: $inputEndTime, in: inputBeginTime...)
+                .foregroundColor(Color("text_black"))
+                .accentColor(Color(itemsFiltered[itemId].tags.colorName))
+                .onChange(of: inputEndTime, perform: { value in
+                    if inputEndTime<inputBeginTime{
+                        inputEndTime = inputBeginTime
+                        showEndTimeWarning = true
+                    } else {
+                        showEndTimeWarning = false
+                    }
+                })
+            if showEndTimeWarning{
+                Text("must ends after event begins")
+            }
+        }
+    }
+    
+    var timePickerPnt: some View{
+        DatePicker("Time", selection: $inputBeginTime)
+            .foregroundColor(Color("text_black"))
+            .accentColor(Color(itemsFiltered[itemId].tags.colorName))
+            .onChange(of: inputBeginTime) { _ in
+                inputEndTime = inputBeginTime
+            }
+    }
+    
+    var timeReminder:some View{
+        HStack{
+            Toggle("Reminder", isOn:$inputReminder)
+                .foregroundColor(Color("text_black"))
+                .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
+                .animation(.default)
+            
+            if inputReminder {
+                Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
+                    Text("when happens").tag(0)
+                    Text("in 5 min").tag(5)
+                    Text("in 10 min").tag(10)
+                    Text("in 15 min").tag(15)
+                    Text("in 30 min").tag(30)
+                    Text("in 45 min").tag(45)
+                    Text("in 1 hour").tag(60)
+                }
+                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+                .pickerStyle(MenuPickerStyle())
+                .animation(.default)
+            }
+        }
+    }
+    
+    var notesField:some View{
+        InputField(title: "Notes", alignment: .leading, color: Color(itemsFiltered[itemId].tags.colorName), fieldHeight: 180) {
+            ZStack(alignment:.center){
+                TextEditor(text: $inputNote)
+                    .font(.system(size: 15))
+                    .foregroundColor(Color("text_black"))
+                if inputNote.isEmpty{
+                    Text("Jog down goals, subtasks, journals...")
+                        .font(.system(size: 15))
+                        .foregroundColor(Color("text_black").opacity(0.5))
+                }
+            }.padding(5)
+        }.animation(.default)
     }
 }
 

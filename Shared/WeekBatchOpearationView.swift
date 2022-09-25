@@ -135,8 +135,9 @@ struct WeekBatchOpearationView: View {
                     .font(.system(size: fsNavBar))
                 Spacer()
                 Spacer().frame(width: 25)
-                
-            }.frame(height:20).padding(mNavBar)
+            }
+            .frame(height:20)
+            .padding(mNavBar)
             //Content:
             ScrollView{
                 VStack(alignment: .center, spacing: 15 ){
