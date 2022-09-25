@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScrollPreferenceKey: PreferenceKey {
-    static var defaultValue:CGFloat = 200
+    static var defaultValue:CGFloat = 250
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }

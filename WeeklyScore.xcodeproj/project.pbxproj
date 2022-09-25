@@ -74,7 +74,7 @@
 		00C59BDE26D605B8008A47D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C59BDD26D605B8008A47D3 /* Assets.xcassets */; };
 		00C59BE026D605B8008A47D3 /* WeeklyScoreWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */; };
 		00C59BE126D605B8008A47D3 /* WeeklyScoreWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BDC26D605B5008A47D3 /* WeeklyScoreWidget.intentdefinition */; };
-		00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00C59BD326D605B5008A47D3 /* WeeklyScoreWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00C59BEB26D9A223008A47D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C59BEA26D9A223008A47D3 /* CloudKit.framework */; };
 		00C59BED26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEC26D9B07D008A47D3 /* ColorTagTileView.swift */; };
 		00C59BF026DAC5F1008A47D3 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C59BEF26DAC5F1008A47D3 /* NoItemView.swift */; };
@@ -110,15 +110,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00C59BE526D605B8008A47D3 /* Embed App Extensions */ = {
+		00C59BE526D605B8008A47D3 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed App Extensions */,
+				00C59BE426D605B8008A47D3 /* WeeklyScoreWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -578,7 +578,7 @@
 				C8BCDFFF26918079006E7D7E /* Sources */,
 				C8BCE00026918079006E7D7E /* Frameworks */,
 				C8BCE00126918079006E7D7E /* Resources */,
-				00C59BE526D605B8008A47D3 /* Embed App Extensions */,
+				00C59BE526D605B8008A47D3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -597,7 +597,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					00C59BD226D605B5008A47D3 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -838,6 +838,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -897,6 +898,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
