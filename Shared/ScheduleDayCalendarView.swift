@@ -18,7 +18,7 @@ struct ScheduleDayCalendarView: View {
     var schedules: FetchedResults<Schedule>
     var interCord: Double
     var today:Date
-
+    
     @State var timeNow = Date()
     let topSpacing:CGFloat = 30
     let bottomSpacing:CGFloat = 50
@@ -27,49 +27,43 @@ struct ScheduleDayCalendarView: View {
     
     var body: some View {
         ScrollViewReader { scrollview in
-            ZStack(alignment: .top){
-                ScrollView{
-                    Spacer()
-                        .frame(height:topSpacing)
-                    ZStack(alignment: .topLeading){
-                        //MARK: Timeline background
-                        ForEach (0...24, id:\.self){ r in
-                            HStack(alignment:.center, spacing:5){
-                                Text("\(r):00")
-                                    .foregroundColor(Color("text_black").opacity(0.5))
-                                    .font(.system(size: 12))
-                                    .padding(.leading, 20)
-                                VStack{
-                                    Divider()
-                                }
-                                .id(r)
-                            }
-                            .frame(height:10)
-                            .padding(.top, CGFloat( Double(r) * interCord) )
-                        }
-                        // end time line plot VStack
-                        
-                        //MARK: All schedules
-                        ScheduleDayCalendarContentView(schedules: schedules, interCord: interCord,today:today)
-                        
-                        //MARK:Now line
-                        if propertiesModel.startDate == DateServer.startOfToday() {
-                            NowLine(timeNow: timeNow, interCord: interCord)
-                        }
-                        
-                    } // end ZStack
-                    .padding(.trailing , 20)
-                    Spacer()
-                        .frame(height:bottomSpacing)
-                } // end scrollView
-                .onAppear(){
-                    scrollview.scrollTo(17)
-                }
-    
-            }         // end button + scroll ZStack
+            ScrollView{
+                Spacer().frame(height:topSpacing)
+                ZStack(alignment: .topLeading){
+                    timeLine
+                    
+                    ScheduleDayCalendarContentView(schedules: schedules, interCord: interCord,today:today)
+                    
+                    if propertiesModel.startDate == DateServer.startOfToday() {
+                        NowLine(timeNow: timeNow, interCord: interCord)
+                    }
+                    
+                } // end ZStack
+                .padding(.trailing , 20)
+                Spacer().frame(height:bottomSpacing)
+            } // end scrollView
+            .onAppear(){
+                scrollview.scrollTo(17)
+            }
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
             }
+        }
+    }
+    var timeLine:some View{
+        ForEach (0...24, id:\.self){ r in
+            HStack(alignment:.center, spacing:5){
+                Text("\(r):00")
+                    .foregroundColor(Color("text_black").opacity(0.5))
+                    .font(.system(size: 12))
+                    .padding(.leading, 20)
+                VStack{
+                    Divider()
+                }
+                .id(r)
+            }
+            .frame(height:10)
+            .padding(.top, CGFloat( Double(r) * interCord) )
         }
     }
 }

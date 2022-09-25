@@ -34,8 +34,7 @@ struct ScheduleWeekCalendarContentView: View {
                                 let (startCord,heightCord) = CordServer.calculateCord(startTime: schedule.beginTime, endTime: schedule.endTime, today: dayLookingAt, unit: interCord, durationBased: schedule.items.durationBased)
                                 
                                 VStack(spacing:0){
-                                    Spacer()
-                                        .frame(height:CGFloat(startCord))
+                                    Spacer().frame(height:CGFloat(startCord))
                                     if geo.frame(in: .global).width / 8 < wThreshhold {
                                         ScheduleTileCompactView(schedule: schedule)
                                             .frame(height:CGFloat(heightCord))
@@ -43,7 +42,6 @@ struct ScheduleWeekCalendarContentView: View {
                                         ScheduleTileView(schedule: schedule, showTime:false,showTitle:false)
                                             .frame(height:CGFloat(heightCord))
                                     }
-                                    
                                     Spacer()
                                 }
                             }// end foreach
@@ -58,7 +56,6 @@ struct ScheduleWeekCalendarContentView: View {
                                     Circle().frame(height:8).foregroundColor(Color("text_red")).padding(.trailing, geo.frame(in: .global).width / 8 - 10)
                                     Spacer()
                                 }
-                                
                             }
                         }
                         .padding(.trailing, 2)

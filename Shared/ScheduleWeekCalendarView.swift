@@ -27,60 +27,23 @@ struct ScheduleWeekCalendarView: View {
             ScrollView{
                 // Whole Zstack
                 ZStack{
-                    //MARK: Vertical lines
-                    ZStack{
-                        GeometryReader { geo in
-                            HStack(spacing:0){
-                                ForEach(-1...6,id: \.self){ offDay in
-                                    HStack{
-                                        Spacer()
-                                        Divider()
-                                    }
-                                    .padding(.vertical, -200)
-                                    .frame(width: geo.frame(in: .global).width / 8)
-                                }
-                            }
-                        }// end GeoReader
-                    }.padding(.horizontal, mPicker) //end vertical lines
-                    
-                    // MARK:Everything except vertical line
+                    verLine
                     VStack(alignment: .leading, spacing: 0){
-                        // MARK: Spacing
-                        Spacer()
-                            .frame(height:topSpacing)
+                        Spacer().frame(height:topSpacing)
                         ZStack(alignment: .topLeading){
-                            
-                            //MARK: Horizental Timeline background
-                            ForEach (0...24, id:\.self){ r in
-                                HStack(alignment:.center, spacing:5){
-                                    Text("\(r):00")
-                                        .foregroundColor(Color("text_black").opacity(0.5))
-                                        .font(.system(size: 12))
-                                        .padding(.leading, 40)
-                                    VStack{
-                                        Divider().padding(.trailing, mPicker)
-                                    }
-                                    .id(r)
-                                }
-                                .frame(height:10)
-                                .padding(.top, CGFloat( Double(r) * interCord) )
-                            }// end timeline background
-                            
-                            
-                            //MARK: Zstack within the picker frame
-                            ZStack{
-                                ScheduleWeekCalendarContentView(schedules: schedules, interCord: interCord, timeNow:timeNow)
-                            }.padding(.horizontal, mPicker) // end ZStack with picker frame
+                            timeLine
+
+                            ScheduleWeekCalendarContentView(schedules: schedules,
+                                                            interCord: interCord,
+                                                            timeNow:timeNow)
+                                .padding(.horizontal, mPicker) // end ZStack with picker frame
                             
                             //MARK:Now line
                             if propertiesModel.startDate == DateServer.startOfThisWeek() {
-                                NowLine(timeNow: timeNow, interCord: interCord)
-                                    .padding(.leading, 17)
-                                    .padding(.trailing, mPicker)
+                                nowLine
                             }//end now line if
                         }// end everything except verticle line (and spacer) Zstack
-                        Spacer()
-                            .frame(height:bottomSpacing)
+                        Spacer().frame(height:bottomSpacing)
                     }// end everything excepet vertical line Vstack
                 }// end whole ZStack
             }//end scrollView
@@ -91,7 +54,47 @@ struct ScheduleWeekCalendarView: View {
                 timeNow = Date()
             }
         }// end scrollReader
-    }//end some view
+    }//end body
+    
+    var verLine: some View {
+        ZStack{
+            GeometryReader { geo in
+                HStack(spacing:0){
+                    ForEach(-1...6,id: \.self){ offDay in
+                        HStack{
+                            Spacer()
+                            Divider()
+                        }
+                        .padding(.vertical, -200)
+                        .frame(width: geo.frame(in: .global).width / 8)
+                    }
+                }
+            }// end GeoReader
+        }.padding(.horizontal, mPicker) //end vertical lines
+    }
+    
+    var timeLine: some View{
+        ForEach (0...24, id:\.self){ r in
+            HStack(alignment:.center, spacing:5){
+                Text("\(r):00")
+                    .foregroundColor(Color("text_black").opacity(0.5))
+                    .font(.system(size: 12))
+                    .padding(.leading, 40)
+                VStack{
+                    Divider().padding(.trailing, mPicker)
+                }
+                .id(r)
+            }
+            .frame(height:10)
+            .padding(.top, CGFloat( Double(r) * interCord) )
+        }
+    }
+    
+    var nowLine:some View{
+        NowLine(timeNow: timeNow, interCord: interCord)
+            .padding(.leading, 17)
+            .padding(.trailing, mPicker)
+    }
 }
 
 //struct ScheduleListPreviewView_Previews: PreviewProvider {
