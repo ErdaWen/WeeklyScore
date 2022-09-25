@@ -32,7 +32,7 @@ struct ScheduleDayCalendarView: View {
                 ZStack(alignment: .topLeading){
                     VStack{
                         Spacer()
-                        Text("\(propertiesModel.scrollPositon)")
+                        Text("\(propertiesModel.scrollPosition)")
                         Spacer()
                     }
                     

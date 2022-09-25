@@ -22,7 +22,7 @@ class PropertiesModel: ObservableObject {
     @Published var dumUpdate = true
     
     // ScrollViews shared data
-    @Published var scrollPositon:CGFloat = 200
+    @Published var scrollPosition:CGFloat = 200
     
     init(){
         updateScores()
