@@ -19,7 +19,7 @@ struct ColorTagTileView: View {
     @State var showDeleteAlert = false
     @State var inputColorName = ""
     let mHor:CGFloat = 10
-    let sColor:CGFloat = 25
+    let sColor:CGFloat = 30
     let rColor:CGFloat = 8
     let hField:CGFloat = 35
     let fsField:CGFloat = 15
@@ -53,30 +53,27 @@ struct ColorTagTileView: View {
 
     var body: some View {
         HStack(spacing:mHor){
-            Picker(selection: $inputColorName,
-                   label:
-                    ZStack{
-                        RoundedRectangle(cornerRadius: rColor)
-                            .foregroundColor(Color(tag.colorName))
-                        Image(systemName: "chevron.down")
-                            .resizable().scaledToFit()
-                            .foregroundColor(Color("background_white"))
-                            .padding(6)
-                            .padding(.top,3)
-                    }.frame(width:sColor, height:sColor)
-                   ) {
-                ForEach (0..<colorNames.count,id: \.self){ r in
-                    Text(colorNames[r])
-                        .tag(colorSystemNames[r])
+            Menu {
+                Picker("x",selection: $inputColorName) {
+                    ForEach (0..<colorNames.count,id: \.self){ r in
+                        Text(colorNames[r])
+                            .tag(colorSystemNames[r])
+                        
+                    }
                 }
+            } label:{
+                Image(systemName: "chevron.down")
+                    .resizable().scaledToFit()
+                    .foregroundColor(Color("background_white"))
+                    .padding(10)
+                    .frame(width:sColor, height:sColor)
+                    .background(Color(tag.colorName))
+                    .mask(RoundedRectangle(cornerRadius: rColor))
             }
-            .pickerStyle(MenuPickerStyle())
             .onChange(of: inputColorName) { _ in
                 saveTag()
             }
-//            RoundedRectangle(cornerRadius: rColor)
-//                .foregroundColor(Color(tag.colorName))
-//                .frame(width:sColor, height:sColor)
+
             ZStack {
                 RoundedRectangle(cornerRadius: rColor)
                     .foregroundColor(Color(tag.colorName).opacity(0.1))
