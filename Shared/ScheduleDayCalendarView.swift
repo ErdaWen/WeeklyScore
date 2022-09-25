@@ -58,6 +58,11 @@ struct ScheduleDayCalendarView: View {
                 let scrollAnchor = 10000 + Int(scrollHour*4)
                 scrollview.scrollTo(scrollAnchor,anchor: .top)
             }
+//            .onChange(of: propertiesModel.dumScheculePageChange, perform: { _ in
+//                let scrollHour = propertiesModel.scrollPosition/interCord
+//                let scrollAnchor = 10000 + Int(scrollHour*4)
+//                scrollview.scrollTo(scrollAnchor,anchor: .top)
+//            })
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
             }

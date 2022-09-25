@@ -20,9 +20,10 @@ class PropertiesModel: ObservableObject {
     @Published var startDate = DateServer.startOfThisWeek()
     @Published var startWeek = DateServer.startOfThisWeek()
     @Published var dumUpdate = true
+    @Published var dumScheculePageChange = true
     
     // ScrollViews shared data
-    @Published var scrollPosition:CGFloat = 200
+    @Published var scrollPosition:CGFloat = 250
     
     init(){
         updateScores()

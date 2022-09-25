@@ -112,9 +112,11 @@ struct ScheduleView: View {
         }
         .onChange(of: dayFromDay1, perform: { _ in
             updateDate()
+            propertiesModel.dumScheculePageChange.toggle()
         })
         .onChange(of: weekFromNow, perform: { _ in
             updateDate()
+            propertiesModel.dumScheculePageChange.toggle()
         })
         .animation(.default)
     }
@@ -158,7 +160,8 @@ struct ScheduleView: View {
                     
                 }
             } // end ForEach
-        }.tabViewStyle(.page(indexDisplayMode: .never))
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var scheduleOperationButtons: some View{
