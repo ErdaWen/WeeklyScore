@@ -56,9 +56,16 @@ struct WeekPicker: View {
                         .fontWeight(.light)
                 }
                 .sheet(isPresented: $selectWeekViewPresented) {
-                    SelectWeekView(weekFromNow:$weekFromNow,
-                                   selectWeekViewPresented:$selectWeekViewPresented)
+                    if #available(iOS 16.0, *) {
+                        SelectWeekView(weekFromNow:$weekFromNow,
+                                       selectWeekViewPresented:$selectWeekViewPresented)
                         .environment(\.managedObjectContext,self.viewContext)
+                        .presentationDetents([.medium,.large])
+                    } else {
+                        SelectWeekView(weekFromNow:$weekFromNow,
+                                       selectWeekViewPresented:$selectWeekViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
+                    }
                 }
                 
                 Spacer()

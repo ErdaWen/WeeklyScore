@@ -13,41 +13,37 @@ struct SelectWeekView: View {
     @Binding var weekFromNow:Int
     @Binding var selectWeekViewPresented: Bool
     @State var selectedDay: Date = Date()
+    @State var selectedDayReal: Date = Date()
     
     let fsNavBar:CGFloat = 20
     let mNavBar:CGFloat = 25
     let fsForm:CGFloat = 16
     
     var body: some View {
-        VStack(spacing: 20){
-            navBar
+        VStack(spacing: 10){
+ //           navBar
+            Spacer().frame(maxHeight: 20)
             DatePicker("Go to Week of:", selection: $selectedDay,displayedComponents: .date)
+                .datePickerStyle(GraphicalDatePickerStyle())
                 .foregroundColor(Color("text_black"))
                 .font(.system(size: fsForm))
                 .datePickerStyle(CompactDatePickerStyle())
                 .onChange(of: selectedDay) { _ in
-                    selectedDay = DateServer.startOfThisWeek(date: selectedDay)
+                    selectedDayReal = DateServer.startOfThisWeek(date: selectedDay)
                     let thisWeekStart = DateServer.startOfThisWeek()
-                    let interval = selectedDay.timeIntervalSinceReferenceDate-thisWeekStart.timeIntervalSinceReferenceDate
+                    let interval = selectedDayReal.timeIntervalSinceReferenceDate-thisWeekStart.timeIntervalSinceReferenceDate
                     weekFromNow = Int(interval/604800)
                 }.padding(.horizontal,20)
             
-            Button{
-                selectWeekViewPresented = false
-            } label: {
-                Text("Done")
-                    .foregroundColor(Color("text_blue"))
-                    .font(.system(size: fsNavBar))
-            }
-            
-            Spacer().frame(maxHeight: 5)
-            Text("or")
-                .foregroundColor(Color("text_black"))
-            Spacer().frame(maxHeight: 5)
-            
+//            Button{
+//                selectWeekViewPresented = false
+//            } label: {
+//                Text("Go")
+//                    .foregroundColor(Color("text_blue"))
+//                    .font(.system(size: fsNavBar))
+//            }.padding(.bottom,10)
             Button {
                 weekFromNow = 0
-                selectWeekViewPresented = false
             } label: {
                 Text("Back to this Week")
                     .foregroundColor(Color("text_blue"))
@@ -58,6 +54,7 @@ struct SelectWeekView: View {
         }
         .onAppear{
             selectedDay = propertiesModel.startWeek
+            selectedDayReal = selectedDay
         }
     }
     
