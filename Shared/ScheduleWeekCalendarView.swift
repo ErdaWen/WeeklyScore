@@ -17,7 +17,6 @@ struct ScheduleWeekCalendarView: View {
     
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     
-    @State var scrollPosition:CGFloat = 200
     
     let mPicker:CGFloat = 40
     let topSpacing:CGFloat = 30
@@ -33,15 +32,12 @@ struct ScheduleWeekCalendarView: View {
                     VStack(alignment: .leading, spacing: 0){
                         Spacer().frame(height:topSpacing)
                         ZStack(alignment: .topLeading){
-                            VStack{
-                                Spacer().frame(height: 200)
-                                GeometryReader {proxy in
-                                    Text("\(-proxy.frame(in: .named("scroll")).minY)")
-                                    Color.clear.preference(key: ScrollPreferenceKey.self,
-                                                           value: -proxy.frame(in: .named("scroll")).minY)
-                                }
-                                Text("\(propertiesModel.scrollPosition)")
-                                Spacer()
+                            GeometryReader {proxy in
+                                Color.clear.preference(key: ScrollPreferenceKey.self,
+                                                       value: -proxy.frame(in: .named("scroll")).minY)
+                            }
+                            .onPreferenceChange(ScrollPreferenceKey.self) { value in
+                                propertiesModel.scrollPosition = value
                             }
 
                             scrollLocator
@@ -63,9 +59,6 @@ struct ScheduleWeekCalendarView: View {
                 }// end whole ZStack
             }//end scrollView
             .coordinateSpace(name: "scroll")
-            .onPreferenceChange(ScrollPreferenceKey.self) { value in
-                propertiesModel.scrollPosition = value
-            }
             .onAppear(){
                 scrollview.scrollTo(10032,anchor: .top)
             }
