@@ -60,7 +60,9 @@ struct ScheduleWeekCalendarView: View {
             }//end scrollView
             .coordinateSpace(name: "scroll")
             .onAppear(){
-                scrollview.scrollTo(10032,anchor: .top)
+                let scrollHour = propertiesModel.scrollPosition/interCord
+                let scrollAnchor = 10000 + Int(scrollHour*4)
+                scrollview.scrollTo(scrollAnchor,anchor: .top)
             }
             .onReceive(updateTimer) { _ in
                 timeNow = Date()

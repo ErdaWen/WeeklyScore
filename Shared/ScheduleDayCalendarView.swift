@@ -32,7 +32,7 @@ struct ScheduleDayCalendarView: View {
                 ZStack(alignment: .topLeading){
                     GeometryReader {proxy in
                         Color.clear.preference(key: ScrollPreferenceKey.self,
-                                               value: -proxy.frame(in: .named("scroll")).minY)
+                                               value: -proxy.frame(in: .named("scroll\(today)")).minY)
                     }
                     .onPreferenceChange(ScrollPreferenceKey.self) { value in
                         propertiesModel.scrollPosition = value
@@ -52,9 +52,11 @@ struct ScheduleDayCalendarView: View {
                 .padding(.trailing , 20)
                 Spacer().frame(height:bottomSpacing)
             } // end scrollView
-            .coordinateSpace(name: "scroll")
+            .coordinateSpace(name: "scroll\(today)")
             .onAppear(){
-                scrollview.scrollTo(10020,anchor: .top)
+                let scrollHour = propertiesModel.scrollPosition/interCord
+                let scrollAnchor = 10000 + Int(scrollHour*4)
+                scrollview.scrollTo(scrollAnchor,anchor: .top)
             }
             .onReceive(updateTimer) { _ in
                 timeNow = Date()
