@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct WeekPicker: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var propertiesModel:PropertiesModel
+    
     @Binding var weekFromNow:Int
     @Binding var dayFromDay1:Int
+    @State var selectWeekViewPresented = false
     
     let rTile:CGFloat = 12
     let sButton:CGFloat = 22
@@ -41,15 +45,20 @@ struct WeekPicker: View {
                 
                 Spacer()
                 
-                //MARK: Week restore
+                //MARK: Week Selection
                 Button {
-                    weekFromNow = 0
+                    selectWeekViewPresented = true
                     dayFromDay1 = -1
                 } label: {
                     Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) )
                         .foregroundColor(Color("text_black"))
                         .font(.system(size: fsTitle))
                         .fontWeight(.light)
+                }
+                .sheet(isPresented: $selectWeekViewPresented) {
+                    SelectWeekView(weekFromNow:$weekFromNow,
+                                   selectWeekViewPresented:$selectWeekViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
                 }
                 
                 Spacer()
