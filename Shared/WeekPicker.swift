@@ -53,7 +53,7 @@ struct WeekPicker: View {
                     Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) )
                         .foregroundColor(Color("text_black"))
                         .font(.system(size: fsTitle))
-                        .fontWeight(.light)
+                        .fontWeight(.semibold)
                 }
                 .sheet(isPresented: $selectWeekViewPresented) {
                     if #available(iOS 16.0, *) {

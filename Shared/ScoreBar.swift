@@ -51,12 +51,29 @@ struct ScoreBar: View {
     }
     var detailedBar: some View {
         HStack(spacing: mScores) {
-            Text("Complete: \(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_green"))
-            Text("Fail: \(propertiesModel.deductScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_red"))
+            Text("Complete: \(propertiesModel.gainedScoreThisWeek)")
+                .font(.system(size: fsSub))
+                .foregroundColor(Color("text_green"))
+                .fontWeight(.semibold)
+
+            Text("Fail: \(propertiesModel.deductScoreThisWeek)")
+                .font(.system(size: fsSub))
+                .foregroundColor(Color("text_red"))
+                .fontWeight(.semibold)
+
             if mode == 3{
-                Text("Unrecorded: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light)
+                Text("Unrecorded: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)")
+                    .font(.system(size: fsSub))
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.semibold)
+
             } else {
-                Text("Upcoming: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light)
+                Text("Upcoming: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)")
+                    .font(.system(size: fsSub))
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.semibold)
+
+  
             }
         }
     }
@@ -64,12 +81,25 @@ struct ScoreBar: View {
     var previewBar: some View {
         HStack(spacing: mScores) {
             if propertiesModel.deductScoreThisWeek != 0 {
-                Text("-\(propertiesModel.deductScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_red"))
-                Text(",").font(.system(size: fsScore)).foregroundColor(Color("text_black")).fontWeight(.light)
+                Text("-\(propertiesModel.deductScoreThisWeek)")
+                    .font(.system(size: fsScore))
+                    .foregroundColor(Color("text_red"))
+                    .fontWeight(.bold)
+                Text(",")
+                    .font(.system(size: fsScore))
+                    .foregroundColor(Color("text_black"))
+                    .fontWeight(.bold)
             }
-            Text("\(propertiesModel.gainedScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_green"))
-            Image(systemName: "line.diagonal").foregroundColor(Color("text_black"))
-            Text("\(propertiesModel.totalScoreThisWeek)").font(.system(size: fsScore)).foregroundColor(Color("text_black"))
+            Text("\(propertiesModel.gainedScoreThisWeek)")
+                .font(.system(size: fsScore))
+                .foregroundColor(Color("text_green"))
+                .fontWeight(.bold)
+            Image(systemName: "line.diagonal")
+                .foregroundColor(Color("text_black"))
+            Text("\(propertiesModel.totalScoreThisWeek)")
+                .font(.system(size: fsScore))
+                .foregroundColor(Color("text_black"))
+                .fontWeight(.bold)
         }
     }
     

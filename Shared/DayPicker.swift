@@ -30,12 +30,18 @@ struct DayPicker: View {
                 HStack(spacing:0){
                     //MARK: List icon
                     VStack(alignment: .center, spacing: 2){
-                        Image(systemName: previewMode ? "calendar" : "list.dash").resizable().scaledToFit().padding(.top,8).frame(width: geo.frame(in: .global).width / 8 - 20, height: previewMode ? 24 : 20)
+                        Image(systemName: previewMode ? "calendar" : "list.dash")
+                            .resizable().scaledToFit()
+                            .padding(.top,8)
+                            .frame(width: geo.frame(in: .global).width / 8 - 20, height: previewMode ? 24 : 20)
                             .padding(.bottom, previewMode ? -2 : 0)
                         // hide text "All" when selected
                         if (dayFromDay1 != -1)
                         {
-                            Text("All").font(.system(size: fsSub)).foregroundColor(Color("text_black")).fontWeight(.light).padding(.top, 4)
+                            Text("All").font(.system(size: fsSub))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(.light)
+                                .padding(.top, 4)
                         }
                     }
                     .padding(.bottom,6)
@@ -55,11 +61,13 @@ struct DayPicker: View {
                             VStack(alignment: .center, spacing: mDateWeekday){
                                 
                                 Text("\(dayNumbers[r])")
-                                    .font(.system(size: fsTitle)).fontWeight(isToday ? .semibold : .light)
+                                    .font(.system(size: fsTitle))
+                                    .fontWeight(isToday ? .bold : .regular)
                                     .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                                 
                                 Text("\(weekdayNumbers[r])")
-                                    .font(.system(size: fsSub)).fontWeight(isToday ? .semibold : .light)
+                                    .font(.system(size: fsSub))
+                                    .fontWeight(isToday ? .bold : .regular)
                                     .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                             }
                             .padding(.bottom,4)
