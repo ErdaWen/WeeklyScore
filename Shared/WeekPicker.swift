@@ -23,8 +23,8 @@ struct WeekPicker: View {
     var body: some View {
         ZStack{
             // Background tile
-            RoundedRectangle(cornerRadius: rTile)
-                .foregroundColor(Color("background_grey"))
+//            RoundedRectangle(cornerRadius: rTile)
+//                .foregroundColor(Color("background_grey"))
             
             HStack{
                 //MARK: Week minus
@@ -43,7 +43,7 @@ struct WeekPicker: View {
                        height: sButton)
                 .padding(.leading,mButton)
                 
-                Spacer()
+                Spacer().frame(maxWidth: 40)
                 
                 //MARK: Week Selection
                 Button {
@@ -68,7 +68,7 @@ struct WeekPicker: View {
                     }
                 }
                 
-                Spacer()
+                Spacer().frame(maxWidth: 40)
                 
                 //MARK: Week plus
                 Button {
