@@ -88,7 +88,9 @@ struct ScheduleView: View {
             mainContentTabs
             VStack (alignment: .center, spacing: 0){
                 VStack(alignment: .center,spacing: 0) {
-                    ScoreBar()
+                    if propertiesModel.totalScoreThisWeek>0{
+                        ScoreBar()
+                    }
                     WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1)
                         .frame(height:hTitle)
                         .padding(.horizontal, mTitle)

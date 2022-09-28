@@ -61,20 +61,12 @@ struct ScoreBar: View {
                 .foregroundColor(Color("text_red"))
                 .fontWeight(.semibold)
 
-            if mode == 3{
-                Text("Unrecorded: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)")
-                    .font(.system(size: fsSub))
-                    .foregroundColor(Color("text_black"))
-                    .fontWeight(.semibold)
+            Text("Pending: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)")
+                .font(.system(size: fsSub))
+                .foregroundColor(Color("text_black"))
+                .fontWeight(.semibold)
 
-            } else {
-                Text("Upcoming: \(propertiesModel.totalScoreThisWeek - propertiesModel.deductScoreThisWeek - propertiesModel.gainedScoreThisWeek)")
-                    .font(.system(size: fsSub))
-                    .foregroundColor(Color("text_black"))
-                    .fontWeight(.semibold)
-
-  
-            }
+            
         }
     }
     
