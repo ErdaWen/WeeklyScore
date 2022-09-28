@@ -75,8 +75,20 @@ struct ItemView: View {
                 Spacer()
                 ZStack(){
                     //MARK: Background
-                    Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0.8),Color("background_white").opacity(0)]), startPoint: .bottom, endPoint: .top))
+                    if #available(iOS 15.0, *) {
+                        VStack{
+                            Spacer()
+                            Color.clear
+                                .background(.ultraThinMaterial)
+                                .blur(radius: 10)
+                        }
+                    } else {
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
+                                                                             Color("background_white").opacity(0.8),
+                                                                             Color("background_white").opacity(0)]),
+                                                 startPoint: .bottom, endPoint: .top))
+                    }
                     
                     //MARK: Buttons on top
                     HStack(spacing:0){
@@ -129,8 +141,8 @@ struct ItemView: View {
     }
 }
 
-struct HabitView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemView()
-    }
-}
+//struct HabitView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ItemView()
+//    }
+//}

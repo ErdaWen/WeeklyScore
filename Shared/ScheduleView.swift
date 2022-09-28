@@ -207,12 +207,22 @@ struct ScheduleView: View {
     
     var previewButtonSlider: some View{
         ZStack{
-            Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
-                                                                 Color("background_white").opacity(0.6),
-                                                                 Color("background_white").opacity(0)]),
-                                     startPoint: .bottom, endPoint: .top))
-            
+            if #available(iOS 15.0, *) {
+                VStack{
+                    Spacer()
+                    Color.clear
+                        .background(.ultraThinMaterial)
+                        .frame(height:60)
+                        .blur(radius: 10)
+                }
+            } else {
+                Rectangle()
+                    .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
+                                                                     Color("background_white").opacity(0.6),
+                                                                     Color("background_white").opacity(0)]),
+                                         startPoint: .bottom, endPoint: .top))
+            }
+
             HStack (spacing:mButtons) {
                 Button {
                     previewMode = !previewMode

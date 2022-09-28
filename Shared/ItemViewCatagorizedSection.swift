@@ -33,7 +33,6 @@ struct ItemViewCatagorizedSection: View {
                     .rotationEffect(showItems ? Angle(degrees: 0) : Angle(degrees: -90))
                 Text(tag.name)
                     .font(.system(size: fsTitle))
-                    .fontWeight(.light)
                     .foregroundColor(Color(tag.colorName))
                 Spacer()
             }
