@@ -13,7 +13,7 @@ struct ScoreBar: View {
     
     let mode = UserDefaults.standard.integer(forKey: "autoCompleteMode")
     let mScores:CGFloat = 10
-    let mScoreTitle:CGFloat = 5
+    let mScoreTitle:CGFloat = 0
     let fsScore:CGFloat = 18.0
     let fsSub:CGFloat = 16
 

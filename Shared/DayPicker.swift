@@ -38,14 +38,14 @@ struct DayPicker: View {
                             .resizable().scaledToFit()
                             .padding(.top,8)
                             .frame(width: geo.frame(in: .global).width / 8 - 20, height: previewMode ? 24 : 20)
-                            .padding(.bottom, previewMode ? -2 : 0)
+                            .padding(.bottom, 10)
                         // hide text "All" when selected
                         if (dayFromDay1 != -1)
                         {
                             Text("All").font(.system(size: fsSub))
                                 .foregroundColor(Color("text_black"))
                                 .fontWeight(.light)
-                                .padding(.top, 4)
+                                .padding(.top, -10)
                         }
                     }
                     .padding(.bottom,6)

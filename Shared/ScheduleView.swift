@@ -34,7 +34,7 @@ struct ScheduleView: View {
     // appearence related
     let mTitle:CGFloat = 20
     let hTitle:CGFloat = 38
-    let mPicker:CGFloat = 40
+    let mPicker:CGFloat = 22
     let hPicker:CGFloat = 45
     let minDragDist:CGFloat = 40
     let mButtons: CGFloat = 20

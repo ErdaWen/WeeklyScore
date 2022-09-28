@@ -18,7 +18,7 @@ struct ScheduleWeekCalendarView: View {
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     
     
-    let mPicker:CGFloat = 40
+    let mPicker:CGFloat = 22
     let topSpacing:CGFloat = 130
     let bottomSpacing:CGFloat = 50
     
@@ -106,7 +106,7 @@ struct ScheduleWeekCalendarView: View {
                 Text("\(r):00")
                     .foregroundColor(Color("text_black").opacity(0.5))
                     .font(.system(size: 12))
-                    .padding(.leading, 40)
+                    .padding(.leading, mPicker)
                 VStack{
                     Divider().padding(.trailing, mPicker)
                 }
@@ -118,7 +118,7 @@ struct ScheduleWeekCalendarView: View {
     
     var nowLine:some View{
         NowLine(timeNow: timeNow, interCord: interCord)
-            .padding(.leading, 17)
+            .padding(.leading, mPicker-21)
             .padding(.trailing, mPicker)
     }
 }
