@@ -19,12 +19,12 @@ struct ScheduleTileView: View {
     @State var changeViewPresented = false
     
     // appearacne related
-    let fsTitle:CGFloat = 15
-    let fsSub:CGFloat = 12.0
+    let fsTitle:CGFloat = 16
+    let fsSub:CGFloat = 14
     let opSub:Double = 0.5
     let mTime:CGFloat = 20
     let mTimeTile:CGFloat = 3
-    let wHandle:CGFloat = 8
+    let wHandle:CGFloat = 8.5
     let wHandleTight: CGFloat = 6
     let mHandle:CGFloat = 6
     let mHandleTight: CGFloat = 3
@@ -243,6 +243,7 @@ struct ScheduleTileView: View {
                 Text(showTitle ? schedule.items.titleIcon + " " + schedule.items.title : schedule.items.titleIcon)
                     .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
                     .font(.system(size: fsTitle))
+                    //.fontWeight(.semibold)
                     .padding(.leading, pTextHor)
                     .padding(.top,pTextVer)
                 Spacer()
@@ -251,29 +252,30 @@ struct ScheduleTileView: View {
             Spacer()
             
             //Score
-            VStack{
-                Spacer()
-                if schedule.statusDefault {
-                    Text("? / \(schedule.score)")
-                        .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
-                        .font(.system(size: fsSub)).fontWeight(.light)
-                        .padding(.trailing, pTextHorTight)
-                        .padding(.bottom, pTextVer)
-                } else {
-                    Text("\(schedule.scoreGained) / \(schedule.score)")
-                        .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
-                        .font(.system(size: fsSub))
-                        .fontWeight(.light)
-                        .padding(.trailing, pTextHorTight)
-                        .padding(.bottom, pTextVer)
-                }
-            }//end score VStack
+            if schedule.score>0 {
+                VStack{
+                    Spacer()
+                    if schedule.statusDefault {
+                        Text("? / \(schedule.score)")
+                            .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
+                            .font(.system(size: fsSub))
+                            .padding(.trailing, pTextHorTight)
+                            .padding(.bottom, pTextVer)
+                    } else {
+                        Text("\(schedule.scoreGained) / \(schedule.score)")
+                            .foregroundColor(Color(schedule.items.tags.colorName+"_text"))
+                            .font(.system(size: fsSub))
+                            .padding(.trailing, pTextHorTight)
+                            .padding(.bottom, pTextVer)
+                    }
+                }//end score VStack
+            }
         }
     }
     
     var checkboxDefault:some View{
         Image(systemName: "flag")
-            .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.3))
+            .foregroundColor(Color(schedule.items.tags.colorName).opacity(1))
             .padding(.leading, mTileFlag)
             .padding(.bottom, pTextVer)
             .onTapGesture {

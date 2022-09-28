@@ -21,7 +21,7 @@ struct ScheduleTileSSView: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: wHandle/2)
+            RoundedRectangle(cornerRadius: 5)
                 .foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
             
             HStack(alignment:.center,spacing:2){

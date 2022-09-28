@@ -20,7 +20,7 @@ struct ScheduleTileCompactView: View {
     let fsTitle:CGFloat = 15
     let rTile:CGFloat = 8
     let opTile:Double = 0.15
-    let wHandle:CGFloat = 6
+    let wHandle:CGFloat = 7
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 3
     
@@ -77,7 +77,7 @@ struct ScheduleTileCompactView: View {
                             .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle-1)
                         Circle()
-                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
+                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(1))
                             .frame(width: wHandle+2)
                             .padding(.trailing, mHandle-1)
                         Circle()

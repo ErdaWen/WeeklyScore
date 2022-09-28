@@ -16,7 +16,7 @@ struct InputField <Content:View>: View {
     var fieldHeight:CGFloat?
     
     
-    let rBoarder:CGFloat = 8
+    let rBoarder:CGFloat = 12
     let wBoarder:CGFloat = 1.5
     let mTitleField:CGFloat = 7
     let fsTitle:CGFloat = 15

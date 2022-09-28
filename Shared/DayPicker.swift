@@ -44,8 +44,8 @@ struct DayPicker: View {
                         {
                             Text("All").font(.system(size: fsSub))
                                 .foregroundColor(Color("text_black"))
-                                .fontWeight(.light)
                                 .padding(.top, -7)
+                                .padding(.bottom,4)
                         }
                     }
                     .padding(.bottom,6)

@@ -38,7 +38,7 @@ struct ScheduleView: View {
     let hPicker:CGFloat = 45
     let minDragDist:CGFloat = 40
     let mButtons: CGFloat = 20
-    let sButton: CGFloat = 18
+    let sButton: CGFloat = 22
     let mButtonUp:CGFloat = 0
     
     init(){
