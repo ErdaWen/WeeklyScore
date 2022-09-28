@@ -19,7 +19,7 @@ struct ScheduleWeekCalendarView: View {
     
     
     let mPicker:CGFloat = 40
-    let topSpacing:CGFloat = 30
+    let topSpacing:CGFloat = 130
     let bottomSpacing:CGFloat = 50
     
     var body: some View {

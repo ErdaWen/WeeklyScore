@@ -20,7 +20,7 @@ struct ScheduleDayCalendarView: View {
     var today:Date
     
     @State var timeNow = Date()
-    let topSpacing:CGFloat = 30
+    let topSpacing:CGFloat = 130
     let bottomSpacing:CGFloat = 50
     
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
