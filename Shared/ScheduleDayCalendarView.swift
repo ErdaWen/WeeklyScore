@@ -30,13 +30,13 @@ struct ScheduleDayCalendarView: View {
             ScrollView{
                 Spacer().frame(height:topSpacing)
                 ZStack(alignment: .topLeading){
-                    GeometryReader {proxy in
-                        Color.clear.preference(key: ScrollPreferenceKey.self,
-                                               value: -proxy.frame(in: .named("scroll\(today)")).minY)
-                    }
-                    .onPreferenceChange(ScrollPreferenceKey.self) { value in
-                        propertiesModel.scrollPosition = value
-                    }
+//                    GeometryReader {proxy in
+//                        Color.clear.preference(key: ScrollPreferenceKey.self,
+//                                               value: -proxy.frame(in: .named("scroll\(today)")).minY)
+//                    }
+//                    .onPreferenceChange(ScrollPreferenceKey.self) { value in
+//                        propertiesModel.scrollPosition = value
+//                    }
                     
                     scrollLocator
                     

@@ -345,14 +345,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		0092DD2F26BCC76B00750557 /* ListView */ = {
+		0092DD2F26BCC76B00750557 /* WeekView */ = {
 			isa = PBXGroup;
 			children = (
 				009C422226AF3C2D00A783F0 /* ScheduleWeekView.swift */,
 				0026288826BDF7EF00A755D2 /* RegularList */,
 				0026288926BDF81F00A755D2 /* Preview */,
 			);
-			name = ListView;
+			name = WeekView;
 			sourceTree = "<group>";
 		};
 		009C422526AF3C4A00A783F0 /* Views */ = {
@@ -402,7 +402,7 @@
 				0026288226BDF11600A755D2 /* ScoreBar.swift */,
 				0026289826BF5ABF00A755D2 /* WeekPicker.swift */,
 				0026289B26BF5EAC00A755D2 /* DayPicker.swift */,
-				0092DD2F26BCC76B00750557 /* ListView */,
+				0092DD2F26BCC76B00750557 /* WeekView */,
 				0026288126BDF07700A755D2 /* DayView */,
 				002628A726BF986500A755D2 /* Elements */,
 				009C422B26AF3D3800A783F0 /* Sheets */,
