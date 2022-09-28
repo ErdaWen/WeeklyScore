@@ -22,10 +22,14 @@ struct DayPicker: View {
         ZStack(alignment:.leading){
             GeometryReader { geo in
                 //MARK: Selection tile
-                Rectangle().foregroundColor(Color("background_grey"))
-                    .frame(width:geo.frame(in: .global).width / 8)
-                    .padding(.leading, geo.frame(in: .global).width / 8 * CGFloat(dayFromDay1 + 1))
-                    .animation(.default)
+//                Circle()
+//                    .foregroundColor(Color("tag_color_orange"))
+//                    .blur(radius: 10)
+//                    .frame(width:30)
+//                    .padding(.top,5)
+//                    .frame(width:geo.frame(in: .global).width / 8)
+//                    .padding(.leading, geo.frame(in: .global).width / 8 * CGFloat(dayFromDay1 + 1))
+//                    .animation(.spring())
                 
                 HStack(spacing:0){
                     //MARK: List icon
@@ -65,13 +69,18 @@ struct DayPicker: View {
                                     .fontWeight(isToday ? .bold : .regular)
                                     .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
                                 
-                                Text("\(weekdayNumbers[r])")
-                                    .font(.system(size: fsSub))
-                                    .fontWeight(isToday ? .bold : .regular)
-                                    .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
+                                if dayFromDay1 != r{
+                                    Text("\(weekdayNumbers[r])")
+                                        .font(.system(size: fsSub))
+                                        .fontWeight(isToday ? .bold : .regular)
+                                        .foregroundColor(isToday ?  Color("text_red") : Color("text_black"))
+                                } else {
+                                    Spacer().frame(height:6)
+                                }
+
                             }
                             .padding(.bottom,4)
-                            .animation(.none)
+                            .animation(.default)
                             
                             // For preview mode, add verticle line to form a calendar look
                             if previewMode && (dayFromDay1 == -1 ){
@@ -88,6 +97,16 @@ struct DayPicker: View {
                         }
                     }// end seven days
                 } // end 8 icons
+                
+                VStack{
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(Color("tag_color_orange"))
+                        .frame(width: geo.frame(in: .global).width / 8,
+                               height: 5)
+                        .padding(.leading, geo.frame(in: .global).width / 8 * CGFloat(dayFromDay1 + 1))
+                        .animation(.spring())
+                }
                 
             } //end GeoReader
         }
