@@ -84,18 +84,9 @@ struct ScheduleView: View {
     
     var body: some View {
         
-        if #available(iOS 15.0, *) {
-            ZStack(alignment: .top){
-                ZStack{
-                    mainContentTabs
-                    // MARK: Preview button and slider
-                    VStack{
-                        scheduleOperationButtons
-                        Spacer()
-                        previewButtonSlider
-                    }
-                }
-                
+        ZStack(alignment: .top){
+            mainContentTabs
+            VStack (alignment: .center, spacing: 0){
                 VStack(alignment: .center,spacing: 0) {
                     ScoreBar()
                     WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1)
@@ -109,58 +100,25 @@ struct ScheduleView: View {
                         conditionalDividor
                     }.frame(height: hPicker)
                 }.background(.ultraThinMaterial)
-            } // end all ZStack
-            .onAppear(){
-                WidgetCenter.shared.reloadAllTimelines()
-                updateDate()
+                scheduleOperationButtons
+                Spacer()
+                previewButtonSlider
             }
-            .onChange(of: dayFromDay1, perform: { _ in
-                updateDate()
-                propertiesModel.dumScheculePageChange.toggle()
-            })
-            .onChange(of: weekFromNow, perform: { _ in
-                updateDate()
-                propertiesModel.dumScheculePageChange.toggle()
-            })
-            .animation(.default)
-        } else {
-            VStack(spacing:0){
-                ScoreBar()
-                WeekPicker(weekFromNow: $weekFromNow, dayFromDay1: $dayFromDay1)
-                    .frame(height:hTitle)
-                    .padding(.horizontal, mTitle)
-                    .animation(.default)
-                
-                ZStack(alignment:.top){
-                    DayPicker(weekFromNow:weekFromNow,dayFromDay1: $dayFromDay1, previewMode: previewMode)
-                        .padding(.horizontal, mPicker)
-                    conditionalDividor
-                }.frame(height: hPicker)
-                
-                ZStack{
-                    mainContentTabs
-                    // MARK: Preview button and slider
-                    VStack{
-                        scheduleOperationButtons
-                        Spacer()
-                        previewButtonSlider
-                    }
-                }
-            } // end all VStack
-            .onAppear(){
-                WidgetCenter.shared.reloadAllTimelines()
-                updateDate()
-            }
-            .onChange(of: dayFromDay1, perform: { _ in
-                updateDate()
-                propertiesModel.dumScheculePageChange.toggle()
-            })
-            .onChange(of: weekFromNow, perform: { _ in
-                updateDate()
-                propertiesModel.dumScheculePageChange.toggle()
-            })
-            .animation(.default)
+            
+        } // end all ZStack
+        .onAppear(){
+            WidgetCenter.shared.reloadAllTimelines()
+            updateDate()
         }
+        .onChange(of: dayFromDay1, perform: { _ in
+            updateDate()
+            propertiesModel.dumScheculePageChange.toggle()
+        })
+        .onChange(of: weekFromNow, perform: { _ in
+            updateDate()
+            propertiesModel.dumScheculePageChange.toggle()
+        })
+        .animation(.default)
     }
 
     
