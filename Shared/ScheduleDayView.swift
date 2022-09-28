@@ -44,7 +44,7 @@ struct ScheduleDayView: View {
             if schedules.count == 0{
                 VStack(){
                     Spacer()
-                    Text("No schedules for selected day")
+                    Text("🌵 No schedules")
                         .foregroundColor(Color("text_black"))
                         .font(.system(size: 18))
                         .fontWeight(.light)

@@ -38,7 +38,7 @@ struct ScheduleWeekListView: View {
                         // Genrate title
                         let (dayDescription, isToday) = DateServer.describeDay(date: dayLookingAt)
                         if isToday {
-                            Text((schedulesFiltered.count > 0) ? "Today" : "No schedules for today")
+                            Text((schedulesFiltered.count > 0) ? "Today" : "No schedules today")
                                 .foregroundColor(Color("text_red")).font(.system(size: 12)).fontWeight(.bold)
                                 .padding(.top,5)
                         } else if (schedulesFiltered.count > 0) {
