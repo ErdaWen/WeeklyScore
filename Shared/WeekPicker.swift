@@ -48,10 +48,17 @@ struct WeekPicker: View {
                 Button {
                     selectWeekViewPresented = true
                 } label: {
-                    Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) )
-                        .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsTitle))
-                        .fontWeight(.semibold)
+                    HStack(alignment:.center){
+                        Text(weekFromNow == 0 ? "This week" : "Week of " + DateServer.generateStartDay(offset:weekFromNow) )
+                            .foregroundColor(Color("text_black"))
+                            .font(.system(size: fsTitle))
+                            .fontWeight(.semibold)
+                        Image(systemName: "clock.arrow.2.circlepath")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 15)
+                            .foregroundColor(Color("text_black"))
+                    }
                 }
                 .sheet(isPresented: $selectWeekViewPresented) {
                     if #available(iOS 16.0, *) {
