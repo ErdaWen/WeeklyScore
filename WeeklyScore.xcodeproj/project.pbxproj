@@ -35,6 +35,7 @@
 		003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A248A269BFD7800BDB239 /* ChangeItemView.swift */; };
 		0056D38228E004A10042AABC /* SelectWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38128E004A10042AABC /* SelectWeekView.swift */; };
 		0056D38428E105910042AABC /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38328E105910042AABC /* PreferenceKeys.swift */; };
+		005B135B28EA3A68002CF1B0 /* tabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005B135A28EA3A68002CF1B0 /* tabButton.swift */; };
 		005D077826CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
 		005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
 		005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
@@ -152,6 +153,7 @@
 		003A248A269BFD7800BDB239 /* ChangeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeItemView.swift; sourceTree = "<group>"; };
 		0056D38128E004A10042AABC /* SelectWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWeekView.swift; sourceTree = "<group>"; };
 		0056D38328E105910042AABC /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
+		005B135A28EA3A68002CF1B0 /* tabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabButton.swift; sourceTree = "<group>"; };
 		005D077726CC762700664008 /* DayBatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchList.swift; sourceTree = "<group>"; };
 		005D077A26CC783600664008 /* DayBatchOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchOperationView.swift; sourceTree = "<group>"; };
 		005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCatagorized.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			children = (
 				C8BCDFFC26918075006E7D7E /* WeeklyScoreApp.swift */,
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
+				005B135A28EA3A68002CF1B0 /* tabButton.swift */,
 				0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */,
 				0080F13A26D1F34F00B10859 /* Settings */,
 				009C422A26AF3D0D00A783F0 /* ScheduleView */,
@@ -733,6 +736,7 @@
 				00C59BED26D9B07D008A47D3 /* ColorTagTileView.swift in Sources */,
 				0092DD3726BCD11C00750557 /* ScheduleWeekCalendarView.swift in Sources */,
 				005D078426CCBFE200664008 /* EditTagView.swift in Sources */,
+				005B135B28EA3A68002CF1B0 /* tabButton.swift in Sources */,
 				C8BCE01126918079006E7D7E /* ContentView.swift in Sources */,
 				0080F14226D21E2700B10859 /* weekStartDayPicker.swift in Sources */,
 				002628A226BF911F00A755D2 /* NowLine.swift in Sources */,

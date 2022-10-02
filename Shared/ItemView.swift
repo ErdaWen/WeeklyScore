@@ -75,21 +75,13 @@ struct ItemView: View {
                 Spacer()
                 ZStack(){
                     //MARK: Background
-                    if #available(iOS 15.0, *) {
                         VStack{
                             Spacer()
                             Color.clear
                                 .background(.ultraThinMaterial)
                                 .blur(radius: 10)
                         }
-                    } else {
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
-                                                                             Color("background_white").opacity(0.8),
-                                                                             Color("background_white").opacity(0)]),
-                                                 startPoint: .bottom, endPoint: .top))
-                    }
-                    
+
                     //MARK: Buttons on top
                     HStack(spacing:0){
                         Spacer()
@@ -129,7 +121,8 @@ struct ItemView: View {
                         }
                         Spacer()
                     }
-                }.frame(height:45)//end bottom button Zstack
+                    .padding(.bottom,45)
+                }.frame(height:45+45)//end bottom button Zstack
         
             } //end bottom button Vstack
             

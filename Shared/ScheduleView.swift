@@ -211,20 +211,13 @@ struct ScheduleView: View {
     
     var previewButtonSlider: some View{
         ZStack{
-            if #available(iOS 15.0, *) {
-                VStack{
-                    Spacer()
-                    Color.clear
-                        .background(.ultraThinMaterial)
-                        .frame(height:60)
-                        .blur(radius: 20)
-                }
-            } else {
-                Rectangle()
-                    .fill(LinearGradient(gradient: Gradient(colors: [Color("background_white"),
-                                                                     Color("background_white").opacity(0.6),
-                                                                     Color("background_white").opacity(0)]),
-                                         startPoint: .bottom, endPoint: .top))
+
+            VStack{
+                Spacer()
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .frame(height:60+45)
+                    .blur(radius: 20)
             }
 
             HStack (spacing:mButtons) {
@@ -234,7 +227,7 @@ struct ScheduleView: View {
                     Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
                         .resizable().scaledToFit()
                         .foregroundColor(Color("text_black"))
-                        .frame(height:sButton)
+                        .frame(height:sButton-5)
                         .padding(.leading,70)
                         .padding(.top,19)
                 }
@@ -248,8 +241,10 @@ struct ScheduleView: View {
                         .frame(height:38)
                         .padding(.trailing,60)
                 }
-            } // HStack
-        }.frame(height:75)
+            }
+            .padding(.bottom, 45)
+            // HStack
+        }.frame(height:75+45)
     }
 }
 

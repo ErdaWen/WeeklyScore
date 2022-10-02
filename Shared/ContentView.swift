@@ -46,32 +46,20 @@ struct ContentView: View {
 
     var body: some View {
         ZStack(alignment:.top){
-                
-            TabView(selection: $tabIndex){
-                // MARK: Schedule View
-                ScheduleView()
-                    .tabItem {
-                        VStack{
-                            Image (systemName: "calendar.badge.clock")
-                            Text ("Schedule").fontWeight(.light)
-                        }
-                    }.tag(1)
-                // MARK: Habit View
-                ItemView()
-                    .tabItem {
-                        VStack{
-                            Image (systemName: "flag")
-                            Text ("Habits").fontWeight(.light)
-                        }
-                        
-                    }.tag(2)
-                SettingView()
-                    .tabItem{
-                        VStack{
-                            Image (systemName:"gear")
-                            Text("Settings").fontWeight(.light)
-                        }
-                    }.tag(3)
+            ZStack{
+                switch tabIndex{
+                case 2:
+                    ItemView()
+                case 3:
+                    SettingView()
+                default:
+                    ScheduleView()
+                }
+                VStack{
+                    Spacer()
+                    threeButtons
+                        .frame(height: 45)
+                }
             }
             
             //MARK: autorecord noification bar
@@ -91,6 +79,40 @@ struct ContentView: View {
             autoRecord()
             print("excecuted auto record")
         }
+    }
+    
+    var threeButtons: some View{
+        HStack{
+            Spacer()
+            Button {
+                tabIndex = 1
+            } label: {
+                tabButton(imageName: "calendar.badge.clock",
+                          titleText: "Schedule",
+                          selected: (tabIndex == 1))
+            }//end button schedules
+            
+            Spacer()
+            
+            Button {
+                tabIndex = 2
+            } label: {
+                tabButton(imageName: "flag",
+                          titleText: "Habits",
+                          selected: (tabIndex == 2))
+            }//end button habits
+            
+            Spacer()
+            
+            Button {
+                tabIndex = 3
+            } label: {
+                tabButton(imageName: "gear",
+                          titleText: "Settings",
+                          selected: (tabIndex == 3))
+            }//end button settings
+            Spacer()
+        }// end Hstack
     }
 }
 
