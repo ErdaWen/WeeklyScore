@@ -21,9 +21,9 @@ struct ItemTileView: View {
     @State var dates:[Date] = []
     @State var value:[Int] = []
     
-    let fsTitle:CGFloat = 15
-    let fsSub:CGFloat = 15
-    let wHandle:CGFloat = 8
+    let fsTitle:CGFloat = 16
+    let fsSub:CGFloat = 16
+    let wHandle:CGFloat = 10
     let mHandle:CGFloat = 8
     let rTile:CGFloat = 10
     let rSmallTile:CGFloat = 8
@@ -53,137 +53,34 @@ struct ItemTileView: View {
     
     
     var body: some View {
-        
         HStack(spacing:0){
-            //MARK: Left handle
             if item.durationBased{
-                RoundedRectangle(cornerRadius: wHandle/2)
-                    .frame(width: wHandle)
-                    .foregroundColor(Color(item.tags.colorName))
-                    .padding(.horizontal, mHandle)
+                handleDur
             } else {
-                Circle()
-                    .frame(width: wHandle + 4,height: wHandle + 4)
-                    .foregroundColor(Color(item.tags.colorName))
-                    .padding(.horizontal, mHandle - 2)
-                
+                handlePnt
             }
-            
-            
+
             //MARK: Center tile
             ZStack(alignment:.top){
-                //MARK: Background tile
-                RoundedRectangle(cornerRadius: rTile).stroke(Color(item.tags.colorName), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: rTile).stroke(Color(item.tags.colorName), lineWidth: 1)
                 RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(item.tags.colorName).opacity(opTile))
                 VStack(alignment: .center, spacing: 0){
-                    //MARK: First line
-                    HStack(alignment:.center){
-                        //MARK: Title
-                        Text(item.titleIcon + " " + item.title)
-                            .strikethrough(item.hidden)
-                            .foregroundColor(Color("text_black"))
-                            .font(.system(size: fsTitle))
-                            .padding(.leading,pText)
-                            .padding(.bottom,mTextVer)
-                        
-                        //MARK: Edit button
-                        if showDetail{
-                            Button {
-                                changeViewPresented = true
-                            } label: {
-                                Image(systemName: "square.and.pencil")
-                                    .resizable().scaledToFit()
-                                    .foregroundColor(Color("text_black"))
-                                    .frame(height:sButton).padding(.leading,3)
-                                
-                            }
-                        }
-                        Spacer()
-                        //MARK: Show detail/rough statisitc
-                        if showDetail{
-                            Button {
-                                withAnimation(.default){
-                                showDetail = false
-                                }
-                            } label: {
-                                Image(systemName: "chevron.up")
-                                    .resizable().scaledToFit()
-                                    .foregroundColor(Color("text_black"))
-                                    .frame(width:sButton,height:sButton).padding(.leading,3)
-                                    .padding(.trailing,mSmallTiles)
-                                    .padding(.vertical,mSmallTileVer)
-                            }
-                            
-                        } else {
-                            ZStack(){
-                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                                Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
-                                    .font(.system(size: fsSub))
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("text_black"))
-                            }
-                            .frame(width:wSmallTile)
-                            .padding(.trailing,mSmallTiles)
-                            .padding(.vertical,mSmallTileVer)
-                        }//end if else
-                        
-                    }//end first line Hstack
-                    .frame(height:45)
-                    
-                    //MARK: Statistics
+                    titleLine
+                        .frame(height:45)
                     if showDetail{
-                        //MARK: Bars
                         ItemStatisticBars(dates: dates, values: value, durationBased: item.durationBased,color: Color(item.tags.colorName))
                             .padding(.horizontal, 10)
                             .animation(.default)
-                        //MARK: Numbers
-                        HStack{
-                            ZStack(){
-                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                                Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
-                                    .font(.system(size: fsSub))
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("text_black"))
-                            }
-                            
-                            ZStack(){
-                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                                Text("\(item.scoreTotal) pts")
-                                    .font(.system(size: fsSub))
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("text_black"))
-                            }
-                            .frame(height:20)
-                            
-                            ZStack(){
-                                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
-                                if let r = rate {
-                                    Text("\(Int(r*100)) % ")
-                                        .font(.system(size: fsSub))
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("text_black"))
-                                } else {
-                                    Text(" - % ")
-                                        .font(.system(size: fsSub))
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("text_black"))
-                                }
-                                
-                            }
-                            .frame(height:20)
-                            
-                        }// end numbers Hstack
-                        .frame(height: 20)
-                        .padding(.horizontal,10)
-                        .padding(.vertical, 10)
-                    } // end if show detail
-                    
+                        statisticSummary
+                            .frame(height: 20)
+                            .padding(.horizontal,10)
+                            .padding(.vertical, 10)
+                    }
                 }// end VStack
-                
             } // End center tile ZStack
             .onTapGesture {
                 withAnimation(.default) {
-                    showDetail = true
+                    showDetail.toggle()
                 }
             }
             .onChange(of: showDetail) { _ in
@@ -194,10 +91,114 @@ struct ItemTileView: View {
                 ChangeItemView(changeItemViewPresented: $changeViewPresented, item: item)
                     .environment(\.managedObjectContext,self.viewContext)
             }
-            
         }//end everything Hstack
         .frame(height: showDetail ? hTilesDetail : hTiles)
     }
+    var handleDur:some View{
+        RoundedRectangle(cornerRadius: wHandle/2)
+            .frame(width: wHandle)
+            .foregroundColor(Color(item.tags.colorName))
+            .padding(.horizontal, mHandle)
+    }
+    var handlePnt:some View{
+        Circle()
+            .frame(width: wHandle + 4,height: wHandle + 4)
+            .foregroundColor(Color(item.tags.colorName))
+            .padding(.horizontal, mHandle - 2)
+    }
+    
+    var titleLine:some View{
+        HStack(alignment:.center){
+            //MARK: Title
+            Text(item.titleIcon + " " + item.title)
+                .strikethrough(item.hidden)
+                .foregroundColor(Color("text_black"))
+                .font(.system(size: fsTitle))
+                .fontWeight(.semibold)
+                .padding(.leading,pText)
+                .padding(.bottom,mTextVer)
+            
+            //MARK: Edit button
+            if showDetail{
+                Button {
+                    changeViewPresented = true
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .resizable().scaledToFit()
+                        .foregroundColor(Color("text_black"))
+                        .frame(height:sButton).padding(.leading,3)
+                }
+            }
+            Spacer()
+            //MARK: Show detail/rough statisitc
+            if showDetail{
+                Button {
+                    withAnimation(.default){
+                    showDetail = false
+                    }
+                } label: {
+                    Image(systemName: "chevron.up")
+                        .resizable().scaledToFit()
+                        .foregroundColor(Color("text_black"))
+                        .frame(width:sButton,height:sButton).padding(.leading,3)
+                        .padding(.trailing,mSmallTiles)
+                        .padding(.vertical,mSmallTileVer)
+                }
+                
+            } else {
+                ZStack(){
+                    RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                    Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
+                        .font(.system(size: fsSub))
+                        .fontWeight(.regular)
+                        .foregroundColor(Color("text_black"))
+                }
+                .frame(width:wSmallTile)
+                .padding(.trailing,mSmallTiles)
+                .padding(.vertical,mSmallTileVer)
+            }//end if else
+            
+        }
+    }
+    
+    var statisticSummary:some View{
+        HStack{
+            ZStack(){
+                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                Text(item.durationBased ? DateServer.describeMin(min: Int(item.minutesTotal))  : "\(item.checkedTotal) times")
+                    .font(.system(size: fsSub))
+                    .fontWeight(.regular)
+                    .foregroundColor(Color("text_black"))
+            }
+            
+            ZStack(){
+                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                Text("\(item.scoreTotal) pts")
+                    .font(.system(size: fsSub))
+                    .fontWeight(.regular)
+                    .foregroundColor(Color("text_black"))
+            }
+            .frame(height:20)
+            
+            ZStack(){
+                RoundedRectangle(cornerRadius: rSmallTile).foregroundColor(Color("background_white"))
+                if let r = rate {
+                    Text("\(Int(r*100)) % ")
+                        .font(.system(size: fsSub))
+                        .fontWeight(.regular)
+                        .foregroundColor(Color("text_black"))
+                } else {
+                    Text(" - % ")
+                        .font(.system(size: fsSub))
+                        .fontWeight(.regular)
+                        .foregroundColor(Color("text_black"))
+                }
+                
+            }
+            .frame(height:20)
+        }
+    }
+    
 }
 
 //struct ItemTileView_Previews: PreviewProvider {

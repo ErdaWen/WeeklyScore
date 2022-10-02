@@ -24,7 +24,6 @@ struct ItemViewCatagorizedSection: View {
     var body: some View {
         VStack(alignment: .leading,spacing:mTiles){
             
-            
             HStack{
                 Image(systemName: "chevron.down")
                     .resizable().scaledToFit()
@@ -33,6 +32,7 @@ struct ItemViewCatagorizedSection: View {
                     .rotationEffect(showItems ? Angle(degrees: 0) : Angle(degrees: -90))
                 Text(tag.name)
                     .font(.system(size: fsTitle))
+                    .fontWeight(.semibold)
                     .foregroundColor(Color(tag.colorName))
                 Spacer()
             }
@@ -44,7 +44,6 @@ struct ItemViewCatagorizedSection: View {
             }
             
             if showItems {
-                
                 if items.count == 0{
                     HStack{
                         Spacer().frame(width:20)
