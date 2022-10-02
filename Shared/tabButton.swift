@@ -31,6 +31,7 @@ struct tabButton: View {
             }
         }
         .frame(width: 80)
+        .animation(.default)
     }
 }
 

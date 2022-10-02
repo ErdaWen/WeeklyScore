@@ -84,33 +84,30 @@ struct ContentView: View {
     var threeButtons: some View{
         HStack{
             Spacer()
-            Button {
+            tabButton(imageName: "calendar.badge.clock",
+                      titleText: "Schedule",
+                      selected: (tabIndex == 1))
+            .onTapGesture {
                 tabIndex = 1
-            } label: {
-                tabButton(imageName: "calendar.badge.clock",
-                          titleText: "Schedule",
-                          selected: (tabIndex == 1))
-            }//end button schedules
-            
+            }
+
             Spacer()
             
-            Button {
+            tabButton(imageName: "flag",
+                      titleText: "Habits",
+                      selected: (tabIndex == 2))
+            .onTapGesture {
                 tabIndex = 2
-            } label: {
-                tabButton(imageName: "flag",
-                          titleText: "Habits",
-                          selected: (tabIndex == 2))
-            }//end button habits
-            
+            }
+
             Spacer()
-            
-            Button {
+            tabButton(imageName: "gear",
+                      titleText: "Settings",
+                      selected: (tabIndex == 3))
+            .onTapGesture {
                 tabIndex = 3
-            } label: {
-                tabButton(imageName: "gear",
-                          titleText: "Settings",
-                          selected: (tabIndex == 3))
-            }//end button settings
+            }
+
             Spacer()
         }// end Hstack
     }
