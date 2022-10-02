@@ -31,6 +31,7 @@ struct ScheduleTileView: View {
     let mHandleLeft:CGFloat = 6
     let mHandleTightLeft:CGFloat = 3
     let rTile:CGFloat = 8
+    let opTile0:Double = 0.2
     let opTile:Double = 0.15
     let pTextHor:CGFloat = 8
     let pTextVer:CGFloat = 5
@@ -108,12 +109,18 @@ struct ScheduleTileView: View {
                     changeViewPresented = true
                 } label: {
                     //MARK: Center tile
-                    ZStack(alignment:.top){
-                        //Background tile
-                        RoundedRectangle(cornerRadius: rTile)
-                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
-                        tileText
-                    }
+//                    ZStack(alignment:.top){
+//                        //Background tile
+//                        RoundedRectangle(cornerRadius: rTile)
+//                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
+//                        tileText
+//                    }
+                    tileText
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(schedule.items.tags.colorName).opacity(opTile0),
+                             Color(schedule.items.tags.colorName).opacity(opTile)]),
+                                                   startPoint: .topLeading,
+                                                   endPoint: .bottomTrailing),
+                                    in: RoundedRectangle(cornerRadius: rTile))
                 }//end Button Label
                 .sheet(isPresented: $changeViewPresented) {
                     ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)

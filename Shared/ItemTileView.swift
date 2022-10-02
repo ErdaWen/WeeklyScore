@@ -112,9 +112,9 @@ struct ItemTileView: View {
             //MARK: Title
             Text(item.titleIcon + " " + item.title)
                 .strikethrough(item.hidden)
-                .foregroundColor(Color("text_black"))
+                .foregroundColor(Color(item.tags.colorName+"_text"))
                 .font(.system(size: fsTitle))
-                .fontWeight(.semibold)
+                .fontWeight(.regular)
                 .padding(.leading,pText)
                 .padding(.bottom,mTextVer)
             
