@@ -65,16 +65,15 @@ struct EditTagView: View {
             //MARK: Contents
             ScrollView{
                 VStack(spacing:mVer){
-
-                    ForEach(tags){ tag in
-                        ColorTagTileView(tag: tag,dumUpdate:propertiesModel.dumUpdate)
-                    }
                     
                     FloatButton(systemName: "plus.square", sButton: sButton) {
                         genNewTag()
                     }
                     .padding(.top,pButton)
-
+                    
+                    ForEach(tags){ tag in
+                        ColorTagTileView(tag: tag,dumUpdate:propertiesModel.dumUpdate)
+                    }
                     
                 }// end Vstack
                 .padding(.init(top: 0, leading: 40, bottom: 10, trailing: 40))

@@ -52,7 +52,7 @@ struct ItemView: View {
                     Color.clear
                         .background(.ultraThinMaterial)
                         .frame(height:80)
-                        .blur(radius: 10)
+                        .blur(radius: 15)
                     Spacer()
                     Color.clear
                         .background(.ultraThinMaterial)
@@ -82,8 +82,14 @@ struct ItemView: View {
                     tagViewPresented = true
                 }
                 .sheet(isPresented: $tagViewPresented) {
-                    EditTagView(editTagViewPresented: $tagViewPresented)
-                        .environment(\.managedObjectContext,self.viewContext)
+                    if #available(iOS 16.0, *) {
+                        EditTagView(editTagViewPresented: $tagViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
+                            .presentationDetents([.medium,.large])
+                    } else {
+                        EditTagView(editTagViewPresented: $tagViewPresented)
+                            .environment(\.managedObjectContext,self.viewContext)
+                    }
                 }
             }
             

@@ -233,8 +233,15 @@ struct AddItemView: View {
                                 .padding(.trailing, 10)
                                 .padding(.bottom, 10)
                                 .sheet(isPresented: $tagViewPresented) {
-                                    EditTagView(editTagViewPresented: $tagViewPresented)
-                                        .environment(\.managedObjectContext,self.viewContext)
+                                    if #available(iOS 16.0, *) {
+                                        EditTagView(editTagViewPresented: $tagViewPresented)
+                                            .environment(\.managedObjectContext,self.viewContext)
+                                            .presentationDetents([.medium,.large])
+                                    } else {
+                                        EditTagView(editTagViewPresented: $tagViewPresented)
+                                            .environment(\.managedObjectContext,self.viewContext)
+                                    }
+
                                 }
                             }// end choose tag Zstack
                         })

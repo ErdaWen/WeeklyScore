@@ -21,8 +21,8 @@ struct ColorTagTileView: View {
     let mHor:CGFloat = 10
     let sColor:CGFloat = 30
     let rColor:CGFloat = 8
-    let hField:CGFloat = 35
-    let fsField:CGFloat = 15
+    let hField:CGFloat = 40
+    let fsField:CGFloat = 16
     let colorNames = ["Red","Orange","Yellow","Green","Cyan","Blue","Magenta"]
     let colorSystemNames = ["tag_color_red","tag_color_orange","tag_color_yellow","tag_color_green","tag_color_cyan","tag_color_blue","tag_color_magenta"]
 
