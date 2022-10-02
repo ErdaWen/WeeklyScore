@@ -24,7 +24,7 @@ struct ItemView: View {
     // @State var catagorized = UserDefaults.standard.bool(forKey: "itemCatagorized")
     let catagorized = true
     
-    let pButton:CGFloat = 20
+    let pButton:CGFloat = 0
     let sButton:CGFloat = 22
     let pButton2:CGFloat = 10
     let mButtons:CGFloat = 35
@@ -33,7 +33,6 @@ struct ItemView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            //MARK: Add Habit Button
             if !catagorized {
                 if items.count == 0{
                     NoItemView(catagorized:catagorized)
@@ -45,63 +44,65 @@ struct ItemView: View {
                     NoItemView(catagorized:catagorized)
                 } else {
                     ItemViewCatagorized(items: items, showArchive: showArchive)
+                        .padding(.vertical,1)
                 }
             }
-            //MARK: Add habit button
-                //MARK:Buttons
-            HStack(alignment:.center,spacing: 20){
-                FloatButton(systemName: "plus.square", sButton: sButton) {
-                    addViewPresented = true
-                }
-                .padding(.leading,20)
-                .sheet(isPresented: $addViewPresented, content: {
-                    AddItemView(addItemViewPresented: $addViewPresented)
-                        .environment(\.managedObjectContext,self.viewContext)
-                })
-                
-                if catagorized{
-                    FloatButton(systemName: "plus.rectangle.on.folder", sButton: sButton+5) {
-                        tagViewPresented = true
-                    }
-                    .sheet(isPresented: $tagViewPresented) {
-                        EditTagView(editTagViewPresented: $tagViewPresented)
-                            .environment(\.managedObjectContext,self.viewContext)
-                    }
-                }
-                
-                HStack(alignment: .center, spacing: mButtonText){
-                    FloatButton(systemName: showArchive ? "archivebox.fill" : "archivebox", sButton: sButton) {
-                        withAnimation(.default){
-                        showArchive.toggle()
-                        }
-                        UserDefaults.standard.set(showArchive, forKey: "showArchivedItem")
-                    }
-                    Text( showArchive ? "Hide\nArchived" : "Show\nArchived")
-                        .font(.system(size: fsSub))
-                        .fontWeight(.light)
-                        .foregroundColor(Color("text_black"))
-                        .multilineTextAlignment(.leading)
-                }
-            }
-            .frame(height:80)
-            .padding(.top,pButton)
-            
-            //MARK: Archive and tag button
-            VStack{
-                Spacer()
-                Color.clear
-                    .ignoresSafeArea()
-                    .background(.ultraThinMaterial)
-                    .blur(radius: 10)
-                    .frame(height:60)//end bottom button Zstack
-            }
-            
 
-   
+                VStack{
+                    Color.clear
+                        .background(.ultraThinMaterial)
+                        .frame(height:80)
+                        .blur(radius: 10)
+                    Spacer()
+                    Color.clear
+                        .background(.ultraThinMaterial)
+                        .frame(height:60)
+                        .blur(radius: 10)
+                }
+            threeButtons
+
         }
         // end whole view ZStack
         
         
+    }
+    var threeButtons: some View{
+        HStack(alignment:.center,spacing: 20){
+            FloatButton(systemName: "plus.square", sButton: sButton) {
+                addViewPresented = true
+            }
+            .padding(.leading,20)
+            .sheet(isPresented: $addViewPresented, content: {
+                AddItemView(addItemViewPresented: $addViewPresented)
+                    .environment(\.managedObjectContext,self.viewContext)
+            })
+            
+            if catagorized{
+                FloatButton(systemName: "plus.rectangle.on.folder", sButton: sButton+5) {
+                    tagViewPresented = true
+                }
+                .sheet(isPresented: $tagViewPresented) {
+                    EditTagView(editTagViewPresented: $tagViewPresented)
+                        .environment(\.managedObjectContext,self.viewContext)
+                }
+            }
+            
+            HStack(alignment: .center, spacing: mButtonText){
+                FloatButton(systemName: showArchive ? "archivebox.fill" : "archivebox", sButton: sButton) {
+                    withAnimation(.default){
+                    showArchive.toggle()
+                    }
+                    UserDefaults.standard.set(showArchive, forKey: "showArchivedItem")
+                }
+                Text( showArchive ? "Hide\nArchived" : "Show\nArchived")
+                    .font(.system(size: fsSub))
+                    .fontWeight(.light)
+                    .foregroundColor(Color("text_black"))
+                    .multilineTextAlignment(.leading)
+            }.frame(width: 100)
+        }
+        .frame(height:80)
+        .padding(.top,pButton)
     }
 }
 
