@@ -54,9 +54,15 @@ struct ScheduleDayCalendarView: View {
             } // end scrollView
             .coordinateSpace(name: "scroll\(today)")
             .onAppear(){
-                let scrollHour = propertiesModel.scrollPosition/interCord
-                let scrollAnchor = 10000 + Int(scrollHour*4)
-                scrollview.scrollTo(scrollAnchor,anchor: .top)
+                if propertiesModel.startDate == DateServer.startOfToday() {
+                    let hournow = (Date().timeIntervalSinceReferenceDate - propertiesModel.startDate.timeIntervalSinceReferenceDate)/3600
+                    let scrollAnchor = 10000 + Int(hournow*4+6)
+                    scrollview.scrollTo(scrollAnchor,anchor: .center)
+                } else {
+                    let scrollHour = propertiesModel.scrollPosition/interCord
+                    let scrollAnchor = 10000 + Int(scrollHour*4)
+                    scrollview.scrollTo(scrollAnchor,anchor: .top)
+                }
             }
 //            .onChange(of: propertiesModel.dumScheculePageChange, perform: { _ in
 //                let scrollHour = propertiesModel.scrollPosition/interCord

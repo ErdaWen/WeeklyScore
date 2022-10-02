@@ -52,7 +52,7 @@ struct ScheduleWeekCalendarView: View {
                             //MARK:Now line
                             if propertiesModel.startDate == DateServer.startOfThisWeek() {
                                 nowLine
-                            }//end now line if
+                            }
                         }// end everything except verticle line (and spacer) Zstack
                         Spacer().frame(height:bottomSpacing)
                     }// end everything excepet vertical line Vstack
@@ -60,9 +60,16 @@ struct ScheduleWeekCalendarView: View {
             }//end scrollView
             .coordinateSpace(name: "scroll")
             .onAppear(){
-                let scrollHour = propertiesModel.scrollPosition/interCord
-                let scrollAnchor = 10000 + Int(scrollHour*4)
-                scrollview.scrollTo(scrollAnchor,anchor: .top)
+                
+                if propertiesModel.startDate == DateServer.startOfThisWeek() {
+                    let hournow = (Date().timeIntervalSinceReferenceDate - DateServer.startOfToday().timeIntervalSinceReferenceDate)/3600
+                    let scrollAnchor = 10000 + Int(hournow*4+6)
+                    scrollview.scrollTo(scrollAnchor,anchor: .center)
+                } else {
+                    let scrollHour = propertiesModel.scrollPosition/interCord
+                    let scrollAnchor = 10000 + Int(scrollHour*4)
+                    scrollview.scrollTo(scrollAnchor,anchor: .top)
+                }
             }
 //            .onChange(of: propertiesModel.dumScheculePageChange, perform: { _ in
 //                let scrollHour = propertiesModel.scrollPosition/interCord
@@ -120,6 +127,7 @@ struct ScheduleWeekCalendarView: View {
         NowLine(timeNow: timeNow, interCord: interCord)
             .padding(.leading, mPicker-21)
             .padding(.trailing, mPicker)
+            .id(20000)
     }
 }
 
