@@ -26,8 +26,10 @@ struct ScheduleTileView: View {
     let mTimeTile:CGFloat = 3
     let wHandle:CGFloat = 8.5
     let wHandleTight: CGFloat = 6
-    let mHandle:CGFloat = 6
-    let mHandleTight: CGFloat = 3
+    let mHandle:CGFloat = 4
+    let mHandleTight: CGFloat = 2
+    let mHandleLeft:CGFloat = 6
+    let mHandleTightLeft:CGFloat = 3
     let rTile:CGFloat = 8
     let opTile:Double = 0.15
     let pTextHor:CGFloat = 8
@@ -152,19 +154,19 @@ struct ScheduleTileView: View {
                 .frame(width: showTitle ? wHandle : wHandleTight)
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
-                .padding(.leading, showTitle ? mHandle : 0)
+                .padding(.leading, showTitle ? mHandleLeft : 0)
             
             RoundedRectangle(cornerRadius: wHandle/2)
                 .frame(width: showTitle ? wHandle : wHandleTight)
                 .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
-                .padding(.leading, showTitle ? mHandle : 0)
+                .padding(.leading, showTitle ? mHandleLeft : 0)
             
             RoundedRectangle(cornerRadius: wHandle/2)
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle : wHandleTight)
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
-                .padding(.leading, showTitle ? mHandle : 0)
+                .padding(.leading, showTitle ? mHandleLeft : 0)
             
         }
     }
@@ -174,7 +176,7 @@ struct ScheduleTileView: View {
             .frame(width: showTitle ? wHandle : wHandleTight)
             .foregroundColor(Color(schedule.items.tags.colorName))
             .padding(.trailing, showTitle ? mHandle : mHandleTight)
-            .padding(.leading, showTitle ? mHandle : 0)
+            .padding(.leading, showTitle ? mHandleLeft : 0)
     }
     
     var handleDurNotChecked: some View{
@@ -183,13 +185,13 @@ struct ScheduleTileView: View {
                 .frame(width: showTitle ? wHandle : wHandleTight)
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
-                .padding(.leading, showTitle ? mHandle : 0)
+                .padding(.leading, showTitle ? mHandleLeft : 0)
             
             RoundedRectangle(cornerRadius: wHandle/2)
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle : wHandleTight)
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
-                .padding(.leading, showTitle ? mHandle : 0)
+                .padding(.leading, showTitle ? mHandleLeft : 0)
         }
     }
     
@@ -199,17 +201,17 @@ struct ScheduleTileView: View {
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-                .padding(.leading, showTitle ? mHandle - 2 : 0)
+                .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
             Circle()
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                 .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-                .padding(.leading, showTitle ? mHandle - 2 : 0)
+                .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
             Circle()
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-                .padding(.leading, showTitle ? mHandle - 2 : 0)
+                .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
         }
     }
     
@@ -218,7 +220,7 @@ struct ScheduleTileView: View {
             .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
             .foregroundColor(Color(schedule.items.tags.colorName))
             .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-            .padding(.leading, showTitle ? mHandle - 2 : 0)
+            .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
     }
     
     var handlePntNotChecked: some View{
@@ -227,12 +229,12 @@ struct ScheduleTileView: View {
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-                .padding(.leading, showTitle ? mHandle - 2 : 0)
+                .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
             Circle()
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
-                .padding(.leading, showTitle ? mHandle - 2 : 0)
+                .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
         }
     }
     

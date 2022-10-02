@@ -21,7 +21,7 @@ struct ScheduleTileCompactView: View {
     let rTile:CGFloat = 8
     let opTile:Double = 0.15
     let wHandle:CGFloat = 7
-    let mHandle:CGFloat = 3
+    let mHandle:CGFloat = 1
     let pTextVer:CGFloat = 3
     
     var body: some View {
