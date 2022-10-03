@@ -95,16 +95,20 @@ struct WidgetScheduleTile: View {
                     HStack{
                         Text(schedule.title)
                             .font(.system(size: compact ? fsTitleCompact : fsTitle))
+                            .fontWeight(.semibold)
                             .foregroundColor(schedule.colortext)
                             .padding(.top,compact ? pTextVerCompact : pTextVer)
                             .padding(.leading,5)
                         Spacer()
-                        Text("\(schedule.score)")
-                            .font(.system(size: compact ? fsTitleCompact : fsTitle))
-                            .foregroundColor(Color("text_black"))
-                            .fontWeight(compact ? .regular : .light)
-                            .padding(.top,compact ? pTextVerCompact : pTextVer)
-                            .padding(.trailing,5)
+                        if schedule.score>0{
+                            Text("\(schedule.score)")
+                                .font(.system(size: compact ? fsTitleCompact : fsTitle))
+                                .foregroundColor(Color("text_black"))
+                                .fontWeight(compact ? .regular : .light)
+                                .padding(.top,compact ? pTextVerCompact : pTextVer)
+                                .padding(.trailing,5)
+                        }
+                        
                     }
                 } // End center tile ZStack
             } // end content Hstack

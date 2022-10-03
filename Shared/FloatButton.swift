@@ -26,6 +26,8 @@ struct FloatButton: View {
                 .frame(width:sButton,height:sButton)
                 .padding(.horizontal, mButtonHor)
                 .padding(.vertical, mButtonVer).foregroundColor(Color("text_black"))
+                .shadow(color: Color("text_black").opacity(0.4),
+                        radius: 5, x:3, y:3)
                 .background(
                     RadialGradient(gradient: Gradient(colors: [Color("background_white"),Color("background_white").opacity(0)]), center: .center, startRadius: rBackgroundStart, endRadius: rBackgroundEnd)
                 )
