@@ -20,7 +20,7 @@ struct ScheduleWeekListView: View {
     let mButtons:CGFloat = 16
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 150
-    let bottomSpacing:CGFloat = 50
+    let bottomSpacing:CGFloat = 150
 
 
     var body: some View {

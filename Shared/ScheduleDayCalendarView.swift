@@ -20,8 +20,8 @@ struct ScheduleDayCalendarView: View {
     var today:Date
     
     @State var timeNow = Date()
-    let topSpacing:CGFloat = 130
-    let bottomSpacing:CGFloat = 50
+    let topSpacing:CGFloat = 160
+    let bottomSpacing:CGFloat = 150
     
     let updateTimer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     
@@ -56,7 +56,8 @@ struct ScheduleDayCalendarView: View {
             .onAppear(){
                 if propertiesModel.startDate == DateServer.startOfToday() {
                     let hournow = (Date().timeIntervalSinceReferenceDate - propertiesModel.startDate.timeIntervalSinceReferenceDate)/3600
-                    let scrollAnchor = 10000 + Int(hournow*4+6)
+                    var scrollAnchor = 10000 + Int(hournow*4+6)
+                    scrollAnchor = min(scrollAnchor,10000+17*4)
                     scrollview.scrollTo(scrollAnchor,anchor: .center)
                 } else {
                     let scrollHour = propertiesModel.scrollPosition/interCord

@@ -16,7 +16,7 @@ struct ScheduleDayListView: View {
     
     let mTitleButton:CGFloat = 3
     let topSpacing:CGFloat = 150
-    let bottomSpacing:CGFloat = 50
+    let bottomSpacing:CGFloat = 150
     let mHorizon:CGFloat = 20
     
     var body: some View {
