@@ -58,7 +58,7 @@ struct ChangeScheduleView: View {
         inputBeginTime = schedule.beginTime
         inputEndTime = schedule.endTime
         inputReminder = schedule.reminder
-        inputReminderTime = Int (schedule.reminderTime)
+        inputReminderTime = Int(schedule.reminderTime)
         if let n = schedule.notes{
             inputNote = n
         }
@@ -190,6 +190,7 @@ struct ChangeScheduleView: View {
                         } else {
                             timePickerPnt
                         }
+                        timeReminder
                         Spacer().frame(height:8)
                         notesField
                         deleteButton
@@ -372,7 +373,7 @@ struct ChangeScheduleView: View {
     }
     
     var timeReminder:some View{
-        VStack(spacing: mVer) {
+        VStack(alignment:.trailing){
             Toggle("Reminder", isOn:$inputReminder)
                 .foregroundColor(Color("text_black"))
                 .toggleStyle(SwitchToggleStyle(tint: Color(itemsFiltered[itemId].tags.colorName)))
@@ -382,22 +383,30 @@ struct ChangeScheduleView: View {
                 }
             
             if inputReminder {
-                Picker("Remind " + (inputReminderTime == 0 ? "when happens..." : "in \(inputReminderTime) min...") ,selection:$inputReminderTime){
-                    Text("when happens").tag(0)
-                    Text("in 5 min").tag(5)
-                    Text("in 10 min").tag(10)
-                    Text("in 15 min").tag(15)
-                    Text("in 30 min").tag(30)
-                    Text("in 45 min").tag(45)
-                    Text("in 1 hour").tag(60)
-                }
-                .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
-                .pickerStyle(MenuPickerStyle())
-                .animation(.default)
-                .onChange(of:inputReminderTime){ _ in
+                Menu{
+                    Picker("",selection:$inputReminderTime){
+                        Text("when starts").tag(0)
+                        Text("in 5 min").tag(5)
+                        Text("in 10 min").tag(10)
+                        Text("in 15 min").tag(15)
+                        Text("in 30 min").tag(30)
+                        Text("in 45 min").tag(45)
+                        Text("in 1 hour").tag(60)
+                    }
+                } label: {
+                    HStack(alignment:.center){
+                        Text("Remind " + (inputReminderTime == 0 ? "when happens" : "in \(inputReminderTime) min") )
+                            .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+                        Image(systemName: "chevron.down")
+                            .resizable().scaledToFit()
+                            .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+                            .frame(height: 10)
+                    }
+                }//end menu
+                .onChange(of: inputReminderTime) { _ in
                     somethingChanged = true
                 }
-            }
+            }//end if inputReminder
         }
     }
     
