@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WidgetKit
+import UserNotifications
 
 struct AddScheduleView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -99,6 +100,12 @@ struct AddScheduleView: View {
             print("Cannot generate new item")
             print(error)
         }
+        
+        if inputReminder{
+            NotificationServer.addNoitfication(of: newSchedule)
+            NotificationServer.debugNotification()
+        }
+        
     }
     
     var body: some View {

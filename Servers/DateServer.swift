@@ -189,6 +189,12 @@ class DateServer {
         return Int64((endTime.timeIntervalSinceReferenceDate - beginTime.timeIntervalSinceReferenceDate)/60)
     }
     
+    //MARK: Given date, return date components
+    static func generateDateComponents(of date:Date) -> DateComponents {
+        let dateComponents = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute], from: date)
+        return dateComponents
+    }
+    
     
     //MARK: Add cetain time
     static func addOneWeek (date:Date) -> Date {

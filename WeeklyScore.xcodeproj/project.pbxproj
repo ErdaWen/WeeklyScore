@@ -36,6 +36,7 @@
 		0056D38228E004A10042AABC /* SelectWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38128E004A10042AABC /* SelectWeekView.swift */; };
 		0056D38428E105910042AABC /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D38328E105910042AABC /* PreferenceKeys.swift */; };
 		005B135B28EA3A68002CF1B0 /* tabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005B135A28EA3A68002CF1B0 /* tabButton.swift */; };
+		005B135D28ECDBB3002CF1B0 /* NotificationServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005B135C28ECDBB3002CF1B0 /* NotificationServer.swift */; };
 		005D077826CC762700664008 /* DayBatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077726CC762700664008 /* DayBatchList.swift */; };
 		005D077B26CC783600664008 /* DayBatchOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077A26CC783600664008 /* DayBatchOperationView.swift */; };
 		005D077E26CC7D7D00664008 /* ItemViewCatagorized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */; };
@@ -154,6 +155,7 @@
 		0056D38128E004A10042AABC /* SelectWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWeekView.swift; sourceTree = "<group>"; };
 		0056D38328E105910042AABC /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		005B135A28EA3A68002CF1B0 /* tabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabButton.swift; sourceTree = "<group>"; };
+		005B135C28ECDBB3002CF1B0 /* NotificationServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServer.swift; sourceTree = "<group>"; };
 		005D077726CC762700664008 /* DayBatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchList.swift; sourceTree = "<group>"; };
 		005D077A26CC783600664008 /* DayBatchOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBatchOperationView.swift; sourceTree = "<group>"; };
 		005D077D26CC7D7D00664008 /* ItemViewCatagorized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCatagorized.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				00214CBC26BBAF2D001FE49D /* AutoRecordServer.swift */,
 				002628B526C750AD00A755D2 /* StatisticServer.swift */,
 				002628BC26C8971300A755D2 /* ConflictServer.swift */,
+				005B135C28ECDBB3002CF1B0 /* NotificationServer.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				00C72FA626963CC00028EF5C /* AddScheduleView.swift in Sources */,
 				008DC8EF26AD1322009AB91C /* Schedule+CoreDataClass.swift in Sources */,
 				00AE2E3226A949A000F77898 /* Constants.swift in Sources */,
+				005B135D28ECDBB3002CF1B0 /* NotificationServer.swift in Sources */,
 				003A248B269BFD7800BDB239 /* ChangeItemView.swift in Sources */,
 				002628B626C750AD00A755D2 /* StatisticServer.swift in Sources */,
 				0080F14526D21FCC00B10859 /* autoCompleteModePicker.swift in Sources */,

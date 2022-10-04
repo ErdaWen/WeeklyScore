@@ -45,6 +45,9 @@ struct SettingViewContent: View {
                         print("Widget Update Requested")
                         //"WeeklyScoreWidget"
                     }
+                    Button("Allow Notification"){
+                        NotificationServer.askPermission()
+                    }
                     
                 }//end all Zstack
                 .padding(.horizontal, 40)
