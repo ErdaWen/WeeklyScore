@@ -91,6 +91,10 @@ struct WeekBatchOpearationView: View {
             print("Cannot copy new item")
             print(error)
         }
+        if newSchedule.reminder{
+            NotificationServer.addNotification(of: newSchedule)
+            NotificationServer.debugNotification()
+        }
         
     }
     
@@ -116,9 +120,7 @@ struct WeekBatchOpearationView: View {
         }
     }
     
-    
     var body: some View {
-        
         VStack{
             //MARK: Navigation bar
             HStack{

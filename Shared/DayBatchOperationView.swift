@@ -93,6 +93,10 @@ struct DayBatchOperationView: View {
             print(error)
         }
         
+        if newSchedule.reminder{
+            NotificationServer.addNotification(of: newSchedule)
+            NotificationServer.debugNotification()
+        }
     }
     
     func deleteAll(){

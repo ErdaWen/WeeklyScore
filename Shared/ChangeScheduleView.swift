@@ -39,7 +39,8 @@ struct ChangeScheduleView: View {
     @State var scoreChanged = false
     @State var somethingChanged = false
     @State var addViewPresented = false
-    
+    @State var notificationPermission = false
+
     
     let mNavBar:CGFloat = 25
     let fsNavBar:CGFloat = 20
@@ -62,6 +63,7 @@ struct ChangeScheduleView: View {
         if let n = schedule.notes{
             inputNote = n
         }
+        notificationPermission = NotificationServer.checkPermission()
     }
     
     func updateDefault () {
@@ -70,6 +72,7 @@ struct ChangeScheduleView: View {
     }
     
     func deleteSchedule(){
+        NotificationServer.removeNotification(of: schedule)
         schedule.items.scoreTotal -= schedule.scoreGained
         schedule.items.minutesTotal -= schedule.minutesGained
         schedule.items.checkedTotal -= schedule.checked ? 1 : 0
@@ -135,8 +138,6 @@ struct ChangeScheduleView: View {
         print("score changed")
     }
     
-    
-    
     func saveSchedule(){
         // Deal with score statistic issue
         if itemChanged{
@@ -172,6 +173,14 @@ struct ChangeScheduleView: View {
         } catch {
             print("Cannot save item")
             print(error)
+        }
+        
+        if inputReminder{
+            NotificationServer.addNotification(of: schedule)
+            NotificationServer.debugNotification()
+        } else {
+            NotificationServer.removeNotification(of: schedule)
+            NotificationServer.debugNotification()
         }
     }
     
@@ -407,6 +416,20 @@ struct ChangeScheduleView: View {
                     somethingChanged = true
                 }
             }//end if inputReminder
+        }
+    }
+    
+    var fakeTimeReminder:some View{
+        HStack{
+            Text("Reminder")
+                .foregroundColor(Color("text_black"))
+            Spacer()
+            Button {
+                notificationPermission = NotificationServer.askPermission()
+            } label: {
+                Text("Allow Notification...")
+                    .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+            }
         }
     }
     

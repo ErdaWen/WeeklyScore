@@ -34,6 +34,7 @@ struct AddScheduleView: View {
     @State var showConflictAlert = false
     @State var inputNote = ""
     @State var itemsFiltered:[Item] = []
+    @State var notificationPermission = false
     
     @State var addViewPresented = false
     
@@ -54,8 +55,8 @@ struct AddScheduleView: View {
             itemId = 0
             updateDefault ()
         }
+        notificationPermission = NotificationServer.checkPermission()
     }
-    
     
     func updateDefault () {
         inputScore = itemsFiltered[itemId].defaultScore
@@ -102,7 +103,7 @@ struct AddScheduleView: View {
         }
         
         if inputReminder{
-            NotificationServer.addNoitfication(of: newSchedule)
+            NotificationServer.addNotification(of: newSchedule)
             NotificationServer.debugNotification()
         }
         
@@ -124,7 +125,11 @@ struct AddScheduleView: View {
                             } else {
                                 timePickerPnt
                             }
-                            timeReminder
+                            if notificationPermission{
+                                timeReminder
+                            } else{
+                                fakeTimeReminder
+                            }
                             Spacer().frame(height:20)
                             notesField
                         } // end form VStack
@@ -309,6 +314,20 @@ struct AddScheduleView: View {
                     }
                 }//end menu
             }//end if inputReminder
+        }
+    }
+    
+    var fakeTimeReminder:some View{
+        HStack{
+            Text("Reminder")
+                .foregroundColor(Color("text_black"))
+            Spacer()
+            Button {
+                notificationPermission = NotificationServer.askPermission()
+            } label: {
+                Text("Allow Notification...")
+                    .foregroundColor(Color(itemsFiltered[itemId].tags.colorName))
+            }
         }
     }
     
