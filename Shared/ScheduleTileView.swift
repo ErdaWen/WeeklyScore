@@ -36,7 +36,8 @@ struct ScheduleTileView: View {
     let pTextHor:CGFloat = 8
     let pTextVer:CGFloat = 5
     let pTextHorTight:CGFloat = 5
-    let mTileFlag:CGFloat = 3
+    let mTileFlag:CGFloat = 5
+    let sTileFlag:CGFloat = 18
     
     func saveSchedule(inputChecked:Bool, inputScoreGained:Int64, inputMinutesGained:Int64) {
         // Calculate check changed
@@ -279,12 +280,16 @@ struct ScheduleTileView: View {
                     }
                 }//end score VStack
             }
-        }
+        }.padding(.top,6)
     }
     
     var checkboxDefault:some View{
-        Image(systemName: "flag")
+        Image(systemName: "square")
+            .resizable().scaledToFit()
             .foregroundColor(Color(schedule.items.tags.colorName).opacity(1))
+            .shadow(color: Color("text_black").opacity(0.2),
+                    radius: 2, x:2, y:2)
+            .frame(width: sTileFlag,height: sTileFlag)
             .padding(.leading, mTileFlag)
             .padding(.bottom, pTextVer)
             .onTapGesture {
@@ -304,8 +309,12 @@ struct ScheduleTileView: View {
     }
     
     var checkboxCheckOrUncheck:some View{
-        Image(systemName: schedule.checked ? "flag.fill" : "flag")
+        Image(systemName: schedule.checked ? "checkmark.square" : "square")
+            .resizable().scaledToFit()
             .foregroundColor(Color(schedule.items.tags.colorName))
+            .shadow(color: Color("text_black").opacity(0.2),
+                    radius: 2, x:2, y:2)
+            .frame(width: sTileFlag,height: sTileFlag)
             .padding(.leading, mTileFlag)
             .padding(.bottom, pTextVer)
             .onTapGesture {

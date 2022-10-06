@@ -29,7 +29,7 @@ struct ScheduleView: View {
     //Use factor for list style view
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
     //Use interCord for calender style view
-    @State var interCord = 50.0
+    @State var interCord = 60.0
     
     // appearence related
     let mTitle:CGFloat = 20
@@ -222,11 +222,14 @@ struct ScheduleView: View {
 
             HStack (spacing:mButtons) {
                 Button {
-                    previewMode = !previewMode
+                    previewMode.toggle()
+                    UserDefaults.standard.set(previewMode, forKey: "previewMode")
                 } label: {
                     Image(systemName:  previewMode ? "list.bullet.rectangle" : "list.bullet.rectangle.fill")
                         .resizable().scaledToFit()
                         .foregroundColor(Color("text_black"))
+                        .shadow(color: Color("text_black").opacity(0.4),
+                                radius: 5, x:3, y:3)
                         .frame(height:sButton-5)
                         .padding(.leading,70)
                         .padding(.top,19)

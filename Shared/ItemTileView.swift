@@ -118,18 +118,19 @@ struct ItemTileView: View {
                 .padding(.leading,pText)
                 .padding(.bottom,mTextVer)
             
+            Spacer()
             //MARK: Edit button
             if showDetail{
                 Button {
                     changeViewPresented = true
                 } label: {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "ellipsis.circle")
                         .resizable().scaledToFit()
                         .foregroundColor(Color("text_black"))
                         .frame(height:sButton).padding(.leading,3)
                 }
             }
-            Spacer()
+            
             //MARK: Show detail/rough statisitc
             if showDetail{
                 Button {

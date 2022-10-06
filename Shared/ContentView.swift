@@ -93,7 +93,7 @@ struct ContentView: View {
 
             Spacer()
             
-            tabButton(imageName: "flag",
+            tabButton(imageName: "flag.filled.and.flag.crossed",
                       titleText: "Habits",
                       selected: (tabIndex == 2))
             .onTapGesture {
