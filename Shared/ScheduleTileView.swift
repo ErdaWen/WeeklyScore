@@ -38,7 +38,9 @@ struct ScheduleTileView: View {
     let pTextVer:CGFloat = 5
     let pTextHorTight:CGFloat = 5
     let mTileFlag:CGFloat = 5
-    let sTileFlag:CGFloat = 18
+    let sTileFlag:CGFloat = 20
+    let rShadow:CGFloat = 3
+    let opShadow = 0.2
     
     func saveSchedule(inputChecked:Bool, inputScoreGained:Int64, inputMinutesGained:Int64) {
         // Calculate check changed
@@ -111,18 +113,20 @@ struct ScheduleTileView: View {
                     changeViewPresented = true
                 } label: {
                     //MARK: Center tile
-//                    ZStack(alignment:.top){
-//                        //Background tile
-//                        RoundedRectangle(cornerRadius: rTile)
-//                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
-//                        tileText
-//                    }
-                    tileText
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(schedule.items.tags.colorName).opacity(opTile0),
-                             Color(schedule.items.tags.colorName).opacity(opTile)]),
-                                                   startPoint: .topLeading,
-                                                   endPoint: .bottomTrailing),
-                                    in: RoundedRectangle(cornerRadius: rTile))
+                    ZStack(alignment:.top){
+                        //Background tile
+                        RoundedRectangle(cornerRadius: rTile)
+                            .foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
+                        tileText
+                    }
+//                    tileText
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(schedule.items.tags.colorName).opacity(opTile0),
+//                             Color(schedule.items.tags.colorName).opacity(opTile)]),
+//                                                   startPoint: .topLeading,
+//                                                   endPoint: .bottomTrailing),
+//                                    in: RoundedRectangle(cornerRadius: rTile))
                 }//end Button Label
                 .sheet(isPresented: $changeViewPresented) {
                     ChangeScheduleView(changeScheduleViewPresented: $changeViewPresented, schedule: schedule)
@@ -134,12 +138,17 @@ struct ScheduleTileView: View {
                     Spacer()
                     if schedule.statusDefault{
                         checkboxDefault
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
                     } else {
                         checkboxCheckOrUncheck
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
                     }
                 }//end status checkbox Vstack
                 
             } // end tile main body HStack
+            
         }
     }
     
@@ -172,6 +181,8 @@ struct ScheduleTileView: View {
                 .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
                 .padding(.leading, showTitle ? mHandleLeft : 0)
+                .shadow(color: Color("text_black").opacity(opShadow),
+                        radius: rShadow, x:0, y:0)
             
             RoundedRectangle(cornerRadius: wHandle/2)
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
@@ -188,6 +199,8 @@ struct ScheduleTileView: View {
             .foregroundColor(Color(schedule.items.tags.colorName))
             .padding(.trailing, showTitle ? mHandle : mHandleTight)
             .padding(.leading, showTitle ? mHandleLeft : 0)
+            .shadow(color: Color("text_black").opacity(opShadow),
+                    radius: rShadow, x:0, y:0)
     }
     
     var handleDurNotChecked: some View{
@@ -197,6 +210,8 @@ struct ScheduleTileView: View {
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle : mHandleTight)
                 .padding(.leading, showTitle ? mHandleLeft : 0)
+                .shadow(color: Color("text_black").opacity(opShadow),
+                        radius: rShadow, x:0, y:0)
             
             RoundedRectangle(cornerRadius: wHandle/2)
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
@@ -218,6 +233,8 @@ struct ScheduleTileView: View {
                 .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
                 .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
+                .shadow(color: Color("text_black").opacity(opShadow),
+                        radius: rShadow, x:0, y:0)
             Circle()
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
@@ -232,6 +249,8 @@ struct ScheduleTileView: View {
             .foregroundColor(Color(schedule.items.tags.colorName))
             .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
             .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
+            .shadow(color: Color("text_black").opacity(opShadow),
+                    radius: rShadow, x:0, y:0)
     }
     
     var handlePntNotChecked: some View{
@@ -241,6 +260,8 @@ struct ScheduleTileView: View {
                 .foregroundColor(Color("background_white"))
                 .padding(.trailing, showTitle ? mHandle - 2 : mHandleTight - 1 )
                 .padding(.leading, showTitle ? mHandleLeft - 2 : 0)
+                .shadow(color: Color("text_black").opacity(opShadow),
+                        radius: rShadow, x:0, y:0)
             Circle()
                 .stroke(Color(schedule.items.tags.colorName),lineWidth: 1.5)
                 .frame(width: showTitle ? wHandle + 4 : wHandleTight + 2)
@@ -290,8 +311,8 @@ struct ScheduleTileView: View {
         Image(systemName: "square")
             .resizable().scaledToFit()
             .foregroundColor(Color(schedule.items.tags.colorName).opacity(1))
-            .shadow(color: Color("text_black").opacity(0.2),
-                    radius: 2, x:2, y:2)
+//            .shadow(color: Color("text_black").opacity(0.1),
+//                    radius: 2, x:0, y:0)
             .frame(width: sTileFlag,height: sTileFlag)
             .padding(.leading, mTileFlag)
             .padding(.bottom, pTextVer)
@@ -315,8 +336,8 @@ struct ScheduleTileView: View {
         Image(systemName: schedule.checked ? "checkmark.square" : "square")
             .resizable().scaledToFit()
             .foregroundColor(Color(schedule.items.tags.colorName))
-            .shadow(color: Color("text_black").opacity(0.2),
-                    radius: 2, x:2, y:2)
+//            .shadow(color: Color("text_black").opacity(0.1),
+//                    radius: 2, x:0, y:0)
             .frame(width: sTileFlag,height: sTileFlag)
             .padding(.leading, mTileFlag)
             .padding(.bottom, pTextVer)

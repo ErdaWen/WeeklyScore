@@ -22,6 +22,8 @@ struct WidgetScheduleTile: View {
     let mHandle:CGFloat = 3
     let pTextVer:CGFloat = 5
     let pTextVerCompact:CGFloat = 3
+    let rShadow:CGFloat = 2
+    let opShadow = 0.1
 
     
 
@@ -82,16 +84,22 @@ struct WidgetScheduleTile: View {
                         .frame(width: wHandle)
                         .foregroundColor(schedule.color)
                         .padding(.trailing, mHandle)
+                        .shadow(color: Color("text_black").opacity(opShadow*2),
+                                radius: rShadow, x:0, y:0)
                 } else {
                     Circle()
                         .frame(width: wHandle+2)
                         .foregroundColor(schedule.color)
                         .padding(.trailing, mHandle-2)
+                        .shadow(color: Color("text_black").opacity(opShadow*2),
+                                radius: rShadow, x:0, y:0)
                 }
                 
                 ZStack(alignment:.top){
                     //MARK: Background tile
                     RoundedRectangle(cornerRadius: rTile).foregroundColor(schedule.color.opacity(opTile))
+                        .shadow(color: Color("text_black").opacity(opShadow*2),
+                                radius: rShadow, x:0, y:0)
                     HStack{
                         Text(schedule.title)
                             .font(.system(size: compact ? fsTitleCompact : fsTitle))

@@ -23,6 +23,8 @@ struct ScheduleTileCompactView: View {
     let wHandle:CGFloat = 7
     let mHandle:CGFloat = 1
     let pTextVer:CGFloat = 3
+    let rShadow:CGFloat = 3
+    let opShadow = 0.2
     
     var body: some View {
         HStack(spacing:0){
@@ -39,18 +41,23 @@ struct ScheduleTileCompactView: View {
                             .foregroundColor(Color(schedule.items.tags.colorName).opacity(0.1))
                             .padding(.trailing, mHandle)
                             .padding(.leading, 1)
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle)
                             .padding(.trailing, mHandle)
                             .padding(.leading, 1)
                     }
+
                 } else if schedule.checked{
                     RoundedRectangle(cornerRadius: wHandle/2)
                         .frame(width: wHandle)
                         .foregroundColor(Color(schedule.items.tags.colorName))
                         .padding(.trailing, mHandle)
                         .padding(.leading, 1)
+                        .shadow(color: Color("text_black").opacity(opShadow),
+                                radius: rShadow, x:0, y:0)
 
                 } else {
                     ZStack{
@@ -59,6 +66,8 @@ struct ScheduleTileCompactView: View {
                             .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle)
                             .padding(.leading, 1)
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
 
                         RoundedRectangle(cornerRadius: wHandle/2)
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
@@ -67,6 +76,7 @@ struct ScheduleTileCompactView: View {
                             .padding(.leading, 1)
 
                     }
+                    
                 }
                 // end duration-based
             } else {
@@ -80,27 +90,36 @@ struct ScheduleTileCompactView: View {
                             .foregroundColor(Color(schedule.items.tags.colorName).opacity(1))
                             .frame(width: wHandle+2)
                             .padding(.trailing, mHandle-1)
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
                         Circle()
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle+2)
                             .padding(.trailing, mHandle-1)
                     }
+                    
                 } else if schedule.checked{
                     Circle()
                         .frame(width: wHandle+2)
                         .foregroundColor(Color(schedule.items.tags.colorName))
                         .padding(.trailing, mHandle-1)
+                        .shadow(color: Color("text_black").opacity(opShadow),
+                                radius: rShadow, x:0, y:0)
                 } else {
                     ZStack{
                         Circle()
                             .frame(width: wHandle+2)
                             .foregroundColor(Color("background_white"))
                             .padding(.trailing, mHandle-1)
+                            .shadow(color: Color("text_black").opacity(opShadow),
+                                    radius: rShadow, x:0, y:0)
                         Circle()
                             .stroke(Color(schedule.items.tags.colorName),lineWidth: 1)
                             .frame(width: wHandle+2)
                             .padding(.trailing, mHandle-1)
+
                     }
+                    
                 }
                 
             }
@@ -111,6 +130,8 @@ struct ScheduleTileCompactView: View {
                 ZStack(alignment:.top){
                     //MARK: Background tile
                     RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(schedule.items.tags.colorName).opacity(opTile))
+                        .shadow(color: Color("text_black").opacity(opShadow),
+                                radius: rShadow, x:0, y:0)
                     Text(schedule.items.titleIcon)
                         .font(.system(size: fsTitle))
                         .padding(.top,pTextVer)

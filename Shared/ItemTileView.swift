@@ -37,6 +37,8 @@ struct ItemTileView: View {
     let hTiles:CGFloat = 45
     let hTilesDetail:CGFloat = 250
     let sButton:CGFloat = 17
+    let rShadow:CGFloat = 4
+    let opShadow = 0.3
     
     
     func updateItem() {
@@ -56,14 +58,20 @@ struct ItemTileView: View {
         HStack(spacing:0){
             if item.durationBased{
                 handleDur
+                    .shadow(color: Color("text_black").opacity(opShadow),
+                            radius: rShadow, x:0, y:0)
             } else {
                 handlePnt
+                    .shadow(color: Color("text_black").opacity(opShadow),
+                            radius: rShadow, x:0, y:0)
             }
 
             //MARK: Center tile
             ZStack(alignment:.top){
                 RoundedRectangle(cornerRadius: rTile).stroke(Color(item.tags.colorName), lineWidth: 1)
                 RoundedRectangle(cornerRadius: rTile).foregroundColor(Color(item.tags.colorName).opacity(opTile))
+                    .shadow(color: Color("text_black").opacity(opShadow),
+                            radius: rShadow, x:0, y:0)
                 VStack(alignment: .center, spacing: 0){
                     titleLine
                         .frame(height:45)
