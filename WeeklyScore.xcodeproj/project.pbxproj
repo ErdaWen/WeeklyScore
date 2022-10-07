@@ -282,7 +282,6 @@
 				0072756526B32A7B00FAA32D /* ScheduleTileView.swift */,
 				0092DD3326BCC98E00750557 /* ScheduleTileCompactView.swift */,
 				002628BF26C8C52F00A755D2 /* ScheduleTileSSView.swift */,
-				002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */,
 				002628A126BF911F00A755D2 /* NowLine.swift */,
 			);
 			name = Elements;
@@ -318,6 +317,15 @@
 				005B135C28ECDBB3002CF1B0 /* NotificationServer.swift */,
 			);
 			path = Servers;
+			sourceTree = "<group>";
+		};
+		005B135E28EF7E29002CF1B0 /* NotUsed */ = {
+			isa = PBXGroup;
+			children = (
+				002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */,
+				002628AC26C0F25A00A755D2 /* ScheduleTileDetailView.swift */,
+			);
+			name = NotUsed;
 			sourceTree = "<group>";
 		};
 		007A99ED28D8E60C00773FFB /* Calendar */ = {
@@ -367,10 +375,11 @@
 				C8BCDFFD26918075006E7D7E /* ContentView.swift */,
 				005B135A28EA3A68002CF1B0 /* tabButton.swift */,
 				0026289526BF57BA00A755D2 /* AutoRecordNotificationBar.swift */,
-				0080F13A26D1F34F00B10859 /* Settings */,
 				009C422A26AF3D0D00A783F0 /* ScheduleView */,
 				009C422826AF3CBA00A783F0 /* ItemView */,
+				0080F13A26D1F34F00B10859 /* Settings */,
 				0026288A26BDF9FB00A755D2 /* SharedElement */,
+				005B135E28EF7E29002CF1B0 /* NotUsed */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -427,7 +436,6 @@
 				002628C226C8C82300A755D2 /* WeekBatchList.swift */,
 				005D077A26CC783600664008 /* DayBatchOperationView.swift */,
 				005D077726CC762700664008 /* DayBatchList.swift */,
-				002628AF26C0F8C700A755D2 /* ScheduleDetailView.swift */,
 			);
 			name = Sheets;
 			sourceTree = "<group>";

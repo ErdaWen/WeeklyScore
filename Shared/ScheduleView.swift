@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import WidgetKit
+import CoreData
 
 
 struct ScheduleView: View {
@@ -25,6 +26,7 @@ struct ScheduleView: View {
     @State var previewMode = UserDefaults.standard.bool(forKey: "previewMode")
     @State var addViewPresented = false
     @State var batchAddViewPresented = false
+    @State var scheduleExists = true
 
     //Use factor for list style view
     @State var factor = UserDefaults.standard.double(forKey: "listScaleFactor")
@@ -62,6 +64,7 @@ struct ScheduleView: View {
         } else {
             UserDefaults.standard.set(true, forKey: "onDayView")
         }
+//        updatetScheduleExists()
     }
     
     func fetchSchedules(from startTime:Date, to endTime:Date, cutend:Bool) -> FetchRequest<Schedule>{
@@ -81,6 +84,30 @@ struct ScheduleView: View {
                                               animation: .default)
         return fetchRes
     }
+    
+//    func updatetScheduleExists(){
+//        var predicate = NSPredicate()
+//        if dayFromDay1 == -1{
+//            predicate = NSPredicate(format: "(beginTime >= %@) AND (beginTime < %@)",
+//                                    propertiesModel.startDate as NSDate,
+//                                    DateServer.addOneWeek(date: propertiesModel.startDate) as NSDate)
+//        }else{
+//            predicate = NSPredicate(format: "(endTime >= %@) AND (beginTime < %@)",
+//                                    propertiesModel.startDate as NSDate,
+//                                    DateServer.addOneDay(date: propertiesModel.startDate) as NSDate)
+//        }
+//        let sortDescriptors = [NSSortDescriptor(key: "beginTime", ascending: true),
+//                               NSSortDescriptor(key: "endTime", ascending: true)]
+//        @FetchRequest(entity: Schedule.entity(),
+//                      sortDescriptors: sortDescriptors,
+//                      predicate: predicate) var scheduleShown: FetchedResults<Schedule>
+//        print(scheduleShown)
+//        if scheduleShown.count>0 {
+//            scheduleExists = true
+//        } else {
+//            scheduleExists = false
+//        }
+//    }
     
     var body: some View {
         
@@ -123,8 +150,7 @@ struct ScheduleView: View {
         .animation(.default)
     }
 
-    
-    
+  
     var conditionalDividor: some View {
         //Horizontal Divider, not shown in week calendar look
         VStack{
@@ -180,9 +206,10 @@ struct ScheduleView: View {
                     .environment(\.managedObjectContext,self.viewContext)
             }
             
-            FloatButton(systemName: "plus.square.on.square", sButton: sButton) {
+            FloatButton(systemName: "square.3.layers.3d", sButton: sButton) {
                 batchAddViewPresented = true
             }
+            .disabled(!scheduleExists)
             .sheet(isPresented: $batchAddViewPresented) {
                 if dayFromDay1 == -1 {
                     let fetchScheduleRes = fetchSchedules(from: propertiesModel.startDate,

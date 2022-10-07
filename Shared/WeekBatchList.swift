@@ -14,7 +14,7 @@ struct WeekBatchList: View {
     
     var body: some View {
         if schedules.count == 0 {
-            Text("No schedules")
+            Text("No schedules to operate")
                 .font(.system(size: fsSub))
                 .fontWeight(.light)
                 .foregroundColor(Color("text_black"))

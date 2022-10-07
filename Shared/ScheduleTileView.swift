@@ -23,7 +23,8 @@ struct ScheduleTileView: View {
     let fsSub:CGFloat = 14
     let opSub:Double = 0.5
     let mTime:CGFloat = 20
-    let mTimeTile:CGFloat = 3
+    let mTimeTop:CGFloat = 9
+    let mTimeTile:CGFloat = 2
     let wHandle:CGFloat = 8.5
     let wHandleTight: CGFloat = 6
     let mHandle:CGFloat = 4
@@ -147,6 +148,7 @@ struct ScheduleTileView: View {
             .foregroundColor(Color("text_black").opacity(opSub))
             .font(.system(size: fsSub))
             .padding(.leading, mTime)
+            .padding(.top,mTimeTop)
     }
     
     var timePnt: some View{
@@ -154,6 +156,7 @@ struct ScheduleTileView: View {
             .foregroundColor(Color("text_black").opacity(opSub))
             .font(.system(size: fsSub))
             .padding(.leading, mTime)
+            .padding(.top,mTimeTop)
     }
     
     var handleDurDefault: some View{
@@ -280,7 +283,7 @@ struct ScheduleTileView: View {
                     }
                 }//end score VStack
             }
-        }.padding(.top,6)
+        }
     }
     
     var checkboxDefault:some View{

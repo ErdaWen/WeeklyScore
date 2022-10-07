@@ -30,6 +30,7 @@ struct WeekBatchOpearationView: View {
     @State var showDeleteAlert = false
     @State var activeAlert: ActiveAlert = .allDone
     @State var weekCopyTo = Date()
+    @State var noSchedules = false
     
     let mHorizon:CGFloat = 40
     let mNavBar:CGFloat = 25
@@ -122,126 +123,22 @@ struct WeekBatchOpearationView: View {
     
     var body: some View {
         VStack{
-            //MARK: Navigation bar
-            HStack{
-                Button {
-                    addBatchScheduleViewPresented = false
-                } label: {
-                    Image(systemName: "xmark.circle")
-                        .resizable().scaledToFit()
-                        .foregroundColor(Color("text_black"))
-                        .frame(height:25)
-                }
-                Spacer()
-                Text("Batch Operation")
-                    .font(.system(size: fsNavBar))
-                Spacer()
-                Spacer().frame(width: 25)
-            }
-            .frame(height:20)
-            .padding(mNavBar)
-            //Content:
+            navBar
             ScrollView{
                 VStack(alignment: .center, spacing: 15 ){
-                    //MARK: All habits view
+
                     InputField(title: nil, alignment: .leading, color: Color("background_grey2"), fieldHeight: 220) {
                         WeekBatchList(schedules: schedules)
                             .padding(.horizontal, 10)
                     }
                     .padding(.top,2)
-                    //MARK: Select week
-                    
-                    
-                    DatePicker("Copy to week of:", selection: $weekCopyTo,displayedComponents: .date)
-                        .foregroundColor(Color("text_black"))
-                        .font(.system(size: fsForm))
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .onChange(of: weekCopyTo) { _ in
-                            weekCopyTo = DateServer.startOfThisWeek(date: weekCopyTo)
-                        }
-                    
-                    
-//                    if weekCopyTo == DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date())){
-//
-//                        HStack{
-//                            Spacer()
-//
-//                            Text("(Next week)")
-//                                .foregroundColor(Color("text_black"))
-//                                .font(.system(size: fsForm))
-//                        }
-//
-//                    }//end if
-                    
-                    
-                    //MARK: Copy button
-                    
-                    Button {
-                        copyAll()
-                        alarmConditioning()
-                        showConflitAlert = true
-                        
-                    } label: {
-                        HStack{
-                            Image(systemName: "doc.on.doc")
-                                .resizable().scaledToFit()
-                                .foregroundColor(Color("text_blue")).frame(height:20)
-                            Text("Copy")
-                                .foregroundColor(Color("text_blue"))
-                                .font(.system(size: 20))
-                        }
-                    }//end button
-                    .alert(isPresented: $showConflitAlert) {
-                        switch activeAlert{
-                        case .nothing:
-                            return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
-                                showConflitAlert = false
-                            }))
-                        case .allDone:
-                            return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
-                        case .allFail:
-                            return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
-                        case .partDone:
-                            return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
-                                addBatchScheduleViewPresented = false
-                            }))
-                            
-                        }// end switch
-                    }// end alert
-                    
-                    Button {
-                        showDeleteAlert = true
-                    } label: {
-                        HStack{
-                            Image(systemName: "trash")
-                                .resizable().scaledToFit()
-                                .foregroundColor(Color("text_red")).frame(height:20)
-                            Text("Delete All...")
-                                .foregroundColor(Color("text_red"))
-                                .font(.system(size: 20))
-                        }
-                    }
-                    .alert(isPresented: $showDeleteAlert) {
-                        if schedules.count == 0{
-                            return Alert(title: Text("😶 Nothing"), message: Text("Nothing to deleted") , dismissButton:.default(Text("OK"), action: {
-                                showConflitAlert = false
-                            }))
-                        } else {
-                            return Alert(title: Text("🤔 You Sure?"), message: Text("Delete all Schedules"), primaryButton: .default(Text("Keep"), action: {
-                                showDeleteAlert = false
-                            }), secondaryButton: .default(Text("Delete").foregroundColor(Color("text_red")), action: {
-                                deleteAll()
-                                showDeleteAlert = false
-                                addBatchScheduleViewPresented = false
-                            }))
-                        }
-                        
-                    }
-          
+
+                    weekSelector
+                        .disabled(noSchedules)
+                    copyButton
+                        .disabled(noSchedules)
+                    deleteButton
+                        .disabled(noSchedules)
                     
                 }// end content VStack
                 .padding(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
@@ -251,10 +148,113 @@ struct WeekBatchOpearationView: View {
         }// end everything ZStack
         .onAppear(){
             weekCopyTo = DateServer.addOneWeek(date: DateServer.startOfThisWeek(date: Date()))
-            
+            if schedules.count == 0{
+                noSchedules = true
+            }
         }
         .preferredColorScheme(nightMode ? nil : .light)
         
+    }
+    
+    var navBar:some View{
+        HStack{
+            Button {
+                addBatchScheduleViewPresented = false
+            } label: {
+                Image(systemName: "xmark.circle")
+                    .resizable().scaledToFit()
+                    .foregroundColor(Color("text_black"))
+                    .frame(height:25)
+            }
+            Spacer()
+            Text("Batch Operation")
+                .font(.system(size: fsNavBar))
+            Spacer()
+            Spacer().frame(width: 25)
+        }
+        .frame(height:20)
+        .padding(mNavBar)
+    }
+    
+    var weekSelector:some View{
+        DatePicker("Copy to week of:", selection: $weekCopyTo,displayedComponents: .date)
+            .foregroundColor(Color("text_black"))
+            .font(.system(size: fsForm))
+            .datePickerStyle(CompactDatePickerStyle())
+            .onChange(of: weekCopyTo) { _ in
+                weekCopyTo = DateServer.startOfThisWeek(date: weekCopyTo)
+            }
+    }
+    
+    var copyButton:some View{
+        Button {
+            copyAll()
+            alarmConditioning()
+            showConflitAlert = true
+            
+        } label: {
+            HStack{
+                Image(systemName: "doc.on.doc")
+                    .resizable().scaledToFit()
+                    .foregroundColor(Color("text_blue")).frame(height:20)
+                Text("Copy")
+                    .foregroundColor(Color("text_blue"))
+                    .font(.system(size: 20))
+            }
+        }//end button
+        .alert(isPresented: $showConflitAlert) {
+            switch activeAlert{
+            case .nothing:
+                return Alert(title: Text("😶 Nothing"), message: Text("Nothing to be copied") , dismissButton:.default(Text("OK"), action: {
+                    showConflitAlert = false
+                }))
+            case .allDone:
+                return Alert(title: Text("✅ Done"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied."), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+            case .allFail:
+                return Alert(title: Text("❌ Conflit"), message: Text("No schedelue copied due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+            case .partDone:
+                return Alert(title: Text("⚠️ Conflit"), message: Text("\(numDone) " + (numDone == 1 ? "schedule " : "schedules ") + "copied. " + "\(numConflict) failed due to duplication with existing schedules"), dismissButton:.default(Text("OK"), action: {
+                    addBatchScheduleViewPresented = false
+                }))
+                
+            }// end switch
+        }// end alert
+
+    }
+    
+    var deleteButton:some View{
+        Button {
+            showDeleteAlert = true
+        } label: {
+            HStack{
+                Image(systemName: "trash")
+                    .resizable().scaledToFit()
+                    .foregroundColor(Color("text_red")).frame(height:20)
+                Text("Delete All...")
+                    .foregroundColor(Color("text_red"))
+                    .font(.system(size: 20))
+            }
+        }
+        .alert(isPresented: $showDeleteAlert) {
+            if schedules.count == 0{
+                return Alert(title: Text("😶 Nothing"), message: Text("Nothing to deleted") , dismissButton:.default(Text("OK"), action: {
+                    showConflitAlert = false
+                }))
+            } else {
+                return Alert(title: Text("🤔 You Sure?"), message: Text("Delete all Schedules"), primaryButton: .default(Text("Keep"), action: {
+                    showDeleteAlert = false
+                }), secondaryButton: .default(Text("Delete").foregroundColor(Color("text_red")), action: {
+                    deleteAll()
+                    showDeleteAlert = false
+                    addBatchScheduleViewPresented = false
+                }))
+            }
+            
+        }
     }
 }
 
