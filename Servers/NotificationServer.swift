@@ -54,7 +54,7 @@ class NotificationServer{
         }
         notificationContent.sound = UNNotificationSound.default
         
-        let notificationTime = schedule.beginTime.addingTimeInterval(TimeInterval(-360*schedule.reminderTime))
+        let notificationTime = schedule.beginTime.addingTimeInterval(TimeInterval(-60*schedule.reminderTime))
         let dateComponents = DateServer.generateDateComponents(of: notificationTime)
         let noitficationTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let notificationRequest = UNNotificationRequest(identifier: schedule.id!.uuidString, content: notificationContent, trigger: noitficationTrigger)
